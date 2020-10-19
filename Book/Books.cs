@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using eBdb;
+using eBdb.EpubReader;
 
 namespace Book
 {
-    public class Class1
+    public class Books
     {
-        // свддв
-        //лоооол
+        protected string Title { get; set; }
+        protected string Author { get; set; }
+        
     }
 }

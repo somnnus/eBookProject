@@ -33,11 +33,14 @@
   <ItemGroup>
     <Reference Include="eBdb.EpubReader, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Menu\bin\Debug\eBdb.EpubReader.dll</HintPath>
+      <HintPath>..\eBdb.EpubReader.dll</HintPath>
+    </Reference>
+    <Reference Include="FB2Library">
+      <HintPath>..\FB2Library.dll</HintPath>
     </Reference>
     <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Menu\bin\Debug\Ionic.Zip.dll</HintPath>
+      <HintPath>..\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -49,7 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Books.cs" />
+    <Compile Include="EpubBook.cs" />
+    <Compile Include="FB2Book.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
