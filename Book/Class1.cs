@@ -9,5 +9,6 @@ namespace Book
     public class Class1
     {
         // свддв
+        //лоооол
     }
 }
