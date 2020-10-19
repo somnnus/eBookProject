@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 
+
 namespace Menu
 {
     /// <summary>
@@ -23,11 +24,41 @@ namespace Menu
     {
         List<Book> books = new List<Book>();
 
+        Dictionary<int, List<Book>> dictKeys = new Dictionary<int, List<Book>>();
+
+        int currentPage = 0;
+
+        int blocksCount;
+
         public MainWindow()
         {
             InitializeComponent();
 
-            listBoxBooks.ItemsSource = AddBooks(books);
+            blocksCount = 4;
+            dictKeys = ArrayHelperExtensions.Split(AddBooks(books), dictKeys, blocksCount);
+
+            if (currentPage == 0)
+            {
+                listBoxBooks.ItemsSource = dictKeys[0];
+            }
+        }
+
+        private void LeftPageClick(object sender, RoutedEventArgs e)
+        {
+            if (currentPage > 0)
+            {
+                currentPage--;
+                listBoxBooks.ItemsSource = dictKeys[currentPage];
+            }
+        }
+
+        private void RightPageClick(object sender, RoutedEventArgs e)
+        {
+            if ((currentPage + 1) < dictKeys.Count)
+            {
+                currentPage++;
+                listBoxBooks.ItemsSource = dictKeys[currentPage];
+            }
         }
 
         private List<Book> AddBooks(List<Book> books)
@@ -52,120 +83,120 @@ namespace Menu
             });
             books.Add(new Book()
             {
-                author = "Достоевский",
-                bookName = "Братья Карамазовы",
+                author = "Тургенев",
+                bookName = "Отцы и дети",
                 imagePath = "images/SCAN_20140123_185338818.jpg"
             });
             books.Add(new Book()
             {
-                author = "Толстой",
-                bookName = "Анна Каренина",
+                author = "Куприн",
+                bookName = "Гранатовый браслет",
                 imagePath = "images/SCAN_20140123_185430521.jpg"
             });
             books.Add(new Book()
             {
-                author = "Пушкин",
-                bookName = "Евгений Онегин",
+                author = "Пастернак",
+                bookName = "Доктор Живаго",
                 imagePath = "images/Scan_20170628_174511.jpg"
             });
             books.Add(new Book()
             {
-                author = "Достоевский",
-                bookName = "Братья Карамазовы",
+                author = "Пушкин",
+                bookName = "Капитанская дочка",
                 imagePath = "images/SCAN_20140123_185338818.jpg"
             });
             books.Add(new Book()
             {
-                author = "Толстой",
-                bookName = "Анна Каренина",
+                author = "Набоков",
+                bookName = "Лолита",
                 imagePath = "images/SCAN_20140123_185430521.jpg"
             });
             books.Add(new Book()
             {
-                author = "Пушкин",
-                bookName = "Евгений Онегин",
+                author = "Маяковский",
+                bookName = "Если звёзды зажигаются...",
                 imagePath = "images/Scan_20170628_174511.jpg"
             });
             books.Add(new Book()
             {
-                author = "Достоевский",
-                bookName = "Братья Карамазовы",
+                author = "Булгаков",
+                bookName = "Мастер и Маргарита",
                 imagePath = "images/SCAN_20140123_185338818.jpg"
             });
             books.Add(new Book()
             {
                 author = "Толстой",
-                bookName = "Анна Каренина",
+                bookName = "Война и мир",
                 imagePath = "images/SCAN_20140123_185430521.jpg"
             });
             books.Add(new Book()
             {
-                author = "Пушкин",
-                bookName = "Евгений Онегин",
+                author = "Лермонтов",
+                bookName = "Герой нашего времени",
                 imagePath = "images/Scan_20170628_174511.jpg"
             });
             return books;
         }
 
-        //private Point myMousePlacementPoint;
+    //private Point myMousePlacementPoint;
 
-        //private void OnListViewMouseDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (e.MiddleButton == MouseButtonState.Pressed)
-        //    {
-        //        myMousePlacementPoint = this.PointToScreen(Mouse.GetPosition(this));
-        //    }
-        //}
+    //private void OnListViewMouseDown(object sender, MouseButtonEventArgs e)
+    //{
+    //    if (e.MiddleButton == MouseButtonState.Pressed)
+    //    {
+    //        myMousePlacementPoint = this.PointToScreen(Mouse.GetPosition(this));
+    //    }
+    //}
 
-        //private void OnListViewMouseMove(object sender, MouseEventArgs e)
-        //{
-        //    ScrollViewer scrollViewer = GetScrollViewer(listBoxBooks) as ScrollViewer;
+    //private void OnListViewMouseMove(object sender, MouseEventArgs e)
+    //{
+    //    ScrollViewer scrollViewer = GetScrollViewer(listBoxBooks) as ScrollViewer;
 
-        //    if (e.MiddleButton == MouseButtonState.Pressed)
-        //    {
-        //        var currentPoint = this.PointToScreen(Mouse.GetPosition(this));
+    //    if (e.MiddleButton == MouseButtonState.Pressed)
+    //    {
+    //        var currentPoint = this.PointToScreen(Mouse.GetPosition(this));
 
-        //        if (currentPoint.Y < myMousePlacementPoint.Y)
-        //        {
-        //            scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - 3);
-        //        }
-        //        else if (currentPoint.Y > myMousePlacementPoint.Y)
-        //        {
-        //            scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset + 3);
-        //        }
+    //        if (currentPoint.Y < myMousePlacementPoint.Y)
+    //        {
+    //            scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - 3);
+    //        }
+    //        else if (currentPoint.Y > myMousePlacementPoint.Y)
+    //        {
+    //            scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset + 3);
+    //        }
 
-        //        if (currentPoint.X < myMousePlacementPoint.X)
-        //        {
-        //            scrollViewer.ScrollToHorizontalOffset(scrollViewer.HorizontalOffset - 3);
-        //        }
-        //        else if (currentPoint.X > myMousePlacementPoint.X)
-        //        {
-        //            scrollViewer.ScrollToHorizontalOffset(scrollViewer.HorizontalOffset + 3);
-        //        }
-        //    }
-        //}
+    //        if (currentPoint.X < myMousePlacementPoint.X)
+    //        {
+    //            scrollViewer.ScrollToHorizontalOffset(scrollViewer.HorizontalOffset - 3);
+    //        }
+    //        else if (currentPoint.X > myMousePlacementPoint.X)
+    //        {
+    //            scrollViewer.ScrollToHorizontalOffset(scrollViewer.HorizontalOffset + 3);
+    //        }
+    //    }
+    //}
 
-        //public static DependencyObject GetScrollViewer(DependencyObject o)
-        //{
-        //    // Return the DependencyObject if it is a ScrollViewer
-        //    if (o is ScrollViewer)
-        //    { return o; }
+    //public static DependencyObject GetScrollViewer(DependencyObject o)
+    //{
+    //    // Return the DependencyObject if it is a ScrollViewer
+    //    if (o is ScrollViewer)
+    //    { return o; }
 
-        //    for (int i = 0; i < VisualTreeHelper.GetChildrenCount(o); i++)
-        //    {
-        //        var child = VisualTreeHelper.GetChild(o, i);
+    //    for (int i = 0; i < VisualTreeHelper.GetChildrenCount(o); i++)
+    //    {
+    //        var child = VisualTreeHelper.GetChild(o, i);
 
-        //        var result = GetScrollViewer(child);
-        //        if (result == null)
-        //        {
-        //            continue;
-        //        }
-        //        else
-        //        {
-        //            return result;
-        //        }
-        //    }
-        //    return null;
-        //}
-    }
+    //        var result = GetScrollViewer(child);
+    //        if (result == null)
+    //        {
+    //            continue;
+    //        }
+    //        else
+    //        {
+    //            return result;
+    //        }
+    //    }
+    //    return null;
+    //}
+}
 }

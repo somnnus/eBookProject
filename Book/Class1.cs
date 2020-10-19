@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using eBdb;
 
 namespace Book
 {
     public class Class1
     {
-        // свддв
-        //лоооол
     }
 }

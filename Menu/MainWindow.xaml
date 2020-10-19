@@ -168,7 +168,7 @@
                     </ControlTemplate>
                 </Label.Template>
             </Label>
-            <Grid  Canvas.Left="359" Canvas.Top="66"/>
+            <Grid  Canvas.Left="322" Canvas.Top="51"  Height="523" Width="551"/>
             <ListBox x:Name="listBoxBooks" Canvas.Left="322" Canvas.Top="51" Background="Bisque" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="523" Width="551">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -186,12 +186,12 @@
                 </ListBox.ItemsPanel>
             </ListBox>
             <Label Canvas.Left="228" Canvas.Top="277" Height="63" Width="63">
-                <Hyperlink TextDecorations="None">
-                    <ContentControl Margin="10" Template="{StaticResource ArrowLeft}" />
+                <Hyperlink TextDecorations="None" Click="LeftPageClick">
+                    <ContentControl Margin="10" Template="{StaticResource ArrowLeft}"/>
                 </Hyperlink>
             </Label>
             <Label Canvas.Left="911" Canvas.Top="277" Height="62" Width="63">
-                <Hyperlink TextDecorations="None">
+                <Hyperlink TextDecorations="None" Click="RightPageClick">
                     <InlineUIContainer>
                         <ContentControl Margin="10" Template="{StaticResource ArrowRight}" />
                     </InlineUIContainer>
