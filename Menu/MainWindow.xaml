@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Menu"
-        
-        mc:Ignorable="d"
-        Title="Reader" Height="650" Width="1000" WindowStyle="None" WindowState="Maximized">
 
+    mc:Ignorable="d"
+        Title="Reader" Height="650" Width="1000" WindowStyle="None" WindowState="Normal"  ResizeMode="CanResize">
+
+    
     <Window.Resources>
         <Style TargetType="{x:Type Hyperlink}" x:Key="HyperlinkSettings">
             <Setter Property="Foreground" Value="Black"/>
@@ -152,6 +153,7 @@
         <Style TargetType="{x:Type ScrollBar}">
             <Setter Property="Template" Value="{StaticResource VerticalScrollBar}"/>
         </Style>-->
+
     </Window.Resources>
     <Grid>
         <Canvas Background="Bisque">
@@ -169,23 +171,31 @@
                     </ControlTemplate>
                 </Label.Template>
             </Label>
-            <Grid  Canvas.Left="322" Canvas.Top="51"  Height="523" Width="551"/>
-            <ListBox x:Name="listBoxBooks" Canvas.Left="322" Canvas.Top="51" Background="Bisque" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="523" Width="551">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Vertical">
-                            <Image Width="150" Source='{Binding imagePath}'/>
-                            <TextBlock Text='{Binding author}'></TextBlock>
-                            <TextBlock Text='{Binding bookName}'></TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel ItemHeight="250" ItemWidth="250" IsItemsHost="True" Orientation="Horizontal"  />
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-            </ListBox>
+
+            <UserControl>
+                <UserControl.Resources>
+                    <local:SizePercentageConverter x:Key="PercentageConverter" />
+                </UserControl.Resources>
+                <Grid Margin="320,50,0,0" Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.6, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Canvas}},Path=ActualWidth}">
+                    <ListBox x:Name="listBoxBooks" Height="auto" Width="auto" Background="Bisque" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.2, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}" Source='{Binding imagePath}'/>
+                                    <TextBlock Text='{Binding author}'></TextBlock>
+                                    <TextBlock Text='{Binding bookName}'></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel ItemHeight="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.4, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}" 
+                                           ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.4, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}" IsItemsHost="True" Orientation="Horizontal"  />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+                </Grid>
+            </UserControl>
             <Label Canvas.Left="228" Canvas.Top="277" Height="63" Width="63">
                 <Hyperlink TextDecorations="None" Click="LeftPageClick">
                     <ContentControl Margin="10" Template="{StaticResource ArrowLeft}"/>
