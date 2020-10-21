@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Menu"
         
         mc:Ignorable="d"
-        Title="Reader" Height="650" Width="1000">
+        Title="Reader" Height="650" Width="1000" WindowStyle="None" WindowState="Maximized">
+
     <Window.Resources>
         <Style TargetType="{x:Type Hyperlink}" x:Key="HyperlinkSettings">
             <Setter Property="Foreground" Value="Black"/>
