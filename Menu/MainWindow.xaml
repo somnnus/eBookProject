@@ -8,7 +8,7 @@
     mc:Ignorable="d"
         Title="Reader" Height="650" Width="1000" WindowStyle="None" WindowState="Normal"  ResizeMode="CanResize">
 
-    
+
     <Window.Resources>
         <Style TargetType="{x:Type Hyperlink}" x:Key="HyperlinkSettings">
             <Setter Property="Foreground" Value="Black"/>
@@ -61,10 +61,10 @@
             </Style.Triggers>
         </Style>
         <ControlTemplate x:Key="ArrowRight">
-            <Path Width="30" Height="30" Data="F1M568.254,-7.43524L568.159,-7.34277 567.977,-7.52246 546.559,-28.9417 525.484,-28.9417 549.787,-4.63446 557.439,3.01532 557.619,3.19629 550.067,10.7549 525.758,35.0583 546.834,35.0583 568.254,13.6429 578.792,3.10254 568.254,-7.43524z" Stretch="Uniform" Fill="#FFFFFFFF" RenderTransformOrigin="0.5,0.5" />
+            <Path Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Data="F1M568.254,-7.43524L568.159,-7.34277 567.977,-7.52246 546.559,-28.9417 525.484,-28.9417 549.787,-4.63446 557.439,3.01532 557.619,3.19629 550.067,10.7549 525.758,35.0583 546.834,35.0583 568.254,13.6429 578.792,3.10254 568.254,-7.43524z" Stretch="Uniform" Fill="#FFFFFFFF" RenderTransformOrigin="0.5,0.5"/>
         </ControlTemplate>
         <ControlTemplate x:Key="ArrowLeft">
-            <Path Width="30" Height="30" Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z" Stretch="Uniform" Fill="#FFFFFFFF" RenderTransformOrigin="0.5,0.5" />
+            <Path Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z" Stretch="Uniform" Fill="#FFFFFFFF" RenderTransformOrigin="0.5,0.5"/>
         </ControlTemplate>
         <!--<Style x:Key="ScrollBarLineButtonStyle" TargetType="{x:Type RepeatButton}">
             <Setter Property="Focusable" Value="False"/>
@@ -196,18 +196,26 @@
                     </ListBox>
                 </Grid>
             </UserControl>
-            <Label Canvas.Left="228" Canvas.Top="277" Height="63" Width="63">
-                <Hyperlink TextDecorations="None" Click="LeftPageClick">
-                    <ContentControl Margin="10" Template="{StaticResource ArrowLeft}"/>
-                </Hyperlink>
-            </Label>
-            <Label Canvas.Left="911" Canvas.Top="277" Height="62" Width="63">
-                <Hyperlink TextDecorations="None" Click="RightPageClick">
-                    <InlineUIContainer>
-                        <ContentControl Margin="10" Template="{StaticResource ArrowRight}" />
-                    </InlineUIContainer>
-                </Hyperlink>
-            </Label>
+            <UserControl>
+                <UserControl.Resources>
+                    <local:SizePercentageConverter x:Key="PercentageConverter"/>
+                </UserControl.Resources>
+                <Label Margin="230,270,0,0" Height="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.05, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}" Width="auto">
+                    <Hyperlink TextDecorations="None" Click="LeftPageClick">
+                        <ContentControl Template="{StaticResource ArrowLeft}"/>
+                    </Hyperlink>
+                </Label>
+            </UserControl>
+            <UserControl>
+                <UserControl.Resources>
+                    <local:SizePercentageConverter x:Key="PercentageConverter"/>
+                </UserControl.Resources>
+                <Label Height="{Binding ActualWidth, ConverterParameter=0.05, Converter={StaticResource PercentageConverter}, RelativeSource={RelativeSource AncestorType={x:Type Grid}, Mode=FindAncestor}}" Width="auto" HorizontalAlignment="Right">
+                    <Hyperlink TextDecorations="None" Click="RightPageClick">
+                        <ContentControl Template="{StaticResource ArrowRight}"/>
+                    </Hyperlink>
+                </Label>
+            </UserControl>
             <!--<DataGrid Name="booksGrid" Background="Black">
                 <DataGrid.Columns>
                     <DataGridHyperlinkColumn Width="2.5*" />
