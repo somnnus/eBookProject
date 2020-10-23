@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Menu"
 
     mc:Ignorable="d"
-        Title="Reader" Height="650" Width="1010" WindowStyle="None" WindowState="Normal"  ResizeMode="CanResizeWithGrip"  MinHeight="650" MinWidth="1010">
+        Title="Reader" Height="700" Width="1150" WindowStyle="None" WindowState="Normal"  ResizeMode="CanResizeWithGrip"  MinHeight="700" MinWidth="1150">
 
 
     <Window.Resources>
@@ -61,131 +61,45 @@
             </Style.Triggers>
         </Style>
         <ControlTemplate x:Key="ArrowRight">
-            <Path Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Data="F1M568.254,-7.43524L568.159,-7.34277 567.977,-7.52246 546.559,-28.9417 525.484,-28.9417 549.787,-4.63446 557.439,3.01532 557.619,3.19629 550.067,10.7549 525.758,35.0583 546.834,35.0583 568.254,13.6429 578.792,3.10254 568.254,-7.43524z" Stretch="Uniform" Fill="#FFFFFFFF" RenderTransformOrigin="0.5,0.5"/>
+            <Path Width="30" Height="{TemplateBinding Height}" Data="F1M568.254,-7.43524L568.159,-7.34277 567.977,-7.52246 546.559,-28.9417 525.484,-28.9417 549.787,-4.63446 557.439,3.01532 557.619,3.19629 550.067,10.7549 525.758,35.0583 546.834,35.0583 568.254,13.6429 578.792,3.10254 568.254,-7.43524z" Stretch="Uniform" Fill="#FFFFFFFF" RenderTransformOrigin="0.5,0.5"/>
         </ControlTemplate>
         <ControlTemplate x:Key="ArrowLeft">
-            <Path Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z" Stretch="Uniform" Fill="#FFFFFFFF" RenderTransformOrigin="0.5,0.5"/>
+            <Path Width="30" Height="{TemplateBinding Height}" Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z" Stretch="Uniform" Fill="#FFFFFFFF" RenderTransformOrigin="0.5,0.5"/>
         </ControlTemplate>
-        <!--<Style x:Key="ScrollBarLineButtonStyle" TargetType="{x:Type RepeatButton}">
-            <Setter Property="Focusable" Value="False"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type RepeatButton}">
-                        <Canvas Height="18">
-                            <Polygon Fill="LightBlue" Points="3,15 15,15 9,3"></Polygon>
-                        </Canvas>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="ScrollBarLineButtonBottomStyle" TargetType="{x:Type RepeatButton}">
-            <Setter Property="Focusable" Value="False"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type RepeatButton}">
-                        <Canvas Height="18">
-                            <Polygon Fill="LightBlue" Points="3,3 9,15 15,3"></Polygon>
-                        </Canvas>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="ScrollBarPageButtonStyle" TargetType="{x:Type RepeatButton}">
-            <Setter Property="IsTabStop" Value="False"/>
-            <Setter Property="Focusable" Value="False"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type RepeatButton}">
-                        <Border BorderBrush="Transparent"></Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="ScrollBarThumbStyle" TargetType="{x:Type Thumb}">
-            <Setter Property="IsTabStop" Value="False"/>
-            <Setter Property="Focusable" Value="False"/>
-            <Setter Property="Margin" Value="1,0,1,0" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Thumb}">
-                        <Rectangle Fill="LightBlue" Margin="2"></Rectangle>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <ControlTemplate x:Key="VerticalScrollBar" TargetType="{x:Type ScrollBar}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition MaxHeight="18"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition MaxHeight="18"/>
-                </Grid.RowDefinitions>
-
-                <RepeatButton Grid.Row="0" Height="18"
-                          Style="{StaticResource ScrollBarLineButtonStyle}"
-                          Command="ScrollBar.LineUpCommand" >
-                </RepeatButton>
-                <Track Name="PART_Track" Grid.Row="1" 
-                   IsDirectionReversed="True">
-                    <Track.DecreaseRepeatButton>
-                        <RepeatButton Command="ScrollBar.PageUpCommand" Style="{StaticResource ScrollBarPageButtonStyle}">
-                        </RepeatButton>
-                    </Track.DecreaseRepeatButton>
-                    <Track.Thumb>
-                        <Thumb Style="{StaticResource ScrollBarThumbStyle}">
-                        </Thumb>
-                    </Track.Thumb>
-                    <Track.IncreaseRepeatButton>
-                        <RepeatButton Command="ScrollBar.PageDownCommand" Style="{StaticResource ScrollBarPageButtonStyle}">
-                        </RepeatButton>
-                    </Track.IncreaseRepeatButton>
-                </Track>
-                <RepeatButton Grid.Row="3" Height="18"
-                          Style="{StaticResource ScrollBarLineButtonBottomStyle}"
-                          Command="ScrollBar.LineDownCommand">
-                </RepeatButton>
-            </Grid>
-        </ControlTemplate>
-
-        <Style TargetType="{x:Type ScrollBar}">
-            <Setter Property="Template" Value="{StaticResource VerticalScrollBar}"/>
-        </Style>-->
-
     </Window.Resources>
     <Grid>
-        <Canvas Background="Bisque">
-            <StackPanel Canvas.Top="140" Canvas.Left="10" Height="132" Width="215">
-                <TextBlock Style="{StaticResource TextBlockSettings}"><Hyperlink NavigateUri="#" Style="{StaticResource HyperlinkSettings}">Вернуться к прочтению</Hyperlink></TextBlock>
-                <TextBlock Style="{StaticResource TextBlockSettings}"><Hyperlink NavigateUri="#" Style="{StaticResource HyperlinkSettings}">Перейти в библиотеку</Hyperlink></TextBlock>
-                <TextBlock Style="{StaticResource TextBlockSettings}"><Hyperlink NavigateUri="#" Style="{StaticResource HyperlinkSettings}">Настройки интерфейса</Hyperlink></TextBlock>
-            </StackPanel>
-            <Label Style="{StaticResource LabelSettings}" Canvas.Left="29" Canvas.Top="74" Height="61" Width="164">
-                <Label.Template>
-                    <ControlTemplate>
-                        <Border Background="#FFE6C196" CornerRadius="50" Padding="2" BorderThickness="3" BorderBrush="#FFB99A7B">
-                            <ContentPresenter Content="Меню" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                        </Border>
-                    </ControlTemplate>
-                </Label.Template>
-            </Label>
-
-
-            <Grid Margin="230,30,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <UserControl>
-                    <UserControl.Resources>
-                        <local:SizePercentageConverter x:Key="PercentageConverter" />
-                    </UserControl.Resources>
-                    <Grid Name="libraryGrid" Margin="70,0,75,0" 
-                          Height="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.9, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Canvas}},Path=ActualHeight}"
-                          Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.6, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Canvas}},Path=ActualWidth}">
-                        <ListBox x:Name="listBoxBooks" Height="auto" Width="auto" Background="Bisque" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <UserControl>
+            <UserControl.Resources>
+                <local:SizePercentageConverter x:Key="PercentageConverter" />
+            </UserControl.Resources>
+            <Canvas Background="Bisque">
+                <StackPanel Margin="40,40,0,0">
+                    <Label Style="{StaticResource LabelSettings}" Width="220" Height="65" HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <Label.Template>
+                            <ControlTemplate>
+                                <Border Background="#FFE6C196" CornerRadius="50" Padding="2" BorderThickness="3" BorderBrush="#FFB99A7B">
+                                    <ContentPresenter Content="Панель управления" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Label.Template>
+                    </Label>
+                    <StackPanel Height="auto" Width="auto" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource TextBlockSettings}"><Hyperlink NavigateUri="#" Style="{StaticResource HyperlinkSettings}">Вернуться к прочтению</Hyperlink></TextBlock>
+                        <TextBlock Style="{StaticResource TextBlockSettings}"><Hyperlink NavigateUri="#" Style="{StaticResource HyperlinkSettings}">Перейти в библиотеку</Hyperlink></TextBlock>
+                        <TextBlock Style="{StaticResource TextBlockSettings}"><Hyperlink NavigateUri="#" Style="{StaticResource HyperlinkSettings}">Настройки интерфейса</Hyperlink></TextBlock>
+                    </StackPanel>
+                </StackPanel>
+                <Grid Margin="270,20,0,0"
+                      Height="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.95, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Canvas}},Path=ActualHeight}"
+                      Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.75, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Canvas}},Path=ActualWidth}">
+                    <Grid Name="libraryGrid" Margin="75,0,75,0">
+                        <ListBox x:Name="listBoxBooks" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="auto" Width="auto" Background="Bisque" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Vertical">
-                                        <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.15, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}" Source='{Binding imagePath}'/>
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                                        <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.15, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}"
+                                               Height="auto" 
+                                               Source='{Binding imagePath}'/>
                                         <TextBlock Text='{Binding author}'></TextBlock>
                                         <TextBlock Text='{Binding bookName}'></TextBlock>
                                     </StackPanel>
@@ -193,39 +107,29 @@
                             </ListBox.ItemTemplate>
                             <ListBox.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapPanel ItemHeight="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.35, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}" 
-                                               ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.3, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}" 
+                                    <WrapPanel ItemHeight="auto" 
+                                               ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.25, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}" 
                                                IsItemsHost="True" Orientation="Horizontal"  />
                                 </ItemsPanelTemplate>
                             </ListBox.ItemsPanel>
                         </ListBox>
                     </Grid>
-                </UserControl>
-                <UserControl>
-                    <UserControl.Resources>
-                        <local:SizePercentageConverter x:Key="PercentageConverter"/>
-                    </UserControl.Resources>
                     <Label Name="labelArrowLeft" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                           Height="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.07, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualHeight}"
-                           Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.07, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}">
+                           Height="auto"
+                           Width="auto">
                         <Hyperlink TextDecorations="None" Click="LeftPageClick">
                             <ContentControl Template="{StaticResource ArrowLeft}"/>
                         </Hyperlink>
                     </Label>
-                </UserControl>
-                <UserControl>
-                    <UserControl.Resources>
-                        <local:SizePercentageConverter x:Key="PercentageConverter"/>
-                    </UserControl.Resources>
                     <Label Name="labelArrowRight" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                           Height="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.07, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualHeight}"
-                           Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.07, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}">
+                           Height="auto"
+                           Width="auto">
                         <Hyperlink TextDecorations="None" Click="RightPageClick">
                             <ContentControl Template="{StaticResource ArrowRight}"/>
                         </Hyperlink>
                     </Label>
-                </UserControl>
-            </Grid>
-        </Canvas>
+                </Grid>
+            </Canvas>
+        </UserControl>
     </Grid>
 </Window>

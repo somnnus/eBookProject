@@ -34,7 +34,7 @@ namespace Menu
         {
             InitializeComponent();
 
-            blocksCount = 4;
+            blocksCount = 6;
             dictKeys = ArrayHelperExtensions.Split(AddBooks(books), dictKeys, blocksCount);
 
             if (currentPage == 0)
