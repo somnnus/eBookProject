@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Menu"
 
     mc:Ignorable="d"
-        Title="Reader" Height="650" Width="1000" WindowStyle="None" WindowState="Normal"  ResizeMode="CanResize">
+        Title="Reader" Height="650" Width="1010" WindowStyle="None" WindowState="Normal"  ResizeMode="CanResizeWithGrip"  MinHeight="650" MinWidth="1010">
 
 
     <Window.Resources>
@@ -157,12 +157,12 @@
     </Window.Resources>
     <Grid>
         <Canvas Background="Bisque">
-            <StackPanel Canvas.Top="140" Canvas.Left="35" Height="132" Width="226">
+            <StackPanel Canvas.Top="140" Canvas.Left="10" Height="132" Width="215">
                 <TextBlock Style="{StaticResource TextBlockSettings}"><Hyperlink NavigateUri="#" Style="{StaticResource HyperlinkSettings}">Вернуться к прочтению</Hyperlink></TextBlock>
                 <TextBlock Style="{StaticResource TextBlockSettings}"><Hyperlink NavigateUri="#" Style="{StaticResource HyperlinkSettings}">Перейти в библиотеку</Hyperlink></TextBlock>
                 <TextBlock Style="{StaticResource TextBlockSettings}"><Hyperlink NavigateUri="#" Style="{StaticResource HyperlinkSettings}">Настройки интерфейса</Hyperlink></TextBlock>
             </StackPanel>
-            <Label Style="{StaticResource LabelSettings}" Canvas.Left="60" Canvas.Top="66" Height="61" Width="164">
+            <Label Style="{StaticResource LabelSettings}" Canvas.Left="29" Canvas.Top="74" Height="61" Width="164">
                 <Label.Template>
                     <ControlTemplate>
                         <Border Background="#FFE6C196" CornerRadius="50" Padding="2" BorderThickness="3" BorderBrush="#FFB99A7B">
@@ -172,78 +172,60 @@
                 </Label.Template>
             </Label>
 
-            <UserControl>
-                <UserControl.Resources>
-                    <local:SizePercentageConverter x:Key="PercentageConverter"/>
-                </UserControl.Resources>
-                <Grid Margin="320,50,0,0" Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.6, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Canvas}},Path=ActualWidth}">
-                    <ListBox x:Name="listBoxBooks" Height="auto" Width="auto" Background="Bisque" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Vertical">
-                                    <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.2, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}" Source='{Binding imagePath}'/>
-                                    <TextBlock Text='{Binding author}'></TextBlock>
-                                    <TextBlock Text='{Binding bookName}'></TextBlock>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel ItemHeight="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.4, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}" 
-                                           ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.4, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}" IsItemsHost="True" Orientation="Horizontal"  />
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                    </ListBox>
-                </Grid>
-            </UserControl>
-            <UserControl>
-                <UserControl.Resources>
-                    <local:SizePercentageConverter x:Key="PercentageConverter"/>
-                </UserControl.Resources>
-                <Label Margin="230,270,0,0" Height="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.05, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}" Width="auto">
-                    <Hyperlink TextDecorations="None" Click="LeftPageClick">
-                        <ContentControl Template="{StaticResource ArrowLeft}"/>
-                    </Hyperlink>
-                </Label>
-            </UserControl>
-            <UserControl>
-                <UserControl.Resources>
-                    <local:SizePercentageConverter x:Key="PercentageConverter"/>
-                </UserControl.Resources>
-                <Label Height="{Binding ActualWidth, ConverterParameter=0.05, Converter={StaticResource PercentageConverter}, RelativeSource={RelativeSource AncestorType={x:Type Grid}, Mode=FindAncestor}}" Width="auto" >
-                    <Hyperlink TextDecorations="None" Click="RightPageClick">
-                        <ContentControl HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Template="{StaticResource ArrowRight}"/>
-                    </Hyperlink>
-                </Label>
-            </UserControl>
-            <!--<DataGrid Name="booksGrid" Background="Black">
-                <DataGrid.Columns>
-                    <DataGridHyperlinkColumn Width="2.5*" />
-                </DataGrid.Columns>
-                <Image Grid.Column="0" x:Name="mainImage">
-                    <Image.Source>
-                        <FormatConvertedBitmap Source={Binding }"
-                DestinationFormat="Gray32Float" />
-                    </Image.Source>
-                </Image>
-                <StackPanel Grid.Column="1">
-                    <Image Source="1.jpg" />
-                    <Image Source="2.jpg" />
-                    <Image Source="4.jpg" />
-                    <Image Source="3.jpg" />
-                </StackPanel>
-            </DataGrid>-->
 
-            <!--<DataGrid Background="Lavender" Canvas.Left="483" Canvas.Top="63" Height="149" Width="473">
-                <DataGrid.Items>
-                    <TextBlock Style="{StaticResource TextBlockSettings}"><Hyperlink NavigateUri="#" Style="{StaticResource HyperlinkSettings}">Вернуться к прочтению</Hyperlink></TextBlock>
-                    <TextBlock Style="{StaticResource TextBlockSettings}"><Hyperlink NavigateUri="#" Style="{StaticResource HyperlinkSettings}">Перейти в библиотеку</Hyperlink></TextBlock>
-                    <TextBlock Style="{StaticResource TextBlockSettings}"><Hyperlink NavigateUri="#" Style="{StaticResource HyperlinkSettings}">Настройки интерфейса</Hyperlink></TextBlock>
-                </DataGrid.Items>
-                <DataGrid.Columns>
-                    <DataGridTextColumn Width="80" />
-                </DataGrid.Columns>
-            </DataGrid>-->
+            <Grid Margin="230,30,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <UserControl>
+                    <UserControl.Resources>
+                        <local:SizePercentageConverter x:Key="PercentageConverter" />
+                    </UserControl.Resources>
+                    <Grid Name="libraryGrid" Margin="70,0,75,0" 
+                          Height="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.9, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Canvas}},Path=ActualHeight}"
+                          Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.6, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Canvas}},Path=ActualWidth}">
+                        <ListBox x:Name="listBoxBooks" Height="auto" Width="auto" Background="Bisque" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical">
+                                        <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.15, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}" Source='{Binding imagePath}'/>
+                                        <TextBlock Text='{Binding author}'></TextBlock>
+                                        <TextBlock Text='{Binding bookName}'></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel ItemHeight="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.35, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}" 
+                                               ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.3, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}" 
+                                               IsItemsHost="True" Orientation="Horizontal"  />
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                        </ListBox>
+                    </Grid>
+                </UserControl>
+                <UserControl>
+                    <UserControl.Resources>
+                        <local:SizePercentageConverter x:Key="PercentageConverter"/>
+                    </UserControl.Resources>
+                    <Label Name="labelArrowLeft" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                           Height="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.07, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualHeight}"
+                           Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.07, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}">
+                        <Hyperlink TextDecorations="None" Click="LeftPageClick">
+                            <ContentControl Template="{StaticResource ArrowLeft}"/>
+                        </Hyperlink>
+                    </Label>
+                </UserControl>
+                <UserControl>
+                    <UserControl.Resources>
+                        <local:SizePercentageConverter x:Key="PercentageConverter"/>
+                    </UserControl.Resources>
+                    <Label Name="labelArrowRight" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                           Height="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.07, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualHeight}"
+                           Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.07, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}">
+                        <Hyperlink TextDecorations="None" Click="RightPageClick">
+                            <ContentControl Template="{StaticResource ArrowRight}"/>
+                        </Hyperlink>
+                    </Label>
+                </UserControl>
+            </Grid>
         </Canvas>
     </Grid>
 </Window>
