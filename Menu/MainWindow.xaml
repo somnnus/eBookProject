@@ -6,9 +6,8 @@
         xmlns:local="clr-namespace:Menu"
 
     mc:Ignorable="d"
-        Title="Reader" Height="700" Width="1150" WindowStyle="None" WindowState="Normal"  ResizeMode="CanResizeWithGrip"  MinHeight="700" MinWidth="1150">
-
-
+        Title="Reader" Height="700" Width="1150" WindowState="Normal" ResizeMode="CanResizeWithGrip"
+        MinHeight="300" MinWidth="850">
     <Window.Resources>
         <Style TargetType="{x:Type Hyperlink}" x:Key="HyperlinkSettings">
             <Setter Property="Foreground" Value="Black"/>
@@ -27,10 +26,16 @@
         <Style TargetType="{x:Type TextBlock}" x:Key="TextBlockSettings">
             <Setter Property="Margin" Value="10" />
         </Style>
-        <Style TargetType="{x:Type Label}" x:Key="LabelSettings">
+        <Style TargetType="{x:Type Control}" x:Key="TextSettings">
             <Setter Property="FontFamily" Value="Garamond" />
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="FontSize" Value="26" />
+        </Style>
+        <Style TargetType="{x:Type Control}" x:Key="Headings">
+            <Setter Property="FontFamily" Value="Garamond" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="40" />
+            <Setter Property="FontWeight" Value="Bold"/>
         </Style>
         <Style TargetType="{x:Type ListBox}">
             <Setter Property="BorderThickness" Value="0"/>
@@ -67,37 +72,56 @@
             <Path Width="30" Height="{TemplateBinding Height}" Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z" Stretch="Uniform" Fill="#FFFFFFFF" RenderTransformOrigin="0.5,0.5"/>
         </ControlTemplate>
     </Window.Resources>
-    <Grid>
+    <DockPanel Background="Bisque">
+        <StackPanel Margin="40">
+            <Label Content="Menu" Style="{StaticResource Headings}" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Menu Style="{StaticResource TextSettings}" Width="auto" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Vertical" Background="Bisque"/>
+                </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+                <MenuItem Header="Continue reading"/>
+                <MenuItem Header="Edit library">
+                   <MenuItem Header="Add a book"/>
+                   <MenuItem Header="Remove a book" />
+                </MenuItem>
+                <MenuItem Header="Settings" />
+                <Separator/>
+                <MenuItem Header="Exit" />
+            </Menu>
+        </StackPanel>
         <UserControl>
             <UserControl.Resources>
-                <local:SizePercentageConverter x:Key="PercentageConverter" />
+                <local:SizePercentageConverter x:Key="PercentageConverter"/>
             </UserControl.Resources>
-            <Canvas Background="Bisque">
-                <StackPanel Margin="40,40,0,0">
-                    <Label Style="{StaticResource LabelSettings}" Width="220" Height="65" HorizontalAlignment="Center" VerticalAlignment="Top">
-                        <Label.Template>
-                            <ControlTemplate>
-                                <Border Background="#FFE6C196" CornerRadius="50" Padding="2" BorderThickness="3" BorderBrush="#FFB99A7B">
-                                    <ContentPresenter Content="Панель управления" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                </Border>
-                            </ControlTemplate>
-                        </Label.Template>
-                    </Label>
-                    <StackPanel Height="auto" Width="auto" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <TextBlock Style="{StaticResource TextBlockSettings}"><Hyperlink NavigateUri="#" Style="{StaticResource HyperlinkSettings}">Вернуться к прочтению</Hyperlink></TextBlock>
-                        <TextBlock Style="{StaticResource TextBlockSettings}"><Hyperlink NavigateUri="#" Style="{StaticResource HyperlinkSettings}">Перейти в библиотеку</Hyperlink></TextBlock>
-                        <TextBlock Style="{StaticResource TextBlockSettings}"><Hyperlink NavigateUri="#" Style="{StaticResource HyperlinkSettings}">Настройки интерфейса</Hyperlink></TextBlock>
-                    </StackPanel>
-                </StackPanel>
-                <Grid Margin="270,20,0,0"
-                      Height="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.95, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Canvas}},Path=ActualHeight}"
-                      Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.75, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Canvas}},Path=ActualWidth}">
-                    <Grid Name="libraryGrid" Margin="75,0,75,0">
-                        <ListBox x:Name="listBoxBooks" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="auto" Width="auto" Background="Bisque" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <DockPanel Margin="40">
+                <Label Content="Reading Recently" Style="{StaticResource Headings}" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <DockPanel Height="auto" Width="auto" LastChildFill="True">
+                    <Grid Width="40" DockPanel.Dock="Left">
+                        <Label Name="labelArrowLeft" VerticalAlignment="Center" 
+                           Height="auto"
+                           Width="auto">
+                            <Hyperlink TextDecorations="None" Click="LeftPageClick">
+                                <ContentControl Template="{StaticResource ArrowLeft}"/>
+                            </Hyperlink>
+                        </Label>
+                    </Grid>
+                    <Grid Width="40" DockPanel.Dock="Right">
+                        <Label Name="labelArrowRight" VerticalAlignment="Center" 
+                            Height="auto"
+                            Width="auto">
+                          <Hyperlink TextDecorations="None" Click="RightPageClick">
+                               <ContentControl Template="{StaticResource ArrowRight}"/>
+                          </Hyperlink>
+                        </Label>
+                    </Grid>
+                    <Grid Name="libraryGrid">
+                        <ListBox x:Name="listBoxBooks" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="Bisque" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                                        <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.15, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}"
+                                        <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.13, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type DockPanel}},Path=ActualWidth}"
                                                Height="auto" 
                                                Source='{Binding imagePath}'/>
                                         <TextBlock Text='{Binding author}'></TextBlock>
@@ -107,29 +131,15 @@
                             </ListBox.ItemTemplate>
                             <ListBox.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapPanel ItemHeight="auto" 
-                                               ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.25, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}" 
+                                    <WrapPanel ItemHeight="auto"
+                                               ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.23, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type DockPanel}},Path=ActualWidth}" 
                                                IsItemsHost="True" Orientation="Horizontal"  />
                                 </ItemsPanelTemplate>
                             </ListBox.ItemsPanel>
                         </ListBox>
                     </Grid>
-                    <Label Name="labelArrowLeft" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                           Height="auto"
-                           Width="auto">
-                        <Hyperlink TextDecorations="None" Click="LeftPageClick">
-                            <ContentControl Template="{StaticResource ArrowLeft}"/>
-                        </Hyperlink>
-                    </Label>
-                    <Label Name="labelArrowRight" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                           Height="auto"
-                           Width="auto">
-                        <Hyperlink TextDecorations="None" Click="RightPageClick">
-                            <ContentControl Template="{StaticResource ArrowRight}"/>
-                        </Hyperlink>
-                    </Label>
-                </Grid>
-            </Canvas>
+                </DockPanel>
+            </DockPanel>
         </UserControl>
-    </Grid>
+    </DockPanel>
 </Window>
