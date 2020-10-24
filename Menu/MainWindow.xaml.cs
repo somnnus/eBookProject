@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
-
+using System.Windows.Threading;
 
 namespace Menu
 {
@@ -22,6 +22,7 @@ namespace Menu
     /// </summary>
     public partial class MainWindow : Window
     {
+        NavigationService service;
         List<Book> books = new List<Book>();
 
         Dictionary<int, List<Book>> dictKeys = new Dictionary<int, List<Book>>();
@@ -33,7 +34,7 @@ namespace Menu
         public MainWindow()
         {
             InitializeComponent();
-
+            
             blocksCount = 6;
             dictKeys = ArrayHelperExtensions.Split(AddBooks(books), dictKeys, blocksCount);
 
@@ -41,7 +42,19 @@ namespace Menu
             {
                 listBoxBooks.ItemsSource = dictKeys[0];
             }
+            //Loaded += OpenLibraryPage;
+            service = NavigationService.GetNavigationService(this);
         }
+
+        //void OpenLibraryPage(object sender, RoutedEventArgs e)
+        //{
+
+        //    IsLoaded = true;
+
+        //    nav = NavigationService.GetNavigationService(this);
+        //    nav.Navigate(new Uri("LibraryPage.xaml", UriKind.RelativeOrAbsolute));
+
+        //}
 
         private void LeftPageClick(object sender, RoutedEventArgs e)
         {
@@ -59,6 +72,36 @@ namespace Menu
                 currentPage++;
                 listBoxBooks.ItemsSource = dictKeys[currentPage];
             }
+        }
+
+        private void OpenLibraryPage(object sender, RoutedEventArgs e)
+        {
+            Page libPage;
+
+            try
+            {
+                libPage = (Page)Application.LoadComponent(new Uri("LibraryPage.xaml", UriKind.Relative));
+            }
+            catch (Exception)
+            {
+                // note error and abort
+                return;
+            }
+
+
+            libPage.Loaded += (sender1,e1) => service.Navigate(libPage);
+            //Application.Current.Dispatcher.BeginInvoke(Loaded, DispatcherPriority.Normal);
+            
+
+            //while (libPage.IsLoaded)
+            //{
+            //    NavigationService service = NavigationService.GetNavigationService(this);
+            //    service.Navigate(libPage);
+            //}
+
+
+            //NavigationService service = NavigationService.GetNavigationService(menu);
+            //service.Navigate(new Uri("LibraryPage.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private List<Book> AddBooks(List<Book> books)
@@ -137,66 +180,5 @@ namespace Menu
             });
             return books;
         }
-
-    //private Point myMousePlacementPoint;
-
-    //private void OnListViewMouseDown(object sender, MouseButtonEventArgs e)
-    //{
-    //    if (e.MiddleButton == MouseButtonState.Pressed)
-    //    {
-    //        myMousePlacementPoint = this.PointToScreen(Mouse.GetPosition(this));
-    //    }
-    //}
-
-    //private void OnListViewMouseMove(object sender, MouseEventArgs e)
-    //{
-    //    ScrollViewer scrollViewer = GetScrollViewer(listBoxBooks) as ScrollViewer;
-
-    //    if (e.MiddleButton == MouseButtonState.Pressed)
-    //    {
-    //        var currentPoint = this.PointToScreen(Mouse.GetPosition(this));
-
-    //        if (currentPoint.Y < myMousePlacementPoint.Y)
-    //        {
-    //            scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - 3);
-    //        }
-    //        else if (currentPoint.Y > myMousePlacementPoint.Y)
-    //        {
-    //            scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset + 3);
-    //        }
-
-    //        if (currentPoint.X < myMousePlacementPoint.X)
-    //        {
-    //            scrollViewer.ScrollToHorizontalOffset(scrollViewer.HorizontalOffset - 3);
-    //        }
-    //        else if (currentPoint.X > myMousePlacementPoint.X)
-    //        {
-    //            scrollViewer.ScrollToHorizontalOffset(scrollViewer.HorizontalOffset + 3);
-    //        }
-    //    }
-    //}
-
-    //public static DependencyObject GetScrollViewer(DependencyObject o)
-    //{
-    //    // Return the DependencyObject if it is a ScrollViewer
-    //    if (o is ScrollViewer)
-    //    { return o; }
-
-    //    for (int i = 0; i < VisualTreeHelper.GetChildrenCount(o); i++)
-    //    {
-    //        var child = VisualTreeHelper.GetChild(o, i);
-
-    //        var result = GetScrollViewer(child);
-    //        if (result == null)
-    //        {
-    //            continue;
-    //        }
-    //        else
-    //        {
-    //            return result;
-    //        }
-    //    }
-    //    return null;
-    //}
-}
+    }
 }
