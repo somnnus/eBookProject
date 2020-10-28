@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Menu
 {
     /// <summary>
-    /// Логика взаимодействия для LibraryPage.xaml
+    /// Логика взаимодействия для Library.xaml
     /// </summary>
-    public partial class LibraryPage : Page
+    public partial class Library : UserControl
     {
-        public LibraryPage()
+        public Library()
         {
             InitializeComponent();
         }
