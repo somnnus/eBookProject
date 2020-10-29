@@ -25,7 +25,6 @@ namespace Menu
                     }
                 }
             }
-
             return dictKeys;
         }
     }

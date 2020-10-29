@@ -20,8 +20,12 @@ namespace Menu
     /// </summary>
     public partial class Library : UserControl
     {
-        public Library()
+        public Dictionary<int, List<Book>> dictBooks;
+
+        public Library(Dictionary<int, List<Book>> dict)
         {
+            dictBooks = dict;
+
             InitializeComponent();
         }
     }

@@ -6,7 +6,40 @@
              xmlns:local="clr-namespace:Menu"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1150">
-    <Grid Background="White">
-        <Button Content="Hooray!" HorizontalAlignment="Left" Margin="385,184,0,0" VerticalAlignment="Top" Width="75"/>
+    <UserControl.Resources>
+        <local:SizePercentageConverter x:Key="PercentageConverter"/>
+    </UserControl.Resources>
+    <Grid Background="White" Margin="10">
+        <DataGrid Name="dataGridLib" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="listBoxKeys" Binding="{Binding dictBooks.Keys}"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ListBox x:Name="listBoxBooks" ItemsSource="{Binding dictBooks[0]}"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="Bisque" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                                            <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.13, ElementName=dataGridLib, Path=ActualWidth}"
+                                               Height="auto" 
+                                               Source='{Binding imagePath}'/>
+                                            <TextBlock Text='{Binding author}'></TextBlock>
+                                            <TextBlock Text='{Binding bookName}'></TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel ItemHeight="auto"
+                                               ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.23, ElementName=dataGridLib,Path=ActualWidth}" 
+                                               IsItemsHost="True" Orientation="Horizontal"  />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>
