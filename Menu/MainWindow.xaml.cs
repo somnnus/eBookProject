@@ -84,16 +84,21 @@ namespace Menu
             {
                 File.Copy(path, newFullFileName);
             }
-                      
 
-            Book currentBook = new Book();
-            currentBook.FullPath = newFullFileName;
+
+            Book currentBook=null;
+            
             if (fileName.Contains(".epub"))
             {
+                currentBook = new EpubBook(newFullFileName);
+                currentBook.FullPath = newFullFileName;
                 currentBook.Format = Book.FormatBook.EPUB;
+                
             }
             else if (fileName.Contains(".fb2"))
             {
+                currentBook = new FB2Book(newFullFileName);
+                currentBook.FullPath = newFullFileName;
                 currentBook.Format = Book.FormatBook.FB2;
             }
             books.Add(currentBook);
