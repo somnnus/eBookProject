@@ -44,6 +44,7 @@ namespace Menu
             InitializeComponent();
 
             CreateHiddenDirectory();
+            CheckSerializization();
 
             ValuePassEvent = new ValuePassDelegate(method1);
             mainScreen.del = ValuePassEvent;
