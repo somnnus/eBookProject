@@ -22,6 +22,7 @@ namespace Menu
     {
         public Delegate del;
         public Delegate del2;
+        public Delegate delAddBook;
 
         public void method1()
         {
@@ -31,6 +32,11 @@ namespace Menu
         public void method2()
         {
             del2.DynamicInvoke();
+        }
+
+        public void method3()
+        {
+            delAddBook.DynamicInvoke();
         }
 
         List<Books> books = new List<Books>();
@@ -157,6 +163,11 @@ namespace Menu
         private void ExitClick(object sender, RoutedEventArgs e)
         {
             method2();
+        }
+
+        private void AddBook_Click(object sender, RoutedEventArgs e)
+        {
+            method3();
         }
     }
 }

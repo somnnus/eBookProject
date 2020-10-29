@@ -85,7 +85,7 @@
                     <MenuItem Header="Continue reading"/>
                     <MenuItem Header="Go to the library" Click="OpenLibraryPage"/>
                     <MenuItem Header="Edit the library">
-                        <MenuItem Header="Add a book"/>
+                        <MenuItem Header="Add a book" Click="AddBook_Click"/>
                         <MenuItem Header="Remove a book" />
                     </MenuItem>
                     <MenuItem Header="Settings" />
