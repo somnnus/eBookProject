@@ -25,5 +25,10 @@ namespace LibraryReader.Books
         public int LastPage { get; set; }
         public FormatBook Format { get; set; }
 
+        public Book()
+        {
+
+        }
+
     }
 }

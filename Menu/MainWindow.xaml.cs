@@ -36,7 +36,8 @@ namespace Menu
 
         private List<Book> books = new List<Book>();
 
-        static string fullPath;
+        static string fullPath = AppDomain.CurrentDomain.BaseDirectory+"Library";
+            
 
         public MainWindow()
         {
@@ -60,6 +61,7 @@ namespace Menu
 
         public void method2()
         {
+            Serialization.SerializationInformationAboutBook(books, fullPath);
             Close();
         }
 
@@ -97,13 +99,21 @@ namespace Menu
         }
 
         private void CreateHiddenDirectory()
-        {
-            fullPath = AppDomain.CurrentDomain.BaseDirectory;
-            fullPath = fullPath+ "Library";
+        {           
             if (!Directory.Exists(fullPath))
             {
                 DirectoryInfo di = Directory.CreateDirectory(fullPath);
                 di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
+            }
+        }
+
+        private void CheckSerializization()
+        {
+            string fileNameSerialize = fullPath + "\\" + "library.xml";
+            
+            if (File.Exists(fileNameSerialize))
+            {
+              books =  Serialization.DeserializationLibrary(fileNameSerialize);
             }
 
         }
