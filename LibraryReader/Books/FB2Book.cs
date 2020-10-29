@@ -7,16 +7,14 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using FB2Library;
 
-namespace Book
+namespace LibraryReader.Books
 {
     [Serializable]
-    class FB2Book: Books
+    class FB2Book: Book
     {
         public FB2Book(string path)
         {
-            
 
             var namespaceManager = new XmlNamespaceManager(new NameTable());
             namespaceManager.AddNamespace("fb", "http://www.gribuser.ru/xml/fictionbook/2.0");
