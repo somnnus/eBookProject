@@ -33,9 +33,9 @@ namespace Menu
             del2.DynamicInvoke();
         }
 
-        List<Book> books = new List<Book>();
+        List<Books> books = new List<Books>();
 
-        Dictionary<int, List<Book>> dictKeys = new Dictionary<int, List<Book>>();
+        Dictionary<int, List<Books>> dictKeys = new Dictionary<int, List<Books>>();
 
         int currentPage = 0;
 
@@ -77,75 +77,75 @@ namespace Menu
             method1();
         }
 
-        private List<Book> AddBooks(List<Book> books)
+        private List<Books> AddBooks(List<Books> books)
         {
-            books.Add(new Book()
+            books.Add(new Books()
             {
                 author = "Достоевский",
                 bookName = "Братья Карамазовы",
                 imagePath = "images/SCAN_20140123_185338818.jpg"
             });
-            books.Add(new Book()
+            books.Add(new Books()
             {
                 author = "Толстой",
                 bookName = "Анна Каренина",
                 imagePath = "images/SCAN_20140123_185430521.jpg"
             });
-            books.Add(new Book()
+            books.Add(new Books()
             {
                 author = "Пушкин",
                 bookName = "Евгений Онегин",
                 imagePath = "images/Scan_20170628_174511.jpg"
             });
-            books.Add(new Book()
+            books.Add(new Books()
             {
                 author = "Тургенев",
                 bookName = "Отцы и дети",
                 imagePath = "images/SCAN_20140123_185338818.jpg"
             });
-            books.Add(new Book()
+            books.Add(new Books()
             {
                 author = "Куприн",
                 bookName = "Гранатовый браслет",
                 imagePath = "images/SCAN_20140123_185430521.jpg"
             });
-            books.Add(new Book()
+            books.Add(new Books()
             {
                 author = "Пастернак",
                 bookName = "Доктор Живаго",
                 imagePath = "images/Scan_20170628_174511.jpg"
             });
-            books.Add(new Book()
+            books.Add(new Books()
             {
                 author = "Пушкин",
                 bookName = "Капитанская дочка",
                 imagePath = "images/SCAN_20140123_185338818.jpg"
             });
-            books.Add(new Book()
+            books.Add(new Books()
             {
                 author = "Набоков",
                 bookName = "Лолита",
                 imagePath = "images/SCAN_20140123_185430521.jpg"
             });
-            books.Add(new Book()
+            books.Add(new Books()
             {
                 author = "Маяковский",
                 bookName = "Если звёзды зажигаются...",
                 imagePath = "images/Scan_20170628_174511.jpg"
             });
-            books.Add(new Book()
+            books.Add(new Books()
             {
                 author = "Булгаков",
                 bookName = "Мастер и Маргарита",
                 imagePath = "images/SCAN_20140123_185338818.jpg"
             });
-            books.Add(new Book()
+            books.Add(new Books()
             {
                 author = "Толстой",
                 bookName = "Война и мир",
                 imagePath = "images/SCAN_20140123_185430521.jpg"
             });
-            books.Add(new Book()
+            books.Add(new Books()
             {
                 author = "Лермонтов",
                 bookName = "Герой нашего времени",

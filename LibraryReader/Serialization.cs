@@ -9,7 +9,7 @@ namespace LibraryReader
 {
     public class Serialization
     {
-        public static List<Book> books = new List<Book>();
+        public static List<Book> books;
 
         private string fullPath = AppDomain.CurrentDomain.BaseDirectory;
 

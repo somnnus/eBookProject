@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LibraryReader;
+using LibraryReader.Books;
 using System.IO;
 using System.Windows.Threading;
 
@@ -28,6 +30,7 @@ namespace Menu
         public delegate void ExitDelegate();
         public event ExitDelegate ExitInTheWindow;
 
+        private List<Book> books = new List<Book>();
         public MainWindow()
         {
             InitializeComponent();
