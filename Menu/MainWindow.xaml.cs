@@ -34,15 +34,18 @@ namespace Menu
 
             ValuePassEvent = new ValuePassDelegate(method1);
             mainScreen.del = ValuePassEvent;
+
+            ExitInTheWindow = new ExitDelegate(method2);
+            mainScreen.del2 = ExitInTheWindow;
         }
         public void method1()
         {
             contentMain.Content = new Library();
         }
 
-        public void MethodExitInWindow()
+        public void method2()
         {
-            
+            this.Close();
         }
     }
 }

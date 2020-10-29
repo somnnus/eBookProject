@@ -21,10 +21,16 @@ namespace Menu
     public partial class Main : UserControl
     {
         public Delegate del;
+        public Delegate del2;
 
         public void method1()
         {
             del.DynamicInvoke();
+        }
+
+        public void method2()
+        {
+            del2.DynamicInvoke();
         }
 
         List<Book> books = new List<Book>();
@@ -146,16 +152,11 @@ namespace Menu
                 imagePath = "images/Scan_20170628_174511.jpg"
             });
             return books;
-        }
-
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }       
+        }     
 
         private void ExitClick(object sender, RoutedEventArgs e)
         {
-            
+            method2();
         }
     }
 }
