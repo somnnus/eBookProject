@@ -8,9 +8,11 @@ using eBdb.EpubReader;
 
 namespace Book
 {
+    [Serializable]
     public class EpubBook: Books
     {
         Epub epubBook;
+
         public EpubBook(string path)
         {
             epubBook = new Epub(path);

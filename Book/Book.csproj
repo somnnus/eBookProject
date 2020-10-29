@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bookmark.cs" />
     <Compile Include="Books.cs" />
     <Compile Include="EpubBook.cs" />
     <Compile Include="FB2Book.cs" />

@@ -11,7 +11,8 @@ using FB2Library;
 
 namespace Book
 {
-    class FB2Book
+    [Serializable]
+    class FB2Book: Books
     {
         public FB2Book(string path)
         {
