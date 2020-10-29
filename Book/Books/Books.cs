@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using eBdb.EpubReader;
 
 
-namespace Book
+namespace LibraryForReader.Books
 {   [Serializable]
     public class Books
     {

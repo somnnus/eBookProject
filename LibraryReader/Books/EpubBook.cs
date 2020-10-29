@@ -6,10 +6,10 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using eBdb.EpubReader;
 
-namespace Book
+namespace LibraryReader.Books
 {
     [Serializable]
-    public class EpubBook: Books
+    public class EpubBook : Book
     {
         Epub epubBook;
 
