@@ -72,7 +72,6 @@
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
     <Compile Include="SizePercentageConverter.cs" />
-    <Compile Include="Switcher.cs" />
     <Page Include="Library.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
