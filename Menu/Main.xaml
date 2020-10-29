@@ -90,7 +90,7 @@
                     </MenuItem>
                     <MenuItem Header="Settings" />
                     <Separator/>
-                    <MenuItem Header="Exit" />
+                    <MenuItem Header="Exit" Click="ExitClick" />
                 </Menu>
             </StackPanel>
             <Grid>

@@ -151,6 +151,11 @@ namespace Menu
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
 
+        }       
+
+        private void ExitClick(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

@@ -25,6 +25,9 @@ namespace Menu
         public delegate void ValuePassDelegate();
         public event ValuePassDelegate ValuePassEvent;
 
+        public delegate void ExitDelegate();
+        public event ExitDelegate ExitInTheWindow;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -35,6 +38,11 @@ namespace Menu
         public void method1()
         {
             contentMain.Content = new Library();
+        }
+
+        public void MethodExitInWindow()
+        {
+            
         }
     }
 }
