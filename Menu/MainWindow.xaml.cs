@@ -32,6 +32,8 @@ namespace Menu
         {
             InitializeComponent();
 
+            CreateHiddenDirectory();
+
             ValuePassEvent = new ValuePassDelegate(method1);
             mainScreen.del = ValuePassEvent;
 
@@ -45,7 +47,19 @@ namespace Menu
 
         public void method2()
         {
-            this.Close();
+            Close();
+        }
+
+        private void CreateHiddenDirectory()
+        {
+            string fullPath = AppDomain.CurrentDomain.BaseDirectory;
+            fullPath = fullPath+ "Library";
+            if (!Directory.Exists(fullPath))
+            {
+                DirectoryInfo di = Directory.CreateDirectory(fullPath);
+                di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
+            }
+
         }
     }
 }
