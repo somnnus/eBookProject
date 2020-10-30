@@ -44,7 +44,7 @@
       <HintPath>bin\Debug\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="LibraryReader">
-      <HintPath>..\LibraryReader\bin\Debug\LibraryReader.dll</HintPath>
+      <HintPath>..\LibraryReader\obj\Debug\LibraryReader.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

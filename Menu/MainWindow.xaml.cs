@@ -25,6 +25,9 @@ namespace Menu
     /// </summary>
     public partial class MainWindow : Window
     {
+        Dictionary<int, List<Books>> dictBooks; //общие ресурсы
+        List<Books> listBooks;
+
         public delegate void ValuePassDelegate();
         public event ValuePassDelegate ValuePassEvent;
 
@@ -42,9 +45,7 @@ namespace Menu
         public MainWindow()
         {
             InitializeComponent();
-
-            CreateHiddenDirectory();
-            CheckSerializization();
+            listBooks = new List<Books>();
 
             ValuePassEvent = new ValuePassDelegate(method1);
             mainScreen.del = ValuePassEvent;
@@ -52,12 +53,27 @@ namespace Menu
             ExitInTheWindow = new ExitDelegate(method2);
             mainScreen.del2 = ExitInTheWindow;
 
+            FillLibrary();
+
             AddBook = new AddBookDelegate(method3);
             mainScreen.delAddBook = AddBook;
         }
+
+        private void FillLibrary()
+        {
+            AddBooks(listBooks);
+            int blocksCount = 6;
+            mainScreen.dictBooks = new Dictionary<int, List<Books>>();
+            mainScreen.dictBooks = ArrayHelperExtensions.Split(listBooks, mainScreen.dictBooks, blocksCount);
+
+            dictBooks = mainScreen.dictBooks;
+
+            mainScreen.listBoxBooks.ItemsSource = mainScreen.dictBooks[0];
+        }
+
         public void method1()
         {
-            contentMain.Content = new Library();
+            contentMain.Content = new Library(dictBooks);
         }
 
         public void method2()
@@ -117,6 +133,83 @@ namespace Menu
               books =  Serialization.DeserializationLibrary(fileNameSerialize);
             }
 
+        }
+
+        private List<Books> AddBooks(List<Books> books)
+        {
+            books.Add(new Books()
+            {
+                author = "Достоевский",
+                bookName = "Братья Карамазовы",
+                imagePath = "images/SCAN_20140123_185338818.jpg"
+            });
+            books.Add(new Books()
+            {
+                author = "Толстой",
+                bookName = "Анна Каренина",
+                imagePath = "images/SCAN_20140123_185430521.jpg"
+            });
+            books.Add(new Books()
+            {
+                author = "Пушкин",
+                bookName = "Евгений Онегин",
+                imagePath = "images/Scan_20170628_174511.jpg"
+            });
+            books.Add(new Books()
+            {
+                author = "Тургенев",
+                bookName = "Отцы и дети",
+                imagePath = "images/SCAN_20140123_185338818.jpg"
+            });
+            books.Add(new Books()
+            {
+                author = "Куприн",
+                bookName = "Гранатовый браслет",
+                imagePath = "images/SCAN_20140123_185430521.jpg"
+            });
+            books.Add(new Books()
+            {
+                author = "Пастернак",
+                bookName = "Доктор Живаго",
+                imagePath = "images/Scan_20170628_174511.jpg"
+            });
+            books.Add(new Books()
+            {
+                author = "Пушкин",
+                bookName = "Капитанская дочка",
+                imagePath = "images/SCAN_20140123_185338818.jpg"
+            });
+            books.Add(new Books()
+            {
+                author = "Набоков",
+                bookName = "Лолита",
+                imagePath = "images/SCAN_20140123_185430521.jpg"
+            });
+            books.Add(new Books()
+            {
+                author = "Маяковский",
+                bookName = "Если звёзды зажигаются...",
+                imagePath = "images/Scan_20170628_174511.jpg"
+            });
+            books.Add(new Books()
+            {
+                author = "Булгаков",
+                bookName = "Мастер и Маргарита",
+                imagePath = "images/SCAN_20140123_185338818.jpg"
+            });
+            books.Add(new Books()
+            {
+                author = "Толстой",
+                bookName = "Война и мир",
+                imagePath = "images/SCAN_20140123_185430521.jpg"
+            });
+            books.Add(new Books()
+            {
+                author = "Лермонтов",
+                bookName = "Герой нашего времени",
+                imagePath = "images/Scan_20170628_174511.jpg"
+            });
+            return books;
         }
     }
 }
