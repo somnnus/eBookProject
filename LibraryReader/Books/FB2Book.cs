@@ -11,7 +11,7 @@ using System.Xml.XPath;
 namespace LibraryReader.Books
 {
     [Serializable]
-    class FB2Book: Book
+    public class FB2Book: Book
     {
         public FB2Book(string path)
         {
