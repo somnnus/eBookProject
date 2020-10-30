@@ -32,13 +32,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="eBdb.EpubReader">
-      <HintPath>..\Menu\bin\Debug\eBdb.EpubReader.dll</HintPath>
+      <HintPath>..\eBdb.EpubReader.dll</HintPath>
     </Reference>
     <Reference Include="FB2Library">
       <HintPath>..\FB2Library.dll</HintPath>
     </Reference>
     <Reference Include="Ionic.Zip">
-      <HintPath>..\Menu\bin\Debug\Ionic.Zip.dll</HintPath>
+      <HintPath>..\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
