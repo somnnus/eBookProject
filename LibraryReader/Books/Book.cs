@@ -10,9 +10,25 @@ namespace LibraryReader.Books
     public class Book
     {
         List<Bookmark> bookmarks = new List<Bookmark>();
-        protected string Title { get; set; }
-        protected string Author { get; set; }
-        protected string Content { get; set; }
+        public enum FormatBook
+        {
+            EPUB = 1,
+            FB2
+        }
+
+        public string Title { get; set; }
+        public string Author { get; set; }
+        public string Content { get; set; }
+        public string FullPath { get; set; }
+
+        public int FontSize { get; set; }
+        public int LastPage { get; set; }
+        public FormatBook Format { get; set; }
+
+        public Book()
+        {
+
+        }
 
     }
 }

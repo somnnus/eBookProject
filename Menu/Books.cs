@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Menu
 {
-    public class Book
+    public class Books
     {
         public string author { get; set; }
         public string bookName { get; set; }
