@@ -25,8 +25,8 @@ namespace Menu
     /// </summary>
     public partial class MainWindow : Window
     {
-        Dictionary<int, List<Books>> dictBooks; //общие ресурсы
-        List<Books> listBooks;
+        public Dictionary<int, List<Books>> dictBooks; //общие ресурсы
+        public List<Books> listBooks;
 
         public delegate void ValuePassDelegate();
         public event ValuePassDelegate ValuePassEvent;

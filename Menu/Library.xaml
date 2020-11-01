@@ -5,22 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Menu"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="1150">
+             d:DesignHeight="700" d:DesignWidth="1150" PreviewMouseWheel="ListBox_PreviewMouseWheel">
     <UserControl.Resources>
         <local:SizePercentageConverter x:Key="PercentageConverter"/>
     </UserControl.Resources>
-    <Grid Background="White" Margin="10">
-        <DataGrid Name="dataGridLib" AutoGenerateColumns="False">
+    <Grid>
+        <DataGrid ItemsSource="{Binding dictBooks}" Background="Bisque" Name="dataGridLib" AutoGenerateColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
+            <DataGrid.Resources>
+                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="Bisque" />
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="listBoxKeys" Binding="{Binding dictBooks.Keys}"/>
-                <DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding Key}" Header="Sorting By" Width="*"/>
+                <DataGridTemplateColumn Header="Sorted Books" Width="10*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ListBox x:Name="listBoxBooks" ItemsSource="{Binding dictBooks[0]}"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="Bisque" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                            <ListBox ItemsSource="{Binding Value}" BorderThickness="0"  Background="Bisque" HorizontalAlignment="Stretch" VerticalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                                            <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.13, ElementName=dataGridLib, Path=ActualWidth}"
+                                            <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.1, ElementName=dataGridLib, Path=ActualWidth}"
                                                Height="auto" 
                                                Source='{Binding imagePath}'/>
                                             <TextBlock Text='{Binding author}'></TextBlock>
@@ -31,7 +37,7 @@
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel ItemHeight="auto"
-                                               ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.23, ElementName=dataGridLib,Path=ActualWidth}" 
+                                               ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.17, ElementName=dataGridLib,Path=ActualWidth}" 
                                                IsItemsHost="True" Orientation="Horizontal"  />
                                     </ItemsPanelTemplate>
                                 </ListBox.ItemsPanel>
