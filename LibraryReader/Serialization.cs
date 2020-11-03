@@ -24,7 +24,7 @@ namespace LibraryReader
                 using (Stream fStream = new FileStream(fullPath,
                             FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
                 {
-                    XmlSerializer xmlFormat1 = new XmlSerializer(typeof(List<Book>), new Type[] { typeof(Book), typeof(string), typeof(EpubBook) });
+                    XmlSerializer xmlFormat1 = new XmlSerializer(typeof(List<Book>), new Type[] { typeof(Book), typeof(string), typeof(EpubBook),typeof(FB2Book) });
                     xmlFormat1.Serialize(fStream, books);
                 }
                 MessageBox.Show("=> Saved list in XML format!");
@@ -35,7 +35,7 @@ namespace LibraryReader
         {
             List<Book> books;
 
-            XmlSerializer xmlFormat = new XmlSerializer(typeof(List<Book>), new Type[] { typeof(Book), typeof(string), typeof(EpubBook) });
+            XmlSerializer xmlFormat = new XmlSerializer(typeof(List<Book>), new Type[] { typeof(Book), typeof(string), typeof(EpubBook), typeof(FB2Book) });
 
             using (Stream fStream = new FileStream(fullPath,
                 FileMode.Open, FileAccess.Read, FileShare.None))

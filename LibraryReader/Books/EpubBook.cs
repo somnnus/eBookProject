@@ -23,7 +23,6 @@ namespace LibraryReader.Books
             FullPath = path;
             Title = epubBook.Title[0];
             Author = epubBook.Creator[0];
-            FullPath = path;
             FontSize = 16;
             
         }
