@@ -31,7 +31,7 @@ namespace Menu
             InitializeComponent();
         }
 
-        private void ListBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        private void DoPreviewingMouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (e.Delta > 0)
             {

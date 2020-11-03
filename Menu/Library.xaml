@@ -5,47 +5,81 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Menu"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="1150" PreviewMouseWheel="ListBox_PreviewMouseWheel">
+             d:DesignHeight="700" d:DesignWidth="1150" PreviewMouseWheel="DoPreviewingMouseWheel" MinWidth="1150">
     <UserControl.Resources>
+        <SolidColorBrush x:Key="clBr" Color="BlanchedAlmond" />
         <local:SizePercentageConverter x:Key="PercentageConverter"/>
+        <ControlTemplate x:Key="NoScroll">
+            <ItemsPresenter></ItemsPresenter>
+        </ControlTemplate>
     </UserControl.Resources>
-    <Grid>
-        <DataGrid ItemsSource="{Binding dictBooks}" Background="Bisque" Name="dataGridLib" AutoGenerateColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
-            <DataGrid.Resources>
-                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
-                    <Setter Property="Background" Value="Bisque" />
-                    <Setter Property="BorderThickness" Value="0"/>
-                </Style>
-            </DataGrid.Resources>
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Key}" Header="Sorting By" Width="*"/>
-                <DataGridTemplateColumn Header="Sorted Books" Width="10*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ListBox ItemsSource="{Binding Value}" BorderThickness="0"  Background="Bisque" HorizontalAlignment="Stretch" VerticalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                                            <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.1, ElementName=dataGridLib, Path=ActualWidth}"
+    <DockPanel Background="{StaticResource clBr}">
+        <StackPanel Margin="40">
+            <Label Content="Menu" Style="{StaticResource Headings}" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Menu Name="menu" Style="{StaticResource TextSettings}" Width="auto" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Vertical"  Background="{StaticResource clBr}" />
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+                <MenuItem Header="Choose sorting" >
+                    <MenuItem Header="By author" />
+                    <MenuItem Header="By name" />
+                    <MenuItem Header="By date" />
+                </MenuItem>
+                <Separator BorderBrush="DarkGray" />
+                <MenuItem Header="Continue reading"/>
+                <MenuItem Header="Go to the main page"/>
+                <MenuItem Header="Edit the library">
+                    <MenuItem Header="Add a book"/>
+                    <MenuItem Header="Remove a book" />
+                </MenuItem>
+                <MenuItem Header="Settings" />
+                <Separator BorderBrush="DarkGray"/>
+                <MenuItem Header="Exit"/>
+            </Menu>
+        </StackPanel>
+        <Grid Margin="40">
+            <DataGrid Background="{StaticResource clBr}" ItemsSource="{Binding dictBooks}" Name="dataGridLib" AutoGenerateColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Key}" Header="Sorting By" Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="FontFamily" Value="Garamond" />
+                                <Setter Property="Foreground" Value="Black" />
+                                <Setter Property="FontSize" Value="36" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTemplateColumn Header="Sorted Books" Width="3*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ListBox ItemsSource="{Binding Value}" Template="{StaticResource NoScroll}" HorizontalAlignment="Stretch" VerticalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                                                <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.1, ElementName=dataGridLib, Path=ActualWidth}"
                                                Height="auto" 
                                                Source='{Binding imagePath}'/>
-                                            <TextBlock Text='{Binding author}'></TextBlock>
-                                            <TextBlock Text='{Binding bookName}'></TextBlock>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                                <ListBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel ItemHeight="auto"
-                                               ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.17, ElementName=dataGridLib,Path=ActualWidth}" 
+                                                <TextBlock Style="{StaticResource TextBlockSettings}" Text='{Binding author}'></TextBlock>
+                                                <TextBlock Style="{StaticResource TextBlockSettings}" Text='{Binding bookName}'></TextBlock>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel ItemHeight="auto"
+                                               ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.15, ElementName=dataGridLib,Path=ActualWidth}" 
                                                IsItemsHost="True" Orientation="Horizontal"  />
-                                    </ItemsPanelTemplate>
-                                </ListBox.ItemsPanel>
-                            </ListBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                </ListBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </DockPanel>
 </UserControl>

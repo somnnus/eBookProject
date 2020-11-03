@@ -7,79 +7,23 @@
              mc:Ignorable="d"
              d:DesignHeight="700" d:DesignWidth="1150">
     <UserControl.Resources>
-        <Style TargetType="{x:Type Hyperlink}" x:Key="HyperlinkSettings">
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="ForceCursor" Value="True" />
-            <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="FontFamily" Value="Garamond"/>
-            <Setter Property="TextDecorations" Value="None" />
-            <Setter Property="IsEnabled" Value="False" />
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="DarkRed" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-        <Style TargetType="{x:Type TextBlock}" x:Key="TextBlockSettings">
-            <Setter Property="Margin" Value="10" />
-        </Style>
-        <Style TargetType="{x:Type Control}" x:Key="TextSettings">
-            <Setter Property="FontFamily" Value="Garamond" />
-            <Setter Property="Foreground" Value="Black" />
-            <Setter Property="FontSize" Value="26" />
-        </Style>
-        <Style TargetType="{x:Type Control}" x:Key="Headings">
-            <Setter Property="FontFamily" Value="Garamond" />
-            <Setter Property="Foreground" Value="Black" />
-            <Setter Property="FontSize" Value="40" />
-            <Setter Property="FontWeight" Value="Bold"/>
-        </Style>
-        <Style TargetType="{x:Type ListBox}">
-            <Setter Property="BorderThickness" Value="0"/>
-        </Style>
-        <Style TargetType="{x:Type ListBoxItem}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                        <Border>
-                            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalAlignment}" HorizontalAlignment="Center" />
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Cursor" Value="Hand"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                <Border Background="LightSalmon">
-                                    <ContentPresenter VerticalAlignment="{TemplateBinding VerticalAlignment}" HorizontalAlignment="Center" />
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        <SolidColorBrush x:Key="clBr" Color="BlanchedAlmond" />
         <ControlTemplate x:Key="ArrowRight">
             <Path Width="30" Height="{TemplateBinding Height}" Data="F1M568.254,-7.43524L568.159,-7.34277 567.977,-7.52246 546.559,-28.9417 525.484,-28.9417 549.787,-4.63446 557.439,3.01532 557.619,3.19629 550.067,10.7549 525.758,35.0583 546.834,35.0583 568.254,13.6429 578.792,3.10254 568.254,-7.43524z" Stretch="Uniform" Fill="#FFFFFFFF" RenderTransformOrigin="0.5,0.5"/>
         </ControlTemplate>
         <ControlTemplate x:Key="ArrowLeft">
             <Path Width="30" Height="{TemplateBinding Height}" Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z" Stretch="Uniform" Fill="#FFFFFFFF" RenderTransformOrigin="0.5,0.5"/>
         </ControlTemplate>
-
         <local:SizePercentageConverter x:Key="PercentageConverter"/>
     </UserControl.Resources>
-    <Grid Name="mainGrid" Background="Bisque">
+    <Grid Name="mainGrid" Background="{StaticResource clBr}" >
         <DockPanel>
             <StackPanel Margin="40">
                 <Label Content="Menu" Style="{StaticResource Headings}" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <Menu Name="menu" Style="{StaticResource TextSettings}" Width="auto" VerticalAlignment="Top" HorizontalAlignment="Right">
                     <Menu.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <VirtualizingStackPanel Orientation="Vertical" Background="Bisque"/>
+                            <VirtualizingStackPanel Orientation="Vertical"  Background="{StaticResource clBr}" />
                         </ItemsPanelTemplate>
                     </Menu.ItemsPanel>
                     <MenuItem Header="Continue reading"/>
@@ -116,15 +60,15 @@
                             </Label>
                         </Grid>
                         <Grid Name="libraryGrid">
-                            <ListBox x:Name="listBoxBooks" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="Bisque" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                            <ListBox x:Name="listBoxBooks" HorizontalAlignment="Stretch" VerticalAlignment="Center"  Background="{StaticResource clBr}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                                             <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.13, ElementName=DockPanelLibrary, Path=ActualWidth}"
                                                Height="auto" 
                                                Source='{Binding imagePath}'/>
-                                            <TextBlock Text='{Binding author}'></TextBlock>
-                                            <TextBlock Text='{Binding bookName}'></TextBlock>
+                                            <TextBlock Style="{StaticResource TextBlockSettings}" Text='{Binding author}'></TextBlock>
+                                            <TextBlock Style="{StaticResource TextBlockSettings}" Text='{Binding bookName}'></TextBlock>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
