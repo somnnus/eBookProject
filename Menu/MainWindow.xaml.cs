@@ -121,7 +121,8 @@ namespace Menu
                 else if (fileName.Contains(".fb2"))
                 {
                     currentBook = new FB2Book(newFullFileName);
-                    currentBook.FullPath = newFullFileName;
+                    books.Add(currentBook);
+                    Serialization.SerializationInformationAboutBook(books, fullPath);
 
                 }
                 
