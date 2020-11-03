@@ -11,28 +11,31 @@ namespace LibraryReader
     {
         public static void SerializationInformationAboutBook(List<Book> books,string fullPath)
         {
-            string fileName = "library.xml";
-            fullPath = fullPath + "\\" + fileName;
-
-            if (File.Exists(fullPath))
+            if (books != null)
             {
-                File.Delete(fullPath);
-            }
+                string fileName = "library.xml";
+                fullPath = fullPath + "\\" + fileName;
 
-            using (Stream fStream = new FileStream(fullPath,
-                        FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
-            {
-                XmlSerializer xmlFormat1 = new XmlSerializer(typeof(List<Book>), new Type[] { typeof(Book), typeof(string) });
-                xmlFormat1.Serialize(fStream, books);
+                if (File.Exists(fullPath))
+                {
+                    File.Delete(fullPath);
+                }
+
+                using (Stream fStream = new FileStream(fullPath,
+                            FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
+                {
+                    XmlSerializer xmlFormat1 = new XmlSerializer(typeof(List<Book>), new Type[] { typeof(Book), typeof(string), typeof(EpubBook) });
+                    xmlFormat1.Serialize(fStream, books);
+                }
+                MessageBox.Show("=> Saved list in XML format!");
             }
-            MessageBox.Show("=> Saved list in XML format!");
         }
 
         public static List<Book> DeserializationLibrary(string fullPath)
         {
             List<Book> books;
 
-            XmlSerializer xmlFormat = new XmlSerializer(typeof(List<Book>), new Type[] { typeof(Book), typeof(string) });
+            XmlSerializer xmlFormat = new XmlSerializer(typeof(List<Book>), new Type[] { typeof(Book), typeof(string), typeof(EpubBook) });
 
             using (Stream fStream = new FileStream(fullPath,
                 FileMode.Open, FileAccess.Read, FileShare.None))

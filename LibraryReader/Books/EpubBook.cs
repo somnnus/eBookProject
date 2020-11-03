@@ -13,11 +13,19 @@ namespace LibraryReader.Books
     {
         Epub epubBook;
 
+        public EpubBook()
+        {
+
+        }
         public EpubBook(string path)
         {
             epubBook = new Epub(path);
+            FullPath = path;
             Title = epubBook.Title[0];
             Author = epubBook.Creator[0];
+            FullPath = path;
+            FontSize = 16;
+            
         }
 
         public string GetContentAsHtml()

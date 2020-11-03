@@ -17,6 +17,7 @@ using LibraryReader.Books;
 using System.IO;
 using System.Windows.Threading;
 using Microsoft.Win32;
+using eBdb.EpubReader;
 
 namespace Menu
 {
@@ -46,6 +47,9 @@ namespace Menu
         {
             InitializeComponent();
             listBooks = new List<Books>();
+
+            CreateHiddenDirectory();
+            CheckSerializization();
 
             ValuePassEvent = new ValuePassDelegate(method1);
             mainScreen.del = ValuePassEvent;
@@ -99,25 +103,29 @@ namespace Menu
             if (!File.Exists(newFullFileName))
             {
                 File.Copy(path, newFullFileName);
-            }
 
+                Book currentBook = null;
 
-            Book currentBook=null;
-            
-            if (fileName.Contains(".epub"))
-            {
-                currentBook = new EpubBook(newFullFileName);
-                currentBook.FullPath = newFullFileName;
-                currentBook.Format = Book.FormatBook.EPUB;
+                if (fileName.Contains(".epub"))
+                {
+                    Epub epub = new Epub(newFullFileName);
+
+                    currentBook = new EpubBook(newFullFileName);
+                    //currentBook.Author = epub.Creator[0];
+                    //currentBook.Title = epub.Title[0];
+                    //currentBook.FontSize = 16;
+                    //currentBook.FullPath = newFullFileName;
+                    books.Add(currentBook);              
+                    Serialization.SerializationInformationAboutBook(books, fullPath);
+                }
+                else if (fileName.Contains(".fb2"))
+                {
+                    currentBook = new FB2Book(newFullFileName);
+                    currentBook.FullPath = newFullFileName;
+
+                }
                 
             }
-            else if (fileName.Contains(".fb2"))
-            {
-                currentBook = new FB2Book(newFullFileName);
-                currentBook.FullPath = newFullFileName;
-                currentBook.Format = Book.FormatBook.FB2;
-            }
-            books.Add(currentBook);
         }
 
         private void CreateHiddenDirectory()
