@@ -25,7 +25,7 @@ namespace Menu
         public Dictionary<string, List<Books>> dictBooks { get; set; }
         public List<Books> listBooks { get; set; }
 
-        public Library(Dictionary<int, List<Books>> dict, List<Books> list)
+        public Library(Dictionary<string, List<Books>> dict, List<Books> list)
         {
             DataContext = this;
             dictBooks = dict;
@@ -37,13 +37,17 @@ namespace Menu
         private void SortByAuthor(object sender, RoutedEventArgs e)
         {
             listBooks.Sort(new AuthorComparer());
+            keyTextColumn.Header = "Sort By Author";
             dictBooks = ArrayHelperExtensions.SplitByFirstLetter(listBooks, dictBooks);
-            UpdateLayout();
+            dataGridLib.ItemsSource = dictBooks;
+            CollectionViewSource.GetDefaultView(dataGridLib.ItemsSource).Refresh();
         }
 
         private void SortByName(object sender, RoutedEventArgs e)
         {
             listBooks.Sort(new NameComparer());
+            keyTextColumn.Header = "Sort By Book Name";
+            dictBooks = new Dictionary<string, List<Books>>(); //обновление содержимого
             dictBooks = ArrayHelperExtensions.SplitByFirstLetter(listBooks, dictBooks);
             UpdateLayout();
         }
@@ -51,6 +55,8 @@ namespace Menu
         private void SortByDate(object sender, RoutedEventArgs e)
         {
             listBooks.Sort(new DateComparer());
+            keyTextColumn.Header = "Sort By Date";
+            dictBooks = new Dictionary<string, List<Books>>(); //обновление содержимого
             dictBooks = ArrayHelperExtensions.SplitByDate(listBooks, dictBooks);
             UpdateLayout();
         }

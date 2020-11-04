@@ -20,7 +20,7 @@ namespace Menu
     /// </summary>
     public partial class Main : UserControl
     {
-        public Dictionary<int, List<Books>> dictBooks;
+        public Dictionary<string, List<Books>> dictBooks;
 
         public Delegate del;
         public Delegate del2;
@@ -53,7 +53,7 @@ namespace Menu
             if (currentPage > 0)
             {
                 currentPage--;
-                listBoxBooks.ItemsSource = dictBooks[currentPage];
+                listBoxBooks.ItemsSource = dictBooks[currentPage.ToString()];
             }
         }
 
@@ -62,7 +62,7 @@ namespace Menu
             if ((currentPage + 1) < dictBooks.Count)
             {
                 currentPage++;
-                listBoxBooks.ItemsSource = dictBooks[currentPage];
+                listBoxBooks.ItemsSource = dictBooks[currentPage.ToString()];
             }
         }
 

@@ -72,8 +72,7 @@ namespace Menu
 
             dictBooks = mainScreen.dictBooks;
 
-            mainScreen.listBoxBooks.ItemsSource = mainScreen.dictBooks[0];
-            //
+            mainScreen.listBoxBooks.ItemsSource = mainScreen.dictBooks["0"];
         }
 
         public void method1()

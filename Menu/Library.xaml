@@ -40,9 +40,9 @@
             </Menu>
         </StackPanel>
         <Grid Margin="40">
-            <DataGrid Background="{StaticResource clBr}" ItemsSource="{Binding dictBooks}" Name="dataGridLib" AutoGenerateColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
+            <DataGrid x:Name="dataGridLib"  Background="{StaticResource clBr}" ItemsSource="{Binding dictBooks}" AutoGenerateColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Key}" Header="Sorting By" Width="*">
+                    <DataGridTextColumn x:Name="keyTextColumn" Binding="{Binding Key}" Header="Sort By" Width="*">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="FontFamily" Value="Garamond" />
