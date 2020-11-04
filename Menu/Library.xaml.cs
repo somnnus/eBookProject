@@ -38,27 +38,33 @@ namespace Menu
         {
             listBooks.Sort(new AuthorComparer());
             keyTextColumn.Header = "Sort By Author";
-            dictBooks = ArrayHelperExtensions.SplitByFirstLetter(listBooks, dictBooks);
-            dataGridLib.ItemsSource = dictBooks;
-            CollectionViewSource.GetDefaultView(dataGridLib.ItemsSource).Refresh();
+            dictBooks = new Dictionary<string, List<Books>>();
+            dictBooks = ArrayHelperExtensions.SplitByAuthor(listBooks, dictBooks);
+            RefreshDict();
         }
 
         private void SortByName(object sender, RoutedEventArgs e)
         {
             listBooks.Sort(new NameComparer());
             keyTextColumn.Header = "Sort By Book Name";
-            dictBooks = new Dictionary<string, List<Books>>(); //обновление содержимого
-            dictBooks = ArrayHelperExtensions.SplitByFirstLetter(listBooks, dictBooks);
-            UpdateLayout();
+            dictBooks = new Dictionary<string, List<Books>>();
+            dictBooks = ArrayHelperExtensions.SplitByBookName(listBooks, dictBooks);
+            RefreshDict();
         }
 
         private void SortByDate(object sender, RoutedEventArgs e)
         {
             listBooks.Sort(new DateComparer());
             keyTextColumn.Header = "Sort By Date";
-            dictBooks = new Dictionary<string, List<Books>>(); //обновление содержимого
+            dictBooks = new Dictionary<string, List<Books>>();
             dictBooks = ArrayHelperExtensions.SplitByDate(listBooks, dictBooks);
-            UpdateLayout();
+            RefreshDict();
+        }
+
+        private void RefreshDict()
+        {
+            dataGridLib.ItemsSource = dictBooks;
+            CollectionViewSource.GetDefaultView(dataGridLib.ItemsSource).Refresh();
         }
 
         private void DoPreviewingMouseWheel(object sender, MouseWheelEventArgs e)

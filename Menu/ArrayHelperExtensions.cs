@@ -29,11 +29,29 @@ namespace Menu
             return dictKeys;
         }
 
-        public static Dictionary<string, List<Books>> SplitByFirstLetter(List<Books> array, Dictionary<string, List<Books>> dictKeys)
+        public static Dictionary<string, List<Books>> SplitByAuthor(List<Books> array, Dictionary<string, List<Books>> dictKeys)
         {
             for (var i = 0; i < array.Count; i++)
             {
                 var firstLetter = array[i].author[0].ToString();
+                if (dictKeys.ContainsKey(firstLetter))
+                {
+                    dictKeys[firstLetter].Add(array[i]);
+                }
+                else
+                {
+                    dictKeys.Add(firstLetter, new List<Books>());
+                    dictKeys[firstLetter].Add(array[i]);
+                }
+            }
+            return dictKeys;
+        }
+
+        public static Dictionary<string, List<Books>> SplitByBookName(List<Books> array, Dictionary<string, List<Books>> dictKeys)
+        {
+            for (var i = 0; i < array.Count; i++)
+            {
+                var firstLetter = array[i].bookName[0].ToString();
                 if (dictKeys.ContainsKey(firstLetter))
                 {
                     dictKeys[firstLetter].Add(array[i]);
