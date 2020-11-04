@@ -8,21 +8,58 @@ namespace Menu
 {
     public static class ArrayHelperExtensions
     {
-        public static Dictionary<int, List<Book>> Split<Book>(List<Book> array, Dictionary<int, List<Book>> dictKeys, int size)
+        public static Dictionary<string, List<Books>> SplitByBlocks(List<Books> array, Dictionary<string, List<Books>> dictKeys, int size)
         {
             for (var i = 0; i < (float)array.Count/ size; i++)
             {
                 foreach (var item in array.Skip(i * size).Take(size))
                 {
-                    if (dictKeys.ContainsKey(i))
+                    var num = i.ToString();
+                    if (dictKeys.ContainsKey(num))
                     {
-                        dictKeys[i].Add(item);
+                        dictKeys[num].Add(item);
                     }
                     else
                     {
-                        dictKeys.Add(i, new List<Book>());
-                        dictKeys[i].Add(item);
+                        dictKeys.Add(num, new List<Books>());
+                        dictKeys[num].Add(item);
                     }
+                }
+            }
+            return dictKeys;
+        }
+
+        public static Dictionary<string, List<Books>> SplitByFirstLetter(List<Books> array, Dictionary<string, List<Books>> dictKeys)
+        {
+            for (var i = 0; i < array.Count; i++)
+            {
+                var firstLetter = array[i].author[0].ToString();
+                if (dictKeys.ContainsKey(firstLetter))
+                {
+                    dictKeys[firstLetter].Add(array[i]);
+                }
+                else
+                {
+                    dictKeys.Add(firstLetter, new List<Books>());
+                    dictKeys[firstLetter].Add(array[i]);
+                }
+            }
+            return dictKeys;
+        }
+
+        public static Dictionary<string, List<Books>> SplitByDate(List<Books> array, Dictionary<string, List<Books>> dictKeys)
+        {
+            for (var i = 0; i < array.Count; i++)
+            {
+                var date = array[i].date.ToString();
+                if (dictKeys.ContainsKey(date))
+                {
+                    dictKeys[date].Add(array[i]);
+                }
+                else
+                {
+                    dictKeys.Add(date, new List<Books>());
+                    dictKeys[date].Add(array[i]);
                 }
             }
             return dictKeys;

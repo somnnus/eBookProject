@@ -12,5 +12,6 @@ namespace Menu
         public string author { get; set; }
         public string bookName { get; set; }
         public string imagePath { get; set; }
+        public DateTime date { get; set; }
     }
 }

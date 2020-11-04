@@ -23,9 +23,9 @@
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
                 <MenuItem Header="Choose sorting" >
-                    <MenuItem Header="By author" />
-                    <MenuItem Header="By name" />
-                    <MenuItem Header="By date" />
+                    <MenuItem Header="By author" Click="SortByAuthor"/>
+                    <MenuItem Header="By name" Click="SortByName"/>
+                    <MenuItem Header="By date" Click="SortByDate"/>
                 </MenuItem>
                 <Separator BorderBrush="DarkGray" />
                 <MenuItem Header="Continue reading"/>
