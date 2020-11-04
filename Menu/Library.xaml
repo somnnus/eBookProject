@@ -40,19 +40,30 @@
             </Menu>
         </StackPanel>
         <Grid Margin="40">
-            <DataGrid x:Name="dataGridLib"  Background="{StaticResource clBr}" ItemsSource="{Binding dictBooks}" AutoGenerateColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
+            <DataGrid x:Name="dataGridLib" Background="{StaticResource clBr}" ItemsSource="{Binding dictBooks}" AutoGenerateColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="keyTextColumn" Binding="{Binding Key}" Header="Sort By" Width="*">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="FontFamily" Value="Garamond" />
                                 <Setter Property="Foreground" Value="Black" />
-                                <Setter Property="FontSize" Value="36" />
+                                <Setter Property="FontSize" Value="34" />
                                 <Setter Property="VerticalAlignment" Value="Center" />
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTemplateColumn Header="Sorted Books" Width="3*">
+                    <DataGridTemplateColumn Width="2*">
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <DockPanel HorizontalAlignment="Stretch">
+                                    <TextBlock DockPanel.Dock="Left" Text="Sorted Books"/>
+                                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                                        <TextBox MinWidth="110" Width="auto" />
+                                        <Image Source="images/search.png" Width="50" />
+                                    </StackPanel>
+                                </DockPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <ListBox ItemsSource="{Binding Value}" Template="{StaticResource NoScroll}" HorizontalAlignment="Stretch" VerticalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
