@@ -32,7 +32,6 @@
                         <MenuItem Header="Add a book" Click="AddBook_Click"/>
                         <MenuItem Header="Remove a book" />
                     </MenuItem>
-                    <MenuItem Header="Settings" />
                     <Separator/>
                     <MenuItem Header="Exit" Click="ExitClick" />
                 </Menu>
@@ -67,8 +66,8 @@
                                             <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.13, ElementName=DockPanelLibrary, Path=ActualWidth}"
                                                Height="auto" 
                                                Source='{Binding imagePath}'/>
-                                            <TextBlock Style="{StaticResource TextBlockSettings}" Text='{Binding author}'></TextBlock>
-                                            <TextBlock Style="{StaticResource TextBlockSettings}" Text='{Binding bookName}'></TextBlock>
+                                            <TextBlock Style="{StaticResource BookTextSettings}" Text='{Binding author}'></TextBlock>
+                                            <TextBlock Style="{StaticResource BookTextSettings}" Text='{Binding bookName}'></TextBlock>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
