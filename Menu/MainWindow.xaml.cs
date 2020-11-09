@@ -44,6 +44,7 @@ namespace Menu
         Epub epub;
 
         static string fullPath = AppDomain.CurrentDomain.BaseDirectory+"Library";
+        static string coverPath = fullPath + "\\" + "Covers";
             
 
         public MainWindow()
@@ -121,12 +122,13 @@ namespace Menu
             {
                 File.Copy(path, newFullFileName);
 
-                Book currentBook = null;
+               // Book currentBook = null;
 
                 if (fileName.Contains(".epub"))
                 {
                     try
                     {
+                        Book currentBook = null;
                         epub = new Epub(newFullFileName);
                         currentBook = new EpubBook(newFullFileName);
                         books.Add(currentBook);
@@ -136,23 +138,21 @@ namespace Menu
                     catch (Exception ex)
                     {
                         MessageBox.Show("Не удается открыть книгу");
+                        File.Delete(newFullFileName);
+                        Serialization.SerializationInformationAboutBook(books, fullPath);
                     }
 
                     
                 }
                 else if (fileName.Contains(".fb2"))
                 {
-                    try
-                    {
+                   
+                        Book currentBook = null;
                         currentBook = new FB2Book(newFullFileName);
                         books.Add(currentBook);
                         FillWithBooks();
                         Serialization.SerializationInformationAboutBook(books, fullPath);
-                    }
-                    catch(Exception ex)
-                    {
-                        MessageBox.Show("Не удается открыть книгу");
-                    }
+                    
 
                 }
                 
@@ -164,6 +164,11 @@ namespace Menu
             if (!Directory.Exists(fullPath))
             {
                 DirectoryInfo di = Directory.CreateDirectory(fullPath);
+                di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
+            }
+            if (!Directory.Exists(coverPath))
+            {
+                DirectoryInfo di = Directory.CreateDirectory(coverPath);
                 di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
             }
         }

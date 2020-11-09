@@ -34,6 +34,9 @@
     <Reference Include="eBdb.EpubReader">
       <HintPath>..\eBdb.EpubReader.dll</HintPath>
     </Reference>
+    <Reference Include="EpubSharp">
+      <HintPath>..\..\..\Project eBook\InterfaceProject\EpubSharp-master\EpubSharp-master\EpubSharp.Tests\bin\Debug\netcoreapp1.1\EpubSharp.dll</HintPath>
+    </Reference>
     <Reference Include="FB2Library">
       <HintPath>..\FB2Library.dll</HintPath>
     </Reference>
@@ -42,6 +45,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />

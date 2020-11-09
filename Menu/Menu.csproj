@@ -42,6 +42,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\eBdb.EpubReader.dll</HintPath>
     </Reference>
+    <Reference Include="EpubSharp">
+      <HintPath>..\..\..\Project eBook\InterfaceProject\EpubSharp-master\EpubSharp-master\EpubSharp.Tests\bin\Debug\netcoreapp1.1\EpubSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Ionic.Zip.dll</HintPath>
@@ -137,11 +140,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\SCAN_20140123_185338818.jpg" />
-    <Resource Include="images\SCAN_20140123_185430521.jpg" />
-    <Resource Include="images\Scan_20170628_174511.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="images\searchLabel.png">

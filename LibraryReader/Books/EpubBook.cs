@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using eBdb.EpubReader;
+using EpubSharp;
 
 namespace LibraryReader.Books
 {
@@ -25,6 +27,7 @@ namespace LibraryReader.Books
             Author = epubBook.Creator[0];
             FontSize = 16;
             Date = DateTime.Now;
+            CoverPath = GetCoverPath();
         }
 
         public string GetContentAsHtml()
@@ -35,6 +38,22 @@ namespace LibraryReader.Books
         {
             Match m = Regex.Match(content, @"<body[^>]*>.+</body>", Utils.REO_csi);
             return m.Success ? Utils.ClearText(m.Value) : "";
+        }
+        private string GetCoverPath()
+        {
+            Random rnd = new Random();
+            EpubSharp.EpubBook book = EpubReader.Read(FullPath);
+            if (book.CoverImage != null)
+            {
+                var cover = book.CoverImage;
+                Image image = ByteArrayToImage(cover);
+                string coverName = string.Format("{0} {1}.jpg", Title,Convert.ToString(rnd.Next(50)));
+                string coverPath = AppDomain.CurrentDomain.BaseDirectory + "Library\\Covers\\"+coverName;
+                image.Save(coverPath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                return coverPath;
+            }
+            else return null;
+                      
         }
 
         static string HtmlToPlainText(string html)

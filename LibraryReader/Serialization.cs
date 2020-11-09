@@ -27,7 +27,7 @@ namespace LibraryReader
                     XmlSerializer xmlFormat1 = new XmlSerializer(typeof(List<Book>), new Type[] { typeof(Book), typeof(string), typeof(EpubBook),typeof(FB2Book) });
                     xmlFormat1.Serialize(fStream, books);
                 }
-                MessageBox.Show("=> Saved list in XML format!");
+              //  MessageBox.Show("=> Saved list in XML format!");
             }
         }
 

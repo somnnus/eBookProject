@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 
 namespace LibraryReader.Books
 {
@@ -16,6 +19,7 @@ namespace LibraryReader.Books
         public string Content { get; set; }
         public string FullPath { get; set; }
         public DateTime Date { get; set; }
+        public string CoverPath {get;set;}
 
         public int FontSize { get; set; }
         public int LastPage { get; set; }
@@ -23,6 +27,12 @@ namespace LibraryReader.Books
         public Book()
         {
 
+        }
+        protected static Image ByteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
         }
 
     }

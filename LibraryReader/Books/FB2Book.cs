@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -28,7 +29,7 @@ namespace LibraryReader.Books
             fB2File.Load(doc, false);
             FullPath = path;
             Date = DateTime.Now;
-
+           
             var s = fB2File.TitleInfo;
             var author = s.BookAuthors;
             StringBuilder name = new StringBuilder();
@@ -39,7 +40,9 @@ namespace LibraryReader.Books
 
             Title = s.BookTitle.Text;
             Author = Convert.ToString(name);
-            
+
+
+            CoverPath = GetCoverPath();
 
 
             //var namespaceManager = new XmlNamespaceManager(new NameTable());
@@ -51,6 +54,26 @@ namespace LibraryReader.Books
             //XmlTextWriter tx = new XmlTextWriter(sw);
             //body[0].WriteTo(tx);
             //string str = sw.ToString();
+
+        }
+        private string GetCoverPath()
+        {
+            Random rnd = new Random();
+            if (fB2File.Images.Count != 0)
+            {
+                var images = fB2File.Images.First();
+                var cover = images.Value.BinaryData;
+                string coverName = string.Format("{0} {1}.jpg", Title, Convert.ToString(rnd.Next(50)));
+                Image image = ByteArrayToImage(cover);
+                string coverPath = AppDomain.CurrentDomain.BaseDirectory + "Library\\Covers\\" + coverName;
+                image.Save(coverPath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                
+                return coverPath;
+            }
+            else
+            {
+                return null;
+            }
 
         }
     }
