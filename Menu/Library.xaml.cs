@@ -24,6 +24,7 @@ namespace Menu
     {
         public Dictionary<string, List<Books>> dictBooks { get; set; }
         public List<Books> listBooks { get; set; }
+        public string lastSortedFeature { get; set; }
 
         public Library(Dictionary<string, List<Books>> dict, List<Books> list)
         {
@@ -31,13 +32,16 @@ namespace Menu
             dictBooks = dict;
             listBooks = list;
 
+            lastSortedFeature = "";
+            
             InitializeComponent();
+            
         }
 
         private void SortByAuthor(object sender, RoutedEventArgs e)
         {
             listBooks.Sort(new AuthorComparer());
-            keyTextColumn.Header = "Sort By Author";
+            lastSortedFeature = "Sorted By Author";
             dictBooks = new Dictionary<string, List<Books>>();
             dictBooks = ArrayHelperExtensions.SplitByAuthor(listBooks, dictBooks);
             RefreshDict();
@@ -46,7 +50,7 @@ namespace Menu
         private void SortByName(object sender, RoutedEventArgs e)
         {
             listBooks.Sort(new NameComparer());
-            keyTextColumn.Header = "Sort By Book Name";
+            lastSortedFeature = "Sorted By Book Name";
             dictBooks = new Dictionary<string, List<Books>>();
             dictBooks = ArrayHelperExtensions.SplitByBookName(listBooks, dictBooks);
             RefreshDict();
@@ -55,7 +59,7 @@ namespace Menu
         private void SortByDate(object sender, RoutedEventArgs e)
         {
             listBooks.Sort(new DateComparer());
-            keyTextColumn.Header = "Sort By Date";
+            lastSortedFeature = "Sorted By Date";
             dictBooks = new Dictionary<string, List<Books>>();
             dictBooks = ArrayHelperExtensions.SplitByDate(listBooks, dictBooks);
             RefreshDict();
