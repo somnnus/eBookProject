@@ -70,7 +70,7 @@ namespace Menu
         {
             for (var i = 0; i < array.Count; i++)
             {
-                var date = array[i].Date.ToString();
+                var date = array[i].Date.ToShortDateString();
                 if (dictKeys.ContainsKey(date))
                 {
                     dictKeys[date].Add(array[i]);

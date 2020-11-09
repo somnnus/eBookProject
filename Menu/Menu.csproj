@@ -43,7 +43,7 @@
       <HintPath>..\eBdb.EpubReader.dll</HintPath>
     </Reference>
     <Reference Include="EpubSharp">
-      <HintPath>..\..\..\Project eBook\InterfaceProject\EpubSharp-master\EpubSharp-master\EpubSharp.Tests\bin\Debug\netcoreapp1.1\EpubSharp.dll</HintPath>
+      <HintPath>..\LibraryReader\bin\Debug\EpubSharp.dll</HintPath>
     </Reference>
     <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
