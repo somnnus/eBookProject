@@ -67,8 +67,9 @@ namespace Menu
 
         private void RefreshDict()
         {
+            DataContext = this;
             dataGridLib.ItemsSource = dictBooks;
-            CollectionViewSource.GetDefaultView(dataGridLib.ItemsSource).Refresh();
+            //CollectionViewSource.GetDefaultView(dataGridLib.ItemsSource).Refresh();
         }
 
         private void DoPreviewingMouseWheel(object sender, MouseWheelEventArgs e)
