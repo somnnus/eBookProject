@@ -146,13 +146,21 @@ namespace Menu
                 }
                 else if (fileName.Contains(".fb2"))
                 {
-                   
+                    try
+                    {
                         Book currentBook = null;
                         currentBook = new FB2Book(newFullFileName);
                         books.Add(currentBook);
                         FillWithBooks();
                         Serialization.SerializationInformationAboutBook(books, fullPath);
-                    
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Не удается открыть книгу");
+                        File.Delete(newFullFileName);
+                        Serialization.SerializationInformationAboutBook(books, fullPath);
+                    }
+
 
                 }
                 
