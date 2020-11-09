@@ -63,11 +63,11 @@
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                                            <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.13, ElementName=DockPanelLibrary, Path=ActualWidth}"
+                                            <!--<Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.13, ElementName=DockPanelLibrary, Path=ActualWidth}"
                                                Height="auto" 
-                                               Source='{Binding imagePath}'/>
-                                            <TextBlock Style="{StaticResource BookTextSettings}" Text='{Binding author}'></TextBlock>
-                                            <TextBlock Style="{StaticResource BookTextSettings}" Text='{Binding bookName}'></TextBlock>
+                                               Source='{Binding imagePath}'/>-->
+                                            <TextBlock Style="{StaticResource BookTextSettings}" Text='{Binding Author}'></TextBlock>
+                                            <TextBlock Style="{StaticResource BookTextSettings}" Text='{Binding Title}'></TextBlock>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>

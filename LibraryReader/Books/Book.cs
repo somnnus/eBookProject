@@ -15,7 +15,7 @@ namespace LibraryReader.Books
         public string Author { get; set; }
         public string Content { get; set; }
         public string FullPath { get; set; }
-        
+        public DateTime Date { get; set; }
 
         public int FontSize { get; set; }
         public int LastPage { get; set; }

@@ -27,6 +27,7 @@ namespace LibraryReader.Books
             XDocument doc = XDocument.Load(path);
             fB2File.Load(doc, false);
             FullPath = path;
+            Date = DateTime.Now;
 
             var s = fB2File.TitleInfo;
             var author = s.BookAuthors;

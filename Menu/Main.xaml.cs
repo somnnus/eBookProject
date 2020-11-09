@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryReader.Books;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,7 @@ namespace Menu
     /// </summary>
     public partial class Main : UserControl
     {
-        public Dictionary<string, List<Books>> dictBooks;
+        public Dictionary<string, List<Book>> dictBooks;
 
         public Delegate del;
         public Delegate del2;

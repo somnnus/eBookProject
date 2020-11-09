@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
+using LibraryReader.Books;
 
 namespace Menu
 {
@@ -22,11 +23,11 @@ namespace Menu
     /// </summary>
     public partial class Library : UserControl
     {
-        public Dictionary<string, List<Books>> dictBooks { get; set; }
-        public List<Books> listBooks { get; set; }
+        public Dictionary<string, List<Book>> dictBooks { get; set; }
+        public List<Book> listBooks { get; set; }
         public string lastSortedFeature { get; set; }
 
-        public Library(Dictionary<string, List<Books>> dict, List<Books> list)
+        public Library(Dictionary<string, List<Book>> dict, List<Book> list)
         {
             DataContext = this;
             dictBooks = dict;
@@ -42,7 +43,7 @@ namespace Menu
         {
             listBooks.Sort(new AuthorComparer());
             lastSortedFeature = "Sorted By Author";
-            dictBooks = new Dictionary<string, List<Books>>();
+            dictBooks = new Dictionary<string, List<Book>>();
             dictBooks = ArrayHelperExtensions.SplitByAuthor(listBooks, dictBooks);
             RefreshDict();
         }
@@ -51,7 +52,7 @@ namespace Menu
         {
             listBooks.Sort(new NameComparer());
             lastSortedFeature = "Sorted By Book Name";
-            dictBooks = new Dictionary<string, List<Books>>();
+            dictBooks = new Dictionary<string, List<Book>>();
             dictBooks = ArrayHelperExtensions.SplitByBookName(listBooks, dictBooks);
             RefreshDict();
         }
@@ -60,14 +61,13 @@ namespace Menu
         {
             listBooks.Sort(new DateComparer());
             lastSortedFeature = "Sorted By Date";
-            dictBooks = new Dictionary<string, List<Books>>();
+            dictBooks = new Dictionary<string, List<Book>>();
             dictBooks = ArrayHelperExtensions.SplitByDate(listBooks, dictBooks);
             RefreshDict();
         }
 
         private void RefreshDict()
         {
-            DataContext = this;
             dataGridLib.ItemsSource = dictBooks;
             //CollectionViewSource.GetDefaultView(dataGridLib.ItemsSource).Refresh();
         }
@@ -86,27 +86,27 @@ namespace Menu
         }
     }
 
-    class AuthorComparer : IComparer<Books>
+    class AuthorComparer : IComparer<Book>
     {
-        public int Compare(Books book1, Books book2)
+        public int Compare(Book book1, Book book2)
         {
-            return book1.author.CompareTo(book2.author);
+            return book1.Author.CompareTo(book2.Author);
         }
     }
 
-    class NameComparer : IComparer<Books>
+    class NameComparer : IComparer<Book>
     {
-        public int Compare(Books book1, Books book2)
+        public int Compare(Book book1, Book book2)
         {
-            return book1.bookName.CompareTo(book2.bookName);
+            return book1.Title.CompareTo(book2.Title);
         }
     }
 
-    class DateComparer : IComparer<Books>
+    class DateComparer : IComparer<Book>
     {
-        public int Compare(Books book1, Books book2)
+        public int Compare(Book book1, Book book2)
         {
-            return book1.date.CompareTo(book2.date);
+            return book1.Date.CompareTo(book2.Date);
         }
     }
 }

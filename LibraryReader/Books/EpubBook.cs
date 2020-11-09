@@ -24,7 +24,7 @@ namespace LibraryReader.Books
             Title = epubBook.Title[0];
             Author = epubBook.Creator[0];
             FontSize = 16;
-            
+            Date = DateTime.Now;
         }
 
         public string GetContentAsHtml()

@@ -26,6 +26,9 @@ namespace Menu
     /// </summary>
     public partial class MainWindow : Window
     {
+        public Dictionary<string, List<Book>> dictionaryBooks;
+        public List<Book> books = new List<Book>();
+
         public Dictionary<string, List<Books>> dictBooks; //общие ресурсы
         public List<Books> listBooks;
 
@@ -37,8 +40,7 @@ namespace Menu
 
         public delegate void AddBookDelegate();
         public event AddBookDelegate AddBook;
-
-        private List<Book> books = new List<Book>();
+        
         Epub epub;
 
         static string fullPath = AppDomain.CurrentDomain.BaseDirectory+"Library";
@@ -58,27 +60,41 @@ namespace Menu
             ExitInTheWindow = new ExitDelegate(method2);
             mainScreen.del2 = ExitInTheWindow;
 
-            FillLibrary();
+            FillWithBooks();
 
             AddBook = new AddBookDelegate(method3);
             mainScreen.delAddBook = AddBook;
         }
 
-        private void FillLibrary()
+        //private void FillLibrary()
+        //{
+        //    AddBooks(listBooks);
+        //    int blocksCount = 6;
+        //    //mainScreen.dictBooks = new Dictionary<string, List<Books>>();
+        //    //mainScreen.dictBooks = ArrayHelperExtensions.SplitByBlocks(listBooks, mainScreen.dictBooks, blocksCount);
+
+        //    //dictBooks = mainScreen.dictBooks;
+
+        //    mainScreen.listBoxBooks.ItemsSource = mainScreen.dictBooks["0"];
+        //}
+
+        public void FillWithBooks()
         {
-            AddBooks(listBooks);
-            int blocksCount = 6;
-            mainScreen.dictBooks = new Dictionary<string, List<Books>>();
-            mainScreen.dictBooks = ArrayHelperExtensions.SplitByBlocks(listBooks, mainScreen.dictBooks, blocksCount);
+            if (books.Count != 0)
+            {
+                int blocksCount = 6;
+                mainScreen.dictBooks = new Dictionary<string, List<Book>>();
+                mainScreen.dictBooks = ArrayHelperExtensions.SplitByBlocks(books, mainScreen.dictBooks, blocksCount);
 
-            dictBooks = mainScreen.dictBooks;
+                dictionaryBooks = mainScreen.dictBooks;
 
-            mainScreen.listBoxBooks.ItemsSource = mainScreen.dictBooks["0"];
+                mainScreen.listBoxBooks.ItemsSource = mainScreen.dictBooks["0"];
+            }
         }
 
         public void method1()
         {
-            contentMain.Content = new Library(dictBooks, listBooks);
+            contentMain.Content = new Library(dictionaryBooks, books);
         }
 
         public void method2()
@@ -113,11 +129,8 @@ namespace Menu
                     {
                         epub = new Epub(newFullFileName);
                         currentBook = new EpubBook(newFullFileName);
-                        //currentBook.Author = epub.Creator[0];
-                        //currentBook.Title = epub.Title[0];
-                        //currentBook.FontSize = 16;
-                        //currentBook.FullPath = newFullFileName;
                         books.Add(currentBook);
+                        FillWithBooks();
                         Serialization.SerializationInformationAboutBook(books, fullPath);
                     }
                     catch (Exception ex)
@@ -133,6 +146,7 @@ namespace Menu
                     {
                         currentBook = new FB2Book(newFullFileName);
                         books.Add(currentBook);
+                        FillWithBooks();
                         Serialization.SerializationInformationAboutBook(books, fullPath);
                     }
                     catch(Exception ex)
@@ -165,93 +179,93 @@ namespace Menu
 
         }
 
-        private List<Books> AddBooks(List<Books> books)
-        {
-            books.Add(new Books()
-            {
-                author = "Достоевский",
-                bookName = "Братья Карамазовы",
-                imagePath = "images/SCAN_20140123_185338818.jpg",
-                date = new DateTime(2000, 10, 1)
-            });
-            books.Add(new Books()
-            {
-                author = "Толстой",
-                bookName = "Анна Каренина",
-                imagePath = "images/SCAN_20140123_185430521.jpg",
-                date = new DateTime(2001, 10, 1)
-            });
-            books.Add(new Books()
-            {
-                author = "Пушкин",
-                bookName = "Евгений Онегин",
-                imagePath = "images/Scan_20170628_174511.jpg",
-                date = new DateTime(2000, 10, 2)
-            });
-            books.Add(new Books()
-            {
-                author = "Тургенев",
-                bookName = "Отцы и дети",
-                imagePath = "images/SCAN_20140123_185338818.jpg",
-                date = new DateTime(2001, 11, 1)
-            });
-            books.Add(new Books()
-            {
-                author = "Куприн",
-                bookName = "Гранатовый браслет",
-                imagePath = "images/SCAN_20140123_185430521.jpg",
-                date = new DateTime(2000, 10, 1)
-            });
-            books.Add(new Books()
-            {
-                author = "Пастернак",
-                bookName = "Доктор Живаго",
-                imagePath = "images/Scan_20170628_174511.jpg",
-                date = new DateTime(2003, 10, 1)
-            });
-            books.Add(new Books()
-            {
-                author = "Пушкин",
-                bookName = "Капитанская дочка",
-                imagePath = "images/SCAN_20140123_185338818.jpg",
-                date = new DateTime(2004, 10, 1)
-            });
-            books.Add(new Books()
-            {
-                author = "Набоков",
-                bookName = "Лолита",
-                imagePath = "images/SCAN_20140123_185430521.jpg",
-                date = new DateTime(2004, 9, 1)
-            });
-            books.Add(new Books()
-            {
-                author = "Маяковский",
-                bookName = "Если звёзды зажигаются...",
-                imagePath = "images/Scan_20170628_174511.jpg",
-                date = new DateTime(2004, 8, 1)
-            });
-            books.Add(new Books()
-            {
-                author = "Булгаков",
-                bookName = "Мастер и Маргарита",
-                imagePath = "images/SCAN_20140123_185338818.jpg",
-                date = new DateTime(2005, 10, 1)
-            });
-            books.Add(new Books()
-            {
-                author = "Толстой",
-                bookName = "Война и мир",
-                imagePath = "images/SCAN_20140123_185430521.jpg",
-                date = new DateTime(2006, 10, 1)
-            });
-            books.Add(new Books()
-            {
-                author = "Лермонтов",
-                bookName = "Герой нашего времени",
-                imagePath = "images/Scan_20170628_174511.jpg",
-                date = new DateTime(2020, 10, 1)
-            });
-            return books;
-        }
+        //private List<Books> AddBooks(List<Books> books)
+        //{
+        //    books.Add(new Books()
+        //    {
+        //        author = "Достоевский",
+        //        bookName = "Братья Карамазовы",
+        //        imagePath = "images/SCAN_20140123_185338818.jpg",
+        //        date = new DateTime(2000, 10, 1)
+        //    });
+        //    books.Add(new Books()
+        //    {
+        //        author = "Толстой",
+        //        bookName = "Анна Каренина",
+        //        imagePath = "images/SCAN_20140123_185430521.jpg",
+        //        date = new DateTime(2001, 10, 1)
+        //    });
+        //    books.Add(new Books()
+        //    {
+        //        author = "Пушкин",
+        //        bookName = "Евгений Онегин",
+        //        imagePath = "images/Scan_20170628_174511.jpg",
+        //        date = new DateTime(2000, 10, 2)
+        //    });
+        //    books.Add(new Books()
+        //    {
+        //        author = "Тургенев",
+        //        bookName = "Отцы и дети",
+        //        imagePath = "images/SCAN_20140123_185338818.jpg",
+        //        date = new DateTime(2001, 11, 1)
+        //    });
+        //    books.Add(new Books()
+        //    {
+        //        author = "Куприн",
+        //        bookName = "Гранатовый браслет",
+        //        imagePath = "images/SCAN_20140123_185430521.jpg",
+        //        date = new DateTime(2000, 10, 1)
+        //    });
+        //    books.Add(new Books()
+        //    {
+        //        author = "Пастернак",
+        //        bookName = "Доктор Живаго",
+        //        imagePath = "images/Scan_20170628_174511.jpg",
+        //        date = new DateTime(2003, 10, 1)
+        //    });
+        //    books.Add(new Books()
+        //    {
+        //        author = "Пушкин",
+        //        bookName = "Капитанская дочка",
+        //        imagePath = "images/SCAN_20140123_185338818.jpg",
+        //        date = new DateTime(2004, 10, 1)
+        //    });
+        //    books.Add(new Books()
+        //    {
+        //        author = "Набоков",
+        //        bookName = "Лолита",
+        //        imagePath = "images/SCAN_20140123_185430521.jpg",
+        //        date = new DateTime(2004, 9, 1)
+        //    });
+        //    books.Add(new Books()
+        //    {
+        //        author = "Маяковский",
+        //        bookName = "Если звёзды зажигаются...",
+        //        imagePath = "images/Scan_20170628_174511.jpg",
+        //        date = new DateTime(2004, 8, 1)
+        //    });
+        //    books.Add(new Books()
+        //    {
+        //        author = "Булгаков",
+        //        bookName = "Мастер и Маргарита",
+        //        imagePath = "images/SCAN_20140123_185338818.jpg",
+        //        date = new DateTime(2005, 10, 1)
+        //    });
+        //    books.Add(new Books()
+        //    {
+        //        author = "Толстой",
+        //        bookName = "Война и мир",
+        //        imagePath = "images/SCAN_20140123_185430521.jpg",
+        //        date = new DateTime(2006, 10, 1)
+        //    });
+        //    books.Add(new Books()
+        //    {
+        //        author = "Лермонтов",
+        //        bookName = "Герой нашего времени",
+        //        imagePath = "images/Scan_20170628_174511.jpg",
+        //        date = new DateTime(2020, 10, 1)
+        //    });
+        //    return books;
+        //}
     }
 }
