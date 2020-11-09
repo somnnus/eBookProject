@@ -39,6 +39,7 @@ namespace Menu
         public event AddBookDelegate AddBook;
 
         private List<Book> books = new List<Book>();
+        Epub epub;
 
         static string fullPath = AppDomain.CurrentDomain.BaseDirectory+"Library";
             
@@ -108,21 +109,36 @@ namespace Menu
 
                 if (fileName.Contains(".epub"))
                 {
-                    Epub epub = new Epub(newFullFileName);
+                    try
+                    {
+                        epub = new Epub(newFullFileName);
+                        currentBook = new EpubBook(newFullFileName);
+                        //currentBook.Author = epub.Creator[0];
+                        //currentBook.Title = epub.Title[0];
+                        //currentBook.FontSize = 16;
+                        //currentBook.FullPath = newFullFileName;
+                        books.Add(currentBook);
+                        Serialization.SerializationInformationAboutBook(books, fullPath);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Не удается открыть книгу");
+                    }
 
-                    currentBook = new EpubBook(newFullFileName);
-                    //currentBook.Author = epub.Creator[0];
-                    //currentBook.Title = epub.Title[0];
-                    //currentBook.FontSize = 16;
-                    //currentBook.FullPath = newFullFileName;
-                    books.Add(currentBook);              
-                    Serialization.SerializationInformationAboutBook(books, fullPath);
+                    
                 }
                 else if (fileName.Contains(".fb2"))
                 {
-                    currentBook = new FB2Book(newFullFileName);
-                    books.Add(currentBook);
-                    Serialization.SerializationInformationAboutBook(books, fullPath);
+                    try
+                    {
+                        currentBook = new FB2Book(newFullFileName);
+                        books.Add(currentBook);
+                        Serialization.SerializationInformationAboutBook(books, fullPath);
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show("Не удается открыть книгу");
+                    }
 
                 }
                 
