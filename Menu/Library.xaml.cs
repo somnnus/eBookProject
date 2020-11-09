@@ -15,34 +15,58 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
 using LibraryReader.Books;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Menu
 {
     /// <summary>
     /// Логика взаимодействия для Library.xaml
     /// </summary>
-    public partial class Library : UserControl
+    public partial class Library : UserControl, INotifyPropertyChanged
     {
         public Dictionary<string, List<Book>> dictBooks { get; set; }
         public List<Book> listBooks { get; set; }
-        public string lastSortedFeature { get; set; }
+
+        public string lastSortingFeature { get; set; }
+
 
         public Library(Dictionary<string, List<Book>> dict, List<Book> list)
         {
             DataContext = this;
             dictBooks = dict;
             listBooks = list;
+            lastSortingFeature = "";
 
-            lastSortedFeature = "";
-            
             InitializeComponent();
-            
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public string LastSortingFeature
+        {
+            get { return lastSortingFeature; }
+            set
+            {
+                lastSortingFeature = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        protected virtual void NotifyPropertyChanged(
+           [CallerMemberName] String propertyName = "")
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         private void SortByAuthor(object sender, RoutedEventArgs e)
         {
             listBooks.Sort(new AuthorComparer());
-            lastSortedFeature = "Sorted By Author";
+            LastSortingFeature = "Sorted By Author";
             dictBooks = new Dictionary<string, List<Book>>();
             dictBooks = ArrayHelperExtensions.SplitByAuthor(listBooks, dictBooks);
             RefreshDict();
@@ -51,7 +75,7 @@ namespace Menu
         private void SortByName(object sender, RoutedEventArgs e)
         {
             listBooks.Sort(new NameComparer());
-            lastSortedFeature = "Sorted By Book Name";
+            LastSortingFeature = "Sorted By Title";
             dictBooks = new Dictionary<string, List<Book>>();
             dictBooks = ArrayHelperExtensions.SplitByBookName(listBooks, dictBooks);
             RefreshDict();
@@ -60,7 +84,7 @@ namespace Menu
         private void SortByDate(object sender, RoutedEventArgs e)
         {
             listBooks.Sort(new DateComparer());
-            lastSortedFeature = "Sorted By Date";
+            LastSortingFeature = "Sorted By Date";
             dictBooks = new Dictionary<string, List<Book>>();
             dictBooks = ArrayHelperExtensions.SplitByDate(listBooks, dictBooks);
             RefreshDict();
@@ -69,7 +93,7 @@ namespace Menu
         private void RefreshDict()
         {
             dataGridLib.ItemsSource = dictBooks;
-            //CollectionViewSource.GetDefaultView(dataGridLib.ItemsSource).Refresh();
+            //CollectionViewSource.GetDefaultView(lastSortingFeature).Refresh();
         }
 
         private void DoPreviewingMouseWheel(object sender, MouseWheelEventArgs e)
