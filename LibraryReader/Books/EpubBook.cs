@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -23,6 +24,7 @@ namespace LibraryReader.Books
         {
             try
             {
+              
                 epubBook = new Epub(path);
                 FullPath = path;
                 Title = epubBook.Title[0];
@@ -30,10 +32,12 @@ namespace LibraryReader.Books
                 FontSize = 16;
                 Date = DateTime.Now;
                 CoverPath = GetCoverPath();
+                
             }
             catch(Exception ex)
             {
-                throw new Exception("Не удалось открыть книгу");
+                
+                throw new Exception();
             }
             
         }
@@ -87,5 +91,7 @@ namespace LibraryReader.Books
             buf = System.Net.WebUtility.HtmlDecode(buf);
             return buf;
         }
+       
+    
     }
 }

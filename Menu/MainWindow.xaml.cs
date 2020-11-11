@@ -130,14 +130,22 @@ namespace Menu
                     {
                         Book currentBook = null;                      
                         currentBook = new EpubBook(newFullFileName);
-                        books.Add(currentBook);
-                        FillWithBooks();
-                        Serialization.SerializationInformationAboutBook(books, fullPath);
+                        if (currentBook != null)
+                        {
+                            books.Add(currentBook);
+                            FillWithBooks();
+                            Serialization.SerializationInformationAboutBook(books, fullPath);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Не удается открыть книгу");
+                        }
+                       
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show("Не удается открыть книгу");
-                        File.Delete(newFullFileName);
+                     //   File.Delete(newFullFileName);
                         Serialization.SerializationInformationAboutBook(books, fullPath);
                     }
 
