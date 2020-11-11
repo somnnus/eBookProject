@@ -119,33 +119,27 @@ namespace Menu
             string fileName = System.IO.Path.GetFileName(newFullFileName);
 
             if (!File.Exists(newFullFileName))
-            {
-                File.Copy(path, newFullFileName);
-
-               // Book currentBook = null;
-
+            {              
                 if (fileName.Contains(".epub"))
                 {
                     try
                     {
                         Book currentBook = null;                      
-                        currentBook = new EpubBook(newFullFileName);
+                        currentBook = new EpubBook(path,newFullFileName);
                         if (currentBook != null)
-                        {
+                        {                            
                             books.Add(currentBook);
-                            FillWithBooks();
+                            FillWithBooks();                           
                             Serialization.SerializationInformationAboutBook(books, fullPath);
                         }
                         else
                         {
-                            MessageBox.Show("Не удается открыть книгу");
-                        }
-                       
+                            MessageBox.Show("Не удалось открыть книгу");
+                        }                                             
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Не удается открыть книгу");
-                     //   File.Delete(newFullFileName);
+                        MessageBox.Show("Не удалось открыть книгу");
                         Serialization.SerializationInformationAboutBook(books, fullPath);
                     }
 
@@ -156,21 +150,31 @@ namespace Menu
                     try
                     {
                         Book currentBook = null;
-                        currentBook = new FB2Book(newFullFileName);
-                        books.Add(currentBook);
-                        FillWithBooks();
-                        Serialization.SerializationInformationAboutBook(books, fullPath);
+                        currentBook = new FB2Book(path,newFullFileName);
+                        if (currentBook != null)
+                        {
+                            books.Add(currentBook);
+                            FillWithBooks();
+                            Serialization.SerializationInformationAboutBook(books, fullPath);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Не удалось открыть книгу");
+                        }
+                        
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Не удается открыть книгу");
+                        MessageBox.Show("Не удалось открыть книгу");
                         File.Delete(newFullFileName);
                         Serialization.SerializationInformationAboutBook(books, fullPath);
                     }
 
-
-                }
-                
+                }              
+            }
+            else
+            {
+                MessageBox.Show("Эта книга уже есть в библиотеке!");
             }
         }
 

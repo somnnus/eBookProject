@@ -20,26 +20,18 @@ namespace LibraryReader.Books
         {
 
         }
-        public EpubBook(string path)
-        {
-            try
-            {
-              
+        public EpubBook(string path,string newPath)
+        {          
                 epubBook = new Epub(path);
-                FullPath = path;
+                File.Copy(path, newPath);
+                FullPath = newPath;
                 Title = epubBook.Title[0];
                 Author = epubBook.Creator[0];
                 FontSize = 16;
                 Date = DateTime.Now;
                 CoverPath = GetCoverPath();
                 
-            }
-            catch(Exception ex)
-            {
-                
-                throw new Exception();
-            }
-            
+
         }
 
         public string GetContentAsHtml()
