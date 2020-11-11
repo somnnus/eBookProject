@@ -21,13 +21,21 @@ namespace LibraryReader.Books
         }
         public EpubBook(string path)
         {
-            epubBook = new Epub(path);
-            FullPath = path;
-            Title = epubBook.Title[0];
-            Author = epubBook.Creator[0];
-            FontSize = 16;
-            Date = DateTime.Now;
-            CoverPath = GetCoverPath();
+            try
+            {
+                epubBook = new Epub(path);
+                FullPath = path;
+                Title = epubBook.Title[0];
+                Author = epubBook.Creator[0];
+                FontSize = 16;
+                Date = DateTime.Now;
+                CoverPath = GetCoverPath();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Не удалось открыть книгу");
+            }
+            
         }
 
         public string GetContentAsHtml()
