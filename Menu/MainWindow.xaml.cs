@@ -41,7 +41,7 @@ namespace Menu
         public delegate void AddBookDelegate();
         public event AddBookDelegate AddBook;
         
-        Epub epub;
+        
 
         static string fullPath = AppDomain.CurrentDomain.BaseDirectory+"Library";
         static string coverPath = fullPath + "\\" + "Covers";
@@ -128,8 +128,7 @@ namespace Menu
                 {
                     try
                     {
-                        Book currentBook = null;
-                        epub = new Epub(newFullFileName);
+                        Book currentBook = null;                      
                         currentBook = new EpubBook(newFullFileName);
                         books.Add(currentBook);
                         FillWithBooks();
