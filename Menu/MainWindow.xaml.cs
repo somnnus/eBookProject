@@ -40,7 +40,10 @@ namespace Menu
 
         public delegate void AddBookDelegate();
         public event AddBookDelegate AddBook;
-        
+
+        public delegate void OpenBookDelegate();
+        public event OpenBookDelegate OpenBook;
+
         Epub epub;
 
         static string fullPath = AppDomain.CurrentDomain.BaseDirectory+"Library";
@@ -65,6 +68,9 @@ namespace Menu
 
             AddBook = new AddBookDelegate(method3);
             mainScreen.delAddBook = AddBook;
+
+            OpenBook = new OpenBookDelegate(method4);
+            mainScreen.delOpenBook = OpenBook;
         }
 
         //private void FillLibrary()
@@ -157,6 +163,11 @@ namespace Menu
                 }
                 
             }
+        }
+
+        public void method4()
+        {
+            contentMain.Content = new OpenedPage();
         }
 
         private void CreateHiddenDirectory()

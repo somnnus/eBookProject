@@ -26,12 +26,14 @@
                             <VirtualizingStackPanel Orientation="Vertical"  Background="{StaticResource clBr}" />
                         </ItemsPanelTemplate>
                     </Menu.ItemsPanel>
+                    <MenuItem Header="Main Page"/>
+                    <MenuItem Header="Library Page"  Click="OpenLibraryPage"/>
                     <MenuItem Header="Continue reading"/>
-                    <MenuItem Header="Go to the library" Click="OpenLibraryPage"/>
-                    <MenuItem Header="Edit the library">
+                    <MenuItem Header="Edit your library">
                         <MenuItem Header="Add a book" Click="AddBook_Click"/>
                         <MenuItem Header="Remove a book" />
                     </MenuItem>
+                    <MenuItem Header="Settings"/>
                     <Separator/>
                     <MenuItem Header="Exit" Click="ExitClick" />
                 </Menu>
@@ -62,7 +64,7 @@
                             <ListBox x:Name="listBoxBooks" HorizontalAlignment="Stretch" VerticalAlignment="Center"  Background="{StaticResource clBr}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                                        <StackPanel MouseDown="StackPanel_MouseDown" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                                             <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.13, ElementName=DockPanelLibrary, Path=ActualWidth}"
                                                Height="auto" 
                                                Source='{Binding CoverPath}'/>

@@ -26,6 +26,7 @@ namespace Menu
         public Delegate del;
         public Delegate del2;
         public Delegate delAddBook;
+        public Delegate delOpenBook; 
 
         public void method1()
         {
@@ -40,6 +41,11 @@ namespace Menu
         public void method3()
         {
             delAddBook.DynamicInvoke();
+        }
+
+        public void method4()
+        {
+            delOpenBook.DynamicInvoke();
         }
 
         int currentPage = 0;
@@ -80,6 +86,14 @@ namespace Menu
         private void AddBook_Click(object sender, RoutedEventArgs e)
         {
             method3();
+        }
+
+        private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount >= 1)
+            {
+                method4();
+            }
         }
     }
 }
