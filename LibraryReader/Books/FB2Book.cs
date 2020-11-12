@@ -20,10 +20,11 @@ namespace LibraryReader.Books
         {
 
         }
-        public FB2Book(string path)
+        public FB2Book(string path,string newPath)
         {
             fB2File = new FB2File();
-            FullPath = path;
+            File.Copy(path, newPath);
+            FullPath = newPath;
             FontSize = 16;
             XDocument doc = XDocument.Load(path);
             fB2File.Load(doc, false);

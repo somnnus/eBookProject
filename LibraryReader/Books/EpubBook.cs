@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -19,15 +20,18 @@ namespace LibraryReader.Books
         {
 
         }
-        public EpubBook(string path)
-        {
-            epubBook = new Epub(path);
-            FullPath = path;
-            Title = epubBook.Title[0];
-            Author = epubBook.Creator[0];
-            FontSize = 16;
-            Date = DateTime.Now;
-            CoverPath = GetCoverPath();
+        public EpubBook(string path,string newPath)
+        {          
+                epubBook = new Epub(path);
+                File.Copy(path, newPath);
+                FullPath = newPath;
+                Title = epubBook.Title[0];
+                Author = epubBook.Creator[0];
+                FontSize = 16;
+                Date = DateTime.Now;
+                CoverPath = GetCoverPath();
+                
+
         }
 
         public string GetContentAsHtml()
@@ -79,5 +83,7 @@ namespace LibraryReader.Books
             buf = System.Net.WebUtility.HtmlDecode(buf);
             return buf;
         }
+       
+    
     }
 }
