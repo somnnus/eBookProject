@@ -98,6 +98,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CommonResources.cs" />
     <Compile Include="LibraryPage\Library.xaml.cs">
       <DependentUpon>Library.xaml</DependentUpon>
     </Compile>
@@ -128,7 +129,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ArrayHelperExtensions.cs" />
-    <Compile Include="Books.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
