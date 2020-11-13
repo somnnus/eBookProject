@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Menu
+namespace Menu.MainAppPage
 {
     /// <summary>
     /// Логика взаимодействия для Main.xaml
@@ -26,7 +26,7 @@ namespace Menu
         public Delegate del;
         public Delegate del2;
         public Delegate delAddBook;
-        public Delegate delOpenBook; 
+        public Delegate delOpenBook;
 
         public void method1()
         {

@@ -1,6 +1,9 @@
-﻿using System;
+﻿using LibraryReader.Books;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,12 +16,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Threading;
-using LibraryReader.Books;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
-namespace Menu
+namespace Menu.LibraryPage
 {
     /// <summary>
     /// Логика взаимодействия для Library.xaml
@@ -30,14 +29,18 @@ namespace Menu
 
         public string lastSortingFeature { get; set; }
 
+        //public Library(Dictionary<string, List<Book>> dict, List<Book> list)
+        //{
+        //    DataContext = this;
+        //    dictBooks = dict;
+        //    listBooks = list;
+        //    lastSortingFeature = "";
 
-        public Library(Dictionary<string, List<Book>> dict, List<Book> list)
+        //    InitializeComponent();
+        //}
+
+        public Library()
         {
-            DataContext = this;
-            dictBooks = dict;
-            listBooks = list;
-            lastSortingFeature = "";
-
             InitializeComponent();
         }
 

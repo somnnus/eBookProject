@@ -38,33 +38,36 @@ namespace Menu
         public delegate void ExitDelegate();
         public event ExitDelegate ExitInTheWindow;
 
-        public delegate void AddBookDelegate();
-        public event AddBookDelegate AddBook;
-        
-        
+        //public delegate void AddBookDelegate();
+        //public event AddBookDelegate AddBook;
+
+        MainWindowViewModel mainWindowViewModel;
 
         static string fullPath = AppDomain.CurrentDomain.BaseDirectory+"Library";
         static string coverPath = fullPath + "\\" + "Covers";
             
 
-        public MainWindow()
+        public MainWindow(MainWindowViewModel mainWindowViewModel)
         {
             InitializeComponent();
+            this.mainWindowViewModel = mainWindowViewModel;
+            DataContext = mainWindowViewModel;
+
             listBooks = new List<Books>();
 
             CreateHiddenDirectory();
             CheckSerializization();
 
-            ValuePassEvent = new ValuePassDelegate(method1);
-            mainScreen.del = ValuePassEvent;
+            //ValuePassEvent = new ValuePassDelegate(method1);
+            //mainScreen.del = ValuePassEvent;
 
-            ExitInTheWindow = new ExitDelegate(method2);
-            mainScreen.del2 = ExitInTheWindow;
+            //ExitInTheWindow = new ExitDelegate(method2);
+            //mainScreen.del2 = ExitInTheWindow;
 
-            FillWithBooks();
+            //FillWithBooks();
 
-            AddBook = new AddBookDelegate(method3);
-            mainScreen.delAddBook = AddBook;
+            //AddBook = new AddBookDelegate(method3);
+            //mainScreen.delAddBook = AddBook;
         }
 
         //private void FillLibrary()
@@ -84,24 +87,29 @@ namespace Menu
             if (books.Count != 0)
             {
                 int blocksCount = 6;
-                mainScreen.dictBooks = new Dictionary<string, List<Book>>();
-                mainScreen.dictBooks = ArrayHelperExtensions.SplitByBlocks(books, mainScreen.dictBooks, blocksCount);
+                //mainScreen.dictBooks = new Dictionary<string, List<Book>>();
+                //mainScreen.dictBooks = ArrayHelperExtensions.SplitByBlocks(books, mainScreen.dictBooks, blocksCount);
 
-                dictionaryBooks = mainScreen.dictBooks;
+                //dictionaryBooks = mainScreen.dictBooks;
 
-                mainScreen.listBoxBooks.ItemsSource = mainScreen.dictBooks["0"];
+                //mainScreen.listBoxBooks.ItemsSource = mainScreen.dictBooks["0"];
             }
         }
 
         public void method1()
         {
-            contentMain.Content = new Library(dictionaryBooks, books);
+            //contentMain.Content = new Library(dictionaryBooks, books);
         }
 
         public void method2()
         {
             Serialization.SerializationInformationAboutBook(books, fullPath);
             Close();
+        }
+
+        private void AddBook(object s, RoutedEventArgs eventArgs)
+        {
+            method3();
         }
 
         public void method3()
@@ -201,6 +209,13 @@ namespace Menu
               books =  Serialization.DeserializationLibrary(fileNameSerialize);
             }
 
+        }
+
+        private void OpenBook(object sender, RoutedEventArgs eventArgs)
+        {
+            var openedBook = new OpenedBook(mainWindowViewModel);
+            openedBook.Show();
+            this.Close();
         }
 
         //private List<Books> AddBooks(List<Books> books)
