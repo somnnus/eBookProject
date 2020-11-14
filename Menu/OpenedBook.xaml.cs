@@ -19,19 +19,16 @@ namespace Menu
     /// </summary>
     public partial class OpenedBook : Window
     {
-        public OpenedBook(MainWindowViewModel mainWindowViewModel)
+        public OpenedBook()
         {
-            this.mainWindowViewModel = mainWindowViewModel;
             InitializeComponent();
         }
 
-        MainWindowViewModel mainWindowViewModel;
-
         private void OpenMenu(object sender, RoutedEventArgs routedEventArgs)
         {
-            var menuWindow = new MainWindow(mainWindowViewModel);
+            var menuWindow = new MainWindow(CommonResources.mainWindowViewModel);
             menuWindow.Show();
-            Close();
+            this.Close();
         }
     }
 }

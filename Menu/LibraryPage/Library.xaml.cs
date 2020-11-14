@@ -24,24 +24,14 @@ namespace Menu.LibraryPage
     /// </summary>
     public partial class Library : UserControl, INotifyPropertyChanged
     {
-        public Dictionary<string, List<Book>> dictBooks { get; set; }
-        public List<Book> listBooks { get; set; }
-
         public string lastSortingFeature { get; set; }
-
-        //public Library(Dictionary<string, List<Book>> dict, List<Book> list)
-        //{
-        //    DataContext = this;
-        //    dictBooks = dict;
-        //    listBooks = list;
-        //    lastSortingFeature = "";
-
-        //    InitializeComponent();
-        //}
 
         public Library()
         {
+            lastSortingFeature = "";
+
             InitializeComponent();
+            dataGridLib.ItemsSource = CommonResources.dictionaryBooks;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -52,50 +42,70 @@ namespace Menu.LibraryPage
             set
             {
                 lastSortingFeature = value;
-                NotifyPropertyChanged();
+                //NotifyPropertyChanged();
             }
         }
 
-        protected virtual void NotifyPropertyChanged(
-           [CallerMemberName] String propertyName = "")
+        //protected virtual void NotifyPropertyChanged(
+        //   [CallerMemberName] String propertyName = "")
+        //{
+        //    PropertyChangedEventHandler handler = PropertyChanged;
+        //    if (handler != null)
+        //    {
+        //        handler(this, new PropertyChangedEventArgs(propertyName));
+        //    }
+        //}
+
+        private void ComboBox_Selected(object sender, RoutedEventArgs e)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
+            ComboBox comboBox = (ComboBox)sender;
+            var selectedFeature = (TextBlock)comboBox.SelectedItem;
+            if (selectedFeature.Text == "Sorted By Author")
             {
-                handler(this, new PropertyChangedEventArgs(propertyName));
+                SortByAuthor();
+            }
+            else
+            if (selectedFeature.Text == "Sorted By Title")
+            {
+                SortByName();
+            }
+            else
+            if (selectedFeature.Text == "Sorted By Date")
+            {
+                SortByDate();
             }
         }
 
-        private void SortByAuthor(object sender, RoutedEventArgs e)
+        private void SortByAuthor()
         {
-            listBooks.Sort(new AuthorComparer());
+            CommonResources.listBooks.Sort(new AuthorComparer());
             LastSortingFeature = "Sorted By Author";
-            dictBooks = new Dictionary<string, List<Book>>();
-            dictBooks = ArrayHelperExtensions.SplitByAuthor(listBooks, dictBooks);
+            CommonResources.dictionaryBooks = new Dictionary<string, List<Book>>();
+            CommonResources.dictionaryBooks = ArrayHelperExtensions.SplitByAuthor(CommonResources.listBooks, CommonResources.dictionaryBooks);
             RefreshDict();
         }
 
-        private void SortByName(object sender, RoutedEventArgs e)
+        private void SortByName()
         {
-            listBooks.Sort(new NameComparer());
+            CommonResources.listBooks.Sort(new NameComparer());
             LastSortingFeature = "Sorted By Title";
-            dictBooks = new Dictionary<string, List<Book>>();
-            dictBooks = ArrayHelperExtensions.SplitByBookName(listBooks, dictBooks);
+            CommonResources.dictionaryBooks = new Dictionary<string, List<Book>>();
+            CommonResources.dictionaryBooks = ArrayHelperExtensions.SplitByBookName(CommonResources.listBooks, CommonResources.dictionaryBooks);
             RefreshDict();
         }
 
-        private void SortByDate(object sender, RoutedEventArgs e)
+        private void SortByDate()
         {
-            listBooks.Sort(new DateComparer());
+            CommonResources.listBooks.Sort(new DateComparer());
             LastSortingFeature = "Sorted By Date";
-            dictBooks = new Dictionary<string, List<Book>>();
-            dictBooks = ArrayHelperExtensions.SplitByDate(listBooks, dictBooks);
+            CommonResources.dictionaryBooks = new Dictionary<string, List<Book>>();
+            CommonResources.dictionaryBooks = ArrayHelperExtensions.SplitByDate(CommonResources.listBooks, CommonResources.dictionaryBooks);
             RefreshDict();
         }
 
         private void RefreshDict()
         {
-            dataGridLib.ItemsSource = dictBooks;
+            dataGridLib.ItemsSource = CommonResources.dictionaryBooks;
             //CollectionViewSource.GetDefaultView(lastSortingFeature).Refresh();
         }
 

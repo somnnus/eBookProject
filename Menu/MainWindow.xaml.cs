@@ -26,89 +26,33 @@ namespace Menu
     /// </summary>
     public partial class MainWindow : Window
     {
-        public Dictionary<string, List<Book>> dictionaryBooks;
-        public List<Book> books = new List<Book>();
-
-        public delegate void ValuePassDelegate();
-        public event ValuePassDelegate ValuePassEvent;
-
-        public delegate void ExitDelegate();
-        public event ExitDelegate ExitInTheWindow;
-
-        //public delegate void AddBookDelegate();
-        //public event AddBookDelegate AddBook;
-
-        MainWindowViewModel mainWindowViewModel;
-
         static string fullPath = AppDomain.CurrentDomain.BaseDirectory+"Library";
         static string coverPath = fullPath + "\\" + "Covers";
-            
 
-        public MainWindow(MainWindowViewModel mainWindowViewModel)
+        public MainWindow(MainWindowViewModel mainWindowVM)
         {
             InitializeComponent();
 
-            this.mainWindowViewModel = mainWindowViewModel;
-            DataContext = mainWindowViewModel;
+            CommonResources.mainWindowViewModel = mainWindowVM;
+            DataContext = mainWindowVM;
 
             CreateHiddenDirectory();
             CheckSerializization();
 
-            //ValuePassEvent = new ValuePassDelegate(method1);
-            //mainScreen.del = ValuePassEvent;
-
-            //ExitInTheWindow = new ExitDelegate(method2);
-            //mainScreen.del2 = ExitInTheWindow;
-
-            //FillWithBooks();
-
-            //AddBook = new AddBookDelegate(method3);
-            //mainScreen.delAddBook = AddBook;
+            FillLibrary();
         }
 
-        //private void FillLibrary()
-        //{
-        //    AddBooks(listBooks);
-        //    int blocksCount = 6;
-        //    //mainScreen.dictBooks = new Dictionary<string, List<Books>>();
-        //    //mainScreen.dictBooks = ArrayHelperExtensions.SplitByBlocks(listBooks, mainScreen.dictBooks, blocksCount);
-
-        //    //dictBooks = mainScreen.dictBooks;
-
-        //    mainScreen.listBoxBooks.ItemsSource = mainScreen.dictBooks["0"];
-        //}
-
-        public void FillWithBooks()
+        public void FillLibrary()
         {
-            if (books.Count != 0)
+            if (CommonResources.listBooks.Count != 0)
             {
                 int blocksCount = 6;
-                //mainScreen.dictBooks = new Dictionary<string, List<Book>>();
-                //mainScreen.dictBooks = ArrayHelperExtensions.SplitByBlocks(books, mainScreen.dictBooks, blocksCount);
-
-                //dictionaryBooks = mainScreen.dictBooks;
-
-                //mainScreen.listBoxBooks.ItemsSource = mainScreen.dictBooks["0"];
+                CommonResources.dictionaryBooks = new Dictionary<string, List<Book>>();
+                CommonResources.dictionaryBooks = ArrayHelperExtensions.SplitByBlocks(CommonResources.listBooks, CommonResources.dictionaryBooks, blocksCount);
             }
         }
 
-        public void method1()
-        {
-            //contentMain.Content = new Library(dictionaryBooks, books);
-        }
-
-        public void method2()
-        {
-            Serialization.SerializationInformationAboutBook(books, fullPath);
-            Close();
-        }
-
-        private void AddBook(object s, RoutedEventArgs eventArgs)
-        {
-            method3();
-        }
-
-        public void method3()
+        public void AddBook(object sender, RoutedEventArgs eventArgs)
         {
             var dialog = new OpenFileDialog();
             dialog.Filter = "Книги (*.epub, *.fb2)|*.epub;*.fb2";
@@ -132,22 +76,20 @@ namespace Menu
                         currentBook = new EpubBook(path,newFullFileName);
                         if (currentBook != null)
                         {                            
-                            books.Add(currentBook);
-                            FillWithBooks();                           
-                            Serialization.SerializationInformationAboutBook(books, fullPath);
+                            CommonResources.listBooks.Insert(0, currentBook);
+                            FillLibrary();                           
+                            Serialization.SerializationInformationAboutBook(CommonResources.listBooks, fullPath);
                         }
                         else
                         {
                             MessageBox.Show("Не удалось открыть книгу");
                         }                                             
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         MessageBox.Show("Не удалось открыть книгу");
-                        Serialization.SerializationInformationAboutBook(books, fullPath);
+                        Serialization.SerializationInformationAboutBook(CommonResources.listBooks, fullPath);
                     }
-
-                    
                 }
                 else if (fileName.Contains(".fb2"))
                 {
@@ -157,9 +99,9 @@ namespace Menu
                         currentBook = new FB2Book(path,newFullFileName);
                         if (currentBook != null)
                         {
-                            books.Add(currentBook);
-                            FillWithBooks();
-                            Serialization.SerializationInformationAboutBook(books, fullPath);
+                            CommonResources.listBooks.Insert(0, currentBook);
+                            FillLibrary();
+                            Serialization.SerializationInformationAboutBook(CommonResources.listBooks, fullPath);
                         }
                         else
                         {
@@ -167,13 +109,12 @@ namespace Menu
                         }
                         
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         MessageBox.Show("Не удалось открыть книгу");
                         File.Delete(newFullFileName);
-                        Serialization.SerializationInformationAboutBook(books, fullPath);
+                        Serialization.SerializationInformationAboutBook(CommonResources.listBooks, fullPath);
                     }
-
                 }              
             }
             else
@@ -202,15 +143,25 @@ namespace Menu
             
             if (File.Exists(fileNameSerialize))
             {
-              books =  Serialization.DeserializationLibrary(fileNameSerialize);
+                CommonResources.listBooks =  Serialization.DeserializationLibrary(fileNameSerialize);
             }
-
         }
 
         private void OpenBook(object sender, RoutedEventArgs eventArgs)
         {
-            var openedBook = new OpenedBook(mainWindowViewModel);
+            var openedBook = new OpenedBook();
             openedBook.Show();
+            this.Close();
+        }
+
+        private void RemoveBook(object sender, RoutedEventArgs eventArgs)
+        {
+
+        }
+
+        private void Exit(object sender, RoutedEventArgs eventArgs)
+        {
+            Serialization.SerializationInformationAboutBook(CommonResources.listBooks, fullPath);
             this.Close();
         }
     }

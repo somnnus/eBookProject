@@ -21,38 +21,13 @@ namespace Menu.MainAppPage
     /// </summary>
     public partial class Main : UserControl
     {
-        public Dictionary<string, List<Book>> dictBooks;
-
-        public Delegate del;
-        public Delegate del2;
-        public Delegate delAddBook;
-        public Delegate delOpenBook;
-
-        public void method1()
-        {
-            del.DynamicInvoke();
-        }
-
-        public void method2()
-        {
-            del2.DynamicInvoke();
-        }
-
-        public void method3()
-        {
-            delAddBook.DynamicInvoke();
-        }
-
-        public void method4()
-        {
-            delOpenBook.DynamicInvoke();
-        }
-
-        int currentPage = 0;
+        public int currentPage = 0;
 
         public Main()
         {
             InitializeComponent();
+
+            listBoxBooks.ItemsSource = CommonResources.dictionaryBooks["0"];
         }
 
         private void LeftPageClick(object sender, RoutedEventArgs e)
@@ -60,39 +35,33 @@ namespace Menu.MainAppPage
             if (currentPage > 0)
             {
                 currentPage--;
-                listBoxBooks.ItemsSource = dictBooks[currentPage.ToString()];
+                listBoxBooks.ItemsSource = CommonResources.dictionaryBooks[currentPage.ToString()];
             }
         }
 
         private void RightPageClick(object sender, RoutedEventArgs e)
         {
-            if ((currentPage + 1) < dictBooks.Count)
+            if ((currentPage + 1) < CommonResources.dictionaryBooks.Count)
             {
                 currentPage++;
-                listBoxBooks.ItemsSource = dictBooks[currentPage.ToString()];
+                listBoxBooks.ItemsSource = CommonResources.dictionaryBooks[currentPage.ToString()];
             }
-        }
-
-        public void OpenLibraryPage(object sender, RoutedEventArgs args)
-        {
-            method1();
-        }
-
-        private void ExitClick(object sender, RoutedEventArgs e)
-        {
-            method2();
-        }
-
-        private void AddBook_Click(object sender, RoutedEventArgs e)
-        {
-            method3();
         }
 
         private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount >= 1)
             {
-                method4();
+                var openedBook = new OpenedBook();
+                openedBook.Show();
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window is MainWindow)
+                    {
+                        window.Close();
+                        break;
+                    }
+                }
             }
         }
     }

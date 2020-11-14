@@ -6,9 +6,9 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:lib="clr-namespace:Menu.LibraryPage"
              xmlns:local1="clr-namespace:Menu"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="700" d:DesignWidth="1150"
-             PreviewMouseWheel="DoPreviewingMouseWheel" MinWidth="1150"
+             PreviewMouseWheel="DoPreviewingMouseWheel"
              d:DataContext="{d:DesignInstance lib:LibraryViewModel,
                                          IsDesignTimeCreatable=True}">
     <UserControl.Resources>
@@ -19,7 +19,7 @@
         </ControlTemplate>
     </UserControl.Resources>
     <Grid Margin="40">
-        <DataGrid x:Name="dataGridLib" Background="{StaticResource clBr}" ItemsSource="{Binding dictBooks}" AutoGenerateColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
+        <DataGrid x:Name="dataGridLib" Background="{StaticResource clBr}" AutoGenerateColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="keyTextColumn" Binding="{Binding Key}" Width="auto">
                     <DataGridTextColumn.ElementStyle>
@@ -30,6 +30,15 @@
                             <Setter Property="VerticalAlignment" Value="Center" />
                         </Style>
                     </DataGridTextColumn.ElementStyle>
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <ComboBox  Text="Choose Sorting" Focusable="False" IsEditable="True" IsReadOnly="True" Width="150" SelectionChanged="ComboBox_Selected">
+                                <TextBlock>Sorted By Author</TextBlock>
+                                <TextBlock>Sorted By Title</TextBlock>
+                                <TextBlock>Sorted By Date</TextBlock>
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
                 </DataGridTextColumn>
                 <DataGridTemplateColumn Width="4*" HeaderStyle="{StaticResource Headings}">
                     <DataGridTemplateColumn.HeaderTemplate>
@@ -39,7 +48,7 @@
                                 <StackPanel Margin="0,0,10,0" DockPanel.Dock="Right" Width="200" Orientation="Horizontal" Background="#FFDEC3A7" HorizontalAlignment="Right">
                                     <TextBox materialDesign:HintAssist.Hint="Search..." Width="150" VerticalAlignment="Center" FontSize="16" HorizontalAlignment="Stretch" Background="Transparent"/>
                                     <Button Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Width="50">
-                                        <!--<Image Source="images/searchLabel.png"/>-->
+                                        <Image Source="/images/searchLabel.png"/>
                                     </Button>
                                 </StackPanel>
                             </DockPanel>
