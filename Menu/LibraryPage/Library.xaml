@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:lib="clr-namespace:Menu.LibraryPage"
+             xmlns:res="clr-namespace:Menu.SharedResources"
              xmlns:local1="clr-namespace:Menu"
              mc:Ignorable="d"
              d:DesignHeight="700" d:DesignWidth="1150"
@@ -19,7 +20,7 @@
         </ControlTemplate>
     </UserControl.Resources>
     <Grid Margin="40">
-        <DataGrid x:Name="dataGridLib" Background="{StaticResource clBr}" AutoGenerateColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
+        <DataGrid x:Name="dataGridLib" ItemsSource="{Binding Path=DataContext.CurrentDictionary, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Background="{StaticResource clBr}" AutoGenerateColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="keyTextColumn" Binding="{Binding Key}" Width="auto">
                     <DataGridTextColumn.ElementStyle>
@@ -44,7 +45,7 @@
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <DockPanel>
-                                <TextBlock DockPanel.Dock="Left" Text="{Binding Path=DataContext.LastSortingFeature, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                                <!--<TextBlock DockPanel.Dock="Left" Text="{Binding Path=DataContext.LastSortingFeature, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>-->
                                 <StackPanel Margin="0,0,10,0" DockPanel.Dock="Right" Width="200" Orientation="Horizontal" Background="#FFDEC3A7" HorizontalAlignment="Right">
                                     <TextBox materialDesign:HintAssist.Hint="Search..." Width="150" VerticalAlignment="Center" FontSize="16" HorizontalAlignment="Stretch" Background="Transparent"/>
                                     <Button Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Width="50">

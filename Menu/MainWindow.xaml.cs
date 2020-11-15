@@ -18,6 +18,7 @@ using System.IO;
 using System.Windows.Threading;
 using Microsoft.Win32;
 using eBdb.EpubReader;
+using Menu.SharedResources;
 
 namespace Menu
 {
@@ -26,7 +27,6 @@ namespace Menu
     /// </summary>
     public partial class MainWindow : Window
     {
-       
         static string fullPath = AppDomain.CurrentDomain.BaseDirectory+"Library";
         static string coverPath = fullPath + "\\" + "Covers";
 
@@ -34,26 +34,27 @@ namespace Menu
         {
             InitializeComponent();
 
-            CommonResources.mainWindowViewModel = mainWindowVM;
+            ResourcesProvider.Current.MainWindowVM = mainWindowVM;
             DataContext = mainWindowVM;
 
             CreateHiddenDirectory();
             CheckSerializization();
 
             FillLibrary(); //обработка постраничного вывода
+            
         }
 
         public void FillLibrary()
         {
-            if (CommonResources.listBooks.Count != 0)
+            if (ResourcesProvider.Current.ListBooks.Count != 0)
             {
                 int blocksCount = 6;
-                CommonResources.booksByPages = new Dictionary<string, List<Book>>();
-                CommonResources.booksByPages = ArrayHelperExtensions.SplitByBlocks(CommonResources.listBooks, CommonResources.booksByPages, blocksCount);
+                ResourcesProvider.Current.BooksByPages = new Dictionary<string, List<Book>>();
+                ResourcesProvider.Current.BooksByPages = ArrayHelperExtensions.SplitByBlocks(ResourcesProvider.Current.ListBooks, ResourcesProvider.Current.BooksByPages, blocksCount);
             }
         }
 
-        public void AddBook(object sender, RoutedEventArgs eventArgs)
+        public void AddBook(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog();
             dialog.Filter = "Книги (*.epub, *.fb2)|*.epub;*.fb2";
@@ -76,10 +77,11 @@ namespace Menu
                         Book currentBook = null;                      
                         currentBook = new EpubBook(path,newFullFileName);
                         if (currentBook != null)
-                        {                            
-                            CommonResources.listBooks.Insert(0, currentBook);
-                            FillLibrary();                           
-                            Serialization.SerializationInformationAboutBook(CommonResources.listBooks, fullPath);
+                        {
+                            ResourcesProvider.Current.ListBooks.Insert(0, currentBook);
+                            RefreshPages();
+
+                            Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
                         }
                         else
                         {
@@ -89,7 +91,7 @@ namespace Menu
                     catch (Exception)
                     {
                         MessageBox.Show("Не удалось открыть книгу");
-                        Serialization.SerializationInformationAboutBook(CommonResources.listBooks, fullPath);
+                        Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
                     }
                 }
                 else if (fileName.Contains(".fb2"))
@@ -100,9 +102,10 @@ namespace Menu
                         currentBook = new FB2Book(path,newFullFileName);
                         if (currentBook != null)
                         {
-                            CommonResources.listBooks.Insert(0, currentBook);
-                            FillLibrary();
-                            Serialization.SerializationInformationAboutBook(CommonResources.listBooks, fullPath);
+                            ResourcesProvider.Current.ListBooks.Insert(0, currentBook);
+                            RefreshPages();
+
+                            Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
                         }
                         else
                         {
@@ -114,13 +117,37 @@ namespace Menu
                     {
                         MessageBox.Show("Не удалось открыть книгу");
                         File.Delete(newFullFileName);
-                        Serialization.SerializationInformationAboutBook(CommonResources.listBooks, fullPath);
+                        Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
                     }
                 }              
             }
             else
             {
                 MessageBox.Show("Эта книга уже есть в библиотеке!");
+            }
+        }
+
+        private void RefreshPages() //динамическое отображение
+        {
+            FillLibrary();
+
+            //динамическая сортировка
+            SortByAuthor();
+            SortByTitle();
+            SortByDate();
+
+            if (ResourcesProvider.Current.LastSortingFeature == "Sorted By Author")
+            {
+                ResourcesProvider.Current.CurrentDictionary = ResourcesProvider.Current.SortedByAuthor;
+            }
+            if (ResourcesProvider.Current.LastSortingFeature == "Sorted By Title")
+            {
+                ResourcesProvider.Current.CurrentDictionary = ResourcesProvider.Current.SortedByTitle;
+            }
+            else
+            if (ResourcesProvider.Current.LastSortingFeature == "Sorted By Date")
+            {
+                ResourcesProvider.Current.CurrentDictionary = ResourcesProvider.Current.SortedByDate;
             }
         }
 
@@ -144,45 +171,83 @@ namespace Menu
             
             if (File.Exists(fileNameSerialize))
             {
-                CommonResources.listBooks =  Serialization.DeserializationLibrary(fileNameSerialize);
+                ResourcesProvider.Current.ListBooks =  Serialization.DeserializationLibrary(fileNameSerialize);
+
+                //динамическая сортировка
+                SortByAuthor();
+                SortByTitle();
+                SortByDate();
             }
         }
 
-        private void OpenLastBook(object sender, RoutedEventArgs eventArgs)
+        private void OpenBook(object sender, RoutedEventArgs e)
         {
-            string fileNameSerialazeLastBook = fullPath + "\\" + "last.xml";
-            Book current = null;
-            if (File.Exists(fileNameSerialazeLastBook))
-            {
-                current = Serialization.DeserializationLastBook(fileNameSerialazeLastBook);
-                var openedBook = new OpenedBook(current);
-                openedBook.Show();
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Nothing");
-            }
+            var book = new Book();
+            var openedBook = new OpenedBook(book);
+            openedBook.Show();
+            this.Close();
+        }
 
+        private void RemoveBook(object sender, RoutedEventArgs e)
+        {
 
-            }
-        //private void OpenBook(object sender, RoutedEventArgs eventArgs)
+        }
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
+            this.Close();
+        }
+
+        private void SortByAuthor()
+        {
+            ResourcesProvider.Current.ListBooks.Sort(new AuthorComparer());
+            ResourcesProvider.Current.SortedByAuthor = new Dictionary<string, List<Book>>();
+            ResourcesProvider.Current.SortedByAuthor = ArrayHelperExtensions.SplitByAuthor(ResourcesProvider.Current.ListBooks, ResourcesProvider.Current.SortedByAuthor);
+        }
+
+        private void SortByTitle()
+        {
+            ResourcesProvider.Current.ListBooks.Sort(new NameComparer());
+            ResourcesProvider.Current.SortedByTitle = new Dictionary<string, List<Book>>();
+            ResourcesProvider.Current.SortedByTitle = ArrayHelperExtensions.SplitByBookName(ResourcesProvider.Current.ListBooks, ResourcesProvider.Current.SortedByTitle);
+        }
+
+        private void SortByDate()
+        {
+            ResourcesProvider.Current.ListBooks.Sort(new DateComparer());
+            ResourcesProvider.Current.SortedByDate = new Dictionary<string, List<Book>>();
+            ResourcesProvider.Current.SortedByDate = ArrayHelperExtensions.SplitByDate(ResourcesProvider.Current.ListBooks, ResourcesProvider.Current.SortedByDate);
+        }
+
+        //private void RefreshDict()
         //{
-        //    Book current = null;
-        //    var openedBook = new OpenedBook(current);
-        //    openedBook.Show();
-        //    this.Close();
+        //    dataGridLib.ItemsSource = ResourcesProvider.Current.SortedBooks;
+        //    //CollectionViewSource.GetDefaultView(lastSortingFeature).Refresh();
         //}
 
-        private void RemoveBook(object sender, RoutedEventArgs eventArgs)
+        class AuthorComparer : IComparer<Book>
         {
-
+            public int Compare(Book book1, Book book2)
+            {
+                return book1.Author.CompareTo(book2.Author);
+            }
         }
 
-        private void Exit(object sender, RoutedEventArgs eventArgs)
+        class NameComparer : IComparer<Book>
         {
-            Serialization.SerializationInformationAboutBook(CommonResources.listBooks, fullPath);
-            this.Close();
+            public int Compare(Book book1, Book book2)
+            {
+                return book1.Title.CompareTo(book2.Title);
+            }
+        }
+
+        class DateComparer : IComparer<Book>
+        {
+            public int Compare(Book book1, Book book2)
+            {
+                return book1.Date.CompareTo(book2.Date);
+            }
         }
     }
 }
