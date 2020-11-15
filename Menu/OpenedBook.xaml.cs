@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using LibraryReader.Books;
+using LibraryReader;
 
 namespace Menu
 {
@@ -19,9 +21,11 @@ namespace Menu
     /// </summary>
     public partial class OpenedBook : Window
     {
-        public OpenedBook()
+        Book currentBook;
+        public OpenedBook(Book current)
         {
             InitializeComponent();
+            currentBook = current;
         }
 
         private void OpenMenu(object sender, RoutedEventArgs routedEventArgs)
