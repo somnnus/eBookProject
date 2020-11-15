@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using LibraryReader.Books;
 using LibraryReader;
+using Menu.SharedResources;
 
 namespace Menu
 {
@@ -30,7 +31,7 @@ namespace Menu
 
         private void OpenMenu(object sender, RoutedEventArgs routedEventArgs)
         {
-            var menuWindow = new MainWindow(CommonResources.mainWindowViewModel);
+            var menuWindow = new MainWindow(ResourcesProvider.Current.MainWindowVM);
             menuWindow.Show();
             this.Close();
         }

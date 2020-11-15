@@ -111,6 +111,8 @@
     <Compile Include="OpenedBook.xaml.cs">
       <DependentUpon>OpenedBook.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SharedResources\Resources.cs" />
+    <Compile Include="SharedResources\ResourcesProvider.cs" />
     <Compile Include="SizePercentageConverter.cs" />
     <Page Include="LibraryPage\Library.xaml">
       <SubType>Designer</SubType>

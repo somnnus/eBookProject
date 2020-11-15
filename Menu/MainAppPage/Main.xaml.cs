@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Menu.SharedResources;
 
 namespace Menu.MainAppPage
 {
@@ -27,9 +28,10 @@ namespace Menu.MainAppPage
         {
             InitializeComponent();
 
-            if (CommonResources.booksByPages.Count != 0)
+            DataContext = ResourcesProvider.Current;
+            if (ResourcesProvider.Current.BooksByPages.Count != 0)
             {
-                listBoxBooks.ItemsSource = CommonResources.booksByPages["0"];
+                //listBoxBooks.ItemsSource = ResourcesProvider.Current.BooksByPages["0"];
             }
         }
 
@@ -38,16 +40,16 @@ namespace Menu.MainAppPage
             if (currentPage > 0)
             {
                 currentPage--;
-                listBoxBooks.ItemsSource = CommonResources.booksByPages[currentPage.ToString()];
+                //listBoxBooks.ItemsSource = ResourcesProvider.Current.BooksByPages[currentPage.ToString()];
             }
         }
 
         private void RightPageClick(object sender, RoutedEventArgs e)
         {
-            if ((currentPage + 1) < CommonResources.booksByPages.Count)
+            if ((currentPage + 1) < ResourcesProvider.Current.BooksByPages.Count)
             {
                 currentPage++;
-                listBoxBooks.ItemsSource = CommonResources.booksByPages[currentPage.ToString()];
+                //listBoxBooks.ItemsSource = ResourcesProvider.Current.BooksByPages[currentPage.ToString()];
             }
         }
 

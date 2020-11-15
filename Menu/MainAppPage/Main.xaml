@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:main="clr-namespace:Menu.MainAppPage"
              xmlns:local1="clr-namespace:Menu"
+             xmlns:res="clr-namespace:Menu.SharedResources"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1150"
              d:DataContext="{d:DesignInstance main:MainViewModel,
@@ -42,7 +43,7 @@
                     </Label>
                 </Grid>
                 <Grid Name="libraryGrid">
-                    <ListBox x:Name="listBoxBooks" HorizontalAlignment="Stretch" VerticalAlignment="Center"  Background="{StaticResource clBr}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <ListBox x:Name="listBoxBooks" ItemsSource="{Binding BooksByPages[currentPage], UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" VerticalAlignment="Center"  Background="{StaticResource clBr}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel MouseDown="StackPanel_MouseDown" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">

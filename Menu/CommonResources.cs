@@ -1,6 +1,7 @@
 ﻿using LibraryReader.Books;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace Menu
         public static Dictionary<string, List<Book>> booksByPages;
         public static Dictionary<string, List<Book>> dictionaryBooks;
         public static List<Book> listBooks;
-
+        
         static CommonResources()
         {
             booksByPages = new Dictionary<string, List<Book>>();
