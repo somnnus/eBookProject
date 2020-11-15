@@ -31,6 +31,12 @@ namespace Menu.LibraryPage
             lastSortingFeature = "";
 
             InitializeComponent();
+            if (CommonResources.listBooks.Count != 0)
+            {
+                SortByDate();
+            }
+            else
+                MessageBox.Show("Library is empty!");
             dataGridLib.ItemsSource = CommonResources.dictionaryBooks;
         }
 
@@ -60,20 +66,25 @@ namespace Menu.LibraryPage
         {
             ComboBox comboBox = (ComboBox)sender;
             var selectedFeature = (TextBlock)comboBox.SelectedItem;
-            if (selectedFeature.Text == "Sorted By Author")
+            if (CommonResources.listBooks.Count != 0)
             {
-                SortByAuthor();
+                if (selectedFeature.Text == "Sorted By Author")
+                {
+                    SortByAuthor();
+                }
+                else
+                if (selectedFeature.Text == "Sorted By Title")
+                {
+                    SortByName();
+                }
+                else
+                if (selectedFeature.Text == "Sorted By Date")
+                {
+                    SortByDate();
+                }
             }
             else
-            if (selectedFeature.Text == "Sorted By Title")
-            {
-                SortByName();
-            }
-            else
-            if (selectedFeature.Text == "Sorted By Date")
-            {
-                SortByDate();
-            }
+                MessageBox.Show("Library is empty!");
         }
 
         private void SortByAuthor()

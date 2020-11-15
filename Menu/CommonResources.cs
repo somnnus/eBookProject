@@ -10,14 +10,14 @@ namespace Menu
     public static class CommonResources
     {
         public static MainWindowViewModel mainWindowViewModel;
-
-
-        //СДЕЛАТЬ ОТДЕЛЬНЫЙ СЛОВАРЬ ДЛЯ ПОСТРАНИЧНОГО ВЫВОДА, например, booksByPages
+        
+        public static Dictionary<string, List<Book>> booksByPages;
         public static Dictionary<string, List<Book>> dictionaryBooks;
         public static List<Book> listBooks;
 
         static CommonResources()
         {
+            booksByPages = new Dictionary<string, List<Book>>();
             dictionaryBooks = new Dictionary<string, List<Book>>();
             listBooks = new List<Book>();
         }
