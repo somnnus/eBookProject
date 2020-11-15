@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using LibraryReader.Books;
 using LibraryReader;
+using System.Threading;
 
 namespace Menu
 {
@@ -22,11 +23,14 @@ namespace Menu
     public partial class OpenedBook : Window
     {
         Book currentBook;
+        Paragraph paragraphHigh = new Paragraph();
         public OpenedBook(Book current)
         {
             InitializeComponent();
             currentBook = current;
             DisplayBook();
+            GoToPage(new object(), new RoutedEventArgs());
+
         }
 
         public void DisplayBook()
@@ -34,18 +38,35 @@ namespace Menu
             flowDocument.Document = null;
             Paragraph paragraph = new Paragraph();
             string text = currentBook.ReturnContent();
-            paragraph.Inlines.Add(text);
+            paragraphHigh.Inlines.Add(text);
             
-            FlowDocument document = new FlowDocument(paragraph);
+            FlowDocument document = new FlowDocument(paragraphHigh);
 
             document.FontSize = 16;
-          //  document.ColumnRuleWidth = border.ActualWidth/2;
-            document.ColumnRuleWidth= grid.ActualWidth/3; //3 свойства для изменения колонок! 2- одна колонка, 3 - две колонки, 4 - три колонки
+            //  document.ColumnRuleWidth = border.ActualWidth/2;
+            document.ColumnWidth = 250;//3 свойства для изменения колонок! 2- одна колонка, 3 - две колонки, 4 - три колонки
             document.ColumnGap = 20;
 
-            flowDocument.Document = document;
-        }
 
+            flowDocument.Document = document;
+            
+        }
+        private void GoToPage(object sender,RoutedEventArgs routedEventArgs)
+        {
+            flowDocument.GoToPage(10);
+        }
+    
+        private void SliderChange(object sender,RoutedPropertyChangedEventArgs<double> e)
+        {
+            ((Slider)sender).SelectionEnd = e.NewValue;
+           
+            FlowDocument document = new FlowDocument(paragraphHigh);
+            document.FontSize = 16;
+            document.ColumnWidth = e.NewValue;
+            document.ColumnGap = 20;
+            flowDocument.Document = document;
+
+        }
         private void OpenMenu(object sender, RoutedEventArgs routedEventArgs)
         {
             var menuWindow = new MainWindow(CommonResources.mainWindowViewModel);
