@@ -57,7 +57,7 @@ namespace Menu.MainAppPage
             {
                 StackPanel stackPanel = (StackPanel)sender;
                 Book current = (Book)stackPanel.DataContext;
-                var openedBook = new OpenedBook();
+                var openedBook = new OpenedBook(current);
                 openedBook.Show();
                 foreach (Window window in Application.Current.Windows)
                 {
