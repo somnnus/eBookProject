@@ -7,6 +7,16 @@
         mc:Ignorable="d"
         Title="OpenedBook" Height="450" Width="800">
     <Grid>
-        <Button Content="Back to main" Width="500" Click="OpenMenu"/>
+        <Button Content="Back to main" Click="OpenMenu" Margin="0,0,649.6,372" Height="Auto"/>
+        <FlowDocumentPageViewer x:Name="FlowDocReader" Background="#FF8D9597" >
+            <FlowDocumentPageViewer.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.039"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </FlowDocumentPageViewer.RenderTransform>
+        </FlowDocumentPageViewer>
     </Grid>
 </Window>

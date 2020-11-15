@@ -52,6 +52,8 @@ namespace Menu.MainAppPage
         {
             if (e.ClickCount >= 1)
             {
+                StackPanel stackPanel = (StackPanel)sender;
+                Book current = (Book)stackPanel.DataContext;
                 var openedBook = new OpenedBook();
                 openedBook.Show();
                 foreach (Window window in Application.Current.Windows)
