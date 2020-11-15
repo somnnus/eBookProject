@@ -35,6 +35,10 @@ namespace LibraryReader.Books
             return returnImage;
         }
 
+        public virtual string ReturnContent()
+        {
+            return null;
+        }
         
     }
 }

@@ -149,7 +149,8 @@ namespace Menu
 
         private void OpenBook(object sender, RoutedEventArgs eventArgs)
         {
-            var openedBook = new OpenedBook();
+            Book current = null;
+            var openedBook = new OpenedBook(current);
             openedBook.Show();
             this.Close();
         }

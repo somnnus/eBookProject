@@ -26,6 +26,24 @@ namespace Menu
         {
             InitializeComponent();
             currentBook = current;
+            DisplayBook();
+        }
+
+        public void DisplayBook()
+        {
+            flowDocument.Document = null;
+            Paragraph paragraph = new Paragraph();
+            string text = currentBook.ReturnContent();
+            paragraph.Inlines.Add(text);
+            
+            FlowDocument document = new FlowDocument(paragraph);
+
+            document.FontSize = 16;
+          //  document.ColumnRuleWidth = border.ActualWidth/2;
+            document.ColumnRuleWidth= grid.ActualWidth/3; //3 свойства для изменения колонок! 2- одна колонка, 3 - две колонки, 4 - три колонки
+            document.ColumnGap = 20;
+
+            flowDocument.Document = document;
         }
 
         private void OpenMenu(object sender, RoutedEventArgs routedEventArgs)
