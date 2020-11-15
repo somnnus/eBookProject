@@ -6,8 +6,20 @@
         xmlns:local="clr-namespace:Menu"
         mc:Ignorable="d"
         Title="OpenedBook" Height="450" Width="800">
+    <Window.Resources>
+        <ControlTemplate x:Key="ArrowLeft">
+            <Path Width="30" Height="{TemplateBinding Height}" Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z" Stretch="Uniform" Fill="#FF7C2989" RenderTransformOrigin="0.5,0.5"/>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid>
-        <Button Content="Back to main" Click="OpenMenu" Margin="0,0,649.6,372" Height="Auto"/>
+        <Grid Width="40" HorizontalAlignment="Left">
+            <Label Name="labelArrowLeft" 
+                           Width="auto">
+                <Hyperlink TextDecorations="None" Click="OpenMenu">
+                    <ContentControl Template="{StaticResource ArrowLeft}"/>
+                </Hyperlink>
+            </Label>
+        </Grid>
         <FlowDocumentPageViewer x:Name="FlowDocReader" Background="#FF8D9597" >
             <FlowDocumentPageViewer.RenderTransform>
                 <TransformGroup>
