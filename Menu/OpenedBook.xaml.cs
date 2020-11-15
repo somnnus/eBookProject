@@ -23,6 +23,7 @@ namespace Menu
     public partial class OpenedBook : Window
     {
         Book currentBook;
+        private double columnWidth; 
         Paragraph paragraphHigh = new Paragraph();
         public OpenedBook(Book current)
         {
@@ -45,6 +46,7 @@ namespace Menu
             document.FontSize = 16;
             //  document.ColumnRuleWidth = border.ActualWidth/2;
             document.ColumnWidth = 250;//3 свойства для изменения колонок! 2- одна колонка, 3 - две колонки, 4 - три колонки
+            columnWidth = 250;
             document.ColumnGap = 20;
 
 
@@ -55,7 +57,22 @@ namespace Menu
         {
             flowDocument.GoToPage(10);
         }
-    
+        private void CreateBookmark(object sender,RoutedEventArgs routedEventArgs)
+        {
+            Bookmark mark = new Bookmark();
+            mark.NumberPage = flowDocument.MasterPageNumber;
+            mark.FrontSize = flowDocument.FontSize;
+            mark.ColumnWidth = columnWidth;
+            currentBook.AddBookmark(mark);
+        }
+        private void OpenBookmark(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (currentBook.bookmarks.Count!=0)
+            {
+                flowDocument.GoToPage(currentBook.bookmarks[0].NumberPage);
+            }
+        }
+
         private void SliderChange(object sender,RoutedPropertyChangedEventArgs<double> e)
         {
             ((Slider)sender).SelectionEnd = e.NewValue;
@@ -63,6 +80,7 @@ namespace Menu
             FlowDocument document = new FlowDocument(paragraphHigh);
             document.FontSize = 16;
             document.ColumnWidth = e.NewValue;
+            columnWidth = e.NewValue;
             document.ColumnGap = 20;
             flowDocument.Document = document;
 

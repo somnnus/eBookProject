@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace LibraryReader.Books
 {
     [Serializable]
-    class Bookmark
+    public class Bookmark
     {
-        public string NumberPage { get; set; }
-        public string FrontSize { get; set; }
-        public string ColumnWidth { get; set; }
+        public int NumberPage { get; set; }
+        public double FrontSize { get; set; }
+        public double ColumnWidth { get; set; }
     }
 }
