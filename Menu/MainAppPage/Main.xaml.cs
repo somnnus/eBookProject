@@ -27,7 +27,10 @@ namespace Menu.MainAppPage
         {
             InitializeComponent();
 
-            listBoxBooks.ItemsSource = CommonResources.dictionaryBooks["0"];
+            if (CommonResources.booksByPages.Count != 0)
+            {
+                listBoxBooks.ItemsSource = CommonResources.booksByPages["0"];
+            }
         }
 
         private void LeftPageClick(object sender, RoutedEventArgs e)
@@ -35,16 +38,16 @@ namespace Menu.MainAppPage
             if (currentPage > 0)
             {
                 currentPage--;
-                listBoxBooks.ItemsSource = CommonResources.dictionaryBooks[currentPage.ToString()];
+                listBoxBooks.ItemsSource = CommonResources.booksByPages[currentPage.ToString()];
             }
         }
 
         private void RightPageClick(object sender, RoutedEventArgs e)
         {
-            if ((currentPage + 1) < CommonResources.dictionaryBooks.Count)
+            if ((currentPage + 1) < CommonResources.booksByPages.Count)
             {
                 currentPage++;
-                listBoxBooks.ItemsSource = CommonResources.dictionaryBooks[currentPage.ToString()];
+                listBoxBooks.ItemsSource = CommonResources.booksByPages[currentPage.ToString()];
             }
         }
 

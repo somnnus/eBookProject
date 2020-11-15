@@ -39,7 +39,7 @@ namespace Menu
             CreateHiddenDirectory();
             CheckSerializization();
 
-            FillLibrary();
+            FillLibrary(); //обработка постраничного вывода
         }
 
         public void FillLibrary()
@@ -47,8 +47,8 @@ namespace Menu
             if (CommonResources.listBooks.Count != 0)
             {
                 int blocksCount = 6;
-                CommonResources.dictionaryBooks = new Dictionary<string, List<Book>>();
-                CommonResources.dictionaryBooks = ArrayHelperExtensions.SplitByBlocks(CommonResources.listBooks, CommonResources.dictionaryBooks, blocksCount);
+                CommonResources.booksByPages = new Dictionary<string, List<Book>>();
+                CommonResources.booksByPages = ArrayHelperExtensions.SplitByBlocks(CommonResources.listBooks, CommonResources.booksByPages, blocksCount);
             }
         }
 

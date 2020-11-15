@@ -32,7 +32,7 @@
                     </DataGridTextColumn.ElementStyle>
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>
-                            <ComboBox  Text="Choose Sorting" Focusable="False" IsEditable="True" IsReadOnly="True" Width="150" SelectionChanged="ComboBox_Selected">
+                            <ComboBox Text="-- Sorted By Date --" Focusable="False" IsEditable="True" IsReadOnly="True" Width="150" SelectionChanged="ComboBox_Selected">
                                 <TextBlock>Sorted By Author</TextBlock>
                                 <TextBlock>Sorted By Title</TextBlock>
                                 <TextBlock>Sorted By Date</TextBlock>
