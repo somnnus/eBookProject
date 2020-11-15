@@ -26,6 +26,7 @@ namespace Menu
     /// </summary>
     public partial class MainWindow : Window
     {
+       
         static string fullPath = AppDomain.CurrentDomain.BaseDirectory+"Library";
         static string coverPath = fullPath + "\\" + "Covers";
 
@@ -147,13 +148,31 @@ namespace Menu
             }
         }
 
-        private void OpenBook(object sender, RoutedEventArgs eventArgs)
+        private void OpenLastBook(object sender, RoutedEventArgs eventArgs)
         {
+            string fileNameSerialazeLastBook = fullPath + "\\" + "last.xml";
             Book current = null;
-            var openedBook = new OpenedBook(current);
-            openedBook.Show();
-            this.Close();
-        }
+            if (File.Exists(fileNameSerialazeLastBook))
+            {
+                current = Serialization.DeserializationLastBook(fileNameSerialazeLastBook);
+                var openedBook = new OpenedBook(current);
+                openedBook.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Nothing");
+            }
+
+
+            }
+        //private void OpenBook(object sender, RoutedEventArgs eventArgs)
+        //{
+        //    Book current = null;
+        //    var openedBook = new OpenedBook(current);
+        //    openedBook.Show();
+        //    this.Close();
+        //}
 
         private void RemoveBook(object sender, RoutedEventArgs eventArgs)
         {

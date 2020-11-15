@@ -22,7 +22,7 @@
                     </Menu.ItemsPanel>
                     <MenuItem Header="Main Page" Command="{Binding MainCommand}"/>
                     <MenuItem Header="Library Page" Command="{Binding LibCommand}"/>
-                    <MenuItem Header="Continue reading" Click="OpenBook"/>
+                    <MenuItem Header="Continue reading" Click="OpenLastBook"/>
                     <MenuItem Header="Edit your library">
                         <MenuItem Header="Add a book" Click="AddBook"/>
                         <MenuItem Header="Remove a book" Click="RemoveBook"/>

@@ -22,6 +22,8 @@ namespace Menu
     /// </summary>
     public partial class OpenedBook : Window
     {
+        string fullPath = AppDomain.CurrentDomain.BaseDirectory + "Library";
+
         Book currentBook;
         private double columnWidth; 
         Paragraph paragraphHigh = new Paragraph();
@@ -30,8 +32,7 @@ namespace Menu
             InitializeComponent();
             currentBook = current;
             DisplayBook();
-            GoToPage(new object(), new RoutedEventArgs());
-
+            Serialization.SerializationLastBook(currentBook, fullPath);
         }
 
         public void DisplayBook()
@@ -48,14 +49,15 @@ namespace Menu
             document.ColumnWidth = 250;//3 свойства для изменения колонок! 2- одна колонка, 3 - две колонки, 4 - три колонки
             columnWidth = 250;
             document.ColumnGap = 20;
-
+            
 
             flowDocument.Document = document;
             
+            
         }
-        private void GoToPage(object sender,RoutedEventArgs routedEventArgs)
+        public void GoToPageMethod()
         {
-            flowDocument.GoToPage(10);
+            flowDocument.GoToPage(3);
         }
         private void CreateBookmark(object sender,RoutedEventArgs routedEventArgs)
         {
@@ -64,12 +66,14 @@ namespace Menu
             mark.FrontSize = flowDocument.FontSize;
             mark.ColumnWidth = columnWidth;
             currentBook.AddBookmark(mark);
+            Serialization.SerializationInformationAboutBook(CommonResources.listBooks, fullPath);
         }
         private void OpenBookmark(object sender, RoutedEventArgs routedEventArgs)
         {
             if (currentBook.bookmarks.Count!=0)
             {
-                flowDocument.GoToPage(currentBook.bookmarks[0].NumberPage);
+              //  flowDocument.GoToPage(currentBook.bookmarks[0].NumberPage);
+                flowDocument.GoToPage(100);
             }
         }
 
@@ -89,7 +93,7 @@ namespace Menu
         {
             var menuWindow = new MainWindow(CommonResources.mainWindowViewModel);
             menuWindow.Show();
-            this.Close();
+            Close();
         }
     }
 }
