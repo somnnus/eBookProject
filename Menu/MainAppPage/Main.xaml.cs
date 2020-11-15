@@ -26,7 +26,7 @@ namespace Menu.MainAppPage
         public Main()
         {
             InitializeComponent();
-
+            
             listBoxBooks.ItemsSource = CommonResources.dictionaryBooks["0"];
         }
 
