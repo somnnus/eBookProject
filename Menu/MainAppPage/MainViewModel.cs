@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Menu.SharedResources;
+using Menu.MainAppPage;
 
 namespace Menu.MainAppPage
 {

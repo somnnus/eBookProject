@@ -14,15 +14,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Menu.SharedResources;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using Menu.Helpers;
 
 namespace Menu.MainAppPage
 {
     /// <summary>
     /// Логика взаимодействия для Main.xaml
     /// </summary>
-    public partial class Main : UserControl
+    public partial class Main : UserControl, INotifyPropertyChanged
     {
         public int currentPage = 0;
+
+        public List<Book> GetCurrentList
+        {
+            get { return ResourcesProvider.Current.BooksByPages[CurrentPage]; }
+        }
 
         public Main()
         {
@@ -35,20 +43,42 @@ namespace Menu.MainAppPage
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public int CurrentPage
+        {
+            get { return currentPage; }
+            set
+            {
+                currentPage = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        protected virtual void NotifyPropertyChanged(
+           [CallerMemberName] String propertyName = "")
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
         private void LeftPageClick(object sender, RoutedEventArgs e)
         {
-            if (currentPage > 0)
+            if (CurrentPage > 0)
             {
-                currentPage--;
+                CurrentPage--;
                 //listBoxBooks.ItemsSource = ResourcesProvider.Current.BooksByPages[currentPage.ToString()];
             }
         }
 
         private void RightPageClick(object sender, RoutedEventArgs e)
         {
-            if ((currentPage + 1) < ResourcesProvider.Current.BooksByPages.Count)
+            if ((CurrentPage + 1) < ResourcesProvider.Current.BooksByPages.Count)
             {
-                currentPage++;
+                CurrentPage++;
                 //listBoxBooks.ItemsSource = ResourcesProvider.Current.BooksByPages[currentPage.ToString()];
             }
         }
@@ -71,5 +101,24 @@ namespace Menu.MainAppPage
                 }
             }
         }
+
+        //private MultiBinding createFieldMultiBinding(string fieldName)
+        //{
+        //    // Create the multi-binding
+        //    MultiBinding mbBinding = new MultiBinding();
+        //    // Create the dictionary binding
+        //    Binding bDictionary = new Binding(ResourcesProvider.Current.BooksByPages);
+        //    bDictionary.Source = this.DataContext;
+        //    // Create the key binding
+        //    Binding bKey = new Binding(fieldName);
+        //    bKey.Source = this.DataContext;
+        //    // Set the multi-binding converter
+        //    mbBinding.Converter = new DictionaryItemConverter();
+        //    // Add the bindings to the multi-binding
+        //    mbBinding.Bindings.Add(bDictionary);
+        //    mbBinding.Bindings.Add(bKey);
+
+        //    return mbBinding;
+        //}
     }
 }

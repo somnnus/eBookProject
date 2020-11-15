@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:main="clr-namespace:Menu.MainAppPage"
-             xmlns:local1="clr-namespace:Menu"
+             xmlns:local="clr-namespace:Menu"
+             xmlns:helper="clr-namespace:Menu.Helpers"
              xmlns:res="clr-namespace:Menu.SharedResources"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1150"
@@ -18,7 +19,7 @@
         <ControlTemplate x:Key="ArrowLeft">
             <Path Width="30" Height="{TemplateBinding Height}" Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z" Stretch="Uniform" Fill="#FFFFFFFF" RenderTransformOrigin="0.5,0.5"/>
         </ControlTemplate>
-        <local1:SizePercentageConverter x:Key="PercentageConverter"/>
+        <local:SizePercentageConverter x:Key="PercentageConverter"/>
     </UserControl.Resources>
     <Grid>
         <DockPanel Margin="40" Background="{StaticResource clBr}">
@@ -43,7 +44,16 @@
                     </Label>
                 </Grid>
                 <Grid Name="libraryGrid">
-                    <ListBox x:Name="listBoxBooks" ItemsSource="{Binding BooksByPages[currentPage], UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" VerticalAlignment="Center"  Background="{StaticResource clBr}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <ListBox x:Name="listBoxBooks" HorizontalAlignment="Stretch" VerticalAlignment="Center"  Background="{StaticResource clBr}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                        <ListBox.ItemsSource>
+                            <MultiBinding>
+                                <MultiBinding.Converter>
+                                    <helper:DictionaryItemConverter/>
+                                </MultiBinding.Converter>
+                                <Binding Path="DataContext.BooksByPages" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type UserControl}}"/>
+                                <Binding Path="CurrentPage" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type UserControl}}"/>
+                            </MultiBinding>
+                        </ListBox.ItemsSource>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel MouseDown="StackPanel_MouseDown" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">

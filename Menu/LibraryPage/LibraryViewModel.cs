@@ -10,9 +10,5 @@ namespace Menu.LibraryPage
 {
     public class LibraryViewModel: ViewModelBase
     {
-        public Resources Current
-        {
-            get { return ResourcesProvider.Current; }
-        }
     }
 }

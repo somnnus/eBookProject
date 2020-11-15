@@ -15,7 +15,7 @@ namespace Menu.SharedResources
 
         private string lastSortingFeature;
         private Dictionary<string, List<Book>> currentDictionary;
-        private Dictionary<string, List<Book>> booksByPages;
+        private Dictionary<int, List<Book>> booksByPages;
         private Dictionary<string, List<Book>> sortedByAuthor;
         private Dictionary<string, List<Book>> sortedByTitle;
         private Dictionary<string, List<Book>> sortedByDate;
@@ -23,7 +23,7 @@ namespace Menu.SharedResources
 
         public Resources()
         {
-            booksByPages = new Dictionary<string, List<Book>>();
+            booksByPages = new Dictionary<int, List<Book>>();
             sortedByAuthor = new Dictionary<string, List<Book>>();
             sortedByTitle = new Dictionary<string, List<Book>>();
             sortedByDate = new Dictionary<string, List<Book>>();
@@ -61,7 +61,7 @@ namespace Menu.SharedResources
             }
         }
 
-        public Dictionary<string, List<Book>> BooksByPages
+        public Dictionary<int, List<Book>> BooksByPages
         {
             get { return booksByPages; }
             set

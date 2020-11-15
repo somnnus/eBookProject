@@ -9,13 +9,13 @@ namespace Menu
 {
     public static class ArrayHelperExtensions
     {
-        public static Dictionary<string, List<Book>> SplitByBlocks(List<Book> array, Dictionary<string, List<Book>> dictKeys, int size)
+        public static Dictionary<int, List<Book>> SplitByBlocks(List<Book> array, Dictionary<int, List<Book>> dictKeys, int size)
         {
             for (var i = 0; i < (float)array.Count/ size; i++)
             {
                 foreach (var item in array.Skip(i * size).Take(size))
                 {
-                    var num = i.ToString();
+                    var num = i;
                     if (dictKeys.ContainsKey(num))
                     {
                         dictKeys[num].Add(item);

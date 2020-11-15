@@ -49,7 +49,7 @@ namespace Menu
             if (ResourcesProvider.Current.ListBooks.Count != 0)
             {
                 int blocksCount = 6;
-                ResourcesProvider.Current.BooksByPages = new Dictionary<string, List<Book>>();
+                ResourcesProvider.Current.BooksByPages = new Dictionary<int, List<Book>>();
                 ResourcesProvider.Current.BooksByPages = ArrayHelperExtensions.SplitByBlocks(ResourcesProvider.Current.ListBooks, ResourcesProvider.Current.BooksByPages, blocksCount);
             }
         }
