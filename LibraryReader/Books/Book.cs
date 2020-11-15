@@ -12,7 +12,7 @@ namespace LibraryReader.Books
     [Serializable]
     public class Book
     {
-        List<Bookmark> bookmarks = new List<Bookmark>();
+        public List<Bookmark> bookmarks = new List<Bookmark>();
 
         public string Title { get; set; }
         public string Author { get; set; }
@@ -35,6 +35,15 @@ namespace LibraryReader.Books
             return returnImage;
         }
 
+        public virtual string ReturnContent()
+        {
+            return null;
+        }
+
+        public void AddBookmark(Bookmark mark)
+        {
+            bookmarks.Add(mark);
+        }
         
     }
 }

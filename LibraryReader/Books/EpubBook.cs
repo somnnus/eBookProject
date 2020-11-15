@@ -15,7 +15,6 @@ namespace LibraryReader.Books
     public class EpubBook : Book
     {
         Epub epubBook;
-
         public EpubBook()
         {
 
@@ -30,14 +29,11 @@ namespace LibraryReader.Books
                 FontSize = 16;
                 Date = DateTime.Now;
                 CoverPath = GetCoverPath();
-                
+               
 
         }
 
-        public string GetContentAsHtml()
-        {
-            return epubBook.GetContentAsHtml();
-        }
+      
         public string GetContentAsString(string content)
         {
             Match m = Regex.Match(content, @"<body[^>]*>.+</body>", Utils.REO_csi);
@@ -83,7 +79,12 @@ namespace LibraryReader.Books
             buf = System.Net.WebUtility.HtmlDecode(buf);
             return buf;
         }
-       
-    
+
+        public override string ReturnContent()
+        {
+            epubBook = new Epub(FullPath);
+            string text = epubBook.GetContentAsHtml();
+            return HtmlToPlainText(text);
+        }           
     }
 }
