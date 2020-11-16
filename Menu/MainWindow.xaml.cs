@@ -188,6 +188,11 @@ namespace Menu
             this.Close();
         }
 
+        private void OpenLastBook(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void RemoveBook(object sender, RoutedEventArgs e)
         {
 
@@ -246,7 +251,13 @@ namespace Menu
         {
             public int Compare(Book book1, Book book2)
             {
-                return book1.Date.CompareTo(book2.Date);
+                if (book1.Date.CompareTo(book2.Date) == 1)
+                    return -1;
+                else
+                if (book1.Date.CompareTo(book2.Date) == -1)
+                    return 1;
+                else
+                    return 0;
             }
         }
     }

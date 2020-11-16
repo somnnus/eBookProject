@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using LibraryReader.Books;
 using LibraryReader;
 using System.Threading;
+using Menu.SharedResources;
 
 namespace Menu
 {
@@ -66,7 +67,7 @@ namespace Menu
             mark.FrontSize = flowDocument.FontSize;
             mark.ColumnWidth = columnWidth;
             currentBook.AddBookmark(mark);
-            Serialization.SerializationInformationAboutBook(CommonResources.listBooks, fullPath);
+            Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
         }
         private void OpenBookmark(object sender, RoutedEventArgs routedEventArgs)
         {
@@ -91,7 +92,7 @@ namespace Menu
         }
         private void OpenMenu(object sender, RoutedEventArgs routedEventArgs)
         {
-            var menuWindow = new MainWindow(CommonResources.mainWindowViewModel);
+            var menuWindow = new MainWindow(ResourcesProvider.Current.MainWindowVM);
             menuWindow.Show();
             Close();
         }

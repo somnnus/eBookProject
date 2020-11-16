@@ -98,7 +98,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CommonResources.cs" />
     <Compile Include="Helpers\DictionaryItemConverter.cs" />
     <Compile Include="LibraryPage\Library.xaml.cs">
       <DependentUpon>Library.xaml</DependentUpon>

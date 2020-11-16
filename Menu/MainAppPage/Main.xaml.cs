@@ -28,11 +28,6 @@ namespace Menu.MainAppPage
     {
         public int currentPage = 0;
 
-        public List<Book> GetCurrentList
-        {
-            get { return ResourcesProvider.Current.BooksByPages[CurrentPage]; }
-        }
-
         public Main()
         {
             InitializeComponent();
