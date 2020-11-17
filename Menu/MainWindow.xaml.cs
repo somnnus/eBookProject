@@ -29,6 +29,7 @@ namespace Menu
     {
         static string fullPath = AppDomain.CurrentDomain.BaseDirectory+"Library";
         static string coverPath = fullPath + "\\" + "Covers";
+       
 
         public MainWindow(MainWindowViewModel mainWindowVM)
         {

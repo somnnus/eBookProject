@@ -51,7 +51,13 @@ namespace LibraryReader.Books
                 image.Save(coverPath, System.Drawing.Imaging.ImageFormat.Jpeg);
                 return coverPath;
             }
-            else return null;
+            else
+            {
+                
+                return null;
+
+                   
+            }
                       
         }
 

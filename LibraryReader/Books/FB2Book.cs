@@ -4,10 +4,12 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using eBdb.EpubReader;
 using FB2Library;
 
 namespace LibraryReader.Books
@@ -57,6 +59,11 @@ namespace LibraryReader.Books
             //string str = sw.ToString();
 
         }
+        public static string GetContentAsTitle(string Content)
+        {
+            Match m = Regex.Match(Content, @"<title[^>]*>.+</title>", Utils.REO_csi);
+            return m.Success ? Utils.ClearText(m.Value) : "";
+        }
         private string GetCoverPath()
         {
             Random rnd = new Random();
@@ -76,6 +83,21 @@ namespace LibraryReader.Books
                 return null;
             }
 
+        }
+
+        public override string ReturnContent()
+        {
+            var namespaceManager = new XmlNamespaceManager(new NameTable());
+            namespaceManager.AddNamespace("fb", "http://www.gribuser.ru/xml/fictionbook/2.0");
+
+            XDocument doc1 = XDocument.Load(FullPath);
+            var body = doc1.Root.XPathSelectElements("fb:body", namespaceManager).ToList();
+            StringWriter sw = new StringWriter();
+            XmlTextWriter tx = new XmlTextWriter(sw);
+            body[0].WriteTo(tx);
+            string str = sw.ToString();
+
+            return GetContentAsTitle(str);
         }
     }
 }
