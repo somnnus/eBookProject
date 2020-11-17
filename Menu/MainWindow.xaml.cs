@@ -204,9 +204,16 @@ namespace Menu
         private void OpenLastBook(object sender, RoutedEventArgs e)
         {
             Book book = CheckLastBookSerializization();
-            var openedBook = new OpenedBook(book);
-            openedBook.Show();
-            this.Close();
+            if (book != null)
+            {
+                var openedBook = new OpenedBook(book);
+                openedBook.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Вы ничего не читали!");
+            }
         }
 
         private void RemoveBook(object sender, RoutedEventArgs e)
