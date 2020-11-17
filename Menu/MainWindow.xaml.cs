@@ -40,6 +40,7 @@ namespace Menu
 
             CreateHiddenDirectory();
             CheckSerializization();
+            CheckSettingsSerialization();
 
             FillLibrary(); //обработка постраничного вывода
             
@@ -193,6 +194,33 @@ namespace Menu
                 return null;
             }
         }
+
+        private void CheckSettingsSerialization()
+        {
+            string fileNameSerialize = fullPath + "\\" + "setting.xml";
+            List<string> setting;
+            if (File.Exists(fileNameSerialize))
+            {
+                setting = Serialization.DeserializationSetting(fileNameSerialize);
+                Application.Current.Resources["clBr"] = (Brush)(new BrushConverter().ConvertFrom(setting[0]));
+                Application.Current.Resources["clBrSearch"] = (Brush)(new BrushConverter().ConvertFrom(setting[1]));
+                Application.Current.Resources["clBrMenu"] = (Brush)(new BrushConverter().ConvertFrom(setting[2]));
+                Application.Current.Resources["clBrText"] = (Brush)(new BrushConverter().ConvertFrom(setting[3]));
+                Application.Current.Resources["clBrArrow"] = (Brush)(new BrushConverter().ConvertFrom(setting[4]));
+            }
+            else
+            {
+                Application.Current.Resources["clBr"] = (Brush)(new BrushConverter().ConvertFrom("#FFFFEBCD"));
+                Application.Current.Resources["clBrSearch"] = (Brush)(new BrushConverter().ConvertFrom("#FFDEC3A7"));
+                Application.Current.Resources["clBrMenu"] = (Brush)(new BrushConverter().ConvertFrom("#442C2E"));
+                Application.Current.Resources["clBrText"] = (Brush)(new BrushConverter().ConvertFrom("#000000"));
+                Application.Current.Resources["clBrArrow"] = (Brush)(new BrushConverter().ConvertFrom("#442C2E"));
+                
+            }
+
+
+        }
+        
 
         private void OpenBook(object sender, RoutedEventArgs e)
         {

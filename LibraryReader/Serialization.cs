@@ -81,6 +81,39 @@ namespace LibraryReader
 
             return book;
         }
+        
+        public static void SerializationSetting(List<string> setting ,string fullPath)
+        {
+            if (setting != null)
+            {
+                string fileName = "setting.xml";
+                fullPath = fullPath + "\\" + fileName;
+
+                if (File.Exists(fullPath))
+                {
+                    File.Delete(fullPath);
+                }
+                using (Stream fStream = new FileStream(fullPath,
+                            FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
+                {
+                    XmlSerializer xmlFormat1 = new XmlSerializer(typeof(List<string>), new Type[] { typeof(string) });
+                    xmlFormat1.Serialize(fStream, setting);
+                }
+            }
+        }
+
+        public static List<string> DeserializationSetting(string fullPath)
+        {
+            List<string> setting;
+            XmlSerializer xmlFormat = new XmlSerializer(typeof(List<string>), new Type[] { typeof(string) });
+
+            using (Stream fStream = new FileStream(fullPath,
+                FileMode.Open, FileAccess.Read, FileShare.None))
+            {
+                setting = (List<string>)xmlFormat.Deserialize(fStream);
+            }
+            return setting;
+        }
 
 
 
