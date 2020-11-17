@@ -88,6 +88,7 @@ namespace LibraryReader.Books
         public override string ReturnContent()
         {
             epubBook = new Epub(FullPath);
+            string text2 = epubBook.GetContentAsPlainText()
             string text = epubBook.GetContentAsHtml();
             return HtmlToPlainText(text);
         }           
