@@ -53,10 +53,7 @@ namespace LibraryReader.Books
             }
             else
             {
-                
-                return null;
-
-                   
+                return AppDomain.CurrentDomain.BaseDirectory + "Library\\Covers\\defoltCover.jpg";
             }
                       
         }
