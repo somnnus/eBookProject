@@ -179,6 +179,19 @@ namespace Menu
                 SortByDate();
             }
         }
+        private Book CheckLastBookSerializization()
+        {
+            string fileNameSerialize = fullPath + "\\" + "last.xml";
+            if (File.Exists(fileNameSerialize))
+            {
+                Book book = Serialization.DeserializationLastBook(fileNameSerialize);
+                return book;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         private void OpenBook(object sender, RoutedEventArgs e)
         {
@@ -190,7 +203,10 @@ namespace Menu
 
         private void OpenLastBook(object sender, RoutedEventArgs e)
         {
-
+            Book book = CheckLastBookSerializization();
+            var openedBook = new OpenedBook(book);
+            openedBook.Show();
+            this.Close();
         }
 
         private void RemoveBook(object sender, RoutedEventArgs e)
