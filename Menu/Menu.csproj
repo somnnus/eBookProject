@@ -111,6 +111,10 @@
     <Compile Include="OpenedBook.xaml.cs">
       <DependentUpon>OpenedBook.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPage\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPage\SettingsViewModel.cs" />
     <Compile Include="SharedResources\Resources.cs" />
     <Compile Include="SharedResources\ResourcesProvider.cs" />
     <Compile Include="SizePercentageConverter.cs" />
@@ -140,6 +144,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourceDict.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPage\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

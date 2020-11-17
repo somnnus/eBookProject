@@ -7,29 +7,26 @@
         xmlns:UserControl="clr-namespace:Menu"
         mc:Ignorable="d"
         Title="Reader" Height="700" Width="1150" WindowState="Normal" ResizeMode="CanResizeWithGrip" MinHeight="300" MinWidth="850">
-    <Window.Resources>
-        <SolidColorBrush x:Key="clBr" Color="BlanchedAlmond" />
-    </Window.Resources>
-    <Grid Name="mainGrid" Background="{StaticResource clBr}" >
+    <Grid Name="mainGrid" Background="{DynamicResource clBr}" >
         <DockPanel>
             <StackPanel Margin="40">
-                <Label Content="Menu" Style="{StaticResource Headings}" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Label Content="Menu" Foreground="{DynamicResource clBrMenu}" Style="{StaticResource Headings}" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <Menu Name="menu" Style="{StaticResource TextSettings}" Width="auto" VerticalAlignment="Top" HorizontalAlignment="Right">
                     <Menu.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <VirtualizingStackPanel Orientation="Vertical"  Background="{StaticResource clBr}" />
+                            <VirtualizingStackPanel Orientation="Vertical"  Background="{DynamicResource clBr}" />
                         </ItemsPanelTemplate>
                     </Menu.ItemsPanel>
-                    <MenuItem Header="Main Page" Command="{Binding MainCommand}"/>
-                    <MenuItem Header="Library Page" Command="{Binding LibCommand}"/>
-                    <MenuItem Header="Continue reading" Click="OpenLastBook"/>
-                    <MenuItem Header="Edit your library">
+                    <MenuItem Foreground="{DynamicResource clBrText}" Header="Main Page" Command="{Binding MainCommand}"/>
+                    <MenuItem Foreground="{DynamicResource clBrText}" Header="Library Page" Command="{Binding LibCommand}"/>
+                    <MenuItem Foreground="{DynamicResource clBrText}" Header="Continue reading" Click="OpenLastBook"/>
+                    <MenuItem Foreground="{DynamicResource clBrText}" Header="Edit your library">
                         <MenuItem Header="Add a book" Click="AddBook"/>
                         <MenuItem Header="Remove a book" Click="RemoveBook"/>
                     </MenuItem>
-                    <MenuItem Header="Settings"/>
+                    <MenuItem Foreground="{DynamicResource clBrText}" Header="Settings" Command="{Binding SettingsCommand}"/>
                     <Separator/>
-                    <MenuItem Header="Exit" Click="Exit"/>
+                    <MenuItem Foreground="{DynamicResource clBrText}" Header="Exit" Click="Exit"/>
                 </Menu>
             </StackPanel>
             <Grid>

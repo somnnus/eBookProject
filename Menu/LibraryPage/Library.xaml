@@ -13,14 +13,13 @@
              d:DataContext="{d:DesignInstance lib:LibraryViewModel,
                                          IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <SolidColorBrush x:Key="clBr" Color="BlanchedAlmond" />
         <local1:SizePercentageConverter x:Key="PercentageConverter"/>
         <ControlTemplate x:Key="NoScroll">
             <ItemsPresenter></ItemsPresenter>
         </ControlTemplate>
     </UserControl.Resources>
     <Grid Margin="40">
-        <DataGrid x:Name="dataGridLib" ItemsSource="{Binding Path=DataContext.CurrentDictionary, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Background="{StaticResource clBr}" AutoGenerateColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
+        <DataGrid x:Name="dataGridLib" ItemsSource="{Binding Path=DataContext.CurrentDictionary, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Background="{DynamicResource clBr}" AutoGenerateColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="keyTextColumn" Binding="{Binding Key}" Width="auto">
                     <DataGridTextColumn.ElementStyle>
@@ -46,7 +45,7 @@
                         <DataTemplate>
                             <DockPanel>
                                 <!--<TextBlock DockPanel.Dock="Left" Text="{Binding Path=DataContext.LastSortingFeature, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>-->
-                                <StackPanel Margin="0,0,10,0" DockPanel.Dock="Right" Width="200" Orientation="Horizontal" Background="#FFDEC3A7" HorizontalAlignment="Right">
+                                <StackPanel Margin="0,0,10,0" DockPanel.Dock="Right" Width="200" Orientation="Horizontal" Background="{DynamicResource clBrSearch}" HorizontalAlignment="Right">
                                     <TextBox TextChanged="SearchInLibrary" materialDesign:HintAssist.Hint="Search..." Width="150" VerticalAlignment="Center" FontSize="16" HorizontalAlignment="Stretch" Background="Transparent"/>
                                     <Label Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Width="40">
                                         <Image Source="/images/searchLabel.png"/>
@@ -64,8 +63,8 @@
                                             <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.1, ElementName=dataGridLib, Path=ActualWidth}"
                                                Height="auto" 
                                                Source='{Binding CoverPath}'/>
-                                            <TextBlock Style="{StaticResource BookTextSettings}" Text='{Binding Author}'></TextBlock>
-                                            <TextBlock Style="{StaticResource BookTextSettings}" Text='{Binding Title}'></TextBlock>
+                                            <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Author}'></TextBlock>
+                                            <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Title}'></TextBlock>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>

@@ -15,7 +15,6 @@
     <Style TargetType="{x:Type Control}" x:Key="Headings">
         <Setter Property="FontFamily" Value="Garamond" />
         <Setter Property="FontSize" Value="40" />
-        <Setter Property="Foreground" Value="#442C2E" />
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Background" Value="Transparent" />

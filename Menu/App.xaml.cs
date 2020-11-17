@@ -9,6 +9,7 @@ using System.Windows;
 using Castle.MicroKernel.Registration;
 using Menu.MainAppPage;
 using Menu.LibraryPage;
+using Menu.SettingsPage;
 
 namespace Menu
 {
@@ -25,6 +26,7 @@ namespace Menu
             container = new WindsorContainer();
             container.Register(Component.For<MainViewModel>());
             container.Register(Component.For<LibraryViewModel>());
+            container.Register(Component.For<SettingsViewModel>());
             container.Register(Component.For<MainWindowViewModel>());
             container.Register(Component.For<MainWindow>());
 

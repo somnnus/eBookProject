@@ -12,18 +12,17 @@
              d:DataContext="{d:DesignInstance main:MainViewModel,
                                          IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <SolidColorBrush x:Key="clBr" Color="BlanchedAlmond" />
         <ControlTemplate x:Key="ArrowRight">
-            <Path Width="30" Height="{TemplateBinding Height}" Data="F1M568.254,-7.43524L568.159,-7.34277 567.977,-7.52246 546.559,-28.9417 525.484,-28.9417 549.787,-4.63446 557.439,3.01532 557.619,3.19629 550.067,10.7549 525.758,35.0583 546.834,35.0583 568.254,13.6429 578.792,3.10254 568.254,-7.43524z" Stretch="Uniform" Fill="#FFFFFFFF" RenderTransformOrigin="0.5,0.5"/>
+            <Path Width="30" Height="{TemplateBinding Height}" Data="F1M568.254,-7.43524L568.159,-7.34277 567.977,-7.52246 546.559,-28.9417 525.484,-28.9417 549.787,-4.63446 557.439,3.01532 557.619,3.19629 550.067,10.7549 525.758,35.0583 546.834,35.0583 568.254,13.6429 578.792,3.10254 568.254,-7.43524z" Stretch="Uniform" Fill="{DynamicResource clBrArrow}" RenderTransformOrigin="0.5,0.5"/>
         </ControlTemplate>
         <ControlTemplate x:Key="ArrowLeft">
-            <Path Width="30" Height="{TemplateBinding Height}" Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z" Stretch="Uniform" Fill="#FFFFFFFF" RenderTransformOrigin="0.5,0.5"/>
+            <Path Width="30" Height="{TemplateBinding Height}" Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z" Stretch="Uniform" Fill="{DynamicResource clBrArrow}" RenderTransformOrigin="0.5,0.5"/>
         </ControlTemplate>
         <local:SizePercentageConverter x:Key="PercentageConverter"/>
     </UserControl.Resources>
     <Grid>
-        <DockPanel Margin="40" Background="{StaticResource clBr}">
-            <Label Content="Reading Recently" Style="{StaticResource Headings}" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <DockPanel Margin="40" Background="{DynamicResource clBr}">
+            <Label Content="Reading Recently" Foreground="{DynamicResource clBrMenu}" Style="{StaticResource Headings}" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <DockPanel Height="auto" Width="auto" LastChildFill="True" Name="DockPanelLibrary">
                 <Grid Width="40" DockPanel.Dock="Left">
                     <Label Name="labelArrowLeft" VerticalAlignment="Center" 
@@ -44,7 +43,7 @@
                     </Label>
                 </Grid>
                 <Grid Name="libraryGrid">
-                    <ListBox x:Name="listBoxBooks" HorizontalAlignment="Stretch" VerticalAlignment="Center"  Background="{StaticResource clBr}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <ListBox x:Name="listBoxBooks" HorizontalAlignment="Stretch" VerticalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                         <ListBox.ItemsSource>
                             <MultiBinding>
                                 <MultiBinding.Converter>
@@ -60,8 +59,8 @@
                                     <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.13, ElementName=DockPanelLibrary, Path=ActualWidth}"
                                                Height="auto" 
                                                Source='{Binding CoverPath}'/>
-                                    <TextBlock Style="{StaticResource BookTextSettings}" Text='{Binding Author}'></TextBlock>
-                                    <TextBlock Style="{StaticResource BookTextSettings}" Text='{Binding Title}'></TextBlock>
+                                    <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Author}'></TextBlock>
+                                    <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Title}'></TextBlock>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

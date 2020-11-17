@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Menu"
              xmlns:main="clr-namespace:Menu.MainAppPage"
-             xmlns:lib="clr-namespace:Menu.LibraryPage">
+             xmlns:lib="clr-namespace:Menu.LibraryPage"
+             xmlns:settings="clr-namespace:Menu.SettingsPage">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -19,6 +20,14 @@
             <DataTemplate DataType="{x:Type main:MainViewModel}">
                 <main:Main />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type settings:SettingsViewModel}">
+                <settings:Settings />
+            </DataTemplate>
+            <SolidColorBrush x:Key="clBr" Color="#FFFFEBCD" />
+            <SolidColorBrush x:Key="clBrSearch" Color="#FFDEC3A7" />
+            <SolidColorBrush x:Key="clBrText" Color="#000000" />
+            <SolidColorBrush x:Key="clBrMenu" Color="#442C2E" />
+            <SolidColorBrush x:Key="clBrArrow" Color="#442C2E" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
