@@ -47,10 +47,10 @@
                             <DockPanel>
                                 <!--<TextBlock DockPanel.Dock="Left" Text="{Binding Path=DataContext.LastSortingFeature, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>-->
                                 <StackPanel Margin="0,0,10,0" DockPanel.Dock="Right" Width="200" Orientation="Horizontal" Background="#FFDEC3A7" HorizontalAlignment="Right">
-                                    <TextBox materialDesign:HintAssist.Hint="Search..." Width="150" VerticalAlignment="Center" FontSize="16" HorizontalAlignment="Stretch" Background="Transparent"/>
-                                    <Button Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Width="50">
+                                    <TextBox TextChanged="SearchInLibrary" materialDesign:HintAssist.Hint="Search..." Width="150" VerticalAlignment="Center" FontSize="16" HorizontalAlignment="Stretch" Background="Transparent"/>
+                                    <Label Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Width="40">
                                         <Image Source="/images/searchLabel.png"/>
-                                    </Button>
+                                    </Label>
                                 </StackPanel>
                             </DockPanel>
                         </DataTemplate>
