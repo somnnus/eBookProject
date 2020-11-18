@@ -8,17 +8,41 @@
              d:DataContext="{d:DesignInstance settings:SettingsViewModel,
                                          IsDesignTimeCreatable=True}"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Margin" Value="10,5,10,5" />
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <Grid Margin="40" Background="{DynamicResource clBr}">
-            <StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button x:Name="whiteTheme" Click="SetWhiteTheme"/>
-                    <Button x:Name="sepiaTheme" Click="SetSepiaTheme"/>
-                    <Button x:Name="darkBlueNight" Click="SetDarkBlueTheme"/>
-                    <Button x:Name="nightTheme" Click="SetNightTheme"/>
+        <DockPanel Margin="40" Background="{DynamicResource clBr}">
+            <Label DockPanel.Dock="Top" Content="Choose Theme" Foreground="{DynamicResource clBrMenu}" Style="{StaticResource Headings}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Button Height="auto" x:Name="whiteTheme" Click="SetWhiteTheme">
+                        <StackPanel>
+                            <Image Width="250" Source="/images/WhiteTheme.PNG" />
+                        </StackPanel>
+                    </Button>
+                    <Button Height="auto" x:Name="sepiaTheme" Click="SetSepiaTheme">
+                        <StackPanel>
+                            <Image Width="250" Source="/images/SepiaTheme.PNG" />
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
-                <TextBlock Foreground="{DynamicResource clBrText}" x:Name="settingsTextBlock"/>
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Button Height="auto" x:Name="darkBlueTheme" Click="SetDarkBlueTheme">
+                        <StackPanel>
+                            <Image Width="250" Source="/images/DarkBlueTheme.PNG" />
+                        </StackPanel>
+                    </Button>
+                    <Button Height="auto" x:Name="nightTheme" Click="SetNightTheme">
+                        <StackPanel>
+                            <Image Width="250" Source="/images/DarkTheme.PNG" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
             </StackPanel>
-        </Grid>
+        </DockPanel>
     </Grid>
 </UserControl>

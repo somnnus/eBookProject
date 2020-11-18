@@ -26,7 +26,6 @@ namespace Menu.SettingsPage
         public Settings()
         {
             InitializeComponent();
-            settingsTextBlock.Text = "Так выглядит ваш текст";
         }
 
         private void SetWhiteTheme(object sender, RoutedEventArgs e)

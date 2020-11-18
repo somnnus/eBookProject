@@ -40,6 +40,7 @@ namespace Menu
             MainCommand = new RelayCommand(ShowFirstView);
             LibCommand = new RelayCommand(ShowSecondView);
             SettingsCommand = new RelayCommand(ShowThirdModel);
+            //ShowFirstView();
         }
 
         private void ShowFirstView()

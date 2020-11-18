@@ -21,7 +21,7 @@
     <Grid Margin="40">
         <DataGrid x:Name="dataGridLib" ItemsSource="{Binding Path=DataContext.CurrentDictionary, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Background="{DynamicResource clBr}" AutoGenerateColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="keyTextColumn" Binding="{Binding Key}" Width="auto">
+                <DataGridTextColumn Foreground="{DynamicResource clBrText}" x:Name="keyTextColumn" Binding="{Binding Key}" Width="auto">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="FontFamily" Value="Garamond" />
@@ -32,10 +32,10 @@
                     </DataGridTextColumn.ElementStyle>
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>
-                            <ComboBox Text="-- Sorted By Date --" Focusable="False" IsEditable="True" IsReadOnly="True" Width="150" SelectionChanged="ComboBox_Selected">
-                                <TextBlock>Sorted By Author</TextBlock>
-                                <TextBlock>Sorted By Title</TextBlock>
-                                <TextBlock>Sorted By Date</TextBlock>
+                            <ComboBox Foreground="{DynamicResource clBrText}" Text="-- Sorted By Date --" Focusable="False" IsEditable="True" IsReadOnly="True" Width="150" SelectionChanged="ComboBox_Selected">
+                                <TextBlock Foreground="Black">Sorted By Author</TextBlock>
+                                <TextBlock Foreground="Black">Sorted By Title</TextBlock>
+                                <TextBlock Foreground="Black">Sorted By Date</TextBlock>
                             </ComboBox>
                         </DataTemplate>
                     </DataGridTextColumn.HeaderTemplate>

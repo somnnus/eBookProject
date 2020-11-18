@@ -21,8 +21,8 @@
                     <MenuItem Foreground="{DynamicResource clBrText}" Header="Library Page" Command="{Binding LibCommand}"/>
                     <MenuItem Foreground="{DynamicResource clBrText}" Header="Continue reading" Click="OpenLastBook"/>
                     <MenuItem Foreground="{DynamicResource clBrText}" Header="Edit your library">
-                        <MenuItem Header="Add a book" Click="AddBook"/>
-                        <MenuItem Header="Remove a book" Click="RemoveBook"/>
+                        <MenuItem Foreground="Black" Header="Add a book" Click="AddBook"/>
+                        <MenuItem Foreground="Black" Header="Remove a book" Click="RemoveBook"/>
                     </MenuItem>
                     <MenuItem Foreground="{DynamicResource clBrText}" Header="Settings" Command="{Binding SettingsCommand}"/>
                     <Separator/>
