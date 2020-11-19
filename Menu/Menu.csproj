@@ -99,6 +99,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helpers\DictionaryItemConverter.cs" />
+    <Compile Include="Helpers\MarginSetter.cs" />
+    <Compile Include="Helpers\UsedImplicitlyAttribute.cs" />
     <Compile Include="LibraryPage\Library.xaml.cs">
       <DependentUpon>Library.xaml</DependentUpon>
     </Compile>

@@ -208,17 +208,6 @@ namespace Menu
                 Application.Current.Resources["clBrText"] = (Brush)(new BrushConverter().ConvertFrom(setting[3]));
                 Application.Current.Resources["clBrArrow"] = (Brush)(new BrushConverter().ConvertFrom(setting[4]));
             }
-            else
-            {
-                Application.Current.Resources["clBr"] = (Brush)(new BrushConverter().ConvertFrom("#FFFFEBCD"));
-                Application.Current.Resources["clBrSearch"] = (Brush)(new BrushConverter().ConvertFrom("#FFDEC3A7"));
-                Application.Current.Resources["clBrMenu"] = (Brush)(new BrushConverter().ConvertFrom("#442C2E"));
-                Application.Current.Resources["clBrText"] = (Brush)(new BrushConverter().ConvertFrom("#000000"));
-                Application.Current.Resources["clBrArrow"] = (Brush)(new BrushConverter().ConvertFrom("#442C2E"));
-                
-            }
-
-
         }
         
 

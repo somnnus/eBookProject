@@ -4,47 +4,36 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Menu"
-        mc:Ignorable="d"
-         Height="518" Width="889.6">
+        xmlns:helper="clr-namespace:Menu.Helpers"
+        mc:Ignorable="d">
     <Window.Resources>
         <ControlTemplate x:Key="ArrowLeft">
             <Path Width="30" Height="{TemplateBinding Height}" Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z" Stretch="Uniform" Fill="#FF7C2989" RenderTransformOrigin="0.5,0.5"/>
         </ControlTemplate>
     </Window.Resources>
 
-    <Grid x:Name="grid" Margin="0,0,3.2,-41">
-
-        <Label Name="labelArrowLeft" 
-                           Width="auto" Margin="0,0,-0.4,76">
-            <Hyperlink TextDecorations="None" Click="OpenMenu">
-                <ContentControl Template="{StaticResource ArrowLeft}" Height="21" Width="13"/>
-            </Hyperlink>
-        </Label>
-        <FlowDocumentPageViewer x:Name="flowDocument" Background="#FF8D9597" Margin="-2,28,-1,40.8" >
-            <FlowDocumentPageViewer.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.039"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </FlowDocumentPageViewer.RenderTransform>
-        </FlowDocumentPageViewer>
-
-        <Slider Name="slider" Value ="250" Maximum="1000" Minimum="150" IsSelectionRangeEnabled="True" ValueChanged="SliderChange" HorizontalAlignment="Left" Margin="25,467,0,0" VerticalAlignment="Top" Height="19" Width="186" RenderTransformOrigin="0.406,2.074"/>
-        <Button Content="Bookmark" Click="CreateBookmark" HorizontalAlignment="Left" Margin="25,0,0,0" VerticalAlignment="Top" Width="76" Height="24" FontSize="9"/>
-        <Button Content="Open Bookmark" Click="OpenBookmark" HorizontalAlignment="Left" Margin="118,0,0,0" VerticalAlignment="Top" Width="108" Height="24" FontSize="9"/>
-    </Grid>
-    <!--<Border x:Name="border"  Background="#FFFCFCFC">
-        <FlowDocumentPageViewer Name="flowDocument" Background="#FF8D9597" Margin="0.2,5.2,-2.8,0.4" RenderTransformOrigin="0.5,0.5">
-            <FlowDocumentPageViewer.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.039"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </FlowDocumentPageViewer.RenderTransform>
-        </FlowDocumentPageViewer>
-    </Border>-->
+    <DockPanel LastChildFill="True" x:Name="gridForReading">
+        <StackPanel DockPanel.Dock="Top" helper:MarginSetter.Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
+            <Label Name="labelArrowLeft" Width="auto">
+                <Hyperlink TextDecorations="None" Click="OpenMenu">
+                    <ContentControl Template="{StaticResource ArrowLeft}" Height="21" Width="13"/>
+                </Hyperlink>
+            </Label>
+            <Button Content="Bookmark" Click="CreateBookmark" Width="80" FontSize="8" />
+            <Button Content="Open Bookmark" Click="OpenBookmark" Width="100" FontSize="8"/>
+        </StackPanel>
+        <Grid>
+            <FlowDocumentPageViewer x:Name="flowDocument" Background="#FF8D9597">
+                <FlowDocumentPageViewer.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.039"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </FlowDocumentPageViewer.RenderTransform>
+            </FlowDocumentPageViewer>
+            <Slider Margin="5 0 0 5" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="slider" Value ="250" Maximum="1000" Minimum="150" IsSelectionRangeEnabled="True" ValueChanged="SliderChange" Width="180"/>
+        </Grid>
+    </DockPanel>
 </Window>
