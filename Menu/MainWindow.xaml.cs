@@ -19,6 +19,7 @@ using System.Windows.Threading;
 using Microsoft.Win32;
 using eBdb.EpubReader;
 using Menu.SharedResources;
+using Menu.Helpers;
 
 namespace Menu
 {
@@ -42,18 +43,7 @@ namespace Menu
             CheckSerializization();
             CheckSettingsSerialization();
 
-            FillLibrary(); //обработка постраничного вывода
-            
-        }
-
-        public void FillLibrary()
-        {
-            if (ResourcesProvider.Current.ListBooks.Count != 0)
-            {
-                int blocksCount = 6;
-                ResourcesProvider.Current.BooksByPages = new Dictionary<int, List<Book>>();
-                ResourcesProvider.Current.BooksByPages = ArrayHelperExtensions.SplitByBlocks(ResourcesProvider.Current.ListBooks, ResourcesProvider.Current.BooksByPages, blocksCount);
-            }
+            LibraryRefreshing.FillMain(); //обработка постраничного вывода
         }
 
         public void AddBook(object sender, RoutedEventArgs e)
@@ -131,26 +121,7 @@ namespace Menu
 
         private void RefreshPages() //динамическое отображение
         {
-            FillLibrary();
-
-            //динамическая сортировка
-            SortByAuthor();
-            SortByTitle();
-            SortByDate();
-
-            if (ResourcesProvider.Current.LastSortingFeature == "Sorted By Author")
-            {
-                ResourcesProvider.Current.CurrentDictionary = ResourcesProvider.Current.SortedByAuthor;
-            }
-            if (ResourcesProvider.Current.LastSortingFeature == "Sorted By Title")
-            {
-                ResourcesProvider.Current.CurrentDictionary = ResourcesProvider.Current.SortedByTitle;
-            }
-            else
-            if (ResourcesProvider.Current.LastSortingFeature == "Sorted By Date")
-            {
-                ResourcesProvider.Current.CurrentDictionary = ResourcesProvider.Current.SortedByDate;
-            }
+            LibraryRefreshing.Refresh();
         }
 
         private void CreateHiddenDirectory()
@@ -176,9 +147,9 @@ namespace Menu
                 ResourcesProvider.Current.ListBooks =  Serialization.DeserializationLibrary(fileNameSerialize);
 
                 //динамическая сортировка
-                SortByAuthor();
-                SortByTitle();
-                SortByDate();
+                LibraryRefreshing.SortByAuthor();
+                LibraryRefreshing.SortByTitle();
+                LibraryRefreshing.SortByDate();
             }
         }
         private Book CheckLastBookSerializization()
@@ -209,7 +180,6 @@ namespace Menu
                 Application.Current.Resources["clBrArrow"] = (Brush)(new BrushConverter().ConvertFrom(setting[4]));
             }
         }
-        
 
         private void OpenBook(object sender, RoutedEventArgs e)
         {
@@ -234,36 +204,10 @@ namespace Menu
             }
         }
 
-        private void RemoveBook(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Exit(object sender, RoutedEventArgs e)
         {
             Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
             this.Close();
-        }
-
-        private void SortByAuthor()
-        {
-            ResourcesProvider.Current.ListBooks.Sort(new AuthorComparer());
-            ResourcesProvider.Current.SortedByAuthor = new Dictionary<string, List<Book>>();
-            ResourcesProvider.Current.SortedByAuthor = ArrayHelperExtensions.SplitByAuthor(ResourcesProvider.Current.ListBooks, ResourcesProvider.Current.SortedByAuthor);
-        }
-
-        private void SortByTitle()
-        {
-            ResourcesProvider.Current.ListBooks.Sort(new NameComparer());
-            ResourcesProvider.Current.SortedByTitle = new Dictionary<string, List<Book>>();
-            ResourcesProvider.Current.SortedByTitle = ArrayHelperExtensions.SplitByBookName(ResourcesProvider.Current.ListBooks, ResourcesProvider.Current.SortedByTitle);
-        }
-
-        private void SortByDate()
-        {
-            ResourcesProvider.Current.ListBooks.Sort(new DateComparer());
-            ResourcesProvider.Current.SortedByDate = new Dictionary<string, List<Book>>();
-            ResourcesProvider.Current.SortedByDate = ArrayHelperExtensions.SplitByDate(ResourcesProvider.Current.ListBooks, ResourcesProvider.Current.SortedByDate);
         }
 
         //private void RefreshDict()
@@ -271,35 +215,5 @@ namespace Menu
         //    dataGridLib.ItemsSource = ResourcesProvider.Current.SortedBooks;
         //    //CollectionViewSource.GetDefaultView(lastSortingFeature).Refresh();
         //}
-
-        class AuthorComparer : IComparer<Book>
-        {
-            public int Compare(Book book1, Book book2)
-            {
-                return book1.Author.CompareTo(book2.Author);
-            }
-        }
-
-        class NameComparer : IComparer<Book>
-        {
-            public int Compare(Book book1, Book book2)
-            {
-                return book1.Title.CompareTo(book2.Title);
-            }
-        }
-
-        class DateComparer : IComparer<Book>
-        {
-            public int Compare(Book book1, Book book2)
-            {
-                if (book1.Date.CompareTo(book2.Date) == 1)
-                    return -1;
-                else
-                if (book1.Date.CompareTo(book2.Date) == -1)
-                    return 1;
-                else
-                    return 0;
-            }
-        }
     }
 }

@@ -98,7 +98,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Comparers\AuthorComparer.cs" />
+    <Compile Include="Comparers\DateComparer.cs" />
+    <Compile Include="Comparers\TitleComparer.cs" />
     <Compile Include="Helpers\DictionaryItemConverter.cs" />
+    <Compile Include="Helpers\LibraryRefreshing.cs" />
+    <Compile Include="Helpers\LibrarySearching.cs" />
     <Compile Include="Helpers\MarginSetter.cs" />
     <Compile Include="Helpers\UsedImplicitlyAttribute.cs" />
     <Compile Include="LibraryPage\Library.xaml.cs">
@@ -113,6 +118,10 @@
     <Compile Include="OpenedBook.xaml.cs">
       <DependentUpon>OpenedBook.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageForRemoving\BooksRemoving.xaml.cs">
+      <DependentUpon>BooksRemoving.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageForRemoving\BooksRemovingViewModel.cs" />
     <Compile Include="SettingsPage\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
@@ -142,6 +151,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="OpenedBook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageForRemoving\BooksRemoving.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

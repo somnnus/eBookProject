@@ -4,7 +4,8 @@
              xmlns:local="clr-namespace:Menu"
              xmlns:main="clr-namespace:Menu.MainAppPage"
              xmlns:lib="clr-namespace:Menu.LibraryPage"
-             xmlns:settings="clr-namespace:Menu.SettingsPage">
+             xmlns:settings="clr-namespace:Menu.SettingsPage"
+             xmlns:removingPage="clr-namespace:Menu.PageForRemoving">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -22,6 +23,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type settings:SettingsViewModel}">
                 <settings:Settings />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type removingPage:BooksRemovingViewModel}">
+                <removingPage:BooksRemoving />
             </DataTemplate>
             <SolidColorBrush x:Key="clBr" Color="#FFFFEBCD" />
             <SolidColorBrush x:Key="clBrSearch" Color="#FFDEC3A7" />
