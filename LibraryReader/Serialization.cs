@@ -102,12 +102,7 @@ namespace LibraryReader
                 }
             }
         }
-        public static IEnumerable<string> SplitPage(this string text, int size)
-        {
-            for (var i = 0; i < text.Length; i += size)
-                yield return text.Substring(i, Math.Min(size, text.Length - i));
-        }
-
+    
         public static List<string> DeserializationSetting(string fullPath)
         {
             List<string> setting;
@@ -121,6 +116,48 @@ namespace LibraryReader
             return setting;
         }
 
+        public static IEnumerable<string> SplitPage(this string text, int size)
+        {
+            for (var i = 0; i < text.Length; i += size)
+                yield return text.Substring(i, Math.Min(size, text.Length - i));
+        }
+
+        public static void SerializationBookDelete(List<Book> books,string fullPath)
+        {
+            if (books != null)
+            {
+                string fileName = "delete.xml";
+                fullPath = fullPath + "\\" + fileName;
+
+                if (File.Exists(fullPath))
+                {
+                    File.Delete(fullPath);
+                }
+
+                using (Stream fStream = new FileStream(fullPath,
+                            FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
+                {
+                    XmlSerializer xmlFormat1 = new XmlSerializer(typeof(List<Book>), new Type[] { typeof(Book), typeof(string), typeof(EpubBook), typeof(FB2Book), typeof(Bookmark) });
+                    xmlFormat1.Serialize(fStream, books);
+                }
+               
+            }
+        }
+
+        public static List<Book> DeserializationBookDelete(string fullPath)
+        {
+            List<Book> books;
+
+            XmlSerializer xmlFormat = new XmlSerializer(typeof(List<Book>), new Type[] { typeof(Book), typeof(string), typeof(EpubBook), typeof(FB2Book), typeof(Bookmark) });
+
+            using (Stream fStream = new FileStream(fullPath,
+                FileMode.Open, FileAccess.Read, FileShare.None))
+            {
+                books = (List<Book>)xmlFormat.Deserialize(fStream);
+            }
+
+            return books;
+        }
 
 
 
