@@ -114,11 +114,7 @@ namespace Menu
             }
         }
 
-        
-        private void SearchInBook(object sender, RoutedEventArgs routedEventArgs)
-        {
-            flowDocument.Find();
-        }
+            
         private void OpenMenu(object sender, RoutedEventArgs routedEventArgs)
         {
             currentBook.FontSize = flowDocument.Document.FontSize;
