@@ -15,28 +15,35 @@ using LibraryReader.Books;
 using LibraryReader;
 using System.Threading;
 using Menu.SharedResources;
+using System.IO;
+using System.Windows.Markup;
+using System.Xml;
 
 namespace Menu
 {
     /// <summary>
     /// Логика взаимодействия для OpenedBook.xaml
     /// </summary>
+    /// 
+    [Serializable]
     public partial class OpenedBook : Window
     {
         string fullPath = AppDomain.CurrentDomain.BaseDirectory + "Library";
 
         string bookmark;
+        int page;
 
         Book currentBook;
         private int columnWidth;
         private int fontSize;
-        Paragraph paragraphHigh = new Paragraph();
+        Paragraph paragraphHigh { get; set; }
         public OpenedBook(Book current)
         {
 
             InitializeComponent();
             currentBook = current;
             DisplayBook();
+
             Serialization.SerializationLastBook(currentBook, fullPath);
         }
         
@@ -71,13 +78,15 @@ namespace Menu
               
                  p.Inlines.Add(paragrapg);
                  doc.Blocks.Add(p);
+                
               
             }
+            
             doc.ColumnWidth = currentBook.ColumnWidth;
             doc.FontSize = currentBook.FontSize;
             flowDocument.Document = doc;
 
-       
+
             
         }
         
@@ -87,38 +96,41 @@ namespace Menu
           //  mark.NumberPage = flowDocument.MasterPageNumber;
             mark.FrontSize = flowDocument.FontSize;
             mark.ColumnWidth = columnWidth;
-            currentBook.AddBookmark(mark);
-            
+            //  currentBook.AddBookmark(mark);
 
-            var paginator = ((IDocumentPaginatorSource)flowDocument.Document).DocumentPaginator as DynamicDocumentPaginator;
-            var position = paginator.GetPagePosition(paginator.GetPage(flowDocument.PageNumber)) as TextPointer;
-             paragraphHigh = position.Paragraph;
+            page = flowDocument.MasterPageNumber;
+
+            
             //  string text = paragraphHigh.ContentEnd
 
-
-            TextRange text = new TextRange(paragraphHigh.ContentStart, paragraphHigh.ContentEnd);
-            bookmark = text.Text;
-            Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
+            //System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(Paragraph));
+            //using (var writer = new StreamWriter(@"C:\Users\1394954\Desktop\Menu\Menu\Menu\bin\Debug\Library\mark.xml"))
+            //{
+            //    serializer.Serialize(writer, paragraphHigh);
+            //}
+        
+          //  Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
 
         }
         private void OpenBookmark(object sender, RoutedEventArgs routedEventArgs)
         {
             if (currentBook.bookmarks.Count!=0)
             {
-                Paragraph p = new Paragraph();
-               // p.Margin = new Thickness(0, 0, 0, 0);
-                p.Inlines.Add(bookmark);
-                p.BringIntoView();
-                flowDocument.BringIntoView();
+                
+               // flowDocument.BringIntoView();
                 //paragraphHigh.BringIntoView();
             }
+            // flowDocument.GoToPage(page);
+            flowDocument.GoToPage(50);
+            flowDocument.Find();
+           
+
         }
 
             
         private void OpenMenu(object sender, RoutedEventArgs routedEventArgs)
         {
-            currentBook.FontSize = flowDocument.Document.FontSize;
-            currentBook.ColumnWidth = flowDocument.Document.ColumnWidth;
+            
             Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
             var menuWindow = new MainWindow(ResourcesProvider.Current.MainWindowVM);
             menuWindow.Show();
