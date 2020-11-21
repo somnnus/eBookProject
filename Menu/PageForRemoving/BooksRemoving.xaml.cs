@@ -17,6 +17,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Menu.Comparers;
 using Menu.Helpers;
+using System.IO;
+using LibraryReader;
 
 namespace Menu.PageForRemoving
 {
@@ -26,6 +28,7 @@ namespace Menu.PageForRemoving
     public partial class BooksRemoving : UserControl
     {
         private List<Book> booksForDeleting;
+        static string fullPath = AppDomain.CurrentDomain.BaseDirectory + "Library";
 
         public BooksRemoving()
         {
@@ -93,12 +96,15 @@ namespace Menu.PageForRemoving
         {
             foreach (var book in booksForDeleting)
             {
-                ResourcesProvider.Current.ListBooks.Remove(book);
+              //  File.Delete(book.FullPath);              
+                ResourcesProvider.Current.ListBooks.Remove(book);                       
             }
-
+           // Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
+            
             LibraryRefreshing.Refresh();
             //Написать вызов к SortingLibrary
         }
+
 
         private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {

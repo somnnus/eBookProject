@@ -27,6 +27,7 @@ namespace LibraryReader.Books
                 Title = epubBook.Title[0];
                 Author = epubBook.Creator[0];
                 FontSize = 16;
+                ColumnWidth = 1000;
                 Date = DateTime.Now;
                 CoverPath = GetCoverPath();
                

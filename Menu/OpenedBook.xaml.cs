@@ -28,10 +28,12 @@ namespace Menu
         string bookmark;
 
         Book currentBook;
-        private double columnWidth; 
+        private int columnWidth;
+        private int fontSize;
         Paragraph paragraphHigh = new Paragraph();
         public OpenedBook(Book current)
         {
+
             InitializeComponent();
             currentBook = current;
             DisplayBook();
@@ -48,18 +50,16 @@ namespace Menu
             
            // FlowDocument document = new FlowDocument(paragraphHigh);
 
-            //document.FontSize = 16;
-            ////  document.ColumnRuleWidth = border.ActualWidth/2;
-            //document.ColumnWidth = 250;//3 свойства для изменения колонок! 2- одна колонка, 3 - две колонки, 4 - три колонки
-            //columnWidth = 250;
-            //document.ColumnGap = 20;
+               //document.FontSize = 16;
+              //  document.ColumnRuleWidth = border.ActualWidth/2;
+             // document.ColumnWidth = 250;//3 свойства для изменения колонок! 2- одна колонка, 3 - две колонки, 4 - три колонки
+            // columnWidth = 250;
+           // document.ColumnGap = 20;
             
 
-            //flowDocument.Document = document;
-
-           // FlowDocument doc =new FlowDocument();
-    
-            // doc.LineHeight = 1.5;
+              //flowDocument.Document = document;
+             // FlowDocument doc =new FlowDocument();   
+            //  doc.LineHeight = 1.5;
            
 
             var s = Serialization.SplitPage(text, 3000);
@@ -70,15 +70,14 @@ namespace Menu
                p.Margin = new Thickness(0,0,0,0);
               
                  p.Inlines.Add(paragrapg);
-                doc.Blocks.Add(p);
-               
-
+                 doc.Blocks.Add(p);
+              
             }
+            doc.ColumnWidth = currentBook.ColumnWidth;
+            doc.FontSize = currentBook.FontSize;
             flowDocument.Document = doc;
 
-
-
-            
+       
             
         }
         
@@ -107,30 +106,24 @@ namespace Menu
             if (currentBook.bookmarks.Count!=0)
             {
                 Paragraph p = new Paragraph();
-                p.Margin = new Thickness(0, 0, 0, 0);
+               // p.Margin = new Thickness(0, 0, 0, 0);
                 p.Inlines.Add(bookmark);
                 p.BringIntoView();
-
+                flowDocument.BringIntoView();
                 //paragraphHigh.BringIntoView();
             }
         }
 
-        private void SliderChange(object sender,RoutedPropertyChangedEventArgs<double> e)
-        {
-            ((Slider)sender).SelectionEnd = e.NewValue;           
-            doc.FontSize = 16;
-            doc.ColumnWidth = e.NewValue;
-            columnWidth = e.NewValue;
-            doc.ColumnGap = 20;
-           // flowDocument.Document = document;
-
-        }
+        
         private void SearchInBook(object sender, RoutedEventArgs routedEventArgs)
         {
             flowDocument.Find();
         }
         private void OpenMenu(object sender, RoutedEventArgs routedEventArgs)
         {
+            currentBook.FontSize = flowDocument.Document.FontSize;
+            currentBook.ColumnWidth = flowDocument.Document.ColumnWidth;
+            Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
             var menuWindow = new MainWindow(ResourcesProvider.Current.MainWindowVM);
             menuWindow.Show();
             Close();

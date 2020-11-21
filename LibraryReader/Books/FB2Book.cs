@@ -28,6 +28,7 @@ namespace LibraryReader.Books
             File.Copy(path, newPath);
             FullPath = newPath;
             FontSize = 16;
+            ColumnWidth = 1000;
             XDocument doc = XDocument.Load(path);
             fB2File.Load(doc, false);
             FullPath = path;

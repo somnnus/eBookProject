@@ -14,6 +14,7 @@ namespace LibraryReader.Books
         public int NumberPage { get; set; }
         public double FrontSize { get; set; }
         public double ColumnWidth { get; set; }
-       // public Paragraph Paragraph { get; set; }
+        
+      //  public Paragraph Paragraph { get; set; }
     }
 }

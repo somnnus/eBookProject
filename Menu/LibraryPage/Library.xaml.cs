@@ -30,13 +30,8 @@ namespace Menu.LibraryPage
         {
             DataContext = ResourcesProvider.Current;
             InitializeComponent();
-            if (ResourcesProvider.Current.ListBooks.Count != 0)
-            {
-                ResourcesProvider.Current.CurrentDictionary = ResourcesProvider.Current.SortedByDate;
-                ResourcesProvider.Current.LastSortingFeature = "Sorted By Date";
-            }
-            else
-                MessageBox.Show("Library is empty!");
+            ResourcesProvider.Current.CurrentDictionary = ResourcesProvider.Current.SortedByDate;
+            ResourcesProvider.Current.LastSortingFeature = "Sorted By Date";
         }
 
         private void ComboBox_Selected(object sender, RoutedEventArgs e)
