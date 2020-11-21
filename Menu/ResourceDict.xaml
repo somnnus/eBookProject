@@ -6,6 +6,8 @@
         <Setter Property="FontFamily" Value="Garamond" />
         <Setter Property="Foreground" Value="Black" />
         <Setter Property="FontSize" Value="14" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
     </Style>
     <Style TargetType="{x:Type Control}" x:Key="TextSettings">
         <Setter Property="FontFamily" Value="Garamond" />
@@ -22,8 +24,8 @@
     <Style TargetType="{x:Type ListBox}">
         <Setter Property="BorderThickness" Value="0"/>
     </Style>
-    <Style TargetType="{x:Type ListBoxItem}">
-        <Setter Property="Template">
+    <Style TargetType="{x:Type StackPanel}" x:Key="ItemAlignment">
+        <!--<Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
                     <Border>
@@ -36,7 +38,7 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Cursor" Value="Hand"/>
             </Trigger>
-        </Style.Triggers>
+        </Style.Triggers>-->
     </Style>
     <Style TargetType="{x:Type Button}">
         <Setter Property="Template">

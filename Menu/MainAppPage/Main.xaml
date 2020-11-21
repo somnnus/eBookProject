@@ -8,7 +8,7 @@
              xmlns:helper="clr-namespace:Menu.Helpers"
              xmlns:res="clr-namespace:Menu.SharedResources"
              mc:Ignorable="d"
-             d:DesignHeight="700" d:DesignWidth="1150"
+             d:DesignHeight="400" d:DesignWidth="1500"
              d:DataContext="{d:DesignInstance main:MainViewModel,
                                          IsDesignTimeCreatable=True}">
     <!--<UserControl.Triggers>
@@ -69,30 +69,37 @@
                         </ListBox.ItemsSource>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel MouseDown="StackPanel_MouseDown" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                                    <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.13, ElementName=DockPanelLibrary, Path=ActualWidth}"
+                                <!--<Grid HorizontalAlignment="Center" VerticalAlignment="Bottom">-->
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition SharedSizeGroup="SharedGroup" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel MouseDown="StackPanel_MouseDown" Orientation="Vertical">
+                                        <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.13, ElementName=DockPanelLibrary, Path=ActualWidth}"
                                                Height="auto" 
                                                Source='{Binding CoverPath}'>
-                                        <Image.Triggers>
-                                            <EventTrigger RoutedEvent="Image.Loaded">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation Storyboard.TargetProperty="(Image.Opacity)" From="0" To="1" Duration="0:0:1" />
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                        </Image.Triggers>
-                                    </Image>
-                                    <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Author}'></TextBlock>
-                                    <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Title}'></TextBlock>
-                                </StackPanel>
+                                            <Image.Triggers>
+                                                <EventTrigger RoutedEvent="Image.Loaded">
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation Storyboard.TargetProperty="(Image.Opacity)" From="0" To="1" Duration="0:0:1" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                            </Image.Triggers>
+                                        </Image>
+                                        <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Author}'></TextBlock>
+                                        <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Title}'></TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                                <!--</Grid>-->
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel ItemHeight="auto"
-                                               ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.23, ElementName=DockPanelLibrary,Path=ActualWidth}" 
-                                               IsItemsHost="True" Orientation="Horizontal"  />
+                                               ItemWidth="auto" 
+                                               IsItemsHost="True" Orientation="Horizontal" Grid.IsSharedSizeScope="True"/>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
                     </ListBox>

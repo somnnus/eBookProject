@@ -112,6 +112,11 @@ namespace Menu.MainAppPage
             }
         }
 
+        private void WrapPanel_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+
+        }
+
         //private MultiBinding createFieldMultiBinding(string fieldName)
         //{
         //    // Create the multi-binding
