@@ -42,6 +42,10 @@ namespace Menu.Helpers
                 ResourcesProvider.Current.BooksByPages = new Dictionary<int, List<Book>>();
                 ResourcesProvider.Current.BooksByPages = ArrayHelperExtensions.SplitByBlocks(ResourcesProvider.Current.ListBooks, ResourcesProvider.Current.BooksByPages, blocksCount);
             }
+            else
+            {
+                ResourcesProvider.Current.BooksByPages = new Dictionary<int, List<Book>>();
+            }
         }
 
         public static void SortByAuthor()

@@ -99,7 +99,7 @@ namespace Menu.PageForRemoving
               //  File.Delete(book.FullPath);              
                 ResourcesProvider.Current.ListBooks.Remove(book);                       
             }
-           // Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
+            // Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
             
             LibraryRefreshing.Refresh();
         }
