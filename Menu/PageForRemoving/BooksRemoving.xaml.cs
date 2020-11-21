@@ -97,7 +97,6 @@ namespace Menu.PageForRemoving
             }
 
             LibraryRefreshing.Refresh();
-            //Написать вызов к SortingLibrary
         }
 
         private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)

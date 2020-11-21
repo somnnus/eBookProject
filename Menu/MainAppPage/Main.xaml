@@ -11,6 +11,20 @@
              d:DesignHeight="700" d:DesignWidth="1150"
              d:DataContext="{d:DesignInstance main:MainViewModel,
                                          IsDesignTimeCreatable=True}">
+    <!--<UserControl.Triggers>
+        <EventTrigger RoutedEvent="Hyperlink.Click">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="blackStop" Storyboard.TargetProperty="Offset"
+                                         From="0" To="1" Duration="0:0:2" />
+                        <DoubleAnimation Storyboard.TargetName="transpStop" Storyboard.TargetProperty="Offset"
+                                         From="0" To="1" Duration="0:0:2" BeginTime="0:0:2"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </UserControl.Triggers>-->
     <UserControl.Resources>
         <ControlTemplate x:Key="ArrowRight">
             <Path Width="30" Height="{TemplateBinding Height}" Data="F1M568.254,-7.43524L568.159,-7.34277 567.977,-7.52246 546.559,-28.9417 525.484,-28.9417 549.787,-4.63446 557.439,3.01532 557.619,3.19629 550.067,10.7549 525.758,35.0583 546.834,35.0583 568.254,13.6429 578.792,3.10254 568.254,-7.43524z" Stretch="Uniform" Fill="{DynamicResource clBrArrow}" RenderTransformOrigin="0.5,0.5"/>
@@ -37,7 +51,7 @@
                     <Label Name="labelArrowRight" VerticalAlignment="Center" 
                             Height="auto"
                             Width="auto">
-                        <Hyperlink TextDecorations="None" Click="RightPageClick">
+                        <Hyperlink TextDecorations="None" Click="RightPageClick" >
                             <ContentControl Template="{StaticResource ArrowRight}"/>
                         </Hyperlink>
                     </Label>
@@ -58,7 +72,17 @@
                                 <StackPanel MouseDown="StackPanel_MouseDown" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                                     <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.13, ElementName=DockPanelLibrary, Path=ActualWidth}"
                                                Height="auto" 
-                                               Source='{Binding CoverPath}'/>
+                                               Source='{Binding CoverPath}'>
+                                        <Image.Triggers>
+                                            <EventTrigger RoutedEvent="Image.Loaded">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="(Image.Opacity)" From="0" To="1" Duration="0:0:1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </Image.Triggers>
+                                    </Image>
                                     <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Author}'></TextBlock>
                                     <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Title}'></TextBlock>
                                 </StackPanel>

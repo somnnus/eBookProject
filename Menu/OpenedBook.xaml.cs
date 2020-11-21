@@ -37,7 +37,6 @@ namespace Menu
             DisplayBook();
             Serialization.SerializationLastBook(currentBook, fullPath);
         }
-        
        
         public void DisplayBook()
         {
@@ -61,7 +60,6 @@ namespace Menu
     
             // doc.LineHeight = 1.5;
            
-
             var s = Serialization.SplitPage(text, 3000);
             
             foreach (var paragrapg in s)
@@ -69,17 +67,10 @@ namespace Menu
                Paragraph p = new Paragraph();
                p.Margin = new Thickness(0,0,0,0);
               
-                 p.Inlines.Add(paragrapg);
-                doc.Blocks.Add(p);
-               
-
+               p.Inlines.Add(paragrapg);
+               doc.Blocks.Add(p);
             }
             flowDocument.Document = doc;
-
-
-
-            
-            
         }
         
         private void CreateBookmark(object sender,RoutedEventArgs routedEventArgs)
@@ -90,17 +81,14 @@ namespace Menu
             mark.ColumnWidth = columnWidth;
             currentBook.AddBookmark(mark);
             
-
             var paginator = ((IDocumentPaginatorSource)flowDocument.Document).DocumentPaginator as DynamicDocumentPaginator;
             var position = paginator.GetPagePosition(paginator.GetPage(flowDocument.PageNumber)) as TextPointer;
              paragraphHigh = position.Paragraph;
             //  string text = paragraphHigh.ContentEnd
-
-
+            
             TextRange text = new TextRange(paragraphHigh.ContentStart, paragraphHigh.ContentEnd);
             bookmark = text.Text;
             Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
-
         }
         private void OpenBookmark(object sender, RoutedEventArgs routedEventArgs)
         {

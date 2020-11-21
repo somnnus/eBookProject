@@ -26,6 +26,20 @@ namespace Menu.MainAppPage
     /// </summary>
     public partial class Main : UserControl, INotifyPropertyChanged
     {
+        //public BitmapImage CurrentImage { get; set; }
+
+        //public List<BitmapImage> Images { get; set; }
+
+        //private int _imageIndex = 0;
+
+        //public void NextImageClick(object sender, MouseButtonEventArgs e)
+        //{
+        //    if (_imageIndex >= Images.Count) _imageIndex = 0;
+        //    CurrentImage = Images[imageIndex];
+        //    NotifyPropertyChanged();  //необходимо реализовать INotifyPropertyChanged в классе модели
+        //    _imageIndex++;
+        //}
+
         public int currentPage = 0;
 
         public Main()
