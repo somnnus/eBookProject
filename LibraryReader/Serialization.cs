@@ -4,6 +4,7 @@ using System.IO;
 using System.Xml.Serialization;
 using LibraryReader.Books;
 using System.Windows.Forms;
+using System.Windows.Documents;
 
 namespace LibraryReader
 {
@@ -24,7 +25,7 @@ namespace LibraryReader
                 using (Stream fStream = new FileStream(fullPath,
                             FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
                 {
-                    XmlSerializer xmlFormat1 = new XmlSerializer(typeof(List<Book>), new Type[] { typeof(Book), typeof(string), typeof(EpubBook),typeof(FB2Book) });
+                    XmlSerializer xmlFormat1 = new XmlSerializer(typeof(List<Book>), new Type[] { typeof(Book), typeof(string), typeof(EpubBook),typeof(FB2Book), typeof(Bookmark) });
                     xmlFormat1.Serialize(fStream, books);
                 }
               //  MessageBox.Show("=> Saved list in XML format!");
@@ -35,7 +36,7 @@ namespace LibraryReader
         {
             List<Book> books;
 
-            XmlSerializer xmlFormat = new XmlSerializer(typeof(List<Book>), new Type[] { typeof(Book), typeof(string), typeof(EpubBook), typeof(FB2Book) });
+            XmlSerializer xmlFormat = new XmlSerializer(typeof(List<Book>), new Type[] { typeof(Book), typeof(string), typeof(EpubBook), typeof(FB2Book),typeof(Bookmark) });
 
             using (Stream fStream = new FileStream(fullPath,
                 FileMode.Open, FileAccess.Read, FileShare.None))
@@ -61,7 +62,7 @@ namespace LibraryReader
                 using (Stream fStream = new FileStream(fullPath,
                             FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
                 {
-                    XmlSerializer xmlFormat1 = new XmlSerializer(typeof(Book), new Type[] { typeof(Book), typeof(string), typeof(EpubBook), typeof(FB2Book) });
+                    XmlSerializer xmlFormat1 = new XmlSerializer(typeof(Book), new Type[] { typeof(Book), typeof(string), typeof(EpubBook), typeof(FB2Book), typeof(Bookmark) });
                     xmlFormat1.Serialize(fStream, book);
                 }
                 //  MessageBox.Show("=> Saved list in XML format!");
@@ -71,7 +72,7 @@ namespace LibraryReader
         {
             Book book;
 
-            XmlSerializer xmlFormat = new XmlSerializer(typeof(Book), new Type[] { typeof(Book), typeof(string), typeof(EpubBook), typeof(FB2Book) });
+            XmlSerializer xmlFormat = new XmlSerializer(typeof(Book), new Type[] { typeof(Book), typeof(string), typeof(EpubBook), typeof(FB2Book), typeof(Bookmark) });
 
             using (Stream fStream = new FileStream(fullPath,
                 FileMode.Open, FileAccess.Read, FileShare.None))
@@ -100,6 +101,11 @@ namespace LibraryReader
                     xmlFormat1.Serialize(fStream, setting);
                 }
             }
+        }
+        public static IEnumerable<string> SplitPage(this string text, int size)
+        {
+            for (var i = 0; i < text.Length; i += size)
+                yield return text.Substring(i, Math.Min(size, text.Length - i));
         }
 
         public static List<string> DeserializationSetting(string fullPath)

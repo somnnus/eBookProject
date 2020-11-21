@@ -25,6 +25,8 @@ namespace Menu
     {
         string fullPath = AppDomain.CurrentDomain.BaseDirectory + "Library";
 
+        string bookmark;
+
         Book currentBook;
         private double columnWidth; 
         Paragraph paragraphHigh = new Paragraph();
@@ -35,60 +37,97 @@ namespace Menu
             DisplayBook();
             Serialization.SerializationLastBook(currentBook, fullPath);
         }
-
+        
+       
         public void DisplayBook()
         {
             flowDocument.Document = null;
             Paragraph paragraph = new Paragraph();
             string text = currentBook.ReturnContent();
-            paragraphHigh.Inlines.Add(text);
+            //paragraphHigh.Inlines.Add(text);
             
-            FlowDocument document = new FlowDocument(paragraphHigh);
+           // FlowDocument document = new FlowDocument(paragraphHigh);
 
-            document.FontSize = 16;
-            //  document.ColumnRuleWidth = border.ActualWidth/2;
-            document.ColumnWidth = 250;//3 свойства для изменения колонок! 2- одна колонка, 3 - две колонки, 4 - три колонки
-            columnWidth = 250;
-            document.ColumnGap = 20;
+            //document.FontSize = 16;
+            ////  document.ColumnRuleWidth = border.ActualWidth/2;
+            //document.ColumnWidth = 250;//3 свойства для изменения колонок! 2- одна колонка, 3 - две колонки, 4 - три колонки
+            //columnWidth = 250;
+            //document.ColumnGap = 20;
             
 
-            flowDocument.Document = document;
+            //flowDocument.Document = document;
+
+           // FlowDocument doc =new FlowDocument();
+    
+            // doc.LineHeight = 1.5;
+           
+
+            var s = Serialization.SplitPage(text, 3000);
+            
+            foreach (var paragrapg in s)
+            {
+               Paragraph p = new Paragraph();
+               p.Margin = new Thickness(0,0,0,0);
+              
+                 p.Inlines.Add(paragrapg);
+                doc.Blocks.Add(p);
+               
+
+            }
+            flowDocument.Document = doc;
+
+
+
             
             
         }
-        public void GoToPageMethod()
-        {
-            flowDocument.GoToPage(3);
-        }
+        
         private void CreateBookmark(object sender,RoutedEventArgs routedEventArgs)
         {
             Bookmark mark = new Bookmark();
-            mark.NumberPage = flowDocument.MasterPageNumber;
+          //  mark.NumberPage = flowDocument.MasterPageNumber;
             mark.FrontSize = flowDocument.FontSize;
             mark.ColumnWidth = columnWidth;
             currentBook.AddBookmark(mark);
+            
+
+            var paginator = ((IDocumentPaginatorSource)flowDocument.Document).DocumentPaginator as DynamicDocumentPaginator;
+            var position = paginator.GetPagePosition(paginator.GetPage(flowDocument.PageNumber)) as TextPointer;
+             paragraphHigh = position.Paragraph;
+            //  string text = paragraphHigh.ContentEnd
+
+
+            TextRange text = new TextRange(paragraphHigh.ContentStart, paragraphHigh.ContentEnd);
+            bookmark = text.Text;
             Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
+
         }
         private void OpenBookmark(object sender, RoutedEventArgs routedEventArgs)
         {
             if (currentBook.bookmarks.Count!=0)
             {
-              //  flowDocument.GoToPage(currentBook.bookmarks[0].NumberPage);
-                flowDocument.GoToPage(100);
+                Paragraph p = new Paragraph();
+                p.Margin = new Thickness(0, 0, 0, 0);
+                p.Inlines.Add(bookmark);
+                p.BringIntoView();
+
+                //paragraphHigh.BringIntoView();
             }
         }
 
         private void SliderChange(object sender,RoutedPropertyChangedEventArgs<double> e)
         {
-            ((Slider)sender).SelectionEnd = e.NewValue;
-           
-            FlowDocument document = new FlowDocument(paragraphHigh);
-            document.FontSize = 16;
-            document.ColumnWidth = e.NewValue;
+            ((Slider)sender).SelectionEnd = e.NewValue;           
+            doc.FontSize = 16;
+            doc.ColumnWidth = e.NewValue;
             columnWidth = e.NewValue;
-            document.ColumnGap = 20;
-            flowDocument.Document = document;
+            doc.ColumnGap = 20;
+           // flowDocument.Document = document;
 
+        }
+        private void SearchInBook(object sender, RoutedEventArgs routedEventArgs)
+        {
+            flowDocument.Find();
         }
         private void OpenMenu(object sender, RoutedEventArgs routedEventArgs)
         {
