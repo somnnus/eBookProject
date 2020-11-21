@@ -102,7 +102,6 @@ namespace Menu.PageForRemoving
            // Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
             
             LibraryRefreshing.Refresh();
-            //Написать вызов к SortingLibrary
         }
 
 
