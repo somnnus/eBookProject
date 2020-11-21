@@ -31,7 +31,6 @@ namespace LibraryReader.Books
             ColumnWidth = 1000;
             XDocument doc = XDocument.Load(path);
             fB2File.Load(doc, false);
-            FullPath = path;
             Date = DateTime.Now;
            
             var s = fB2File.TitleInfo;

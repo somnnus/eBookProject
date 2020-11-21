@@ -19,6 +19,7 @@ using Menu.Comparers;
 using Menu.Helpers;
 using System.IO;
 using LibraryReader;
+using System.Drawing;
 
 namespace Menu.PageForRemoving
 {
@@ -29,6 +30,7 @@ namespace Menu.PageForRemoving
     {
         private List<Book> booksForDeleting;
         static string fullPath = AppDomain.CurrentDomain.BaseDirectory + "Library";
+        
 
         public BooksRemoving()
         {
@@ -94,16 +96,25 @@ namespace Menu.PageForRemoving
 
         private void CleanLibrary(object sender, RoutedEventArgs e)
         {
+            List<string> coversPath = new List<string>();
             foreach (var book in booksForDeleting)
             {
-              //  File.Delete(book.FullPath);              
-                ResourcesProvider.Current.ListBooks.Remove(book);                       
+                File.Delete(book.FullPath);              
+                ResourcesProvider.Current.ListBooks.Remove(book);
+                coversPath.Add(book.CoverPath);    
             }
-            // Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
-            
+            Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);            
             LibraryRefreshing.Refresh();
+          //  DeleteCovers(coversPath);
         }
 
+        private void DeleteCovers(List<string> coversPath)
+        {
+            foreach (var coverPath in coversPath)
+            {
+                File.Delete(coverPath);
+            }
+        }
 
         private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {
