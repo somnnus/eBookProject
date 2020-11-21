@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Menu.MainAppPage;
 using Menu.LibraryPage;
 using Menu.SettingsPage;
+using Menu.PageForRemoving;
 using System.Windows;
 
 namespace Menu
@@ -27,20 +28,25 @@ namespace Menu
 
         public RelayCommand SettingsCommand { get; set; }
 
+        public RelayCommand RemovingPageCommand { get; set; }
+
         private readonly MainViewModel mainViewModel;
         private readonly LibraryViewModel libraryViewModel;
         private readonly SettingsViewModel settingsViewModel;
+        private readonly BooksRemovingViewModel removingViewModel;
 
         public MainWindowViewModel(MainViewModel firstViewModel,
-                    LibraryViewModel secondViewModel, SettingsViewModel thirdViewModel)
+                    LibraryViewModel secondViewModel, SettingsViewModel thirdViewModel, BooksRemovingViewModel fourthViewModel)
         {
             mainViewModel = firstViewModel;
             libraryViewModel = secondViewModel;
             settingsViewModel = thirdViewModel;
+            removingViewModel = fourthViewModel;
             MainCommand = new RelayCommand(ShowFirstView);
             LibCommand = new RelayCommand(ShowSecondView);
             SettingsCommand = new RelayCommand(ShowThirdModel);
-            //ShowFirstView();
+            RemovingPageCommand = new RelayCommand(ShowFourthDocument);
+            ShowFirstView();
         }
 
         private void ShowFirstView()
@@ -57,5 +63,11 @@ namespace Menu
         {
             CurrentViewModel = settingsViewModel;
         }
+
+        private void ShowFourthDocument()
+        {
+            CurrentViewModel = removingViewModel;
+        }
+
     }
 }

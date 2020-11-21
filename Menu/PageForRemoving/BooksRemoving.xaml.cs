@@ -1,9 +1,8 @@
 ﻿using LibraryReader.Books;
+using Menu.SharedResources;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,18 +15,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Menu.SharedResources;
+using Menu.Comparers;
 using Menu.Helpers;
 
-namespace Menu.LibraryPage
+namespace Menu.PageForRemoving
 {
     /// <summary>
-    /// Логика взаимодействия для Library.xaml
+    /// Логика взаимодействия для BooksRemoving.xaml
     /// </summary>
-    public partial class Library : UserControl
+    public partial class BooksRemoving : UserControl
     {
-        public Library()
+        private List<Book> booksForDeleting;
+
+        public BooksRemoving()
         {
+            booksForDeleting = new List<Book>();
+
             DataContext = ResourcesProvider.Current;
             InitializeComponent();
             if (ResourcesProvider.Current.ListBooks.Count != 0)
@@ -66,7 +69,7 @@ namespace Menu.LibraryPage
             else
                 MessageBox.Show("Library is empty!");
         }
-        
+
         private void DoPreviewingMouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (e.Delta > 0)
@@ -79,30 +82,69 @@ namespace Menu.LibraryPage
             }
             e.Handled = true;
         }
+        
+        private void SearchInLibrary(object sender, TextChangedEventArgs e)
+        {
+            var textBox = (TextBox)sender;
+            LibrarySearching.Search(textBox);
+        }
+
+        private void CleanLibrary(object sender, RoutedEventArgs e)
+        {
+            foreach (var book in booksForDeleting)
+            {
+                ResourcesProvider.Current.ListBooks.Remove(book);
+            }
+
+            LibraryRefreshing.Refresh();
+            //Написать вызов к SortingLibrary
+        }
 
         private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount >= 1)
             {
                 StackPanel stackPanel = (StackPanel)sender;
-                Book current = (Book)stackPanel.DataContext;
-                var openedBook = new OpenedBook(current);
-                openedBook.Show();
-                foreach (Window window in Application.Current.Windows)
+                Book currentBook = (Book)stackPanel.DataContext;
+                var currentCheckBox = (CheckBox)stackPanel.Children[0];
+
+                if (currentCheckBox.IsChecked == false)
                 {
-                    if (window is MainWindow)
-                    {
-                        window.Close();
-                        break;
-                    }
+                    currentCheckBox.IsChecked = true;
+                    booksForDeleting.Add(currentBook);
+                }
+                else
+                if (currentCheckBox.IsChecked == true)
+                {
+                    currentCheckBox.IsChecked = false;
+                    booksForDeleting.Remove(currentBook);
                 }
             }
         }
 
-        private void SearchInLibrary(object sender, TextChangedEventArgs e)
+        private void ChooseBookToDelete(object sender, RoutedEventArgs e)
         {
-            var textBox = (TextBox)sender;
-            LibrarySearching.Search(textBox);
+            StackPanel stackPanel = (StackPanel)((CheckBox)sender).Parent;
+            Book currentBook = (Book)stackPanel.DataContext;
+            var currentCheckBox = (CheckBox)stackPanel.Children[0];
+
+            if (currentCheckBox.IsChecked == true)
+            {
+                currentCheckBox.IsChecked = true;
+                booksForDeleting.Add(currentBook);
+            }
+            else
+            if (currentCheckBox.IsChecked == false)
+            {
+                currentCheckBox.IsChecked = false;
+                booksForDeleting.Remove(currentBook);
+            }
         }
+
+        //private void RefreshDict()
+        //{
+        //    dataGridLib.ItemsSource = ResourcesProvider.Current.SortedBooks;
+        //    //CollectionViewSource.GetDefaultView(lastSortingFeature).Refresh();
+        //}
     }
 }

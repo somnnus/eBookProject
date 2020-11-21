@@ -10,6 +10,7 @@ using Castle.MicroKernel.Registration;
 using Menu.MainAppPage;
 using Menu.LibraryPage;
 using Menu.SettingsPage;
+using Menu.PageForRemoving;
 
 namespace Menu
 {
@@ -28,6 +29,7 @@ namespace Menu
             container.Register(Component.For<LibraryViewModel>());
             container.Register(Component.For<SettingsViewModel>());
             container.Register(Component.For<MainWindowViewModel>());
+            container.Register(Component.For<BooksRemovingViewModel>());
             container.Register(Component.For<MainWindow>());
 
             var mainWindow = container.Resolve<MainWindow>();
