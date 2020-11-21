@@ -96,25 +96,20 @@ namespace Menu.PageForRemoving
 
         private void CleanLibrary(object sender, RoutedEventArgs e)
         {
-            List<string> coversPath = new List<string>();
+            List<Book> delete = new List<Book>();
             foreach (var book in booksForDeleting)
             {
-                File.Delete(book.FullPath);              
+                delete.Add(book);     
                 ResourcesProvider.Current.ListBooks.Remove(book);
-                coversPath.Add(book.CoverPath);    
+
             }
-            Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);            
+            Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
+            Serialization.SerializationBookDelete(delete, fullPath);
+            
             LibraryRefreshing.Refresh();
-          //  DeleteCovers(coversPath);
+          
         }
 
-        private void DeleteCovers(List<string> coversPath)
-        {
-            foreach (var coverPath in coversPath)
-            {
-                File.Delete(coverPath);
-            }
-        }
 
         private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {

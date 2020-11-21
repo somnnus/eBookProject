@@ -42,6 +42,7 @@ namespace Menu
             CreateHiddenDirectory();
             CheckSerializization();
             CheckSettingsSerialization();
+            CheckSerializationBookDelete();
 
             LibraryRefreshing.FillMain(); //обработка постраничного вывода
         }
@@ -179,6 +180,28 @@ namespace Menu
                 Application.Current.Resources["clBrText"] = (Brush)(new BrushConverter().ConvertFrom(setting[3]));
                 Application.Current.Resources["clBrArrow"] = (Brush)(new BrushConverter().ConvertFrom(setting[4]));
             }
+        }
+        private void CheckSerializationBookDelete()
+        {
+            string fileNameSerialize = fullPath + "\\" + "delete.xml";
+            List<Book> deleteBooks = null;
+            if (File.Exists(fileNameSerialize))
+            {
+                deleteBooks = Serialization.DeserializationBookDelete(fileNameSerialize);
+                File.Delete(fileNameSerialize);
+            }
+            if (deleteBooks!=null)
+            {
+                foreach (var book in deleteBooks)
+                {
+                    File.Delete(book.FullPath);
+                    if (!book.CoverPath.Contains("defoltCover"))       
+                    File.Delete(book.CoverPath);
+                   
+                }
+            }
+            
+            
         }
 
         private void OpenBook(object sender, RoutedEventArgs e)
