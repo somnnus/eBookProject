@@ -49,11 +49,7 @@ namespace Menu
             DisplayBook();
             Serialization.SerializationLastBook(currentBook, fullPath);
 
-
-
         }
-
-
         public void DisplayBook()
         {
             flowDocument.Document = null;
