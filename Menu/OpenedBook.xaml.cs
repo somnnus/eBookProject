@@ -101,8 +101,9 @@ namespace Menu
         private void ComboBox_Selected(object sender, RoutedEventArgs routedEventArgs)
         {
             var comboBox = (ComboBox)sender;
-            var selectedNum = ((Bookmark)(comboBox.SelectedItem)).NumberPage;
+            var selectedNum = ((Bookmark)(comboBox.SelectedItem)).NumberPage;          
             flowDocument.GoToPage(selectedNum);
+            
         }
 
         private void FindInBook(object sender, RoutedEventArgs routedEventArgs)
