@@ -96,26 +96,16 @@ namespace Menu
         private void CreateBookmark(object sender,RoutedEventArgs routedEventArgs)
         {
             Bookmark mark = new Bookmark();
-          //  mark.NumberPage = flowDocument.MasterPageNumber;
-            mark.ColumnWidth = columnWidth;
-            //  currentBook.AddBookmark(mark);
-
-            page = flowDocument.MasterPageNumber;
-
-            
+            mark.NumberPage = flowDocument.MasterPageNumber;
+            currentBook.AddBookmark(mark);
 
         }
         private void OpenBookmark(object sender, RoutedEventArgs routedEventArgs)
         {
-            //if (currentBook.bookmarks.Count!=0)
-            //{
-                
-            //   // flowDocument.BringIntoView();
-            //    //paragraphHigh.BringIntoView();
-            //}
-            // flowDocument.GoToPage(page);
-            flowDocument.Zoom = 150;
-            flowDocument.GoToPage(50);                      
+            if (currentBook.bookmarks.Count!=0)
+            {
+                flowDocument.GoToPage(currentBook.bookmarks[0].NumberPage);
+            }                     
         }
 
         private void FindInBook(object sender, RoutedEventArgs routedEventArgs)

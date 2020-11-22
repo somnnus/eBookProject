@@ -12,9 +12,6 @@ namespace LibraryReader.Books
     public class Bookmark
     {
         public int NumberPage { get; set; }
-        public double Zoom { get; set; }
-        public double ColumnWidth { get; set; }
         
-      //  public Paragraph Paragraph { get; set; }
     }
 }
