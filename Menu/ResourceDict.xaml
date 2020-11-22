@@ -40,6 +40,30 @@
             </Trigger>
         </Style.Triggers>-->
     </Style>
+    <Style TargetType="{x:Type Button}" x:Key="button">
+        <Setter Property="Background" Value="{DynamicResource clBrSearch}"/>
+        <Setter Property="Foreground" Value="{DynamicResource clBrText}"/>
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontFamily" Value="Georgia"/>
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="{DynamicResource clBrText}" BorderThickness="2">
+                        <ContentPresenter VerticalAlignment="{TemplateBinding VerticalAlignment}" HorizontalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
     <Style TargetType="{x:Type Button}">
         <Setter Property="Template">
             <Setter.Value>
