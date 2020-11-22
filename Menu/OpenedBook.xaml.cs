@@ -33,9 +33,13 @@ namespace Menu
         string bookmark;
         int page;
 
-        Book currentBook;
-        private int columnWidth;
-        private int fontSize;
+        Book currentBook=null;
+
+        private double columnWidth;
+        private int lastPage;
+
+        IEnumerable<string> s;
+
         Paragraph paragraphHigh { get; set; }
         public OpenedBook(Book current)
         {
@@ -43,48 +47,47 @@ namespace Menu
             InitializeComponent();
             currentBook = current;
             DisplayBook();
-
             Serialization.SerializationLastBook(currentBook, fullPath);
+            
+                  
+            
         }
         
        
         public void DisplayBook()
         {
             flowDocument.Document = null;
-            Paragraph paragraph = new Paragraph();
-            string text = currentBook.ReturnContent();
-            //paragraphHigh.Inlines.Add(text);
-            
-           // FlowDocument document = new FlowDocument(paragraphHigh);
-
-               //document.FontSize = 16;
-              //  document.ColumnRuleWidth = border.ActualWidth/2;
-             // document.ColumnWidth = 250;//3 свойства для изменения колонок! 2- одна колонка, 3 - две колонки, 4 - три колонки
-            // columnWidth = 250;
-           // document.ColumnGap = 20;
-            
-
-              //flowDocument.Document = document;
-             // FlowDocument doc =new FlowDocument();   
-            //  doc.LineHeight = 1.5;
-           
-
-            var s = Serialization.SplitPage(text, 3000);
+            string text = currentBook.ReturnContent(); 
+            doc.FontSize = 16;
+             s = Serialization.SplitPage(text, 3000);
             
             foreach (var paragrapg in s)
             {
-               Paragraph p = new Paragraph();
-               p.Margin = new Thickness(0,0,0,0);
-              
-                 p.Inlines.Add(paragrapg);
-                 doc.Blocks.Add(p);
-                
-              
+                Paragraph p = new Paragraph();
+                p.Margin = new Thickness(0, 0, 0, 0);
+
+                p.Inlines.Add(paragrapg);
+                doc.Blocks.Add(p);
+                              
             }
-            
-            doc.ColumnWidth = currentBook.ColumnWidth;
-            doc.FontSize = currentBook.FontSize;
+            if (currentBook.Zoom != -1 && currentBook.LastPage != -1 && currentBook.ColumnWidth != -1)
+            {
+                flowDocument.Zoom = currentBook.Zoom;
+                lastPage = currentBook.LastPage;
+                doc.ColumnWidth = currentBook.ColumnWidth;
+                slider.SelectionEnd = currentBook.ColumnWidth;
+                columnWidth = currentBook.ColumnWidth;
+
+            }
+            else
+            {
+                slider.SelectionEnd = 650;
+                doc.ColumnWidth = 650;
+                columnWidth = 650;
+                
+            }                     
             flowDocument.Document = doc;
+            
 
 
             
@@ -94,43 +97,67 @@ namespace Menu
         {
             Bookmark mark = new Bookmark();
           //  mark.NumberPage = flowDocument.MasterPageNumber;
-            mark.FrontSize = flowDocument.FontSize;
             mark.ColumnWidth = columnWidth;
             //  currentBook.AddBookmark(mark);
 
             page = flowDocument.MasterPageNumber;
 
             
-            //  string text = paragraphHigh.ContentEnd
-
-            //System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(Paragraph));
-            //using (var writer = new StreamWriter(@"C:\Users\1394954\Desktop\Menu\Menu\Menu\bin\Debug\Library\mark.xml"))
-            //{
-            //    serializer.Serialize(writer, paragraphHigh);
-            //}
-        
-          //  Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
 
         }
         private void OpenBookmark(object sender, RoutedEventArgs routedEventArgs)
         {
-            if (currentBook.bookmarks.Count!=0)
-            {
+            //if (currentBook.bookmarks.Count!=0)
+            //{
                 
-               // flowDocument.BringIntoView();
-                //paragraphHigh.BringIntoView();
-            }
+            //   // flowDocument.BringIntoView();
+            //    //paragraphHigh.BringIntoView();
+            //}
             // flowDocument.GoToPage(page);
-            flowDocument.GoToPage(50);
+            flowDocument.Zoom = 150;
+            flowDocument.GoToPage(50);                      
+        }
+
+        private void FindInBook(object sender, RoutedEventArgs routedEventArgs)
+        {
             flowDocument.Find();
-           
+        }
+
+        private void SliderChange(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            ((Slider)sender).SelectionEnd = e.NewValue;
+            if (currentBook != null)
+            {
+                foreach (var paragrapg in s)
+                {
+                    Paragraph p = new Paragraph();
+                    p.Margin = new Thickness(0, 0, 0, 0);
+
+                    p.Inlines.Add(paragrapg);
+                    doc.Blocks.Add(p);
+
+
+                }
+
+                doc.ColumnWidth = e.NewValue;
+                flowDocument.Document = doc;
+            }
 
         }
 
-            
+        private void ContinueReading(object sender, RoutedEventArgs routedEventArgs)
+        {
+
+            flowDocument.GoToPage(currentBook.LastPage);
+        }
+
         private void OpenMenu(object sender, RoutedEventArgs routedEventArgs)
         {
-            
+            currentBook.LastPage = flowDocument.MasterPageNumber;
+            currentBook.ColumnWidth = columnWidth;
+            currentBook.Zoom = flowDocument.Zoom;
+
+            Serialization.SerializationLastBook(currentBook, fullPath);
             Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
             var menuWindow = new MainWindow(ResourcesProvider.Current.MainWindowVM);
             menuWindow.Show();

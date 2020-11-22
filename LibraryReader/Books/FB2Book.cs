@@ -27,8 +27,11 @@ namespace LibraryReader.Books
             fB2File = new FB2File();
             File.Copy(path, newPath);
             FullPath = newPath;
-            FontSize = 16;
-            ColumnWidth = 1000;
+
+            ColumnWidth = -1;
+            Zoom = -1;
+            LastPage = -1;
+
             XDocument doc = XDocument.Load(path);
             fB2File.Load(doc, false);
             Date = DateTime.Now;
@@ -44,19 +47,7 @@ namespace LibraryReader.Books
             Title = s.BookTitle.Text;
             Author = Convert.ToString(name);
 
-
             CoverPath = GetCoverPath();
-
-
-            //var namespaceManager = new XmlNamespaceManager(new NameTable());
-            //namespaceManager.AddNamespace("fb", "http://www.gribuser.ru/xml/fictionbook/2.0");
-
-            //XDocument doc1 = XDocument.Load(path);
-            //var body = doc1.Root.XPathSelectElements("fb:body", namespaceManager).ToList();
-            //StringWriter sw = new StringWriter();
-            //XmlTextWriter tx = new XmlTextWriter(sw);
-            //body[0].WriteTo(tx);
-            //string str = sw.ToString();
 
         }
         public static string GetContentAsTitle(string Content)
