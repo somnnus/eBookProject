@@ -25,7 +25,6 @@ namespace LibraryReader.Books
 
         public double Zoom { get; set; }
         public int LastPage { get; set; }
-        public double ColumnWidth { get; set; }
 
         public Book()
         {

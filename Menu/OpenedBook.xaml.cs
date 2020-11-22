@@ -18,6 +18,7 @@ using Menu.SharedResources;
 using System.IO;
 using System.Windows.Markup;
 using System.Xml;
+using System.Text.RegularExpressions;
 
 namespace Menu
 {
@@ -30,15 +31,14 @@ namespace Menu
     {
         string fullPath = AppDomain.CurrentDomain.BaseDirectory + "Library";
 
-        string bookmark;
-        int page;
+       // string bookmark;
+       // int page;
 
         Book currentBook=null;
 
-        private double columnWidth;
         private int lastPage;
 
-        IEnumerable<string> s;
+        string[] newText;
 
         Paragraph paragraphHigh { get; set; }
         public OpenedBook(Book current)
@@ -59,38 +59,30 @@ namespace Menu
             flowDocument.Document = null;
             string text = currentBook.ReturnContent(); 
             doc.FontSize = 16;
-             s = Serialization.SplitPage(text, 3000);
+            newText = Regex.Split(text, @"\n");
             
-            foreach (var paragrapg in s)
+            foreach (var paragrapg in newText)
             {
+                string abz = "    " + paragrapg;
                 Paragraph p = new Paragraph();
-                p.Margin = new Thickness(0, 0, 0, 0);
-
-                p.Inlines.Add(paragrapg);
-                doc.Blocks.Add(p);
-                              
+                p.Margin = new Thickness(0,0,0,0);
+                p.Inlines.Add(abz);
+               
+                doc.Blocks.Add(p);                                      
             }
-            if (currentBook.Zoom != -1 && currentBook.LastPage != -1 && currentBook.ColumnWidth != -1)
+            doc.ColumnWidth = 650;
+            if (currentBook.Zoom != -1 && currentBook.LastPage != -1 )
             {
                 flowDocument.Zoom = currentBook.Zoom;
                 lastPage = currentBook.LastPage;
-                doc.ColumnWidth = currentBook.ColumnWidth;
-                slider.SelectionEnd = currentBook.ColumnWidth;
-                columnWidth = currentBook.ColumnWidth;
-
             }
             else
             {
-                slider.SelectionEnd = 650;
-                doc.ColumnWidth = 650;
-                columnWidth = 650;
-                
-            }                     
+                flowDocument.Zoom = 110;
+            }
+                  
             flowDocument.Document = doc;
-            
-
-
-            
+       
         }
         
         private void CreateBookmark(object sender,RoutedEventArgs routedEventArgs)
@@ -113,26 +105,6 @@ namespace Menu
             flowDocument.Find();
         }
 
-        private void SliderChange(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            ((Slider)sender).SelectionEnd = e.NewValue;
-            if (currentBook != null)
-            {
-                foreach (var paragrapg in s)
-                {
-                    Paragraph p = new Paragraph();
-                    p.Margin = new Thickness(0, 0, 0, 0);
-
-                    p.Inlines.Add(paragrapg);
-                    doc.Blocks.Add(p);
-                }
-
-                doc.ColumnWidth = e.NewValue;
-                flowDocument.Document = doc;
-            }
-
-        }
-
         private void ContinueReading(object sender, RoutedEventArgs routedEventArgs)
         {
 
@@ -142,7 +114,6 @@ namespace Menu
         private void OpenMenu(object sender, RoutedEventArgs routedEventArgs)
         {
             currentBook.LastPage = flowDocument.MasterPageNumber;
-            currentBook.ColumnWidth = columnWidth;
             currentBook.Zoom = flowDocument.Zoom;
 
             Serialization.SerializationLastBook(currentBook, fullPath);

@@ -30,7 +30,6 @@ namespace LibraryReader.Books
                 Date = DateTime.Now;
                 CoverPath = GetCoverPath();
 
-                ColumnWidth = -1;
                 Zoom = -1;
                 LastPage = -1;
 

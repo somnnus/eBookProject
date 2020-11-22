@@ -28,7 +28,6 @@ namespace LibraryReader.Books
             File.Copy(path, newPath);
             FullPath = newPath;
 
-            ColumnWidth = -1;
             Zoom = -1;
             LastPage = -1;
 
