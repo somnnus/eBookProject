@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Menu"
         xmlns:helper="clr-namespace:Menu.Helpers"
-        mc:Ignorable="d">
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ControlTemplate x:Key="ArrowLeft">
             <Path Width="30" Height="{TemplateBinding Height}" Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z" Stretch="Uniform" Fill="{DynamicResource clBrText}"  RenderTransformOrigin="0.5,0.5"/>
