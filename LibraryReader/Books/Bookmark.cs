@@ -12,6 +12,5 @@ namespace LibraryReader.Books
     public class Bookmark
     {
         public int NumberPage { get; set; }
-        
     }
 }

@@ -78,12 +78,12 @@ namespace Menu
                         }
                         else
                         {
-                            MessageBox.Show("Не удалось открыть книгу");
+                            MessageBox.Show("Couldn't open the book");
                         }                                             
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Не удалось открыть книгу");
+                        MessageBox.Show("Couldn't open the book");
                         Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
                     }
                 }
@@ -102,13 +102,13 @@ namespace Menu
                         }
                         else
                         {
-                            MessageBox.Show("Не удалось открыть книгу");
+                            MessageBox.Show("Couldn't open the book");
                         }
                         
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Не удалось открыть книгу");
+                        MessageBox.Show("Couldn't open the book");
                         File.Delete(newFullFileName);
                         Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
                     }
@@ -116,7 +116,7 @@ namespace Menu
             }
             else
             {
-                MessageBox.Show("Эта книга уже есть в библиотеке!");
+                MessageBox.Show("The book has already added in the library!");
             }
         }
 
@@ -214,13 +214,15 @@ namespace Menu
 
         private void OpenLastBook(object sender, RoutedEventArgs e)
         {
+            bool found = false;
             Book book = CheckLastBookSerializization();
             if (book != null)
             {
                 foreach(var dict in ResourcesProvider.Current.ListBooks)
                 {
-                    if (book.Date == dict.Date)
+                    if (book.FullPath == dict.FullPath)
                     {
+                        found = true;
                         var openedBook = new OpenedBook(book);
                         openedBook.Show();
                         this.Close();
@@ -228,14 +230,17 @@ namespace Menu
                     else
                     {
                         File.Delete(fullPath + "\\last.xml");
-                        MessageBox.Show("Книга не найдена");
                     }
-                }               
-              
+                }
+                if (!found)
+                {
+                    MessageBox.Show("Book was not found");
+                }
+
             }
             else
             {
-                MessageBox.Show("Вы ничего не читали!");
+                MessageBox.Show("You haven't opened the book earlier!");
             }
         }
 

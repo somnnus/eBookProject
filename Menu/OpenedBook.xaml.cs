@@ -43,13 +43,16 @@ namespace Menu
         Paragraph paragraphHigh { get; set; }
         public OpenedBook(Book current)
         {
-
             InitializeComponent();
             currentBook = current;
             DisplayBook();
             Serialization.SerializationLastBook(currentBook, fullPath);
 
+            bookmarkList.ItemsSource = currentBook.bookmarks;
+            bookmarkList.DataContext = currentBook.bookmarks;
         }
+
+
         public void DisplayBook()
         {
             flowDocument.Document = null;
@@ -94,6 +97,13 @@ namespace Menu
             {
                 flowDocument.GoToPage(currentBook.bookmarks[0].NumberPage);
             }
+        }
+
+        private void ComboBox_Selected(object sender, RoutedEventArgs routedEventArgs)
+        {
+            var comboBox = (ComboBox)sender;
+            var selectedNum = ((Bookmark)(comboBox.SelectedItem)).NumberPage;
+            flowDocument.GoToPage(selectedNum);
         }
 
         private void FindInBook(object sender, RoutedEventArgs routedEventArgs)
