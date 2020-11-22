@@ -8,7 +8,7 @@
         mc:Ignorable="d">
     <Window.Resources>
         <ControlTemplate x:Key="ArrowLeft">
-            <Path Width="30" Height="{TemplateBinding Height}" Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z" Stretch="Uniform" Fill="{DynamicResource clBrMenu}" RenderTransformOrigin="0.5,0.5"/>
+            <Path Width="30" Height="{TemplateBinding Height}" Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z" Stretch="Uniform" Fill="{DynamicResource clBrText}"  RenderTransformOrigin="0.5,0.5"/>
         </ControlTemplate>
     </Window.Resources>
 
@@ -19,15 +19,21 @@
                     <ContentControl Template="{StaticResource ArrowLeft}" Height="21" Width="13"/>
                 </Hyperlink>
             </Label>
-            <Button Content="Bookmark" Click="CreateBookmark"  Style="{StaticResource button}" />
-            <Button Content="Open Bookmark" Click="OpenBookmark"  Style="{StaticResource button}"/>
+            <Button Content="Make Bookmark" Click="CreateBookmark"  Style="{StaticResource button}" />
+            <!--<Button Content="Open Bookmark" Click="OpenBookmark"  Style="{StaticResource button}"/>-->
             <Button Content="Search" Name="btnSearch" Click="FindInBook"  Style="{StaticResource button}"/>
-            <Button Content="Continue" Click="ContinueReading" Style="{StaticResource button}"/>
-            <ComboBox Name="bookmarkList" Text="Choose Bookmark" Focusable="False" IsEditable="True" SelectionChanged="ComboBox_Selected">
+            <Button Content="Continue Reading" Click="ContinueReading" Style="{StaticResource button}"/>
+            <ComboBox Foreground="{DynamicResource clBrText}" 
+                      FontSize="12" 
+                      FontFamily="Georgia"
+                      BorderBrush="{DynamicResource clBrText}" 
+                      BorderThickness="2" 
+                      ItemsSource="{Binding}"
+                      Name="bookmarkList" Text="Choose Bookmark" Focusable="False" IsEditable="True" SelectionChanged="ComboBox_Selected">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding NumberPage}" />
+                            <TextBlock Foreground="Black" Text="{Binding NumberPage}" />
                         </StackPanel>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>

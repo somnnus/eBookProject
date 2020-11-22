@@ -46,7 +46,10 @@
                         </DataGridTextColumn.ElementStyle>
                         <DataGridTextColumn.HeaderTemplate>
                             <DataTemplate>
-                                <ComboBox Foreground="{DynamicResource clBrText}" Text="-- Sorted By Date --" Focusable="False" IsEditable="True" IsReadOnly="True" Width="150" SelectionChanged="ComboBox_Selected">
+                                <ComboBox Foreground="{DynamicResource clBrText}" 
+                                          FontSize="12" 
+                                          FontFamily="Georgia"
+                                          Text="-- Sorted By Date --" Focusable="False" IsEditable="True" IsReadOnly="True" SelectionChanged="ComboBox_Selected">
                                     <TextBlock Foreground="Black">Sorted By Author</TextBlock>
                                     <TextBlock Foreground="Black">Sorted By Title</TextBlock>
                                     <TextBlock Foreground="Black">Sorted By Date</TextBlock>

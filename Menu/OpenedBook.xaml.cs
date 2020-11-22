@@ -47,8 +47,7 @@ namespace Menu
             currentBook = current;
             DisplayBook();
             Serialization.SerializationLastBook(currentBook, fullPath);
-
-            bookmarkList.ItemsSource = currentBook.bookmarks;
+            
             bookmarkList.DataContext = currentBook.bookmarks;
         }
 

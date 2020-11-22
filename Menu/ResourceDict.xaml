@@ -24,8 +24,8 @@
     <Style TargetType="{x:Type ListBox}">
         <Setter Property="BorderThickness" Value="0"/>
     </Style>
-    <Style TargetType="{x:Type StackPanel}" x:Key="ItemAlignment">
-        <!--<Setter Property="Template">
+    <!--<Style TargetType="{x:Type StackPanel}" x:Key="ItemAlignment">
+        --><!--<Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
                     <Border>
@@ -38,22 +38,19 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Cursor" Value="Hand"/>
             </Trigger>
-        </Style.Triggers>-->
-    </Style>
+        </Style.Triggers>--><!--
+    </Style>-->
     <Style TargetType="{x:Type Button}" x:Key="button">
         <Setter Property="Background" Value="{DynamicResource clBrSearch}"/>
         <Setter Property="Foreground" Value="{DynamicResource clBrText}"/>
         <Setter Property="Width" Value="100"/>
-        <Setter Property="VerticalAlignment" Value="Stretch"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="FontFamily" Value="Georgia"/>
-        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="FontSize" Value="12"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border BorderBrush="{DynamicResource clBrText}" BorderThickness="2">
-                        <ContentPresenter VerticalAlignment="{TemplateBinding VerticalAlignment}" HorizontalAlignment="Center" />
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -64,7 +61,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style TargetType="{x:Type Button}">
+    <!--<Style TargetType="{x:Type Button}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -79,7 +76,7 @@
                 <Setter Property="Cursor" Value="Hand"/>
             </Trigger>
         </Style.Triggers>
-    </Style>
+    </Style>-->
 
     <Style x:Key="ScrollBarThumb"
            TargetType="{x:Type Thumb}">

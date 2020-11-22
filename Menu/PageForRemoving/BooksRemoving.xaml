@@ -29,6 +29,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        
     </UserControl.Resources>
     <Grid Margin="40">
         <ScrollViewer Name="scroll" Style="{StaticResource for_scrollviewer}">
@@ -45,7 +46,10 @@
                         </DataGridTextColumn.ElementStyle>
                         <DataGridTextColumn.HeaderTemplate>
                             <DataTemplate>
-                                <ComboBox Foreground="{DynamicResource clBrText}" Text="-- Sorted By Date --" Focusable="False" IsEditable="True" IsReadOnly="True" Width="150" SelectionChanged="ComboBox_Selected">
+                                <ComboBox Foreground="{DynamicResource clBrText}" 
+                                          FontSize="12" 
+                                          FontFamily="Georgia"
+                                          Text="-- Sorted By Date --" Focusable="False" IsEditable="True" IsReadOnly="True" SelectionChanged="ComboBox_Selected">
                                     <TextBlock Foreground="Black">Sorted By Author</TextBlock>
                                     <TextBlock Foreground="Black">Sorted By Title</TextBlock>
                                     <TextBlock Foreground="Black">Sorted By Date</TextBlock>
@@ -58,7 +62,7 @@
                             <DataTemplate>
                                 <DockPanel HorizontalAlignment="Right" VerticalAlignment="Center" helper:MarginSetter.Margin="10" Margin="0,0,10,0">
                                     <!--<TextBlock DockPanel.Dock="Left" Text="{Binding Path=DataContext.LastSortingFeature, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>-->
-                                    <Button Content="Clean" Click="CleanLibrary" Style="{StaticResource button}"/>
+                                    <Button Content="Clean" Click="CleanLibrary" Style="{StaticResource button}" FontSize="30"/>
                                     <StackPanel DockPanel.Dock="Right" Width="200" VerticalAlignment="Center" Orientation="Horizontal" Background="{DynamicResource clBrSearch}">
                                         <TextBox TextChanged="SearchInLibrary" materialDesign:HintAssist.Hint="Search..." Width="150" VerticalAlignment="Center" FontSize="16" HorizontalAlignment="Stretch" Background="Transparent"/>
                                         <Label Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Width="40">
