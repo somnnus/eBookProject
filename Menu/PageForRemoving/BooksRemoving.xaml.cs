@@ -1,8 +1,9 @@
 ﻿using LibraryReader.Books;
-using Menu.SharedResources;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,22 +16,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Menu.Comparers;
+using Menu.SharedResources;
 using Menu.Helpers;
-using System.IO;
 using LibraryReader;
-using System.Drawing;
 
 namespace Menu.PageForRemoving
 {
     /// <summary>
     /// Логика взаимодействия для BooksRemoving.xaml
     /// </summary>
-    public partial class BooksRemoving : UserControl
+    public partial class BooksRemoving : UserControl, INotifyPropertyChanged
     {
         private List<Book> booksForDeleting;
         static string fullPath = AppDomain.CurrentDomain.BaseDirectory + "Library";
-        
+        private double maxWidth;
 
         public BooksRemoving()
         {
@@ -46,6 +45,28 @@ namespace Menu.PageForRemoving
             else
                 MessageBox.Show("Library is empty!");
         }
+
+        public double MaximumWidth
+        {
+            get { return maxWidth; }
+            set
+            {
+                maxWidth = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        protected virtual void NotifyPropertyChanged(
+           [CallerMemberName] String propertyName = "")
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void ComboBox_Selected(object sender, RoutedEventArgs e)
         {
@@ -79,15 +100,25 @@ namespace Menu.PageForRemoving
         {
             if (e.Delta > 0)
             {
-                ScrollBar.LineUpCommand.Execute(null, e.OriginalSource as IInputElement);
+                int i = 0;
+                while (i < 3)
+                {
+                    scroll.LineUp();
+                    i++;
+                }
             }
             if (e.Delta < 0)
             {
-                ScrollBar.LineDownCommand.Execute(null, e.OriginalSource as IInputElement);
+                int i = 0;
+                while (i < 3)
+                {
+                    scroll.LineDown();
+                    i++;
+                }
             }
             e.Handled = true;
         }
-        
+
         private void SearchInLibrary(object sender, TextChangedEventArgs e)
         {
             var textBox = (TextBox)sender;
@@ -107,7 +138,6 @@ namespace Menu.PageForRemoving
             Serialization.SerializationBookDelete(delete, fullPath);
             
             LibraryRefreshing.Refresh();
-          
         }
 
 
@@ -151,7 +181,24 @@ namespace Menu.PageForRemoving
                 booksForDeleting.Remove(currentBook);
             }
         }
+        
+        private void WrapPanel_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var currentWidth = ((TextBlock)sender).ActualWidth;
+            if (currentWidth > MaximumWidth)
+            {
+                MaximumWidth = currentWidth;
+            }
+        }
 
+        private void Image_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var currentWidth = ((Image)sender).ActualWidth;
+            if (currentWidth > MaximumWidth)
+            {
+                MaximumWidth = currentWidth;
+            }
+        }
         //private void RefreshDict()
         //{
         //    dataGridLib.ItemsSource = ResourcesProvider.Current.SortedBooks;

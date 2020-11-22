@@ -57,7 +57,7 @@
                     </Label>
                 </Grid>
                 <Grid Name="libraryGrid">
-                    <ListBox x:Name="listBoxBooks" HorizontalAlignment="Stretch" VerticalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <ListBox x:Name="listBoxBooks" HorizontalAlignment="Center" VerticalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                         <ListBox.ItemsSource>
                             <MultiBinding>
                                 <MultiBinding.Converter>
@@ -69,13 +69,9 @@
                         </ListBox.ItemsSource>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <!--<Grid HorizontalAlignment="Center" VerticalAlignment="Bottom">-->
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition SharedSizeGroup="SharedGroup" />
-                                    </Grid.ColumnDefinitions>
+                                <Grid Width="{Binding Path=MaximumWidth, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SizeChanged="WrapPanel_SizeChanged">
                                     <StackPanel MouseDown="StackPanel_MouseDown" Orientation="Vertical">
-                                        <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.13, ElementName=DockPanelLibrary, Path=ActualWidth}"
+                                        <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.1, ElementName=DockPanelLibrary, Path=ActualWidth}"
                                                Height="auto" 
                                                Source='{Binding CoverPath}'>
                                             <Image.Triggers>
@@ -92,14 +88,13 @@
                                         <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Title}'></TextBlock>
                                     </StackPanel>
                                 </Grid>
-                                <!--</Grid>-->
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <WrapPanel ItemHeight="auto"
-                                               ItemWidth="auto" 
-                                               IsItemsHost="True" Orientation="Horizontal" Grid.IsSharedSizeScope="True"/>
+                                <WrapPanel ItemHeight="auto" 
+                                           ItemWidth="auto"
+                                           IsItemsHost="True" Orientation="Horizontal"/>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
                     </ListBox>

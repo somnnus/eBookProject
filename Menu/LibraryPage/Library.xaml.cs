@@ -24,15 +24,41 @@ namespace Menu.LibraryPage
     /// <summary>
     /// Логика взаимодействия для Library.xaml
     /// </summary>
-    public partial class Library : UserControl
+    public partial class Library : UserControl, INotifyPropertyChanged
     {
+        private double maxWidth;
+
         public Library()
         {
-            DataContext = ResourcesProvider.Current;
             InitializeComponent();
+            //dataGridLib.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+            //dataGridLib.Arrange(new Rect(0, 0, dataGridLib.DesiredSize.Width, dataGridLib.DesiredSize.Height));
+            DataContext = ResourcesProvider.Current;
             ResourcesProvider.Current.CurrentDictionary = ResourcesProvider.Current.SortedByDate;
             ResourcesProvider.Current.LastSortingFeature = "Sorted By Date";
         }
+
+        public double MaximumWidth
+        {
+            get { return maxWidth; }
+            set
+            {
+                maxWidth = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        protected virtual void NotifyPropertyChanged(
+           [CallerMemberName] String propertyName = "")
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void ComboBox_Selected(object sender, RoutedEventArgs e)
         {
@@ -66,11 +92,21 @@ namespace Menu.LibraryPage
         {
             if (e.Delta > 0)
             {
-                ScrollBar.LineUpCommand.Execute(null, e.OriginalSource as IInputElement);
+                int i = 0;
+                while (i < 3)
+                {
+                    scroll.LineUp();
+                    i++;
+                }
             }
             if (e.Delta < 0)
             {
-                ScrollBar.LineDownCommand.Execute(null, e.OriginalSource as IInputElement);
+                int i = 0;
+                while (i < 3)
+                {
+                    scroll.LineDown();
+                    i++;
+                }
             }
             e.Handled = true;
         }
@@ -98,6 +134,24 @@ namespace Menu.LibraryPage
         {
             var textBox = (TextBox)sender;
             LibrarySearching.Search(textBox);
+        }
+
+        private void WrapPanel_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var currentWidth = ((TextBlock)sender).ActualWidth;
+            if (currentWidth > MaximumWidth)
+            {
+                MaximumWidth = currentWidth;
+            }
+        }
+
+        private void Image_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var currentWidth = ((Image)sender).ActualWidth;
+            if (currentWidth > MaximumWidth)
+            {
+                MaximumWidth = currentWidth;
+            }
         }
     }
 }

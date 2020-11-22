@@ -21,7 +21,7 @@
             </Label>
             <Button Content="Bookmark" Click="CreateBookmark" Width="80" FontSize="8" />
             <Button Content="Open Bookmark" Click="OpenBookmark" Width="100" FontSize="8"/>
-            <Button Name="btnSearch" Click="SearchInBook" Width="100" FontSize="15">Search</Button>
+            <Button Content="Search" Name="btnSearch" Click="SearchInBook" Width="100" FontSize="15"/>
         </StackPanel>
         <Grid>
             <Grid.ColumnDefinitions>

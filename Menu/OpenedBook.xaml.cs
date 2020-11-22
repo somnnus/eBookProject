@@ -15,12 +15,14 @@ using LibraryReader.Books;
 using LibraryReader;
 using System.Threading;
 using Menu.SharedResources;
+using System.IO;
 
 namespace Menu
 {
     /// <summary>
     /// Логика взаимодействия для OpenedBook.xaml
     /// </summary>
+    
     public partial class OpenedBook : Window
     {
         string fullPath = AppDomain.CurrentDomain.BaseDirectory + "Library";
@@ -94,6 +96,11 @@ namespace Menu
             var position = paginator.GetPagePosition(paginator.GetPage(flowDocument.PageNumber)) as TextPointer;
              paragraphHigh = position.Paragraph;
             //  string text = paragraphHigh.ContentEnd
+            System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(Paragraph));
+            using (var writer = new StreamWriter(@"C:\Users\user\Desktop\Проект\eBookProject\Menu\bin\Debug\Library\mark.xml"))
+            {
+                serializer.Serialize(writer, paragraphHigh);
+            }
 
 
             TextRange text = new TextRange(paragraphHigh.ContentStart, paragraphHigh.ContentEnd);

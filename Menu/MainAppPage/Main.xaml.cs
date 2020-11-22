@@ -40,12 +40,14 @@ namespace Menu.MainAppPage
         //    _imageIndex++;
         //}
 
-        public int currentPage = 0;
+        private double maxWidth;
+
+        private int currentPage;
 
         public Main()
         {
             InitializeComponent();
-
+            
             DataContext = ResourcesProvider.Current;
             if (ResourcesProvider.Current.BooksByPages.Count != 0)
             {
@@ -61,6 +63,16 @@ namespace Menu.MainAppPage
             set
             {
                 currentPage = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public double MaximumWidth
+        {
+            get { return maxWidth; }
+            set
+            {
+                maxWidth = value;
                 NotifyPropertyChanged();
             }
         }
@@ -112,9 +124,13 @@ namespace Menu.MainAppPage
             }
         }
 
-        private void WrapPanel_SourceUpdated(object sender, DataTransferEventArgs e)
+        private void WrapPanel_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-
+            var currentWidth = ((Grid)sender).ActualWidth;
+            if (currentWidth > MaximumWidth)
+            {
+                MaximumWidth = currentWidth;
+            }
         }
 
         //private MultiBinding createFieldMultiBinding(string fieldName)
