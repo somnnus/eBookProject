@@ -102,7 +102,7 @@ namespace Menu
         private void ComboBox_Selected(object sender, RoutedEventArgs routedEventArgs)
         {
             var comboBox = (ComboBox)sender;
-            var selectedNum = ((Bookmark)(comboBox.SelectedValue)).NumberPage;          
+            var selectedNum = ((Bookmark)(comboBox.SelectedItem)).NumberPage;          
             flowDocument.GoToPage(selectedNum);
             
         }
