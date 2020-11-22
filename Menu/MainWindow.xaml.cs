@@ -217,9 +217,21 @@ namespace Menu
             Book book = CheckLastBookSerializization();
             if (book != null)
             {
-                var openedBook = new OpenedBook(book);
-                openedBook.Show();
-                this.Close();
+                foreach(var dict in ResourcesProvider.Current.ListBooks)
+                {
+                    if (book.Date == dict.Date)
+                    {
+                        var openedBook = new OpenedBook(book);
+                        openedBook.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        File.Delete(fullPath + "\\last.xml");
+                        MessageBox.Show("Книга не найдена");
+                    }
+                }               
+              
             }
             else
             {

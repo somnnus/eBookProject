@@ -115,13 +115,7 @@ namespace LibraryReader
             }
             return setting;
         }
-
-        public static IEnumerable<string> SplitPage(this string text, int size)
-        {
-            for (var i = 0; i < text.Length; i += size)
-                yield return text.Substring(i, Math.Min(size, text.Length - i));
-        }
-
+    
         public static void SerializationBookDelete(List<Book> books,string fullPath)
         {
             if (books != null)

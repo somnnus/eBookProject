@@ -21,9 +21,10 @@ namespace LibraryReader.Books
         public DateTime Date { get; set; }
         public string CoverPath {get;set;}
 
-        public double FontSize { get; set; }
+
+
+        public double Zoom { get; set; }
         public int LastPage { get; set; }
-        public double ColumnWidth { get; set; }
 
         public Book()
         {
