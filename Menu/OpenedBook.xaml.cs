@@ -125,8 +125,6 @@ namespace Menu
 
                     p.Inlines.Add(paragrapg);
                     doc.Blocks.Add(p);
-
-
                 }
 
                 doc.ColumnWidth = e.NewValue;

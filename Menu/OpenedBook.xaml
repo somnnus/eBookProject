@@ -34,7 +34,7 @@
                 <FlowDocument Name="doc">
                 </FlowDocument>
             </FlowDocumentPageViewer>
-            <Slider Margin="150 0 0 5" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="slider" Value ="625" Maximum="1000" Minimum="250" IsSelectionRangeEnabled="True" ValueChanged="SliderChange" Width="180" Grid.ColumnSpan="2"/>
+            <Slider Margin="430 0 0 5" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="slider" Value ="625" Maximum="1000" Minimum="250" IsSelectionRangeEnabled="True" ValueChanged="SliderChange" Width="180" Grid.ColumnSpan="2"/>
         </Grid>
     </DockPanel>
 </Window>
