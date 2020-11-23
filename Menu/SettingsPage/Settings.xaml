@@ -17,34 +17,36 @@
         <local:SizePercentageConverter x:Key="PercentageConverter"/>
     </UserControl.Resources>
     <Grid>
-        <DockPanel x:Name="DockPanelSettings"  Margin="40" Background="{DynamicResource clBr}">
-            <Label DockPanel.Dock="Top" Content="Choose Theme" Foreground="{DynamicResource clBrMenu}" Style="{StaticResource Headings}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                    <Button Height="auto" x:Name="whiteTheme" Click="SetWhiteTheme">
-                        <StackPanel>
-                            <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.35, ElementName=DockPanelSettings, Path=ActualWidth}" Source="/images/WhiteTheme.PNG" />
-                        </StackPanel>
-                    </Button>
-                    <Button Height="auto" x:Name="sepiaTheme" Click="SetSepiaTheme">
-                        <StackPanel>
-                            <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.35, ElementName=DockPanelSettings, Path=ActualWidth}" Source="/images/SepiaTheme.PNG" />
-                        </StackPanel>
-                    </Button>
-                </StackPanel>
-                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                    <Button Height="auto" x:Name="darkBlueTheme" Click="SetDarkBlueTheme">
-                        <StackPanel>
-                            <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.35, ElementName=DockPanelSettings, Path=ActualWidth}" Source="/images/DarkBlueTheme.PNG" />
-                        </StackPanel>
-                    </Button>
-                    <Button Height="auto" x:Name="nightTheme" Click="SetNightTheme">
-                        <StackPanel>
-                            <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.35, ElementName=DockPanelSettings, Path=ActualWidth}" Source="/images/DarkTheme.PNG" />
-                        </StackPanel>
-                    </Button>
+        <ScrollViewer Style="{StaticResource for_scrollviewer}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <StackPanel CanHorizontallyScroll="False" CanVerticallyScroll="True" x:Name="DockPanelSettings"  Margin="40" Background="{DynamicResource clBr}">
+                <Label Content="Choose Theme" Foreground="{DynamicResource clBrMenu}" Style="{StaticResource Headings}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <Button Height="auto" x:Name="whiteTheme" Click="SetWhiteTheme">
+                            <StackPanel>
+                                <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.35, ElementName=DockPanelSettings, Path=ActualWidth}" Source="/images/WhiteTheme.PNG" />
+                            </StackPanel>
+                        </Button>
+                        <Button Height="auto" x:Name="sepiaTheme" Click="SetSepiaTheme">
+                            <StackPanel>
+                                <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.35, ElementName=DockPanelSettings, Path=ActualWidth}" Source="/images/SepiaTheme.PNG" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <Button Height="auto" x:Name="darkBlueTheme" Click="SetDarkBlueTheme">
+                            <StackPanel>
+                                <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.35, ElementName=DockPanelSettings, Path=ActualWidth}" Source="/images/DarkBlueTheme.PNG" />
+                            </StackPanel>
+                        </Button>
+                        <Button Height="auto" x:Name="nightTheme" Click="SetNightTheme">
+                            <StackPanel>
+                                <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.35, ElementName=DockPanelSettings, Path=ActualWidth}" Source="/images/DarkTheme.PNG" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
-        </DockPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>
