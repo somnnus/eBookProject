@@ -61,7 +61,15 @@ namespace Menu
 
             foreach (var paragrapg in newText)
             {
-                string abz = "    " + paragrapg;
+                string abz;
+                if (paragrapg.Contains("Table"))
+                {
+                    abz = "   ";
+                }
+                else
+                {
+                    abz = "    " + paragrapg;
+                }              
                 Paragraph p = new Paragraph();
                 p.Margin = new Thickness(0, 0, 0, 0);
                 p.Inlines.Add(abz);
