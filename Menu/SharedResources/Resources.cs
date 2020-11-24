@@ -21,6 +21,8 @@ namespace Menu.SharedResources
         private Dictionary<string, List<Book>> sortedByDate;
         private List<Book> listBooks;
 
+        public List<Book> deleteBook;
+
         public Resources()
         {
             booksByPages = new Dictionary<int, List<Book>>();

@@ -134,6 +134,7 @@ namespace Menu.PageForRemoving
                 ResourcesProvider.Current.ListBooks.Remove(book);
 
             }
+            ResourcesProvider.Current.deleteBook = delete;
             Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
             Serialization.SerializationBookDelete(delete, fullPath);
             
