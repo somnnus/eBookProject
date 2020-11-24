@@ -18,54 +18,51 @@
         <ControlTemplate x:Key="NoScroll">
             <ItemsPresenter></ItemsPresenter>
         </ControlTemplate>
-        <Style x:Key="DataGrid" TargetType="DataGrid">
-            <!--<Setter Property="CellStyle">
-                <Setter.Value>
-                    <Style TargetType="DataGridCell">
-                        <Setter Property="BorderThickness" Value="0"/>
-                        <Setter Property="BorderBrush" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
-                        <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource TemplatedParent}}" />
-                    </Style>
-                </Setter.Value>
-            </Setter>-->
-            <!--<Style.Triggers>
+        <Style TargetType="DataGridCell">
+            <Style.Triggers>
+                <Trigger  Property="IsSelected" Value="true">
+                    <Setter Property="Background" Value="{DynamicResource clBr}" />
+                    <Setter Property="Foreground" Value="{DynamicResource clBrText}" />
+                    <Setter Property="BorderBrush" Value="{DynamicResource clBr}" />
+                </Trigger>
                 <Trigger Property="IsMouseOver" Value="False">
-                    <Setter Property="Background" Value="Transparent" />
-                    <Setter Property="BorderBrush" Value="Transparent" />
+                    <Setter Property="Background" Value="{DynamicResource clBr}" />
+                    <Setter Property="Foreground" Value="{DynamicResource clBrText}" />
+                    <Setter Property="BorderBrush" Value="{DynamicResource clBr}" />
                 </Trigger>
-                <Trigger Property="IsSelected" Value="False">
-                    <Setter Property="Background" Value="{x:Null}" />
-                    <Setter Property="BorderBrush" Value="{x:Null}" />
-                </Trigger>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="{x:Null}" />
-                    <Setter Property="BorderBrush" Value="{x:Null}" />
-                </Trigger>
-            </Style.Triggers>-->
+            </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <Grid Margin="40">
-        <ScrollViewer Name="scroll" Style="{StaticResource for_scrollviewer}">
-            <DataGrid  Name="dataGridLib" ItemsSource="{Binding Path=DataContext.CurrentDictionary, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Background="{DynamicResource clBr}" AutoGenerateColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
-                <!--<DataGrid.CellStyle>
-                    <Style TargetType="DataGridCell">
+    <Grid Margin="40" Name="OuterGrid">
+        <ScrollViewer Name="scroll" Style="{StaticResource for_scrollviewer}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <DataGrid HorizontalScrollBarVisibility="Disabled" Name="dataGridLib" ItemsSource="{Binding Path=DataContext.CurrentDictionary, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Background="{DynamicResource clBr}" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="False">
+                <!--<DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridCell}">
                         <Style.Triggers>
-                            <Trigger Property="IsFocused" Value="True">
+                            <Trigger  Property="IsSelected" Value="true">
                                 <Setter Property="Background" Value="Transparent" />
                                 <Setter Property="Foreground" Value="Transparent" />
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="False">
-                                <Setter Property="Background" Value="Transparent" />
-                                <Setter Property="Foreground" Value="Transparent" />
+                                <Setter Property="BorderBrush" Value="Transparent" />
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="False">
-                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Background" Value="{DynamicResource clBr}" />
                                 <Setter Property="Foreground" Value="Transparent" />
+                                <Setter Property="BorderBrush" Value="Transparent" />
                             </Trigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=IsKeyboardFocusWithin}" Value="False" />
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.Setters>
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="Foreground" Value="Transparent" />
+                                    <Setter Property="BorderBrush" Value="Transparent" />
+                                </MultiDataTrigger.Setters>
+                            </MultiDataTrigger>
                         </Style.Triggers>
                     </Style>
-                </DataGrid.CellStyle>-->
+                </DataGrid.Resources>-->
                 <DataGrid.Columns>
                     <DataGridTextColumn Foreground="{DynamicResource clBrText}" x:Name="keyTextColumn" Binding="{Binding Key}" Width="auto">
                         <DataGridTextColumn.ElementStyle>
@@ -106,12 +103,11 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <ListBox Name="dict" ItemsSource="{Binding Value}" Template="{StaticResource NoScroll}" HorizontalAlignment="Stretch" VerticalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                                    
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <Grid Width="{Binding Path=MaximumWidth, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
                                                 <StackPanel MouseDown="StackPanel_MouseDown" Orientation="Vertical">
-                                                    <Image SizeChanged="Image_SizeChanged" Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.1, ElementName=dataGridLib, Path=ActualWidth}"
+                                                    <Image SizeChanged="Image_SizeChanged" Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.1, ElementName=OuterGrid, Path=ActualWidth}"
                                                        Height="auto" 
                                                        Source='{Binding CoverPath}'/>
                                                     <TextBlock SizeChanged="WrapPanel_SizeChanged" Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Author}'></TextBlock>

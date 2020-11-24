@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Menu"
         xmlns:UserControl="clr-namespace:Menu"
         mc:Ignorable="d"
-        Title="Reader" Height="650" Width="1250" WindowState="Normal" ResizeMode="CanResizeWithGrip" MinHeight="300" MinWidth="850">
+        Title="Reader" Height="650" Width="1250" WindowState="Normal" ResizeMode="CanResizeWithGrip" MinHeight="300" MinWidth="900">
     <Grid Name="mainGrid" Background="{DynamicResource clBr}" >
         <DockPanel>
             <StackPanel Margin="40">
@@ -24,7 +24,7 @@
                         <MenuItem Foreground="Black" Header="Add a book" Click="AddBook"/>
                         <MenuItem Foreground="Black" Header="Remove a book" Command="{Binding RemovingPageCommand}"/>
                     </MenuItem>
-                    <MenuItem Foreground="{DynamicResource clBrText}" Header="Settings" Command="{Binding SettingsCommand}"/>
+                    <MenuItem Foreground="{DynamicResource clBrText}" Header="Themes" Command="{Binding SettingsCommand}"/>
                     <Separator/>
                     <MenuItem Foreground="{DynamicResource clBrText}" Header="Exit" Click="Exit"/>
                 </Menu>
