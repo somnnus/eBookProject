@@ -116,7 +116,29 @@ namespace Menu
             }
             else
             {
-                MessageBox.Show("The book has already added in the library!");
+                if (ResourcesProvider.Current.deleteBook != null)
+                {
+                    foreach(var book in ResourcesProvider.Current.deleteBook)
+                    {
+                        if (book.FullPath == newFullFileName)
+                        {
+                            ResourcesProvider.Current.deleteBook.Remove(book);
+                            ResourcesProvider.Current.ListBooks.Insert(0, book);
+                            RefreshPages();
+
+                            Serialization.SerializationBookDelete(ResourcesProvider.Current.deleteBook, fullPath);
+                            Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
+                            return;
+
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("The book has already added in the library!");
+                }
+
+               
             }
         }
 
@@ -199,6 +221,7 @@ namespace Menu
                     File.Delete(book.CoverPath);
                    
                 }
+                ResourcesProvider.Current.deleteBook = null;
             }
             
             
