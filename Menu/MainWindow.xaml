@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Menu"
         xmlns:UserControl="clr-namespace:Menu"
+        Icon="/images/catBook.ico"
         mc:Ignorable="d"
         Title="Reader" Height="650" Width="1250" WindowState="Normal" ResizeMode="CanResizeWithGrip" MinHeight="300" MinWidth="900"
         WindowStartupLocation="CenterScreen">

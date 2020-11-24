@@ -6,52 +6,29 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace LibraryReader.Books
 {
     [Serializable]
-    public class Book: INotifyPropertyChanged
+    public class Book
     {
-        private List<Bookmark> _bookmarks;
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        public List<Bookmark> bookmarks = new List<Bookmark>();
 
         public string Title { get; set; }
         public string Author { get; set; }
         public string Content { get; set; }
         public string FullPath { get; set; }
         public DateTime Date { get; set; }
-        public string CoverPath {get;set;}
+        public string CoverPath { get; set; }
 
-        public List<Bookmark> bookmarks
-        {
-            get {
-                NotifyPropertyChanged();
-                return _bookmarks; }
-            set
-            {
-                _bookmarks = value;
-            }
-        }
 
-        protected virtual void NotifyPropertyChanged(
-           [CallerMemberName] String propertyName = "")
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
 
         public double Zoom { get; set; }
         public int LastPage { get; set; }
 
         public Book()
         {
-            _bookmarks = new List<Bookmark>();
+
         }
         protected static Image ByteArrayToImage(byte[] byteArrayIn)
         {
@@ -69,5 +46,6 @@ namespace LibraryReader.Books
         {
             bookmarks.Add(mark);
         }
+
     }
 }
