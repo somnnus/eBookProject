@@ -32,6 +32,7 @@
             <SolidColorBrush x:Key="clBrText" Color="#000000" />
             <SolidColorBrush x:Key="clBrMenu" Color="#442C2E" />
             <SolidColorBrush x:Key="clBrArrow" Color="#442C2E" />
+            <!--<SolidColorBrush x:Key="clBrComboBox" Color="#000000"/>-->
         </ResourceDictionary>
     </Application.Resources>
 </Application>

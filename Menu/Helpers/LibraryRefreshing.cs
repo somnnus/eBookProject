@@ -38,7 +38,7 @@ namespace Menu.Helpers
         {
             if (ResourcesProvider.Current.ListBooks.Count != 0)
             {
-                int blocksCount = 6;
+                int blocksCount = 4;
                 ResourcesProvider.Current.BooksByPages = new Dictionary<int, List<Book>>();
                 ResourcesProvider.Current.BooksByPages = ArrayHelperExtensions.SplitByBlocks(ResourcesProvider.Current.ListBooks, ResourcesProvider.Current.BooksByPages, blocksCount);
             }

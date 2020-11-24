@@ -47,7 +47,7 @@
                         </DataGridTextColumn.ElementStyle>
                         <DataGridTextColumn.HeaderTemplate>
                             <DataTemplate>
-                                <ComboBox Foreground="{DynamicResource clBrText}" 
+                                <ComboBox
                                           FontSize="12" 
                                           FontFamily="Georgia"
                                           Text="-- Sorted By Date --" Focusable="False" IsEditable="True" IsReadOnly="True" SelectionChanged="ComboBox_Selected">
@@ -79,7 +79,7 @@
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <Grid Width="{Binding Path=MaximumWidth, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
-                                                <StackPanel MouseDown="StackPanel_MouseDown" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                                                <StackPanel Cursor="Hand" MouseDown="StackPanel_MouseDown" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                                                     <CheckBox Click="ChooseBookToDelete" Background="White" BorderBrush="Black" BorderThickness="3" HorizontalAlignment="Right" VerticalAlignment="Top" IsChecked="False" Height="40" />
                                                     <Image SizeChanged="Image_SizeChanged" Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.1, ElementName=OuterGrid, Path=ActualWidth}"
                                                Height="auto" 

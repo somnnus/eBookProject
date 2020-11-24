@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Menu"
         xmlns:UserControl="clr-namespace:Menu"
         mc:Ignorable="d"
-        Title="Reader" Height="650" Width="1250" WindowState="Normal" ResizeMode="CanResizeWithGrip" MinHeight="300" MinWidth="900">
+        Title="Reader" Height="650" Width="1250" WindowState="Normal" ResizeMode="CanResizeWithGrip" MinHeight="300" MinWidth="900"
+        WindowStartupLocation="CenterScreen">
     <Grid Name="mainGrid" Background="{DynamicResource clBr}" >
         <DockPanel>
             <StackPanel Margin="40">

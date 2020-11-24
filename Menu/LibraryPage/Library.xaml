@@ -32,6 +32,32 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <!--<Style TargetType="ComboBoxItem">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="{DynamicResource clBrText}"/>
+                    <Setter Property="Background" Value="LightGray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>-->
+        <!--<Style TargetType="TextBlock" x:Key="TextBlockForCombo">
+            <Setter Property="Foreground" Value="Black"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background"  Value="Transparent"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>-->
+        <!--<Style TargetType="ComboBox" x:Key="Combo">
+            <Style.Triggers>
+                <Trigger Property="IsDropDownOpen" Value="True">
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+                <Trigger Property="IsDropDownOpen" Value="False">
+                    <Setter Property="Foreground" Value="{DynamicResource clBrText}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>-->
     </UserControl.Resources>
     <Grid Margin="40" Name="OuterGrid">
         <ScrollViewer Name="scroll" Style="{StaticResource for_scrollviewer}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
@@ -75,13 +101,22 @@
                         </DataGridTextColumn.ElementStyle>
                         <DataGridTextColumn.HeaderTemplate>
                             <DataTemplate>
-                                <ComboBox Foreground="{DynamicResource clBrText}" 
+                                <ComboBox
                                           FontSize="12" 
                                           FontFamily="Georgia"
                                           Text="-- Sorted By Date --" Focusable="False" IsEditable="True" IsReadOnly="True" SelectionChanged="ComboBox_Selected">
-                                    <TextBlock Foreground="Black">Sorted By Author</TextBlock>
-                                    <TextBlock Foreground="Black">Sorted By Title</TextBlock>
-                                    <TextBlock Foreground="Black">Sorted By Date</TextBlock>
+                                    <!--<ComboBox.Style>
+                                        <Style TargetType="ComboBox">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsDropDownOpen" Value="False">
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ComboBox.Style>-->
+                                    <TextBlock>Sorted By Author</TextBlock>
+                                    <TextBlock>Sorted By Title</TextBlock>
+                                    <TextBlock>Sorted By Date</TextBlock>
                                 </ComboBox>
                             </DataTemplate>
                         </DataGridTextColumn.HeaderTemplate>
@@ -106,7 +141,7 @@
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <Grid Width="{Binding Path=MaximumWidth, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
-                                                <StackPanel MouseDown="StackPanel_MouseDown" Orientation="Vertical">
+                                                <StackPanel Cursor="Hand" MouseDown="StackPanel_MouseDown" Orientation="Vertical">
                                                     <Image SizeChanged="Image_SizeChanged" Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.1, ElementName=OuterGrid, Path=ActualWidth}"
                                                        Height="auto" 
                                                        Source='{Binding CoverPath}'/>

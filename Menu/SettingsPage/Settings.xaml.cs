@@ -36,11 +36,13 @@ namespace Menu.SettingsPage
             Application.Current.Resources["clBrMenu"] = (Brush)(new BrushConverter().ConvertFrom("#424242"));
             Application.Current.Resources["clBrText"] = (Brush)(new BrushConverter().ConvertFrom("#000000"));
             Application.Current.Resources["clBrArrow"] = (Brush)(new BrushConverter().ConvertFrom("#424242"));
+            //Application.Current.Resources["clBrComboBox"] = (Brush)(new BrushConverter().ConvertFrom("#000000"));
             setting.Add("#FFFFFF");
             setting.Add("#EAEAEA");
             setting.Add("#424242");
             setting.Add("#000000");
             setting.Add("#424242");
+            //setting.Add("#000000");
             Serialization.SerializationSetting(setting, fullPath);
             
 
@@ -53,11 +55,13 @@ namespace Menu.SettingsPage
             Application.Current.Resources["clBrMenu"] = (Brush)(new BrushConverter().ConvertFrom("#442C2E"));
             Application.Current.Resources["clBrText"] = (Brush)(new BrushConverter().ConvertFrom("#000000"));
             Application.Current.Resources["clBrArrow"] = (Brush)(new BrushConverter().ConvertFrom("#442C2E"));
+            //Application.Current.Resources["clBrComboBox"] = (Brush)(new BrushConverter().ConvertFrom("#000000"));
             setting.Add("#FFFFEBCD");
             setting.Add("#FFDEC3A7");
             setting.Add("#442C2E");
             setting.Add("#000000");
             setting.Add("#442C2E");
+            //setting.Add("#000000");
             Serialization.SerializationSetting(setting, fullPath);
         }
         private void SetDarkBlueTheme(object sender, RoutedEventArgs e)
@@ -68,11 +72,13 @@ namespace Menu.SettingsPage
             Application.Current.Resources["clBrMenu"] = (Brush)(new BrushConverter().ConvertFrom("#E6E7F1"));
             Application.Current.Resources["clBrText"] = (Brush)(new BrushConverter().ConvertFrom("#EFEFFE"));
             Application.Current.Resources["clBrArrow"] = (Brush)(new BrushConverter().ConvertFrom("#E6E7F1"));
+            //Application.Current.Resources["clBrComboBox"] = (Brush)(new BrushConverter().ConvertFrom("#EFEFFE"));
             setting.Add("#3539A5");
             setting.Add("#535BAB");
             setting.Add("#E6E7F1");
             setting.Add("#EFEFFE");
             setting.Add("#E6E7F1");
+            //setting.Add("#EFEFFE");
             Serialization.SerializationSetting(setting, fullPath);
         }
         private void SetNightTheme(object sender, RoutedEventArgs e)
@@ -83,11 +89,13 @@ namespace Menu.SettingsPage
             Application.Current.Resources["clBrMenu"] = (Brush)(new BrushConverter().ConvertFrom("#FFFFFF"));
             Application.Current.Resources["clBrText"] = (Brush)(new BrushConverter().ConvertFrom("#FFFFFF"));
             Application.Current.Resources["clBrArrow"] = (Brush)(new BrushConverter().ConvertFrom("#FFFFFF"));
+            //Application.Current.Resources["clBrComboBox"] = (Brush)(new BrushConverter().ConvertFrom("#FFFFFF"));
             setting.Add("#363740");
             setting.Add("#494A56");
             setting.Add("#FFFFFF");
             setting.Add("#FFFFFF");
             setting.Add("#FFFFFF");
+            //setting.Add("#FFFFFF");
             Serialization.SerializationSetting(setting, fullPath);
         }
     }
