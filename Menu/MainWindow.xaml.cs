@@ -179,6 +179,7 @@ namespace Menu
                 Application.Current.Resources["clBrMenu"] = (Brush)(new BrushConverter().ConvertFrom(setting[2]));
                 Application.Current.Resources["clBrText"] = (Brush)(new BrushConverter().ConvertFrom(setting[3]));
                 Application.Current.Resources["clBrArrow"] = (Brush)(new BrushConverter().ConvertFrom(setting[4]));
+                //Application.Current.Resources["clBrComboBox"] = (Brush)(new BrushConverter().ConvertFrom(setting[5]));
             }
         }
         private void CheckSerializationBookDelete()
