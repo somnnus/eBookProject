@@ -24,12 +24,12 @@
             <!--<Button Content="Open Bookmark" Click="OpenBookmark"  Style="{StaticResource button}"/>-->
             <Button Content="Search" Name="btnSearch" Click="FindInBook"  Style="{StaticResource button}"/>
             <Button Content="Continue Reading" Click="ContinueReading" Style="{StaticResource button}"/>
-            <ComboBox Foreground="{DynamicResource clBrText}" 
+            <ComboBox 
                       FontSize="12" 
                       FontFamily="Georgia"
                       BorderBrush="{DynamicResource clBrText}" 
                       BorderThickness="2" 
-                      ItemsSource="{Binding}"
+                      ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}"
                       Name="bookmarkList" Text="Choose Bookmark" Focusable="False" IsEditable="True" SelectionChanged="ComboBox_Selected">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>

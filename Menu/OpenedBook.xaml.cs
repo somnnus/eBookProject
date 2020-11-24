@@ -88,6 +88,8 @@ namespace Menu
             Bookmark mark = new Bookmark();
             mark.NumberPage = flowDocument.MasterPageNumber;
             currentBook.AddBookmark(mark);
+            bookmarkList.DataContext = null;
+            bookmarkList.DataContext = currentBook.bookmarks;
 
         }
         private void OpenBookmark(object sender, RoutedEventArgs routedEventArgs)
