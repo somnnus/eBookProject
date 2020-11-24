@@ -32,7 +32,7 @@
                       FontFamily="Georgia"
                       BorderBrush="{DynamicResource clBrText}" 
                       BorderThickness="2" 
-                      ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding }"
                       Name="bookmarkList" Text="Choose Bookmark" Focusable="False" IsEditable="True" SelectionChanged="ComboBox_Selected">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
