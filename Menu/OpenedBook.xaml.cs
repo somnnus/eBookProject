@@ -88,6 +88,9 @@ namespace Menu
             Bookmark mark = new Bookmark();
             mark.NumberPage = flowDocument.MasterPageNumber;
             currentBook.AddBookmark(mark);
+            bookmarkList.DataContext = null;
+            bookmarkList.DataContext = currentBook.bookmarks;
+
 
         }
         private void OpenBookmark(object sender, RoutedEventArgs routedEventArgs)
@@ -101,7 +104,7 @@ namespace Menu
         private void ComboBox_Selected(object sender, RoutedEventArgs routedEventArgs)
         {
             var comboBox = (ComboBox)sender;
-            var selectedNum = ((Bookmark)(comboBox.SelectedItem)).NumberPage;          
+            var selectedNum = ((Bookmark)(comboBox.SelectedValue)).NumberPage;          
             flowDocument.GoToPage(selectedNum);
             
         }
