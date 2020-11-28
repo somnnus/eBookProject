@@ -43,8 +43,9 @@ namespace Menu
         Paragraph paragraphHigh { get; set; }
         public OpenedBook(Book current)
         {
-            InitializeComponent();
             currentBook = current;
+            InitializeComponent();
+            openBookWindow.Title = currentBook.Title + " - " + currentBook.Author;
             DisplayBook();
             Serialization.SerializationLastBook(currentBook, fullPath);
             
@@ -127,7 +128,7 @@ namespace Menu
             flowDocument.GoToPage(currentBook.LastPage);
         }
 
-        private void OpenMenu(object sender, RoutedEventArgs routedEventArgs)
+        private void OpenMenu()
         {
             currentBook.LastPage = flowDocument.MasterPageNumber;
             currentBook.Zoom = flowDocument.Zoom;
@@ -137,6 +138,14 @@ namespace Menu
             var menuWindow = new MainWindow(ResourcesProvider.Current.MainWindowVM);
             menuWindow.Show();
             Close();
+        }
+
+        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 1)
+            {
+                OpenMenu();
+            }
         }
     }
 }

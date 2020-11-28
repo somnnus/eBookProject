@@ -61,7 +61,7 @@
     </UserControl.Resources>
     <Grid Margin="40" Name="OuterGrid">
         <ScrollViewer Name="scroll" Style="{StaticResource for_scrollviewer}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <DataGrid HorizontalScrollBarVisibility="Disabled" Name="dataGridLib" ItemsSource="{Binding Path=DataContext.CurrentDictionary, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Background="{DynamicResource clBr}" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="False">
+            <DataGrid IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" Name="dataGridLib" ItemsSource="{Binding Path=DataContext.CurrentDictionary, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Background="{DynamicResource clBr}" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="False" CanUserReorderColumns="False" CanUserResizeColumns="False">
                 <!--<DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridCell}">
                         <Style.Triggers>

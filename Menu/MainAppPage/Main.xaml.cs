@@ -87,7 +87,7 @@ namespace Menu.MainAppPage
             }
         }
 
-        private void LeftPageClick(object sender, RoutedEventArgs e)
+        private void LeftPageClick()
         {
             if (CurrentPage > 0)
             {
@@ -96,12 +96,28 @@ namespace Menu.MainAppPage
             }
         }
 
-        private void RightPageClick(object sender, RoutedEventArgs e)
+        private void RightPageClick()
         {
             if ((CurrentPage + 1) < ResourcesProvider.Current.BooksByPages.Count)
             {
                 CurrentPage++;
                 //listBoxBooks.ItemsSource = ResourcesProvider.Current.BooksByPages[currentPage.ToString()];
+            }
+        }
+
+        private void Label_MouseDownLeft(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 1)
+            {
+                LeftPageClick();
+            }
+        }
+
+        private void Label_MouseDownRight(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 1)
+            {
+                RightPageClick();
             }
         }
 

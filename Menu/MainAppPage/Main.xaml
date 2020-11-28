@@ -39,21 +39,19 @@
             <Label Content="Reading Recently" Foreground="{DynamicResource clBrMenu}" Style="{StaticResource Headings}" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <DockPanel Height="auto" Width="auto" LastChildFill="True" Name="DockPanelLibrary">
                 <Grid Width="40" DockPanel.Dock="Left">
-                    <Label Name="labelArrowLeft" VerticalAlignment="Center" 
+                    <Label Cursor="Hand" Name="labelArrowLeft" VerticalAlignment="Center" 
                            Height="auto"
-                           Width="auto">
-                        <Hyperlink TextDecorations="None" Click="LeftPageClick">
-                            <ContentControl Template="{StaticResource ArrowLeft}"/>
-                        </Hyperlink>
+                           Width="auto"
+                           MouseDown="Label_MouseDownLeft">
+                        <ContentControl Template="{StaticResource ArrowLeft}"/>
                     </Label>
                 </Grid>
                 <Grid Width="40" DockPanel.Dock="Right">
-                    <Label Name="labelArrowRight" VerticalAlignment="Center" 
+                    <Label Cursor="Hand" Name="labelArrowRight" VerticalAlignment="Center" 
                             Height="auto"
-                            Width="auto">
-                        <Hyperlink TextDecorations="None" Click="RightPageClick" >
-                            <ContentControl Template="{StaticResource ArrowRight}"/>
-                        </Hyperlink>
+                            Width="auto"
+                           MouseDown="Label_MouseDownRight">
+                        <ContentControl Template="{StaticResource ArrowRight}"/>
                     </Label>
                 </Grid>
                 <Grid Name="libraryGrid">

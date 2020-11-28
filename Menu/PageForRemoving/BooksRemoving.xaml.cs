@@ -103,7 +103,7 @@ namespace Menu.PageForRemoving
                 int i = 0;
                 while (i < 3)
                 {
-                    scroll.LineUp();
+                    ((ScrollViewer)sender).LineUp();
                     i++;
                 }
             }
@@ -112,7 +112,7 @@ namespace Menu.PageForRemoving
                 int i = 0;
                 while (i < 3)
                 {
-                    scroll.LineDown();
+                    ((ScrollViewer)sender).LineDown();
                     i++;
                 }
             }
@@ -204,6 +204,16 @@ namespace Menu.PageForRemoving
         //{
         //    dataGridLib.ItemsSource = ResourcesProvider.Current.SortedBooks;
         //    //CollectionViewSource.GetDefaultView(lastSortingFeature).Refresh();
+        //}
+
+        //private void ScrollViewerMouseEnter(object sender, MouseEventArgs e)
+        //{
+        //    ((ListBox)sender).CaptureMouse();
+        //}
+
+        //private void ScrollViewerMouseLeave(object sender, MouseEventArgs e)
+        //{
+        //    ((ListBox)sender).ReleaseMouseCapture();
         //}
     }
 }

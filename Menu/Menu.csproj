@@ -102,6 +102,7 @@
     <Compile Include="Comparers\DateComparer.cs" />
     <Compile Include="Comparers\TitleComparer.cs" />
     <Compile Include="Helpers\DictionaryItemConverter.cs" />
+    <Compile Include="Helpers\IgnoreMouseWheelBehavior.cs" />
     <Compile Include="Helpers\LibraryRefreshing.cs" />
     <Compile Include="Helpers\LibrarySearching.cs" />
     <Compile Include="Helpers\MarginSetter.cs" />
