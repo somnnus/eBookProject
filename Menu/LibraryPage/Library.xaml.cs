@@ -88,28 +88,28 @@ namespace Menu.LibraryPage
                 MessageBox.Show("Library is empty!");
         }
         
-        private void DoPreviewingMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            if (e.Delta > 0)
-            {
-                int i = 0;
-                while (i < 3)
-                {
-                    scroll.LineUp();
-                    i++;
-                }
-            }
-            if (e.Delta < 0)
-            {
-                int i = 0;
-                while (i < 3)
-                {
-                    scroll.LineDown();
-                    i++;
-                }
-            }
-            e.Handled = true;
-        }
+        //private void DoPreviewingMouseWheel(object sender, MouseWheelEventArgs e)
+        //{
+        //    if (e.Delta > 0)
+        //    {
+        //        int i = 0;
+        //        while (i < 3)
+        //        {
+        //            scroll.LineUp();
+        //            i++;
+        //        }
+        //    }
+        //    if (e.Delta < 0)
+        //    {
+        //        int i = 0;
+        //        while (i < 3)
+        //        {
+        //            scroll.LineDown();
+        //            i++;
+        //        }
+        //    }
+        //    e.Handled = true;
+        //}
 
         private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {

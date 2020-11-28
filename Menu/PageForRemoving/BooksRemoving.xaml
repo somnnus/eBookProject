@@ -7,7 +7,6 @@
              xmlns:removingPage="clr-namespace:Menu.PageForRemoving"
              xmlns:local="clr-namespace:Menu"
              xmlns:helper="clr-namespace:Menu.Helpers"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance removingPage:BooksRemovingViewModel,
                                          IsDesignTimeCreatable=True}"
@@ -33,9 +32,10 @@
         </Style>
     </UserControl.Resources>
     <Grid Margin="40" Name="OuterGrid">
-
-        <DataGrid IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" x:Name="dataGridLib" ItemsSource="{Binding Path=DataContext.CurrentDictionary, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Background="{DynamicResource clBr}" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False">
-
+        <DataGrid ScrollViewer.CanContentScroll="False" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" x:Name="dataGridLib" ItemsSource="{Binding Path=DataContext.CurrentDictionary, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Background="{DynamicResource clBr}" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False">
+            <DataGrid.Resources>
+                <Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollModified}"/>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Foreground="{DynamicResource clBrText}" x:Name="keyTextColumn" Binding="{Binding Key}" Width="auto">
                     <DataGridTextColumn.ElementStyle>
@@ -43,15 +43,14 @@
                             <Setter Property="FontFamily" Value="Garamond" />
                             <Setter Property="Foreground" Value="Black" />
                             <Setter Property="FontSize" Value="28" />
-                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <!--<Setter Property="VerticalAlignment" Value="Center" />-->
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>
-                            <ComboBox
-                                          FontSize="12" 
-                                          FontFamily="Georgia"
-                                          Text="-- Sorted By Date --" Focusable="False" IsEditable="True" IsReadOnly="True" SelectionChanged="ComboBox_Selected">
+                            <ComboBox FontSize="12" 
+                                      FontFamily="Georgia"
+                                      Text="-- Sorted By Date --" Focusable="False" IsEditable="True" IsReadOnly="True" SelectionChanged="ComboBox_Selected">
                                 <TextBlock Foreground="Black">Sorted By Author</TextBlock>
                                 <TextBlock Foreground="Black">Sorted By Title</TextBlock>
                                 <TextBlock Foreground="Black">Sorted By Date</TextBlock>
@@ -76,34 +75,29 @@
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ScrollViewer PreviewMouseWheel="DoPreviewingMouseWheel" Style="{StaticResource for_scrollviewer}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                                <ListBox Template="{StaticResource NoScroll}" ItemsSource="{Binding Value}" HorizontalAlignment="Stretch" VerticalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                                    <i:Interaction.Behaviors>
-                                        <helper:IgnoreMouseWheelBehavior />
-                                    </i:Interaction.Behaviors>
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid Width="{Binding Path=MaximumWidth, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
-                                                <StackPanel Cursor="Hand" MouseDown="StackPanel_MouseDown" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                                                    <CheckBox Click="ChooseBookToDelete" Background="{DynamicResource clBrText}" BorderBrush="Black" BorderThickness="3" HorizontalAlignment="Right" VerticalAlignment="Top" IsChecked="False" Height="40" />
-                                                    <Image SizeChanged="Image_SizeChanged" Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.1, ElementName=OuterGrid, Path=ActualWidth}"
+                            <ListBox Template="{StaticResource NoScroll}" ItemsSource="{Binding Value}" HorizontalAlignment="Stretch" VerticalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Width="{Binding Path=MaximumWidth, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+                                            <StackPanel Cursor="Hand" MouseDown="StackPanel_MouseDown" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                                                <CheckBox Click="ChooseBookToDelete" Background="{DynamicResource clBrText}" BorderBrush="Black" BorderThickness="3" HorizontalAlignment="Right" VerticalAlignment="Top" IsChecked="False" Height="40" />
+                                                <Image SizeChanged="Image_SizeChanged" Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.1, ElementName=OuterGrid, Path=ActualWidth}"
                                                Height="auto" 
                                                Source='{Binding CoverPath}'/>
-                                                    <TextBlock SizeChanged="WrapPanel_SizeChanged" Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Author}'></TextBlock>
-                                                    <TextBlock SizeChanged="WrapPanel_SizeChanged" Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Title}'></TextBlock>
-                                                </StackPanel>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                    <ListBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <WrapPanel ItemHeight="auto"
+                                                <TextBlock SizeChanged="WrapPanel_SizeChanged" Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Author}'></TextBlock>
+                                                <TextBlock SizeChanged="WrapPanel_SizeChanged" Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Title}'></TextBlock>
+                                            </StackPanel>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel ItemHeight="auto"
                                                    ItemWidth="auto"
                                                    IsItemsHost="True" Orientation="Horizontal"/>
-                                        </ItemsPanelTemplate>
-                                    </ListBox.ItemsPanel>
-                                </ListBox>
-                            </ScrollViewer>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

@@ -10,7 +10,6 @@
              xmlns:local1="clr-namespace:Menu"
              mc:Ignorable="d"
              d:DesignHeight="700" d:DesignWidth="1150"
-             PreviewMouseWheel="DoPreviewingMouseWheel"
              d:DataContext="{d:DesignInstance lib:LibraryViewModel,
                                          IsDesignTimeCreatable=True}">
     <UserControl.Resources>
@@ -60,9 +59,8 @@
         </Style>-->
     </UserControl.Resources>
     <Grid Margin="40" Name="OuterGrid">
-        <ScrollViewer Name="scroll" Style="{StaticResource for_scrollviewer}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <DataGrid IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" Name="dataGridLib" ItemsSource="{Binding Path=DataContext.CurrentDictionary, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Background="{DynamicResource clBr}" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="False" CanUserReorderColumns="False" CanUserResizeColumns="False">
-                <!--<DataGrid.Resources>
+        <DataGrid IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" Name="dataGridLib" ItemsSource="{Binding Path=DataContext.CurrentDictionary, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Background="{DynamicResource clBr}" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="False" CanUserReorderColumns="False" CanUserResizeColumns="False">
+            <!--<DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridCell}">
                         <Style.Triggers>
                             <Trigger  Property="IsSelected" Value="true">
@@ -89,23 +87,25 @@
                         </Style.Triggers>
                     </Style>
                 </DataGrid.Resources>-->
-                <DataGrid.Columns>
-                    <DataGridTextColumn Foreground="{DynamicResource clBrText}" x:Name="keyTextColumn" Binding="{Binding Key}" Width="auto">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="FontFamily" Value="Garamond" />
-                                <Setter Property="Foreground" Value="Black" />
-                                <Setter Property="FontSize" Value="28" />
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                        <DataGridTextColumn.HeaderTemplate>
-                            <DataTemplate>
-                                <ComboBox
-                                          FontSize="12" 
-                                          FontFamily="Georgia"
-                                          Text="-- Sorted By Date --" Focusable="False" IsEditable="True" IsReadOnly="True" SelectionChanged="ComboBox_Selected">
-                                    <!--<ComboBox.Style>
+            <DataGrid.Resources>
+                <Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollModified}"/>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Foreground="{DynamicResource clBrText}" x:Name="keyTextColumn" Binding="{Binding Key}" Width="auto">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="FontFamily" Value="Garamond" />
+                            <Setter Property="Foreground" Value="Black" />
+                            <Setter Property="FontSize" Value="28" />
+                            <!--<Setter Property="VerticalAlignment" Value="Center" />-->
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <ComboBox FontSize="12" 
+                                      FontFamily="Georgia"
+                                      Text="-- Sorted By Date --" Focusable="False" IsEditable="True" IsReadOnly="True" SelectionChanged="ComboBox_Selected">
+                                <!--<ComboBox.Style>
                                         <Style TargetType="ComboBox">
                                             <Style.Triggers>
                                                 <Trigger Property="IsDropDownOpen" Value="False">
@@ -114,56 +114,55 @@
                                             </Style.Triggers>
                                         </Style>
                                     </ComboBox.Style>-->
-                                    <TextBlock>Sorted By Author</TextBlock>
-                                    <TextBlock>Sorted By Title</TextBlock>
-                                    <TextBlock>Sorted By Date</TextBlock>
-                                </ComboBox>
-                            </DataTemplate>
-                        </DataGridTextColumn.HeaderTemplate>
-                    </DataGridTextColumn>
-                    <DataGridTemplateColumn x:Name="BooksColumn" Width="4*" HeaderStyle="{StaticResource Headings}">
-                        <DataGridTemplateColumn.HeaderTemplate>
-                            <DataTemplate>
-                                <DockPanel>
-                                    <!--<TextBlock DockPanel.Dock="Left" Text="{Binding Path=DataContext.LastSortingFeature, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>-->
-                                    <StackPanel Margin="0,0,10,0" DockPanel.Dock="Right" Width="200" Orientation="Horizontal" Background="{DynamicResource clBrSearch}" HorizontalAlignment="Right">
-                                        <TextBox TextChanged="SearchInLibrary" materialDesign:HintAssist.Hint="Search..." Width="150" VerticalAlignment="Center" FontSize="16" HorizontalAlignment="Stretch" Background="Transparent"/>
-                                        <Label Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Width="40">
-                                            <Image Source="/images/searchLabel.png"/>
-                                        </Label>
-                                    </StackPanel>
-                                </DockPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.HeaderTemplate>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <ListBox Name="dict" ItemsSource="{Binding Value}" Template="{StaticResource NoScroll}" HorizontalAlignment="Stretch" VerticalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid Width="{Binding Path=MaximumWidth, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
-                                                <StackPanel Cursor="Hand" MouseDown="StackPanel_MouseDown" Orientation="Vertical">
-                                                    <Image SizeChanged="Image_SizeChanged" Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.1, ElementName=OuterGrid, Path=ActualWidth}"
+                                <TextBlock>Sorted By Author</TextBlock>
+                                <TextBlock>Sorted By Title</TextBlock>
+                                <TextBlock>Sorted By Date</TextBlock>
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn x:Name="BooksColumn" Width="4*" HeaderStyle="{StaticResource Headings}">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <DockPanel>
+                                <!--<TextBlock DockPanel.Dock="Left" Text="{Binding Path=DataContext.LastSortingFeature, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>-->
+                                <StackPanel Margin="0,0,10,0" DockPanel.Dock="Right" Width="200" Orientation="Horizontal" Background="{DynamicResource clBrSearch}" HorizontalAlignment="Right">
+                                    <TextBox TextChanged="SearchInLibrary" materialDesign:HintAssist.Hint="Search..." Width="150" VerticalAlignment="Center" FontSize="16" HorizontalAlignment="Stretch" Background="Transparent"/>
+                                    <Label Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Width="40">
+                                        <Image Source="/images/searchLabel.png"/>
+                                    </Label>
+                                </StackPanel>
+                            </DockPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ListBox Name="dict" ItemsSource="{Binding Value}" Template="{StaticResource NoScroll}" HorizontalAlignment="Stretch" VerticalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Width="{Binding Path=MaximumWidth, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+                                            <StackPanel Cursor="Hand" MouseDown="StackPanel_MouseDown" Orientation="Vertical">
+                                                <Image SizeChanged="Image_SizeChanged" Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.1, ElementName=OuterGrid, Path=ActualWidth}"
                                                        Height="auto" 
                                                        Source='{Binding CoverPath}'/>
-                                                    <TextBlock SizeChanged="WrapPanel_SizeChanged" Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Author}'></TextBlock>
-                                                    <TextBlock SizeChanged="WrapPanel_SizeChanged" Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Title}'></TextBlock>
-                                                </StackPanel>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                    <ListBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <WrapPanel ItemHeight="auto"
+                                                <TextBlock SizeChanged="WrapPanel_SizeChanged" Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Author}'></TextBlock>
+                                                <TextBlock SizeChanged="WrapPanel_SizeChanged" Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Title}'></TextBlock>
+                                            </StackPanel>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel ItemHeight="auto"
                                                    ItemWidth="auto"
                                                    IsItemsHost="True" Orientation="Horizontal"/>
-                                        </ItemsPanelTemplate>
-                                    </ListBox.ItemsPanel>
-                                </ListBox>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </ScrollViewer>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

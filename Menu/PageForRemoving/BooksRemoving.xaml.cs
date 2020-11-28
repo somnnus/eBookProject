@@ -96,28 +96,18 @@ namespace Menu.PageForRemoving
                 MessageBox.Show("Library is empty!");
         }
 
-        private void DoPreviewingMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            if (e.Delta > 0)
-            {
-                int i = 0;
-                while (i < 3)
-                {
-                    ((ScrollViewer)sender).LineUp();
-                    i++;
-                }
-            }
-            if (e.Delta < 0)
-            {
-                int i = 0;
-                while (i < 3)
-                {
-                    ((ScrollViewer)sender).LineDown();
-                    i++;
-                }
-            }
-            e.Handled = true;
-        }
+        //private void DoPreviewingMouseWheel(object sender, MouseWheelEventArgs e)
+        //{
+        //    if (e.Delta > 0)
+        //    {
+        //        ((ScrollViewer)sender).LineDown();
+        //    }
+        //    if (e.Delta < 0)
+        //    {
+        //        ((ScrollViewer)sender).LineDown();
+        //    }
+        //    e.Handled = true;
+        //}
 
         private void SearchInLibrary(object sender, TextChangedEventArgs e)
         {
