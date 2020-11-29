@@ -140,6 +140,20 @@ namespace Menu
             Close();
         }
 
+        private void OnClosing(object sender,System.ComponentModel.CancelEventArgs e)
+        {
+            currentBook.LastPage = flowDocument.MasterPageNumber;
+            currentBook.Zoom = flowDocument.Zoom;
+
+            Serialization.SerializationLastBook(currentBook, fullPath);
+            Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
+            var menuWindow = new MainWindow(ResourcesProvider.Current.MainWindowVM);
+            menuWindow.Show();
+            
+            
+
+            
+        }
         private void Label_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 1)

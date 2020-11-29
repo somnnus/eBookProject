@@ -9,6 +9,7 @@
         Icon="/images/catBook.ico"
         WindowStartupLocation="CenterScreen"
         MinHeight="300" MinWidth="900">
+        
 
     <Window.Resources>
         <ControlTemplate x:Key="ArrowLeft">
