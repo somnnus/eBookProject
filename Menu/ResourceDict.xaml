@@ -79,7 +79,7 @@
     </Style>-->
 
     <!--Хороший шаблон-->
-    <!--<Style x:Key="ScrollBarThumb"
+    <Style x:Key="ScrollBarThumb"
            TargetType="{x:Type Thumb}">
     <Setter Property="OverridesDefaultStyle"
                 Value="true"/>
@@ -224,11 +224,11 @@
         </Style.Triggers>
     </Style>
 
-    --><!-- ScrollViewer --><!--
+    <!-- ScrollViewer -->
     <Style x:Key="for_scrollviewer"
            TargetType="{x:Type ScrollViewer}">
         <Setter Property="BorderBrush"
-                Value="LightGray"/>
+                Value="{DynamicResource clBrText}"/>
         <Setter Property="BorderThickness"
                 Value="0"/>
         <Setter Property="HorizontalContentAlignment"
@@ -349,7 +349,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>-->
+    </Style>
 
     <!--<Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
         <Setter Property="Template">
@@ -602,7 +602,7 @@
         <Setter Property="Stylus.IsFlicksEnabled"
             Value="false" />
         <Setter Property="Foreground"
-            Value="#ADABAB" />
+            Value="{DynamicResource clBrText}" />
         <Setter Property="Background"
             Value="Transparent" />
         <Setter Property="Width"

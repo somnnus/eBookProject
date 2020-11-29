@@ -24,10 +24,8 @@ namespace Menu.LibraryPage
     /// <summary>
     /// Логика взаимодействия для Library.xaml
     /// </summary>
-    public partial class Library : UserControl, INotifyPropertyChanged
+    public partial class Library : UserControl
     {
-        private double maxWidth;
-
         public Library()
         {
             InitializeComponent();
@@ -37,28 +35,6 @@ namespace Menu.LibraryPage
             ResourcesProvider.Current.CurrentDictionary = ResourcesProvider.Current.SortedByDate;
             ResourcesProvider.Current.LastSortingFeature = "Sorted By Date";
         }
-
-        public double MaximumWidth
-        {
-            get { return maxWidth; }
-            set
-            {
-                maxWidth = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        protected virtual void NotifyPropertyChanged(
-           [CallerMemberName] String propertyName = "")
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         private void ComboBox_Selected(object sender, RoutedEventArgs e)
         {
@@ -136,22 +112,16 @@ namespace Menu.LibraryPage
             LibrarySearching.Search(textBox);
         }
 
-        private void WrapPanel_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            var currentWidth = ((TextBlock)sender).ActualWidth;
-            if (currentWidth > MaximumWidth)
-            {
-                MaximumWidth = currentWidth;
-            }
-        }
+        //private void WrapPanel_SizeChanged(object sender, SizeChangedEventArgs e)
+        //{
+        //    var currentWidth = ((TextBlock)sender).ActualWidth;
+        //    ResourcesProvider.Current.Widths.Add(currentWidth);
+        //}
 
-        private void Image_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            var currentWidth = ((Image)sender).ActualWidth;
-            if (currentWidth > MaximumWidth)
-            {
-                MaximumWidth = currentWidth;
-            }
-        }
+        //private void Image_SizeChanged(object sender, SizeChangedEventArgs e)
+        //{
+        //    var currentWidth = ((Image)sender).ActualWidth;
+        //    ResourcesProvider.Current.Widths.Add(currentWidth);
+        //}
     }
 }

@@ -34,10 +34,10 @@
         </ControlTemplate>
         <local:SizePercentageConverter x:Key="PercentageConverter"/>
     </UserControl.Resources>
-    <Grid>
-        <DockPanel Margin="40" Background="{DynamicResource clBr}">
+    <Grid Margin="40" Name="OuterGrid">
+        <DockPanel Background="{DynamicResource clBr}">
             <Label Content="Reading Recently" Foreground="{DynamicResource clBrMenu}" Style="{StaticResource Headings}" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <DockPanel Height="auto" Width="auto" LastChildFill="True" Name="DockPanelLibrary">
+            <DockPanel Height="auto" Width="auto" LastChildFill="True" x:Name="DockPanelLibrary" x:FieldModifier="public">
                 <Grid Width="40" DockPanel.Dock="Left">
                     <Label Cursor="Hand" Name="labelArrowLeft" VerticalAlignment="Center" 
                            Height="auto"
@@ -67,9 +67,9 @@
                         </ListBox.ItemsSource>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Grid Width="{Binding Path=MaximumWidth, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SizeChanged="WrapPanel_SizeChanged">
+                                <Grid Width="{Binding Path=DataContext.MaxWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SizeChanged="WrapPanel_SizeChanged">
                                     <StackPanel Cursor="Hand" MouseDown="StackPanel_MouseDown" Orientation="Vertical">
-                                        <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.15, ElementName=DockPanelLibrary, Path=ActualWidth}"
+                                        <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.1, ElementName=OuterGrid, Path=ActualWidth}"
                                                Height="auto" 
                                                Source='{Binding CoverPath}'>
                                             <Image.Triggers>

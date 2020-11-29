@@ -22,6 +22,7 @@ namespace Menu.SharedResources
         private List<Book> listBooks;
 
         public List<Book> deleteBook;
+        private List<double> widths;
 
         public Resources()
         {
@@ -30,6 +31,7 @@ namespace Menu.SharedResources
             sortedByTitle = new Dictionary<string, List<Book>>();
             sortedByDate = new Dictionary<string, List<Book>>();
             listBooks = new List<Book>();
+            widths = new List<double>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -41,6 +43,21 @@ namespace Menu.SharedResources
             {
                 mainWindowViewModel = value;
             }
+        }
+
+        public List<double> Widths
+        {
+            get { return widths; }
+            set
+            {
+                widths = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public double MaxWidth
+        {
+            get { return widths.Max(); }
         }
 
         public string LastSortingFeature

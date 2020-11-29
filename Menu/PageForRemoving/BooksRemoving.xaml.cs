@@ -25,15 +25,16 @@ namespace Menu.PageForRemoving
     /// <summary>
     /// Логика взаимодействия для BooksRemoving.xaml
     /// </summary>
-    public partial class BooksRemoving : UserControl, INotifyPropertyChanged
+    public partial class BooksRemoving : UserControl
     {
         private List<Book> booksForDeleting;
+        private List<double> widthsForDeleting;
         static string fullPath = AppDomain.CurrentDomain.BaseDirectory + "Library";
-        private double maxWidth;
 
         public BooksRemoving()
         {
             booksForDeleting = new List<Book>();
+            widthsForDeleting = new List<double>();
 
             DataContext = ResourcesProvider.Current;
             InitializeComponent();
@@ -45,28 +46,6 @@ namespace Menu.PageForRemoving
             else
                 MessageBox.Show("Library is empty!");
         }
-
-        public double MaximumWidth
-        {
-            get { return maxWidth; }
-            set
-            {
-                maxWidth = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        protected virtual void NotifyPropertyChanged(
-           [CallerMemberName] String propertyName = "")
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         private void ComboBox_Selected(object sender, RoutedEventArgs e)
         {
@@ -122,7 +101,10 @@ namespace Menu.PageForRemoving
             {
                 delete.Add(book);     
                 ResourcesProvider.Current.ListBooks.Remove(book);
-
+            }
+            foreach (var width in widthsForDeleting)
+            {
+                ResourcesProvider.Current.Widths.Remove(width);
             }
             ResourcesProvider.Current.deleteBook = delete;
             Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
@@ -137,6 +119,7 @@ namespace Menu.PageForRemoving
             if (e.ClickCount >= 1)
             {
                 StackPanel stackPanel = (StackPanel)sender;
+                Grid parent = (Grid)(stackPanel.Parent);
                 Book currentBook = (Book)stackPanel.DataContext;
                 var currentCheckBox = (CheckBox)stackPanel.Children[0];
 
@@ -144,12 +127,14 @@ namespace Menu.PageForRemoving
                 {
                     currentCheckBox.IsChecked = true;
                     booksForDeleting.Add(currentBook);
+                    widthsForDeleting.Add(parent.ActualWidth);
                 }
                 else
                 if (currentCheckBox.IsChecked == true)
                 {
                     currentCheckBox.IsChecked = false;
                     booksForDeleting.Remove(currentBook);
+                    widthsForDeleting.Remove(parent.ActualWidth);
                 }
             }
         }
@@ -157,6 +142,7 @@ namespace Menu.PageForRemoving
         private void ChooseBookToDelete(object sender, RoutedEventArgs e)
         {
             StackPanel stackPanel = (StackPanel)((CheckBox)sender).Parent;
+            Grid parent = (Grid)(stackPanel.Parent);
             Book currentBook = (Book)stackPanel.DataContext;
             var currentCheckBox = (CheckBox)stackPanel.Children[0];
 
@@ -164,32 +150,28 @@ namespace Menu.PageForRemoving
             {
                 currentCheckBox.IsChecked = true;
                 booksForDeleting.Add(currentBook);
+                widthsForDeleting.Add(parent.ActualWidth);
             }
             else
             if (currentCheckBox.IsChecked == false)
             {
                 currentCheckBox.IsChecked = false;
                 booksForDeleting.Remove(currentBook);
+                widthsForDeleting.Remove(parent.ActualWidth);
             }
         }
         
-        private void WrapPanel_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            var currentWidth = ((TextBlock)sender).ActualWidth;
-            if (currentWidth > MaximumWidth)
-            {
-                MaximumWidth = currentWidth;
-            }
-        }
+        //private void WrapPanel_SizeChanged(object sender, SizeChangedEventArgs e)
+        //{
+        //    var currentWidth = ((TextBlock)sender).ActualWidth;
+        //    ResourcesProvider.Current.Widths.Add(currentWidth);
+        //}
 
-        private void Image_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            var currentWidth = ((Image)sender).ActualWidth;
-            if (currentWidth > MaximumWidth)
-            {
-                MaximumWidth = currentWidth;
-            }
-        }
+        //private void Image_SizeChanged(object sender, SizeChangedEventArgs e)
+        //{
+        //    var currentWidth = ((Image)sender).ActualWidth;
+        //    ResourcesProvider.Current.Widths.Add(currentWidth);
+        //}
         //private void RefreshDict()
         //{
         //    dataGridLib.ItemsSource = ResourcesProvider.Current.SortedBooks;

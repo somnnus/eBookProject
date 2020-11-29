@@ -40,8 +40,6 @@ namespace Menu.MainAppPage
         //    _imageIndex++;
         //}
 
-        private double maxWidth;
-
         private int currentPage;
 
         public Main()
@@ -63,16 +61,6 @@ namespace Menu.MainAppPage
             set
             {
                 currentPage = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        public double MaximumWidth
-        {
-            get { return maxWidth; }
-            set
-            {
-                maxWidth = value;
                 NotifyPropertyChanged();
             }
         }
@@ -143,10 +131,7 @@ namespace Menu.MainAppPage
         private void WrapPanel_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             var currentWidth = ((Grid)sender).ActualWidth;
-            if (currentWidth > MaximumWidth)
-            {
-                MaximumWidth = currentWidth;
-            }
+            ResourcesProvider.Current.Widths.Add(currentWidth);
         }
 
         //private MultiBinding createFieldMultiBinding(string fieldName)

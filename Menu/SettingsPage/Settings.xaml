@@ -18,10 +18,13 @@
         <local:SizePercentageConverter x:Key="PercentageConverter"/>
     </UserControl.Resources>
     <Grid>
-        <ScrollViewer Style="{StaticResource for_scrollviewer}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <StackPanel CanHorizontallyScroll="False" CanVerticallyScroll="True" x:Name="DockPanelSettings"  Margin="40" Background="{DynamicResource clBr}">
-                <Label Content="Choose Theme" Foreground="{DynamicResource clBrMenu}" Style="{StaticResource Headings}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+        <StackPanel ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="DockPanelSettings" Margin="40" Background="{DynamicResource clBr}">
+            <Label Content="Choose Theme" Foreground="{DynamicResource clBrMenu}" Style="{StaticResource Headings}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.Resources>
+                    <Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollModified}"/>
+                </Grid.Resources>
+                <StackPanel>
                     <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                         <Button Height="auto" x:Name="whiteTheme" Click="SetWhiteTheme">
                             <StackPanel>
@@ -47,7 +50,7 @@
                         </Button>
                     </StackPanel>
                 </StackPanel>
-            </StackPanel>
-        </ScrollViewer>
+            </Grid>
+        </StackPanel>
     </Grid>
 </UserControl>

@@ -12,5 +12,9 @@ namespace Menu.MainAppPage
 {
     public class MainViewModel : ViewModelBase
     {
+        public MainViewModel()
+        {
+
+        }
     }
 }
