@@ -149,8 +149,10 @@ namespace Menu
             Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
             var menuWindow = new MainWindow(ResourcesProvider.Current.MainWindowVM);
             menuWindow.Show();
-            e.Cancel = true;
-            Close();
+            
+            
+
+            
         }
         private void Label_MouseDown(object sender, MouseButtonEventArgs e)
         {
