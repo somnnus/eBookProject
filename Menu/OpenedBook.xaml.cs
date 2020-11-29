@@ -129,14 +129,7 @@ namespace Menu
         }
 
         private void OpenMenu()
-        {
-            currentBook.LastPage = flowDocument.MasterPageNumber;
-            currentBook.Zoom = flowDocument.Zoom;
-
-            Serialization.SerializationLastBook(currentBook, fullPath);
-            Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
-            var menuWindow = new MainWindow(ResourcesProvider.Current.MainWindowVM);
-            menuWindow.Show();
+        {            
             Close();
         }
 
@@ -148,12 +141,8 @@ namespace Menu
             Serialization.SerializationLastBook(currentBook, fullPath);
             Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
             var menuWindow = new MainWindow(ResourcesProvider.Current.MainWindowVM);
-            
-            
+                    
             menuWindow.Show();
-
-
-
         }
         private void Label_MouseDown(object sender, MouseButtonEventArgs e)
         {
