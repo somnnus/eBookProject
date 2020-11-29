@@ -150,6 +150,7 @@ namespace Menu
             var menuWindow = new MainWindow(ResourcesProvider.Current.MainWindowVM);
             menuWindow.Show();
             e.Cancel = true;
+            Close();
         }
         private void Label_MouseDown(object sender, MouseButtonEventArgs e)
         {
