@@ -71,10 +71,16 @@ namespace Menu
                         currentBook = new EpubBook(path,newFullFileName);
                         if (currentBook != null)
                         {
-                            ResourcesProvider.Current.ListBooks.Insert(0, currentBook);
-                            RefreshPages();
-
-                            Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
+                            if (FormatCheck(currentBook))
+                            {
+                                MessageBox.Show("The book has already added in the library!");
+                            }
+                            else
+                            {
+                                ResourcesProvider.Current.ListBooks.Insert(0, currentBook);
+                                RefreshPages();
+                                Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
+                            }
                         }
                         else
                         {
@@ -95,10 +101,16 @@ namespace Menu
                         currentBook = new FB2Book(path,newFullFileName);
                         if (currentBook != null)
                         {
-                            ResourcesProvider.Current.ListBooks.Insert(0, currentBook);
-                            RefreshPages();
-
-                            Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
+                            if (FormatCheck(currentBook))
+                            {
+                                MessageBox.Show("The book has already added in the library!");
+                            }
+                            else
+                            {
+                                ResourcesProvider.Current.ListBooks.Insert(0, currentBook);
+                                RefreshPages();
+                                Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
+                            }
                         }
                         else
                         {
@@ -140,6 +152,20 @@ namespace Menu
 
                
             }
+        }
+
+        private bool FormatCheck(Book current)
+        {
+            bool flag = false;
+            foreach (var book in ResourcesProvider.Current.ListBooks)
+            {
+                if(book.Title== current.Title && book.Author == current.Author)
+                {
+                    flag = true;
+                    return flag;
+                }
+            }
+            return flag;
         }
 
         private void RefreshPages() //динамическое отображение
