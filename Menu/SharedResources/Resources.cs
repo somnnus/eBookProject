@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Menu.SharedResources
 {
-    public class Resources: INotifyPropertyChanged
+    public class Resources : INotifyPropertyChanged
     {
         private MainWindowViewModel mainWindowViewModel;
 
@@ -19,10 +19,11 @@ namespace Menu.SharedResources
         private Dictionary<string, List<Book>> sortedByAuthor;
         private Dictionary<string, List<Book>> sortedByTitle;
         private Dictionary<string, List<Book>> sortedByDate;
+        private Dictionary<int, Book> recentlyReadBooks;
         private List<Book> listBooks;
+        private double maxWidth = 0;
 
         public List<Book> deleteBook;
-        private List<double> widths;
 
         public Resources()
         {
@@ -31,7 +32,7 @@ namespace Menu.SharedResources
             sortedByTitle = new Dictionary<string, List<Book>>();
             sortedByDate = new Dictionary<string, List<Book>>();
             listBooks = new List<Book>();
-            widths = new List<double>();
+            recentlyReadBooks = new Dictionary<int, Book>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -45,27 +46,22 @@ namespace Menu.SharedResources
             }
         }
 
-        public List<double> Widths
-        {
-            get { return widths; }
-            set
-            {
-                widths = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        public double MaxWidth
-        {
-            get { return widths.Max(); }
-        }
-
         public string LastSortingFeature
         {
             get { return lastSortingFeature; }
             set
             {
                 lastSortingFeature = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public double MaxWidth
+        {
+            get { return maxWidth; }
+            set
+            {
+                maxWidth = value;
                 NotifyPropertyChanged();
             }
         }
@@ -126,6 +122,16 @@ namespace Menu.SharedResources
             set
             {
                 listBooks = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public Dictionary<int, Book> RecentlyReadBooks
+        {
+            get { return recentlyReadBooks; }
+            set
+            {
+                recentlyReadBooks = value;
                 NotifyPropertyChanged();
             }
         }

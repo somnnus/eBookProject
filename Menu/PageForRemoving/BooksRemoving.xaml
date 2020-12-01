@@ -78,14 +78,14 @@
                             <ListBox Template="{StaticResource NoScroll}" ItemsSource="{Binding Value}" HorizontalAlignment="Stretch" VerticalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid Width="{Binding Path=DataContext.MaxWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+                                        <Grid Width="150">
                                             <StackPanel Cursor="Hand" MouseDown="StackPanel_MouseDown" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                                                 <CheckBox Click="ChooseBookToDelete" Background="{DynamicResource clBrText}" BorderBrush="Black" BorderThickness="3" HorizontalAlignment="Right" VerticalAlignment="Top" IsChecked="False" Height="40" />
                                                 <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.1, ElementName=OuterGrid, Path=ActualWidth}"
                                                Height="auto" 
                                                Source='{Binding CoverPath}'/>
-                                                <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Author}'></TextBlock>
-                                                <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Title}'></TextBlock>
+                                                <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Author}' TextAlignment="Center"></TextBlock>
+                                                <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Title}' TextAlignment="Center"></TextBlock>
                                             </StackPanel>
                                         </Grid>
                                     </DataTemplate>

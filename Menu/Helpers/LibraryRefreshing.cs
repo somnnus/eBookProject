@@ -23,6 +23,7 @@ namespace Menu.Helpers
             {
                 ResourcesProvider.Current.CurrentDictionary = ResourcesProvider.Current.SortedByAuthor;
             }
+            else
             if (ResourcesProvider.Current.LastSortingFeature == "Sorted By Title")
             {
                 ResourcesProvider.Current.CurrentDictionary = ResourcesProvider.Current.SortedByTitle;
@@ -38,12 +39,44 @@ namespace Menu.Helpers
         {
             if (ResourcesProvider.Current.ListBooks.Count != 0)
             {
-                int blocksCount = 6;
-                ResourcesProvider.Current.BooksByPages = new Dictionary<int, List<Book>>();
-                ResourcesProvider.Current.BooksByPages = ArrayHelperExtensions.SplitByBlocks(ResourcesProvider.Current.ListBooks, ResourcesProvider.Current.BooksByPages, blocksCount);
+                var recentlyReadBooksHelper = new Dictionary<int, Book>();
+                if (ResourcesProvider.Current.ListBooks.Count == 1)
+                {
+                    recentlyReadBooksHelper.Add(0, ResourcesProvider.Current.ListBooks[0]);
+                    //ResourcesProvider.Current.RecentlyReadBooks[0] = ResourcesProvider.Current.ListBooks[0];
+
+                    ResourcesProvider.Current.RecentlyReadBooks = recentlyReadBooksHelper;
+                    ResourcesProvider.Current.BooksByPages = new Dictionary<int, List<Book>>();
+                }
+                else
+                if (ResourcesProvider.Current.ListBooks.Count >= 2)
+                {
+                    recentlyReadBooksHelper.Add(0, ResourcesProvider.Current.ListBooks[0]);
+                    recentlyReadBooksHelper.Add(1, ResourcesProvider.Current.ListBooks[1]);
+                    ResourcesProvider.Current.RecentlyReadBooks = recentlyReadBooksHelper;
+
+                    //ResourcesProvider.Current.RecentlyReadBooks[0] = ResourcesProvider.Current.ListBooks[0];
+                    //ResourcesProvider.Current.RecentlyReadBooks[1] = ResourcesProvider.Current.ListBooks[1];
+
+                    var restOfBooksHelper = new List<Book>();
+                    foreach (var book in ResourcesProvider.Current.ListBooks)
+                    {
+                        restOfBooksHelper.Add(book);
+                    }
+
+                    for (int i = 0; i < 2; i++)
+                    {
+                        restOfBooksHelper.RemoveAt(0);
+                    }
+
+                    int blocksCount = 4;
+                    ResourcesProvider.Current.BooksByPages = new Dictionary<int, List<Book>>();
+                    ResourcesProvider.Current.BooksByPages = ArrayHelperExtensions.SplitByBlocks(restOfBooksHelper, ResourcesProvider.Current.BooksByPages, blocksCount);
+                }
             }
             else
             {
+                ResourcesProvider.Current.RecentlyReadBooks = new Dictionary<int, Book>();
                 ResourcesProvider.Current.BooksByPages = new Dictionary<int, List<Book>>();
             }
         }

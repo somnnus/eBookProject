@@ -45,12 +45,51 @@ namespace Menu.MainAppPage
         public Main()
         {
             InitializeComponent();
-            
+
             DataContext = ResourcesProvider.Current;
             if (ResourcesProvider.Current.BooksByPages.Count != 0)
             {
                 //listBoxBooks.ItemsSource = ResourcesProvider.Current.BooksByPages["0"];
             }
+        }
+
+        public void FillMain()
+        {
+
+            //LibraryByBlocks.sum += ResourcesProvider.Current.MaxWidth;
+            //LibraryByBlocks.sum += 250;
+
+            //while (LibraryByBlocks.bookCount != ResourcesProvider.Current.ListBooks.Count)
+            //{
+            //    if (OuterGrid.ActualWidth * 2 >= LibraryByBlocks.sum)
+            //    {
+            //        if (LibraryByBlocks.resultDict.ContainsKey(LibraryByBlocks.i))
+            //        {
+            //            LibraryByBlocks.resultDict[LibraryByBlocks.i].Add(ResourcesProvider.Current.ListBooks[LibraryByBlocks.bookCount]);
+            //        }
+            //        else
+            //        {
+            //            LibraryByBlocks.resultDict.Add(LibraryByBlocks.i, new List<Book>());
+            //            LibraryByBlocks.resultDict[LibraryByBlocks.i].Add(ResourcesProvider.Current.ListBooks[LibraryByBlocks.bookCount]);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        LibraryByBlocks.sum = 0;
+            //        LibraryByBlocks.i++;
+            //        LibraryByBlocks.resultDict.Add(LibraryByBlocks.i, new List<Book>());
+            //        LibraryByBlocks.resultDict[LibraryByBlocks.i].Add(ResourcesProvider.Current.ListBooks[LibraryByBlocks.bookCount]);
+            //    }
+
+            //    LibraryByBlocks.bookCount++;
+            //    LibraryByBlocks.sum += 250;
+            //}
+            //LibraryByBlocks.sum = 0;
+            //LibraryByBlocks.i = 0;
+            //LibraryByBlocks.bookCount = 0;
+            //ResourcesProvider.Current.BooksByPages = new Dictionary<int, List<Book>>();
+            //ResourcesProvider.Current.BooksByPages = LibraryByBlocks.resultDict;
+            //LibraryByBlocks.resultDict = new Dictionary<int, List<Book>>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -128,11 +167,39 @@ namespace Menu.MainAppPage
             }
         }
 
-        private void WrapPanel_SizeChanged(object sender, SizeChangedEventArgs e)
+        //private void WrapPanel_Initialized(object sender, EventArgs e)
+        //{
+        //    FillMain();
+        //}
+
+        //private void DockPanelLibrary_Initialized(object sender, EventArgs e)
+        //{
+        //    FillMain();
+        //}
+
+        private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            var currentWidth = ((Grid)sender).ActualWidth;
-            ResourcesProvider.Current.Widths.Add(currentWidth);
+            Grid grid = (Grid)sender;
+            if (ResourcesProvider.Current.MaxWidth < grid.ActualWidth)
+            {
+                ResourcesProvider.Current.MaxWidth = grid.ActualWidth;
+            }
         }
+
+        //private void UserControlMain_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    FillMain();
+        //}
+
+        //private void Grid_Initialized(object sender, EventArgs e)
+        //{
+        //    FillMain();
+        //}
+
+        //private void StackPanel_SizeChanged(object sender, SizeChangedEventArgs e)
+        //{
+        //    FillMain();
+        //}
 
         //private MultiBinding createFieldMultiBinding(string fieldName)
         //{

@@ -28,13 +28,11 @@ namespace Menu.PageForRemoving
     public partial class BooksRemoving : UserControl
     {
         private List<Book> booksForDeleting;
-        private List<double> widthsForDeleting;
         static string fullPath = AppDomain.CurrentDomain.BaseDirectory + "Library";
 
         public BooksRemoving()
         {
             booksForDeleting = new List<Book>();
-            widthsForDeleting = new List<double>();
 
             DataContext = ResourcesProvider.Current;
             InitializeComponent();
@@ -102,10 +100,6 @@ namespace Menu.PageForRemoving
                 delete.Add(book);     
                 ResourcesProvider.Current.ListBooks.Remove(book);
             }
-            foreach (var width in widthsForDeleting)
-            {
-                ResourcesProvider.Current.Widths.Remove(width);
-            }
             ResourcesProvider.Current.deleteBook = delete;
             Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
             Serialization.SerializationBookDelete(delete, fullPath);
@@ -127,14 +121,12 @@ namespace Menu.PageForRemoving
                 {
                     currentCheckBox.IsChecked = true;
                     booksForDeleting.Add(currentBook);
-                    widthsForDeleting.Add(parent.ActualWidth);
                 }
                 else
                 if (currentCheckBox.IsChecked == true)
                 {
                     currentCheckBox.IsChecked = false;
                     booksForDeleting.Remove(currentBook);
-                    widthsForDeleting.Remove(parent.ActualWidth);
                 }
             }
         }
@@ -150,14 +142,12 @@ namespace Menu.PageForRemoving
             {
                 currentCheckBox.IsChecked = true;
                 booksForDeleting.Add(currentBook);
-                widthsForDeleting.Add(parent.ActualWidth);
             }
             else
             if (currentCheckBox.IsChecked == false)
             {
                 currentCheckBox.IsChecked = false;
                 booksForDeleting.Remove(currentBook);
-                widthsForDeleting.Remove(parent.ActualWidth);
             }
         }
         

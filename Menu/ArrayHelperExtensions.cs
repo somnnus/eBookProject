@@ -11,7 +11,7 @@ namespace Menu
     {
         public static Dictionary<int, List<Book>> SplitByBlocks(List<Book> array, Dictionary<int, List<Book>> dictKeys, int size)
         {
-            for (var i = 0; i < (float)array.Count/ size; i++)
+            for (var i = 0; i < (float)array.Count / size; i++)
             {
                 foreach (var item in array.Skip(i * size).Take(size))
                 {

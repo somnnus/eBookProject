@@ -45,6 +45,11 @@ namespace Menu
             CheckSerializationBookDelete();
 
             LibraryRefreshing.FillMain(); //обработка постраничного вывода
+            //ResourcesProvider.Current.BooksByPages.Add(0, new List<Book>());
+            //foreach (var book in ResourcesProvider.Current.ListBooks)
+            //{
+            //    ResourcesProvider.Current.BooksByPages[0].Add(book);
+            //}
         }
 
         public void AddBook(object sender, RoutedEventArgs e)
