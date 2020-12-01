@@ -249,7 +249,7 @@ namespace Menu
                 foreach (var book in deleteBooks)
                 {
                     File.Delete(book.FullPath);
-                    if (!book.CoverPath.Contains("defoltCover"))       
+                   // if (!book.CoverPath.Contains("defoltCover"))       
                     File.Delete(book.CoverPath);
                    
                 }

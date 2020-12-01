@@ -7,6 +7,7 @@
         xmlns:helper="clr-namespace:Menu.Helpers"
         mc:Ignorable="d"
         Icon="/images/catBook.ico"
+        Closing="OnClosing"
         WindowStartupLocation="CenterScreen"
         MinHeight="300" MinWidth="900">
         
