@@ -62,7 +62,6 @@ namespace LibraryReader.Books
                 {
                     File.Copy(AppDomain.CurrentDomain.BaseDirectory + "images\\defoltCover.jpg", AppDomain.CurrentDomain.BaseDirectory + "Library\\Covers\\defoltCover.jpg");
                 }
-
                 return AppDomain.CurrentDomain.BaseDirectory + "Library\\Covers\\defoltCover.jpg";
             }
                       
