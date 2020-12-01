@@ -37,8 +37,8 @@
     </UserControl.Resources>
     <Grid Margin="40" Name="OuterGrid">
         <DockPanel Background="{DynamicResource clBr}">
-            <Label Content="Reading Recently" Foreground="{DynamicResource clBrMenu}" Style="{StaticResource Headings}" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <DockPanel Height="auto" Width="auto" LastChildFill="True" x:Name="DockPanelLibrary" x:FieldModifier="public">
+                <Label Content="Read Recently" Foreground="{DynamicResource clBrMenu}" Style="{StaticResource Headings}" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <Grid Width="40" DockPanel.Dock="Left">
                     <Label Cursor="Hand" Name="labelArrowLeft" VerticalAlignment="Center" 
                            Height="auto"
@@ -55,29 +55,27 @@
                         <ContentControl Template="{StaticResource ArrowRight}"/>
                     </Label>
                 </Grid>
-                <StackPanel Name="libraryGrid" Orientation="Vertical">
-                    <ListBox x:Name="recentlyReadBooksBox" HorizontalAlignment="Center" ItemsSource="{Binding Path=DataContext.RecentlyReadBooks.Values, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Center" Name="libraryGrid" Orientation="Vertical">
+                    <ListBox HorizontalContentAlignment="Stretch" x:Name="recentlyReadBooksBox" HorizontalAlignment="Center" ItemsSource="{Binding Path=DataContext.RecentlyReadBooks.Values, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Grid Width="300">
-                                    <StackPanel Cursor="Hand" MouseDown="StackPanel_MouseDown" Orientation="Vertical">
-                                        <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.2, ElementName=OuterGrid, Path=ActualWidth}"
-                                               Height="auto" 
+                                <StackPanel Cursor="Hand" MouseDown="StackPanel_MouseDown" Orientation="Vertical" Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.25, ElementName=OuterGrid, Path=ActualWidth}">
+                                    <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.2, ElementName=OuterGrid, Path=ActualWidth}"
+                                               Height="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.35, ElementName=OuterGrid, Path=ActualHeight}"
                                                Source='{Binding CoverPath}'>
-                                            <Image.Triggers>
-                                                <EventTrigger RoutedEvent="Image.Loaded">
-                                                    <BeginStoryboard>
-                                                        <Storyboard>
-                                                            <DoubleAnimation Storyboard.TargetProperty="(Image.Opacity)" From="0" To="1" Duration="0:0:1" />
-                                                        </Storyboard>
-                                                    </BeginStoryboard>
-                                                </EventTrigger>
-                                            </Image.Triggers>
-                                        </Image>
-                                        <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Author}'></TextBlock>
-                                        <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Title}'></TextBlock>
-                                    </StackPanel>
-                                </Grid>
+                                        <Image.Triggers>
+                                            <EventTrigger RoutedEvent="Image.Loaded">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="(Image.Opacity)" From="0" To="1" Duration="0:0:1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </Image.Triggers>
+                                    </Image>
+                                    <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Author}' TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                                    <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Title}' TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                                </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                         <ListBox.ItemsPanel>
@@ -86,7 +84,7 @@
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
                     </ListBox>
-                    <ListBox x:Name="listBoxBooks" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <ListBox HorizontalContentAlignment="Stretch" x:Name="listBoxBooks" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                         <ListBox.ItemsSource>
                             <MultiBinding>
                                 <MultiBinding.Converter>
@@ -98,25 +96,23 @@
                         </ListBox.ItemsSource>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Grid Width="150">
-                                    <StackPanel Cursor="Hand" MouseDown="StackPanel_MouseDown" Orientation="Vertical">
-                                        <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.1, ElementName=OuterGrid, Path=ActualWidth}"
-                                               Height="auto" 
+                                <StackPanel Cursor="Hand" MouseDown="StackPanel_MouseDown" Orientation="Vertical" Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.15, ElementName=OuterGrid, Path=ActualWidth}">
+                                    <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.1, ElementName=OuterGrid, Path=ActualWidth}"
+                                               Height="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.15, ElementName=OuterGrid, Path=ActualHeight}"
                                                Source='{Binding CoverPath}'>
-                                            <Image.Triggers>
-                                                <EventTrigger RoutedEvent="Image.Loaded">
-                                                    <BeginStoryboard>
-                                                        <Storyboard>
-                                                            <DoubleAnimation Storyboard.TargetProperty="(Image.Opacity)" From="0" To="1" Duration="0:0:1" />
-                                                        </Storyboard>
-                                                    </BeginStoryboard>
-                                                </EventTrigger>
-                                            </Image.Triggers>
-                                        </Image>
-                                        <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Author}' TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
-                                        <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Title}' TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
-                                    </StackPanel>
-                                </Grid>
+                                        <Image.Triggers>
+                                            <EventTrigger RoutedEvent="Image.Loaded">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="(Image.Opacity)" From="0" To="1" Duration="0:0:1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </Image.Triggers>
+                                    </Image>
+                                    <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Author}' TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                                    <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Title}' TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                                </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                         <ListBox.ItemsPanel>
