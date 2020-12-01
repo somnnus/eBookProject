@@ -78,7 +78,9 @@ namespace Menu
                         {
                             if (FormatCheck(currentBook))
                             {
-                                MessageBox.Show("The book has already added in the library!");                       
+                                MessageBox.Show("The book has already added in the library!");
+                                File.Delete(currentBook.CoverPath);
+                                File.Delete(currentBook.FullPath);
                             }
                             else
                             {
@@ -109,7 +111,8 @@ namespace Menu
                             if (FormatCheck(currentBook))
                             {
                                 MessageBox.Show("The book has already added in the library!");
-                                
+                                File.Delete(currentBook.CoverPath);
+                                File.Delete(currentBook.FullPath);
                             }
                             else
                             {
@@ -292,7 +295,6 @@ namespace Menu
                 {
                     MessageBox.Show("Book was not found");
                 }
-
             }
             else
             {
