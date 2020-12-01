@@ -78,7 +78,7 @@ namespace Menu
                         {
                             if (FormatCheck(currentBook))
                             {
-                                MessageBox.Show("The book has already added in the library!");
+                                MessageBox.Show("The book has already added in the library!");                       
                             }
                             else
                             {
@@ -109,6 +109,7 @@ namespace Menu
                             if (FormatCheck(currentBook))
                             {
                                 MessageBox.Show("The book has already added in the library!");
+                                
                             }
                             else
                             {

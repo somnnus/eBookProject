@@ -70,7 +70,11 @@ namespace LibraryReader.Books
             }
             else
             {
-                File.Copy(AppDomain.CurrentDomain.BaseDirectory + "images\\defoltCover.jpg", AppDomain.CurrentDomain.BaseDirectory + "Library\\Covers\\defoltCover.jpg");
+                if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Library\\Covers\\defoltCover.jpg"))
+                {
+                    File.Copy(AppDomain.CurrentDomain.BaseDirectory + "images\\defoltCover.jpg", AppDomain.CurrentDomain.BaseDirectory + "Library\\Covers\\defoltCover.jpg");
+                }
+
                 return AppDomain.CurrentDomain.BaseDirectory + "Library\\Covers\\defoltCover.jpg";
             }
 
