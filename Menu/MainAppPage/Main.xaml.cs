@@ -26,20 +26,6 @@ namespace Menu.MainAppPage
     /// </summary>
     public partial class Main : UserControl, INotifyPropertyChanged
     {
-        //public BitmapImage CurrentImage { get; set; }
-
-        //public List<BitmapImage> Images { get; set; }
-
-        //private int _imageIndex = 0;
-
-        //public void NextImageClick(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (_imageIndex >= Images.Count) _imageIndex = 0;
-        //    CurrentImage = Images[imageIndex];
-        //    NotifyPropertyChanged();  //необходимо реализовать INotifyPropertyChanged в классе модели
-        //    _imageIndex++;
-        //}
-
         private int currentPage;
 
         public Main()
@@ -47,49 +33,6 @@ namespace Menu.MainAppPage
             InitializeComponent();
 
             DataContext = ResourcesProvider.Current;
-            if (ResourcesProvider.Current.BooksByPages.Count != 0)
-            {
-                //listBoxBooks.ItemsSource = ResourcesProvider.Current.BooksByPages["0"];
-            }
-        }
-
-        public void FillMain()
-        {
-
-            //LibraryByBlocks.sum += ResourcesProvider.Current.MaxWidth;
-            //LibraryByBlocks.sum += 250;
-
-            //while (LibraryByBlocks.bookCount != ResourcesProvider.Current.ListBooks.Count)
-            //{
-            //    if (OuterGrid.ActualWidth * 2 >= LibraryByBlocks.sum)
-            //    {
-            //        if (LibraryByBlocks.resultDict.ContainsKey(LibraryByBlocks.i))
-            //        {
-            //            LibraryByBlocks.resultDict[LibraryByBlocks.i].Add(ResourcesProvider.Current.ListBooks[LibraryByBlocks.bookCount]);
-            //        }
-            //        else
-            //        {
-            //            LibraryByBlocks.resultDict.Add(LibraryByBlocks.i, new List<Book>());
-            //            LibraryByBlocks.resultDict[LibraryByBlocks.i].Add(ResourcesProvider.Current.ListBooks[LibraryByBlocks.bookCount]);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        LibraryByBlocks.sum = 0;
-            //        LibraryByBlocks.i++;
-            //        LibraryByBlocks.resultDict.Add(LibraryByBlocks.i, new List<Book>());
-            //        LibraryByBlocks.resultDict[LibraryByBlocks.i].Add(ResourcesProvider.Current.ListBooks[LibraryByBlocks.bookCount]);
-            //    }
-
-            //    LibraryByBlocks.bookCount++;
-            //    LibraryByBlocks.sum += 250;
-            //}
-            //LibraryByBlocks.sum = 0;
-            //LibraryByBlocks.i = 0;
-            //LibraryByBlocks.bookCount = 0;
-            //ResourcesProvider.Current.BooksByPages = new Dictionary<int, List<Book>>();
-            //ResourcesProvider.Current.BooksByPages = LibraryByBlocks.resultDict;
-            //LibraryByBlocks.resultDict = new Dictionary<int, List<Book>>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -158,30 +101,6 @@ namespace Menu.MainAppPage
             }
         }
 
-        private static void OpenBook(Book current)
-        {
-            var openedBook = new OpenedBook(current);
-            openedBook.Show();
-            foreach (Window window in Application.Current.Windows)
-            {
-                if (window is MainWindow)
-                {
-                    window.Close();
-                    break;
-                }
-            }
-        }
-
-        //private void WrapPanel_Initialized(object sender, EventArgs e)
-        //{
-        //    FillMain();
-        //}
-
-        //private void DockPanelLibrary_Initialized(object sender, EventArgs e)
-        //{
-        //    FillMain();
-        //}
-
         private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             Grid grid = (Grid)sender;
@@ -197,38 +116,18 @@ namespace Menu.MainAppPage
             OpenBook(current);
         }
 
-        //private void UserControlMain_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    FillMain();
-        //}
-
-        //private void Grid_Initialized(object sender, EventArgs e)
-        //{
-        //    FillMain();
-        //}
-
-        //private void StackPanel_SizeChanged(object sender, SizeChangedEventArgs e)
-        //{
-        //    FillMain();
-        //}
-
-        //private MultiBinding createFieldMultiBinding(string fieldName)
-        //{
-        //    // Create the multi-binding
-        //    MultiBinding mbBinding = new MultiBinding();
-        //    // Create the dictionary binding
-        //    Binding bDictionary = new Binding(ResourcesProvider.Current.BooksByPages);
-        //    bDictionary.Source = this.DataContext;
-        //    // Create the key binding
-        //    Binding bKey = new Binding(fieldName);
-        //    bKey.Source = this.DataContext;
-        //    // Set the multi-binding converter
-        //    mbBinding.Converter = new DictionaryItemConverter();
-        //    // Add the bindings to the multi-binding
-        //    mbBinding.Bindings.Add(bDictionary);
-        //    mbBinding.Bindings.Add(bKey);
-
-        //    return mbBinding;
-        //}
+        private void OpenBook(Book current)
+        {
+            var openedBook = new OpenedBook(current);
+            openedBook.Show();
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window is MainWindow)
+                {
+                    window.Close();
+                    break;
+                }
+            }
+        }
     }
 }
