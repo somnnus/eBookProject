@@ -129,10 +129,10 @@ namespace Menu.PageForRemoving
 
         private void ChooseBookToDelete(object sender, RoutedEventArgs e)
         {
-            StackPanel stackPanel = (StackPanel)((CheckBox)sender).Parent;
-            Grid parent = (Grid)(stackPanel.Parent);
-            Book currentBook = (Book)stackPanel.DataContext;
-            var currentCheckBox = (CheckBox)stackPanel.Children[0];
+            var currentCheckBox = (CheckBox)sender;
+            var wrapPanel = (WrapPanel)(currentCheckBox.Parent);
+            var stackPanel = (StackPanel)(wrapPanel.Parent);
+            var currentBook = (Book)stackPanel.DataContext;
 
             if (currentCheckBox.IsChecked == true)
             {
