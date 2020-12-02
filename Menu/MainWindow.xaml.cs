@@ -28,8 +28,8 @@ namespace Menu
     /// </summary>
     public partial class MainWindow : Window
     {
-        static string fullPath = AppDomain.CurrentDomain.BaseDirectory+"Library";
-        static string coverPath = fullPath + "\\" + "Covers";
+        private static string fullPath = AppDomain.CurrentDomain.BaseDirectory+"Library";
+        private static string coverPath = fullPath + "\\" + "Covers";
        
 
         public MainWindow(MainWindowViewModel mainWindowVM)
@@ -45,10 +45,9 @@ namespace Menu
             CheckSerializationBookDelete();
 
             LibraryRefreshing.FillMain(); //обработка постраничного вывода
-            //ResourcesProvider.Current.BooksByPages.Add(0, new List<Book>());
         }
 
-        public void AddBook(object sender, RoutedEventArgs e)
+        private void AddBook(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog();
             dialog.Filter = "Книги (*.epub, *.fb2)|*.epub;*.fb2";
@@ -74,7 +73,7 @@ namespace Menu
                         {
                             if (FormatCheck(currentBook))
                             {
-                                MessageBox.Show("The book has already added in the library!");
+                                MessageBox.Show("The book has already been added in the library!");
                                 File.Delete(currentBook.CoverPath);
                                 File.Delete(currentBook.FullPath);
                             }
@@ -106,7 +105,7 @@ namespace Menu
                         {
                             if (FormatCheck(currentBook))
                             {
-                                MessageBox.Show("The book has already added in the library!");
+                                MessageBox.Show("The book has already been added in the library!");
                                 File.Delete(currentBook.CoverPath);
                                 File.Delete(currentBook.FullPath);
                             }
@@ -151,7 +150,7 @@ namespace Menu
                 }
                 else
                 {
-                    MessageBox.Show("The book has already added in the library!");
+                    MessageBox.Show("The book has already been added in the library!");
                 }
             }
         }
@@ -232,6 +231,7 @@ namespace Menu
                 //Application.Current.Resources["clBrComboBox"] = (Brush)(new BrushConverter().ConvertFrom(setting[5]));
             }
         }
+
         private void CheckSerializationBookDelete()
         {
             string fileNameSerialize = fullPath + "\\" + "delete.xml";
@@ -251,8 +251,6 @@ namespace Menu
                 }
                 ResourcesProvider.Current.deleteBook = null;
             }
-            
-            
         }
 
         private void OpenBook(object sender, RoutedEventArgs e)
@@ -285,7 +283,7 @@ namespace Menu
                 }
                 if (!found)
                 {
-                    MessageBox.Show("Book was not found");
+                    MessageBox.Show("Book wasn't found");
                 }
             }
             else

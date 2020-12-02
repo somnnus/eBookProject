@@ -20,6 +20,7 @@ namespace Menu
             get { return _currentViewModel; }
             set { Set(ref _currentViewModel, value); }
         }
+
         private ViewModelBase _currentViewModel;
 
         public RelayCommand MainCommand { get; private set; }
@@ -68,6 +69,5 @@ namespace Menu
         {
             CurrentViewModel = removingViewModel;
         }
-
     }
 }
