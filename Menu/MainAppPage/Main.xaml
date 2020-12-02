@@ -7,25 +7,10 @@
              xmlns:main="clr-namespace:Menu.MainAppPage"
              xmlns:local="clr-namespace:Menu"
              xmlns:helper="clr-namespace:Menu.Helpers"
-             xmlns:res="clr-namespace:Menu.SharedResources"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="1500"
              d:DataContext="{d:DesignInstance main:MainViewModel,
                                          IsDesignTimeCreatable=True}">
-    <!--<UserControl.Triggers>
-        <EventTrigger RoutedEvent="Hyperlink.Click">
-            <EventTrigger.Actions>
-                <BeginStoryboard>
-                    <Storyboard>
-                        <DoubleAnimation Storyboard.TargetName="blackStop" Storyboard.TargetProperty="Offset"
-                                         From="0" To="1" Duration="0:0:2" />
-                        <DoubleAnimation Storyboard.TargetName="transpStop" Storyboard.TargetProperty="Offset"
-                                         From="0" To="1" Duration="0:0:2" BeginTime="0:0:2"/>
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger.Actions>
-        </EventTrigger>
-    </UserControl.Triggers>-->
     <UserControl.Resources>
         <ControlTemplate x:Key="ArrowRight">
             <Path Width="30" Height="{TemplateBinding Height}" Data="F1M568.254,-7.43524L568.159,-7.34277 567.977,-7.52246 546.559,-28.9417 525.484,-28.9417 549.787,-4.63446 557.439,3.01532 557.619,3.19629 550.067,10.7549 525.758,35.0583 546.834,35.0583 568.254,13.6429 578.792,3.10254 568.254,-7.43524z" Stretch="Uniform" Fill="{DynamicResource clBrArrow}" RenderTransformOrigin="0.5,0.5"/>
@@ -36,94 +21,133 @@
         <local:SizePercentageConverter x:Key="PercentageConverter"/>
     </UserControl.Resources>
     <Grid Margin="40" Name="OuterGrid">
-        <DockPanel Background="{DynamicResource clBr}">
-            <DockPanel Height="auto" Width="auto" LastChildFill="True" x:Name="DockPanelLibrary" x:FieldModifier="public">
-                <Label Content="Read Recently" Foreground="{DynamicResource clBrMenu}" Style="{StaticResource Headings}" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Grid Width="40" DockPanel.Dock="Left">
-                    <Label Cursor="Hand" Name="labelArrowLeft" VerticalAlignment="Center" 
-                           Height="auto"
-                           Width="auto"
-                           MouseDown="Label_MouseDownLeft">
-                        <ContentControl Template="{StaticResource ArrowLeft}"/>
-                    </Label>
-                </Grid>
-                <Grid Width="40" DockPanel.Dock="Right">
-                    <Label Cursor="Hand" Name="labelArrowRight" VerticalAlignment="Center" 
-                            Height="auto"
-                            Width="auto"
-                           MouseDown="Label_MouseDownRight">
-                        <ContentControl Template="{StaticResource ArrowRight}"/>
-                    </Label>
-                </Grid>
-                <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Center" Name="libraryGrid" Orientation="Vertical">
-                    <ListBox HorizontalContentAlignment="Stretch" x:Name="recentlyReadBooksBox" HorizontalAlignment="Center" ItemsSource="{Binding Path=DataContext.RecentlyReadBooks.Values, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Cursor="Hand" MouseDown="StackPanel_MouseDown" Orientation="Vertical" Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.25, ElementName=OuterGrid, Path=ActualWidth}">
-                                    <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.2, ElementName=OuterGrid, Path=ActualWidth}"
-                                               Height="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.35, ElementName=OuterGrid, Path=ActualHeight}"
-                                               Source='{Binding CoverPath}'>
-                                        <Image.Triggers>
-                                            <EventTrigger RoutedEvent="Image.Loaded">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation Storyboard.TargetProperty="(Image.Opacity)" From="0" To="1" Duration="0:0:1" />
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                        </Image.Triggers>
-                                    </Image>
-                                    <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Author}' TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
-                                    <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Title}' TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                    </ListBox>
-                    <ListBox HorizontalContentAlignment="Stretch" x:Name="listBoxBooks" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                        <ListBox.ItemsSource>
-                            <MultiBinding>
-                                <MultiBinding.Converter>
-                                    <helper:DictionaryItemConverter/>
-                                </MultiBinding.Converter>
-                                <Binding Path="DataContext.BooksByPages" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type UserControl}}"/>
-                                <Binding Path="CurrentPage" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type UserControl}}"/>
-                            </MultiBinding>
-                        </ListBox.ItemsSource>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Cursor="Hand" MouseDown="StackPanel_MouseDown" Orientation="Vertical" Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.15, ElementName=OuterGrid, Path=ActualWidth}">
-                                    <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.1, ElementName=OuterGrid, Path=ActualWidth}"
-                                               Height="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.15, ElementName=OuterGrid, Path=ActualHeight}"
-                                               Source='{Binding CoverPath}'>
-                                        <Image.Triggers>
-                                            <EventTrigger RoutedEvent="Image.Loaded">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation Storyboard.TargetProperty="(Image.Opacity)" From="0" To="1" Duration="0:0:1" />
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                        </Image.Triggers>
-                                    </Image>
-                                    <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Author}' TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
-                                    <TextBlock Foreground="{DynamicResource clBrText}" Style="{StaticResource BookTextSettings}" Text='{Binding Title}' TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel
-                                           IsItemsHost="True" Orientation="Horizontal"/>
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                    </ListBox>
-                </StackPanel>
-            </DockPanel>
+        <DockPanel Name="DockPanelLibrary" 
+                   Background="{DynamicResource clBr}"
+                   LastChildFill="True">
+            <Label Content="Recently Read" 
+                   Foreground="{DynamicResource clBrMenu}" 
+                   Style="{StaticResource Headings}" 
+                   DockPanel.Dock="Top" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Top"/>
+            <Grid Width="40" DockPanel.Dock="Left">
+                <Label Name="labelArrowLeft"
+                       Cursor="Hand"
+                       VerticalAlignment="Center"
+                       MouseDown="Label_MouseDownLeft">
+                    <ContentControl Template="{StaticResource ArrowLeft}"/>
+                </Label>
+            </Grid>
+            <Grid Width="40" DockPanel.Dock="Right">
+                <Label Name="labelArrowRight"
+                       Cursor="Hand" 
+                       VerticalAlignment="Center"
+                       MouseDown="Label_MouseDownRight">
+                    <ContentControl Template="{StaticResource ArrowRight}"/>
+                </Label>
+            </Grid>
+            <StackPanel Name="libraryGrid"
+                        Orientation="Vertical">
+                <ListBox Name="recentlyReadBooksBox"
+                             VerticalContentAlignment="Top"
+                             HorizontalContentAlignment="Center"
+                             Cursor="Hand"
+                             ItemsSource="{Binding Path=DataContext.RecentlyReadBooks.Values, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                             ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel MouseDown="StackPanel_MouseDown">
+                                <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.17, ElementName=OuterGrid, Path=ActualWidth}"
+                                       Source='{Binding CoverPath}'>
+                                    <Image.Triggers>
+                                        <EventTrigger RoutedEvent="Image.Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetProperty="(Image.Opacity)" From="0" To="1" Duration="0:0:1" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Image.Triggers>
+                                </Image>
+                                <TextBlock Foreground="{DynamicResource clBrText}" 
+                                           Style="{StaticResource BookTextSettings}" 
+                                           Text='{Binding Author}' 
+                                           TextWrapping="Wrap" 
+                                           TextAlignment="Center"/>
+                                <TextBlock DockPanel.Dock="Bottom" 
+                                           Foreground="{DynamicResource clBrText}"
+                                           Style="{StaticResource BookTextSettings}"
+                                           Text='{Binding Title}'
+                                           TextWrapping="Wrap"
+                                           TextAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel IsItemsHost="True"
+                                       ListBoxItem.Selected="Item_Selected"
+                                       ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.5, ElementName=libraryGrid, Path=ActualWidth}"
+                                       Orientation="Horizontal">
+                            </WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+                <ListBox Name="listBoxBooks"
+                         VerticalContentAlignment="Top"
+                         HorizontalContentAlignment="Center"
+                         Cursor="Hand"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                         ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <ListBox.ItemsSource>
+                        <MultiBinding>
+                            <MultiBinding.Converter>
+                                <helper:DictionaryItemConverter/>
+                            </MultiBinding.Converter>
+                            <Binding Path="DataContext.BooksByPages" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type UserControl}}"/>
+                            <Binding Path="CurrentPage" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type UserControl}}"/>
+                        </MultiBinding>
+                    </ListBox.ItemsSource>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel MouseDown="StackPanel_MouseDown" 
+                                        Orientation="Vertical">
+                                <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.07, ElementName=OuterGrid, Path=ActualWidth}"
+                                       Source='{Binding CoverPath}'>
+                                    <Image.Triggers>
+                                        <EventTrigger RoutedEvent="Image.Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetProperty="(Image.Opacity)" From="0" To="1" Duration="0:0:1" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Image.Triggers>
+                                </Image>
+                                <TextBlock Foreground="{DynamicResource clBrText}" 
+                                           Style="{StaticResource BookTextSettings}" 
+                                           Text='{Binding Author}' 
+                                           TextWrapping="Wrap" 
+                                           TextAlignment="Center"/>
+                                <TextBlock Foreground="{DynamicResource clBrText}" 
+                                           Style="{StaticResource BookTextSettings}" 
+                                           Text='{Binding Title}' 
+                                           TextWrapping="Wrap" 
+                                           TextAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel IsItemsHost="True"
+                                       ListBoxItem.Selected="Item_Selected"
+                                       ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.25, ElementName=libraryGrid, Path=ActualWidth}"
+                                       Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+            </StackPanel>
         </DockPanel>
     </Grid>
 </UserControl>

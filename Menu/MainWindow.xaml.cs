@@ -46,10 +46,6 @@ namespace Menu
 
             LibraryRefreshing.FillMain(); //обработка постраничного вывода
             //ResourcesProvider.Current.BooksByPages.Add(0, new List<Book>());
-            //foreach (var book in ResourcesProvider.Current.ListBooks)
-            //{
-            //    ResourcesProvider.Current.BooksByPages[0].Add(book);
-            //}
         }
 
         public void AddBook(object sender, RoutedEventArgs e)
@@ -150,7 +146,6 @@ namespace Menu
                             Serialization.SerializationBookDelete(ResourcesProvider.Current.deleteBook, fullPath);
                             Serialization.SerializationInformationAboutBook(ResourcesProvider.Current.ListBooks, fullPath);
                             return;
-
                         }
                     }
                 }
@@ -158,8 +153,6 @@ namespace Menu
                 {
                     MessageBox.Show("The book has already added in the library!");
                 }
-
-               
             }
         }
 
@@ -255,7 +248,6 @@ namespace Menu
                     File.Delete(book.FullPath);
                    // if (!book.CoverPath.Contains("defoltCover"))       
                     File.Delete(book.CoverPath);
-                   
                 }
                 ResourcesProvider.Current.deleteBook = null;
             }

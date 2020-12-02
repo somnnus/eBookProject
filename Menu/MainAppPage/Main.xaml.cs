@@ -154,15 +154,20 @@ namespace Menu.MainAppPage
             {
                 StackPanel stackPanel = (StackPanel)sender;
                 Book current = (Book)stackPanel.DataContext;
-                var openedBook = new OpenedBook(current);
-                openedBook.Show();
-                foreach (Window window in Application.Current.Windows)
+                OpenBook(current);
+            }
+        }
+
+        private static void OpenBook(Book current)
+        {
+            var openedBook = new OpenedBook(current);
+            openedBook.Show();
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window is MainWindow)
                 {
-                    if (window is MainWindow)
-                    {
-                        window.Close();
-                        break;
-                    }
+                    window.Close();
+                    break;
                 }
             }
         }
@@ -184,6 +189,12 @@ namespace Menu.MainAppPage
             {
                 ResourcesProvider.Current.MaxWidth = grid.ActualWidth;
             }
+        }
+
+        private void Item_Selected(object sender, RoutedEventArgs e)
+        {
+            Book current = (Book)((System.Windows.Controls.ListBoxItem)(e.Source)).DataContext;
+            OpenBook(current);
         }
 
         //private void UserControlMain_Loaded(object sender, RoutedEventArgs e)
