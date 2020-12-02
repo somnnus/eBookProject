@@ -96,9 +96,39 @@ namespace Menu
         {
             Bookmark mark = new Bookmark();
             mark.NumberPage = flowDocument.MasterPageNumber;
+
+            foreach (var bookmark in currentBook.bookmarks)
+            {
+                if (bookmark.NumberPage == mark.NumberPage)
+                {
+                    return;
+                }
+            }
+
             currentBook.AddBookmark(mark);
             bookmarkList.DataContext = null;
             bookmarkList.DataContext = currentBook.bookmarks;
+
+        }
+        private void DeleteBookmark(object sender, RoutedEventArgs routedEventArgs)
+        {
+            var button = (Button)sender;
+            var docPanel = (DockPanel)button.Parent;
+            var numberPage =((TextBlock)docPanel.Children[0]).DataContext;
+            Bookmark mark = (Bookmark)numberPage;         
+            
+            foreach(var bookmark in currentBook.bookmarks)
+            {
+                if (bookmark.NumberPage == mark.NumberPage)
+                {
+                    currentBook.bookmarks.Remove(bookmark);
+                    break;
+                }
+            }
+
+            bookmarkList.DataContext = null;
+            bookmarkList.DataContext = currentBook.bookmarks;
+
 
         }
         private void OpenBookmark(object sender, RoutedEventArgs routedEventArgs)
@@ -111,6 +141,7 @@ namespace Menu
 
         private void ComboBox_Selected(object sender, RoutedEventArgs routedEventArgs)
         {
+          
             var comboBox = (ComboBox)sender;
             var selectedNum = ((Bookmark)(comboBox.SelectedItem)).NumberPage;          
             flowDocument.GoToPage(selectedNum);
@@ -150,6 +181,11 @@ namespace Menu
             {
                 OpenMenu();
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

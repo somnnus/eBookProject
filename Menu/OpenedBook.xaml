@@ -40,7 +40,7 @@
                         <DockPanel>
                             <TextBlock Foreground="Black" Text="{Binding NumberPage}" />
                             <Separator/>
-                            <Button DockPanel.Dock="Right" HorizontalAlignment="Right" Width="20" Height="20"/>
+                            <Button Click="DeleteBookmark" DockPanel.Dock="Right" HorizontalAlignment="Right" Width="20" Height="20" FontSize="8"/>
                         </DockPanel>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
