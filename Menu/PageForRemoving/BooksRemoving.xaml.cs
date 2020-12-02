@@ -28,7 +28,7 @@ namespace Menu.PageForRemoving
     public partial class BooksRemoving : UserControl
     {
         private List<Book> booksForDeleting;
-        static string fullPath = AppDomain.CurrentDomain.BaseDirectory + "Library";
+        private static string fullPath = AppDomain.CurrentDomain.BaseDirectory + "Library";
 
         public BooksRemoving()
         {
@@ -46,28 +46,23 @@ namespace Menu.PageForRemoving
         {
             ComboBox comboBox = (ComboBox)sender;
             var selectedFeature = (TextBlock)comboBox.SelectedItem;
-            if (ResourcesProvider.Current.ListBooks.Count != 0)
+            if (selectedFeature.Text == "Sorted By Author")
             {
-                if (selectedFeature.Text == "Sorted By Author")
-                {
-                    ResourcesProvider.Current.CurrentDictionary = ResourcesProvider.Current.SortedByAuthor;
-                    ResourcesProvider.Current.LastSortingFeature = "Sorted By Author";
-                }
-                else
-                if (selectedFeature.Text == "Sorted By Title")
-                {
-                    ResourcesProvider.Current.CurrentDictionary = ResourcesProvider.Current.SortedByTitle;
-                    ResourcesProvider.Current.LastSortingFeature = "Sorted By Title";
-                }
-                else
-                if (selectedFeature.Text == "Sorted By Date")
-                {
-                    ResourcesProvider.Current.CurrentDictionary = ResourcesProvider.Current.SortedByDate;
-                    ResourcesProvider.Current.LastSortingFeature = "Sorted By Date";
-                }
+                ResourcesProvider.Current.CurrentDictionary = ResourcesProvider.Current.SortedByAuthor;
+                ResourcesProvider.Current.LastSortingFeature = "Sorted By Author";
             }
             else
-                MessageBox.Show("Library is empty!");
+            if (selectedFeature.Text == "Sorted By Title")
+            {
+                ResourcesProvider.Current.CurrentDictionary = ResourcesProvider.Current.SortedByTitle;
+                ResourcesProvider.Current.LastSortingFeature = "Sorted By Title";
+            }
+            else
+            if (selectedFeature.Text == "Sorted By Date")
+            {
+                ResourcesProvider.Current.CurrentDictionary = ResourcesProvider.Current.SortedByDate;
+                ResourcesProvider.Current.LastSortingFeature = "Sorted By Date";
+            }
         }
 
         //private void DoPreviewingMouseWheel(object sender, MouseWheelEventArgs e)
