@@ -37,9 +37,11 @@
                       Name="bookmarkList" Text="Choose Bookmark" Focusable="False" IsEditable="True" SelectionChanged="ComboBox_Selected">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
+                        <DockPanel>
                             <TextBlock Foreground="Black" Text="{Binding NumberPage}" />
-                        </StackPanel>
+                            <Separator/>
+                            <Button DockPanel.Dock="Right" HorizontalAlignment="Right" Width="20" Height="20" FontSize="8"/>
+                        </DockPanel>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>

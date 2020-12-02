@@ -110,16 +110,23 @@
                                      VerticalContentAlignment="Top"
                                      HorizontalContentAlignment="Center"
                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                <!--<ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Setter Property="Focusable" Value="False"/>
+                                        --><!--<Setter Property="IsHitTestVisible" Value="False"/>--><!--
+                                    </Style>
+                                </ListBox.ItemContainerStyle>-->
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel MouseDown="StackPanel_MouseDown" 
-                                                    Orientation="Vertical">
+                                        <StackPanel Orientation="Vertical">
                                             <CheckBox Click="ChooseBookToDelete" 
                                                       Background="{DynamicResource clBrText}"
+                                                      BorderBrush="{DynamicResource clBrText}"
                                                       HorizontalAlignment="Right" 
                                                       VerticalAlignment="Top" 
                                                       IsChecked="False" 
-                                                      Height="40" />
+                                                      Height="40"
+                                                      Width="40"/>
                                             <Image Width="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.1, ElementName=OuterGrid, Path=ActualWidth}"
                                                    Source='{Binding CoverPath}'/>
                                             <TextBlock Style="{StaticResource BookTextSettings}" 
@@ -135,8 +142,7 @@
                                     <ItemsPanelTemplate>
                                         <WrapPanel IsItemsHost="True"
                                                    Orientation="Horizontal"
-                                                   ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.25, ElementName=listBoxBooks, Path=ActualWidth}"
-                                                   ListBoxItem.Selected="Item_Selected"/>
+                                                   ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.25, ElementName=listBoxBooks, Path=ActualWidth}"/>
                                     </ItemsPanelTemplate>
                                 </ListBox.ItemsPanel>
                             </ListBox>

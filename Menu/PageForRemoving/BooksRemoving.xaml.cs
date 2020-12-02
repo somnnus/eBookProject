@@ -105,27 +105,27 @@ namespace Menu.PageForRemoving
         }
 
 
-        private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ClickCount >= 1)
-            {
-                StackPanel stackPanel = (StackPanel)sender;
-                Grid parent = (Grid)(stackPanel.Parent);
-                Book currentBook = (Book)stackPanel.DataContext;
-                var currentCheckBox = (CheckBox)stackPanel.Children[0];
-                if (currentCheckBox.IsChecked == false)
-                {
-                    currentCheckBox.IsChecked = true;
-                    booksForDeleting.Add(currentBook);
-                }
-                else
-                if (currentCheckBox.IsChecked == true)
-                {
-                    currentCheckBox.IsChecked = false;
-                    booksForDeleting.Remove(currentBook);
-                }
-            }
-        }
+        //private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    if (e.ClickCount >= 1)
+        //    {
+        //        StackPanel stackPanel = (StackPanel)sender;
+        //        Grid parent = (Grid)(stackPanel.Parent);
+        //        Book currentBook = (Book)stackPanel.DataContext;
+        //        var currentCheckBox = (CheckBox)stackPanel.Children[0];
+        //        if (currentCheckBox.IsChecked == false)
+        //        {
+        //            currentCheckBox.IsChecked = true;
+        //            booksForDeleting.Add(currentBook);
+        //        }
+        //        else
+        //        if (currentCheckBox.IsChecked == true)
+        //        {
+        //            currentCheckBox.IsChecked = false;
+        //            booksForDeleting.Remove(currentBook);
+        //        }
+        //    }
+        //}
 
         private void ChooseBookToDelete(object sender, RoutedEventArgs e)
         {
@@ -145,11 +145,6 @@ namespace Menu.PageForRemoving
                 currentCheckBox.IsChecked = false;
                 booksForDeleting.Remove(currentBook);
             }
-        }
-
-        private void Item_Selected(object sender, RoutedEventArgs e)
-        {
-            WrapPanel wrapPanel = (WrapPanel)sender;
         }
     }
 }
