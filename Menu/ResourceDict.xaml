@@ -4,14 +4,13 @@
 
     <Style TargetType="{x:Type TextBlock}" x:Key="BookTextSettings">
         <Setter Property="FontFamily" Value="Garamond" />
-        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="Foreground" Value="{DynamicResource clBrText}"/>
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="TextAlignment" Value="Center" />
     </Style>
     <Style TargetType="{x:Type Control}" x:Key="TextSettings">
         <Setter Property="FontFamily" Value="Garamond" />
-        <Setter Property="Foreground" Value="Black" />
         <Setter Property="FontSize" Value="26" />
     </Style>
     <Style TargetType="{x:Type Control}" x:Key="Headings">
@@ -40,7 +39,7 @@
             </Trigger>
         </Style.Triggers>--><!--
     </Style>-->
-    <Style TargetType="{x:Type Button}" x:Key="button">
+    <Style TargetType="{x:Type Button}" x:Key="Button">
         <Setter Property="Background" Value="{DynamicResource clBrSearch}"/>
         <Setter Property="Foreground" Value="{DynamicResource clBrText}"/>
         <Setter Property="Width" Value="100"/>
@@ -602,7 +601,7 @@
         <Setter Property="Stylus.IsFlicksEnabled"
             Value="false" />
         <Setter Property="Foreground"
-            Value="{DynamicResource clBrText}" />
+            Value="{DynamicResource clBrSearch}" />
         <Setter Property="Background"
             Value="Transparent" />
         <Setter Property="Width"

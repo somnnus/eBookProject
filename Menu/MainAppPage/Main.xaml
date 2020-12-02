@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:Menu"
              xmlns:helper="clr-namespace:Menu.Helpers"
              mc:Ignorable="d"
-             d:DesignHeight="400" d:DesignWidth="1500"
+             d:DesignHeight="700" d:DesignWidth="1150"
              d:DataContext="{d:DesignInstance main:MainViewModel,
                                          IsDesignTimeCreatable=True}">
     <UserControl.Resources>
@@ -70,17 +70,10 @@
                                         </EventTrigger>
                                     </Image.Triggers>
                                 </Image>
-                                <TextBlock Foreground="{DynamicResource clBrText}" 
-                                           Style="{StaticResource BookTextSettings}" 
-                                           Text='{Binding Author}' 
-                                           TextWrapping="Wrap" 
-                                           TextAlignment="Center"/>
-                                <TextBlock DockPanel.Dock="Bottom" 
-                                           Foreground="{DynamicResource clBrText}"
-                                           Style="{StaticResource BookTextSettings}"
-                                           Text='{Binding Title}'
-                                           TextWrapping="Wrap"
-                                           TextAlignment="Center"/>
+                                <TextBlock Style="{StaticResource BookTextSettings}" 
+                                           Text='{Binding Author}'/>
+                                <TextBlock Style="{StaticResource BookTextSettings}"
+                                           Text='{Binding Title}'/>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -125,16 +118,10 @@
                                         </EventTrigger>
                                     </Image.Triggers>
                                 </Image>
-                                <TextBlock Foreground="{DynamicResource clBrText}" 
-                                           Style="{StaticResource BookTextSettings}" 
-                                           Text='{Binding Author}' 
-                                           TextWrapping="Wrap" 
-                                           TextAlignment="Center"/>
-                                <TextBlock Foreground="{DynamicResource clBrText}" 
-                                           Style="{StaticResource BookTextSettings}" 
-                                           Text='{Binding Title}' 
-                                           TextWrapping="Wrap" 
-                                           TextAlignment="Center"/>
+                                <TextBlock Style="{StaticResource BookTextSettings}" 
+                                           Text='{Binding Author}'/>
+                                <TextBlock Style="{StaticResource BookTextSettings}" 
+                                           Text='{Binding Title}'/>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

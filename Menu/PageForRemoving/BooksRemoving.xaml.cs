@@ -32,17 +32,14 @@ namespace Menu.PageForRemoving
 
         public BooksRemoving()
         {
+            InitializeComponent();
+
             booksForDeleting = new List<Book>();
 
             DataContext = ResourcesProvider.Current;
-            InitializeComponent();
-            if (ResourcesProvider.Current.ListBooks.Count != 0)
-            {
-                ResourcesProvider.Current.CurrentDictionary = ResourcesProvider.Current.SortedByDate;
-                ResourcesProvider.Current.LastSortingFeature = "Sorted By Date";
-            }
-            else
-                MessageBox.Show("Library is empty!");
+
+            ResourcesProvider.Current.CurrentDictionary = ResourcesProvider.Current.SortedByDate;
+            ResourcesProvider.Current.LastSortingFeature = "Sorted By Date";
         }
 
         private void ComboBox_Selected(object sender, RoutedEventArgs e)
@@ -150,32 +147,5 @@ namespace Menu.PageForRemoving
                 booksForDeleting.Remove(currentBook);
             }
         }
-        
-        //private void WrapPanel_SizeChanged(object sender, SizeChangedEventArgs e)
-        //{
-        //    var currentWidth = ((TextBlock)sender).ActualWidth;
-        //    ResourcesProvider.Current.Widths.Add(currentWidth);
-        //}
-
-        //private void Image_SizeChanged(object sender, SizeChangedEventArgs e)
-        //{
-        //    var currentWidth = ((Image)sender).ActualWidth;
-        //    ResourcesProvider.Current.Widths.Add(currentWidth);
-        //}
-        //private void RefreshDict()
-        //{
-        //    dataGridLib.ItemsSource = ResourcesProvider.Current.SortedBooks;
-        //    //CollectionViewSource.GetDefaultView(lastSortingFeature).Refresh();
-        //}
-
-        //private void ScrollViewerMouseEnter(object sender, MouseEventArgs e)
-        //{
-        //    ((ListBox)sender).CaptureMouse();
-        //}
-
-        //private void ScrollViewerMouseLeave(object sender, MouseEventArgs e)
-        //{
-        //    ((ListBox)sender).ReleaseMouseCapture();
-        //}
     }
 }

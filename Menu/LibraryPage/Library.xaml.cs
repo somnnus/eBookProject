@@ -29,9 +29,9 @@ namespace Menu.LibraryPage
         public Library()
         {
             InitializeComponent();
-            //dataGridLib.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-            //dataGridLib.Arrange(new Rect(0, 0, dataGridLib.DesiredSize.Width, dataGridLib.DesiredSize.Height));
+
             DataContext = ResourcesProvider.Current;
+
             ResourcesProvider.Current.CurrentDictionary = ResourcesProvider.Current.SortedByDate;
             ResourcesProvider.Current.LastSortingFeature = "Sorted By Date";
         }
@@ -93,17 +93,14 @@ namespace Menu.LibraryPage
             {
                 StackPanel stackPanel = (StackPanel)sender;
                 Book current = (Book)stackPanel.DataContext;
-                var openedBook = new OpenedBook(current);
-                openedBook.Show();
-                foreach (Window window in Application.Current.Windows)
-                {
-                    if (window is MainWindow)
-                    {
-                        window.Close();
-                        break;
-                    }
-                }
+                OpenBook(current);
             }
+        }
+
+        private void Item_Selected(object sender, RoutedEventArgs e)
+        {
+            Book current = (Book)((System.Windows.Controls.ListBoxItem)(e.Source)).DataContext;
+            OpenBook(current);
         }
 
         private void SearchInLibrary(object sender, TextChangedEventArgs e)
@@ -112,16 +109,18 @@ namespace Menu.LibraryPage
             LibrarySearching.Search(textBox);
         }
 
-        //private void WrapPanel_SizeChanged(object sender, SizeChangedEventArgs e)
-        //{
-        //    var currentWidth = ((TextBlock)sender).ActualWidth;
-        //    ResourcesProvider.Current.Widths.Add(currentWidth);
-        //}
-
-        //private void Image_SizeChanged(object sender, SizeChangedEventArgs e)
-        //{
-        //    var currentWidth = ((Image)sender).ActualWidth;
-        //    ResourcesProvider.Current.Widths.Add(currentWidth);
-        //}
+        private void OpenBook(Book current)
+        {
+            var openedBook = new OpenedBook(current);
+            openedBook.Show();
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window is MainWindow)
+                {
+                    window.Close();
+                    break;
+                }
+            }
+        }
     }
 }
