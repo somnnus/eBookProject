@@ -113,7 +113,6 @@ namespace Menu.PageForRemoving
                 Grid parent = (Grid)(stackPanel.Parent);
                 Book currentBook = (Book)stackPanel.DataContext;
                 var currentCheckBox = (CheckBox)stackPanel.Children[0];
-
                 if (currentCheckBox.IsChecked == false)
                 {
                     currentCheckBox.IsChecked = true;
@@ -146,6 +145,11 @@ namespace Menu.PageForRemoving
                 currentCheckBox.IsChecked = false;
                 booksForDeleting.Remove(currentBook);
             }
+        }
+
+        private void Item_Selected(object sender, RoutedEventArgs e)
+        {
+            WrapPanel wrapPanel = (WrapPanel)sender;
         }
     }
 }

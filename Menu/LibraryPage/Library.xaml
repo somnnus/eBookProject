@@ -157,7 +157,8 @@
                                     <ItemsPanelTemplate>
                                         <WrapPanel IsItemsHost="True"
                                                    ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.25, ElementName=listBoxBooks, Path=ActualWidth}"
-                                                   Orientation="Horizontal"/>
+                                                   Orientation="Horizontal"
+                                                   ListBoxItem.Selected="Item_Selected"/>
                                     </ItemsPanelTemplate>
                                 </ListBox.ItemsPanel>
                             </ListBox>

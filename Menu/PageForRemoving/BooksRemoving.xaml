@@ -103,7 +103,7 @@
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ListBox Name="listBooks"
+                            <ListBox Name="listBoxBooks"
                                      Cursor="Hand"
                                      Template="{StaticResource NoScroll}"
                                      ItemsSource="{Binding Value}"
@@ -133,9 +133,10 @@
                                 </ListBox.ItemTemplate>
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <WrapPanel IsItemsHost="True" 
-                                                   ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.25, ElementName=listBooks, Path=ActualWidth}"
-                                                   Orientation="Horizontal"/>
+                                        <WrapPanel IsItemsHost="True"
+                                                   Orientation="Horizontal"
+                                                   ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.25, ElementName=listBoxBooks, Path=ActualWidth}"
+                                                   ListBoxItem.Selected="Item_Selected"/>
                                     </ItemsPanelTemplate>
                                 </ListBox.ItemsPanel>
                             </ListBox>

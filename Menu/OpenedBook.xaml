@@ -23,17 +23,17 @@
             <Label Cursor="Hand" Name="labelArrowLeft" Width="auto" MouseDown="Label_MouseDown">
                 <ContentControl Template="{StaticResource ArrowLeft}" Height="21" Width="13"/>
             </Label>
-            <Button Content="Make Bookmark" Click="CreateBookmark"  Style="{StaticResource button}" />
+            <Button Content="Make Bookmark" Click="CreateBookmark"  Style="{StaticResource Button}" />
             <!--<Button Content="Open Bookmark" Click="OpenBookmark"  Style="{StaticResource button}"/>-->
-            <Button Content="Search" Name="btnSearch" Click="FindInBook"  Style="{StaticResource button}"/>
-            <Button Content="Continue Reading" Click="ContinueReading" Style="{StaticResource button}"/>
+            <Button Content="Search" Name="btnSearch" Click="FindInBook"  Style="{StaticResource Button}"/>
+            <Button Content="Continue Reading" Click="ContinueReading" Style="{StaticResource Button}"/>
             <ComboBox 
                       Foreground="{DynamicResource clBrText}"
                       FontSize="12" 
                       FontFamily="Georgia"
                       BorderBrush="{DynamicResource clBrText}" 
                       BorderThickness="2" 
-                      ItemsSource="{Binding }"
+                      ItemsSource="{Binding}"
                       Name="bookmarkList" Text="Choose Bookmark" Focusable="False" IsEditable="True" SelectionChanged="ComboBox_Selected">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
