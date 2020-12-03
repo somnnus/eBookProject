@@ -19,6 +19,7 @@ using System.IO;
 using System.Windows.Markup;
 using System.Xml;
 using System.Text.RegularExpressions;
+using System.Windows.Controls.Primitives;
 
 namespace Menu
 {
@@ -36,6 +37,8 @@ namespace Menu
 
         Book currentBook = null;
 
+        bool flag = false;
+
         private int lastPage;
 
         string[] newText;
@@ -48,9 +51,16 @@ namespace Menu
             openBookWindow.Title = currentBook.Title + " - " + currentBook.Author;
             DisplayBook();
             Serialization.SerializationLastBook(currentBook, fullPath);
-            
+
+        
+           
+           // bookmarkList.DataContext = currentBook.bookmarks;
             bookmarkList.DataContext = currentBook.bookmarks;
+           
+
+
         }
+
 
         public void DisplayBook()
         {
@@ -93,6 +103,8 @@ namespace Menu
 
         private void CreateBookmark(object sender, RoutedEventArgs routedEventArgs)
         {
+            flag = true;
+
             Bookmark mark = new Bookmark();
             mark.NumberPage = flowDocument.MasterPageNumber;
 
@@ -104,13 +116,24 @@ namespace Menu
                 }
             }
 
-            //currentBook.bookmarks = currentBook.AddBookmark(mark);
+            currentBook.AddBookmark(mark);
+            
+           
             bookmarkList.DataContext = null;
             bookmarkList.DataContext = currentBook.bookmarks;
+            
+            bookmarkList.Text = "Choose a bookmark";
+            //bookmarkList.SelectedItem = null;
+            
+
+
+            flag = false;
 
         }
         private void DeleteBookmark(object sender, RoutedEventArgs routedEventArgs)
         {
+            flag = true;
+
             var button = (Button)sender;
             var docPanel = (DockPanel)button.Parent;
             var numberPage =((TextBlock)docPanel.Children[0]).DataContext;
@@ -125,10 +148,15 @@ namespace Menu
                 }
             }
 
-            //currentBook.bookmarks = currentBook.AddBookmark(mark);
             bookmarkList.DataContext = null;
             bookmarkList.DataContext = currentBook.bookmarks;
+            
+            
+            bookmarkList.Text = "Choose a bookmark";
 
+
+
+            flag = false;
 
         }
         private void OpenBookmark(object sender, RoutedEventArgs routedEventArgs)
@@ -141,9 +169,19 @@ namespace Menu
 
         private void ComboBox_Selected(object sender, RoutedEventArgs routedEventArgs)
         {
+         
             var comboBox = (ComboBox)sender;
-            var selectedNum = ((Bookmark)(comboBox.SelectedItem)).NumberPage;          
-            flowDocument.GoToPage(selectedNum);
+            if (((Bookmark)(comboBox.SelectedItem)) != null && flag == false)
+            {
+                var selectedNum = ((Bookmark)(comboBox.SelectedItem)).NumberPage;
+                flowDocument.GoToPage(selectedNum);               
+                bookmarkList.Text = "Choose a bookmark";
+            }
+
+            
+
+            //   bookmarkList.ItemsSource = currentBook.bookmarks;
+
         }
 
         private void FindInBook(object sender, RoutedEventArgs routedEventArgs)
@@ -153,6 +191,7 @@ namespace Menu
 
         private void ContinueReading(object sender, RoutedEventArgs routedEventArgs)
         {
+
             flowDocument.GoToPage(currentBook.LastPage);
         }
 
@@ -183,13 +222,6 @@ namespace Menu
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
-        }
-
-        private void BookmarkList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var comboBox = (ComboBox)sender;
-            var selectedNum = ((Bookmark)(comboBox.SelectedItem)).NumberPage;
-            flowDocument.GoToPage(selectedNum);
         }
     }
 }
