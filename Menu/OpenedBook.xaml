@@ -28,16 +28,16 @@
             <Button Content="Search" Name="btnSearch" Click="FindInBook"  Style="{StaticResource Button}"/>
             <Button Content="Continue reading" Click="ContinueReading" Style="{StaticResource Button}"/>
             <ComboBox Text="Choose a bookmark"
+                      ItemsSource="{Binding}"
                       Foreground="{DynamicResource clBrText}"
                       BorderBrush="{DynamicResource clBrText}" 
                       FontFamily="Georgia"
                       FontSize="12" 
-                      BorderThickness="2" 
-                      ItemsSource="{Binding}"
+                      BorderThickness="2"
                       Name="bookmarkList" 
                       Focusable="False"
                       IsEditable="True"
-                      SelectionChanged="ComboBox_Selected">
+                      SelectionChanged="BookmarkList_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <DockPanel>

@@ -52,7 +52,6 @@ namespace Menu
             bookmarkList.DataContext = currentBook.bookmarks;
         }
 
-
         public void DisplayBook()
         {
             flowDocument.Document = null;
@@ -105,7 +104,7 @@ namespace Menu
                 }
             }
 
-            currentBook.AddBookmark(mark);
+            //currentBook.bookmarks = currentBook.AddBookmark(mark);
             bookmarkList.DataContext = null;
             bookmarkList.DataContext = currentBook.bookmarks;
 
@@ -126,6 +125,7 @@ namespace Menu
                 }
             }
 
+            //currentBook.bookmarks = currentBook.AddBookmark(mark);
             bookmarkList.DataContext = null;
             bookmarkList.DataContext = currentBook.bookmarks;
 
@@ -141,11 +141,9 @@ namespace Menu
 
         private void ComboBox_Selected(object sender, RoutedEventArgs routedEventArgs)
         {
-          
             var comboBox = (ComboBox)sender;
             var selectedNum = ((Bookmark)(comboBox.SelectedItem)).NumberPage;          
             flowDocument.GoToPage(selectedNum);
-            
         }
 
         private void FindInBook(object sender, RoutedEventArgs routedEventArgs)
@@ -155,7 +153,6 @@ namespace Menu
 
         private void ContinueReading(object sender, RoutedEventArgs routedEventArgs)
         {
-
             flowDocument.GoToPage(currentBook.LastPage);
         }
 
@@ -186,6 +183,13 @@ namespace Menu
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void BookmarkList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var comboBox = (ComboBox)sender;
+            var selectedNum = ((Bookmark)(comboBox.SelectedItem)).NumberPage;
+            flowDocument.GoToPage(selectedNum);
         }
     }
 }

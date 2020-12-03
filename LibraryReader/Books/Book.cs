@@ -6,12 +6,16 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace LibraryReader.Books
 {
     [Serializable]
     public class Book
     {
+        public Book() { }
+
         public List<Bookmark> bookmarks = new List<Bookmark>();
 
         public string Title { get; set; }
@@ -21,15 +25,9 @@ namespace LibraryReader.Books
         public DateTime Date { get; set; }
         public string CoverPath { get; set; }
 
-
-
         public double Zoom { get; set; }
         public int LastPage { get; set; }
 
-        public Book()
-        {
-
-        }
         protected static Image ByteArrayToImage(byte[] byteArrayIn)
         {
             MemoryStream ms = new MemoryStream(byteArrayIn);
@@ -46,6 +44,5 @@ namespace LibraryReader.Books
         {
             bookmarks.Add(mark);
         }
-
     }
 }
