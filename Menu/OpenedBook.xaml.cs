@@ -56,11 +56,7 @@ namespace Menu
            
            // bookmarkList.DataContext = currentBook.bookmarks;
             bookmarkList.DataContext = currentBook.bookmarks;
-           
-
-
         }
-
 
         public void DisplayBook()
         {
@@ -117,15 +113,13 @@ namespace Menu
             }
 
             currentBook.AddBookmark(mark);
-            
            
             bookmarkList.DataContext = null;
             bookmarkList.DataContext = currentBook.bookmarks;
-            
-            bookmarkList.Text = "Choose a bookmark";
-            //bookmarkList.SelectedItem = null;
-            
+            bookmarkList.SelectedIndex = -1;
 
+
+            //bookmarkList.SelectedItem = null;
 
             flag = false;
 
@@ -150,11 +144,7 @@ namespace Menu
 
             bookmarkList.DataContext = null;
             bookmarkList.DataContext = currentBook.bookmarks;
-            
-            
-            bookmarkList.Text = "Choose a bookmark";
-
-
+            bookmarkList.SelectedIndex = -1;
 
             flag = false;
 
@@ -174,14 +164,10 @@ namespace Menu
             if (((Bookmark)(comboBox.SelectedItem)) != null && flag == false)
             {
                 var selectedNum = ((Bookmark)(comboBox.SelectedItem)).NumberPage;
-                flowDocument.GoToPage(selectedNum);               
-                bookmarkList.Text = "Choose a bookmark";
+                flowDocument.GoToPage(selectedNum);
+                bookmarkList.SelectedIndex = -1;
             }
-
-            
-
             //   bookmarkList.ItemsSource = currentBook.bookmarks;
-
         }
 
         private void FindInBook(object sender, RoutedEventArgs routedEventArgs)
@@ -191,7 +177,6 @@ namespace Menu
 
         private void ContinueReading(object sender, RoutedEventArgs routedEventArgs)
         {
-
             flowDocument.GoToPage(currentBook.LastPage);
         }
 
@@ -211,6 +196,7 @@ namespace Menu
                     
             menuWindow.Show();
         }
+
         private void Label_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 1)

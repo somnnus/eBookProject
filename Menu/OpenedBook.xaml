@@ -14,6 +14,7 @@
         <ControlTemplate x:Key="ArrowLeft">
             <Path Width="30" Height="{TemplateBinding Height}" Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z" Stretch="Uniform" Fill="{DynamicResource clBrText}"  RenderTransformOrigin="0.5,0.5"/>
         </ControlTemplate>
+        <helper:LabelVisibilityConverter x:Key="LabelVisibilityConverter"/>
     </Window.Resources>
     <DockPanel x:Name="gridForReading"
                LastChildFill="True">
@@ -27,30 +28,37 @@
             <Button Content="Make a bookmark" Click="CreateBookmark" Style="{StaticResource Button}"/>
             <Button Content="Search" Name="btnSearch" Click="FindInBook"  Style="{StaticResource Button}"/>
             <Button Content="Continue reading" Click="ContinueReading" Style="{StaticResource Button}"/>
-            <ComboBox Text="Choose a bookmark"
-                      ItemsSource="{Binding}"
-                      Foreground="{DynamicResource clBrText}"
-                      BorderBrush="{DynamicResource clBrText}" 
-                      FontFamily="Georgia"
-                      FontSize="12" 
-                      BorderThickness="2"
-                      Name="bookmarkList" 
-                      Focusable="False"
-                      IsEditable="True"
-                      SelectionChanged="BookmarkList_SelectionChanged">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <DockPanel>
-                            <TextBlock Foreground="Black" Text="{Binding NumberPage}" />
-                            <Button Click="DeleteBookmark" 
-                                    DockPanel.Dock="Right" 
+            <Grid>
+                <ComboBox Name="bookmarkList"
+                          ItemsSource="{Binding}"
+                          BorderBrush="{DynamicResource clBrText}"
+                          BorderThickness="2"
+                          Focusable="False"
+                          IsEditable="True"
+                          SelectionChanged="ComboBox_Selected"
+                          Width="125">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel>
+                                <TextBlock Foreground="Black" Text="{Binding NumberPage}" />
+                                <Button Click="DeleteBookmark" 
+                                    DockPanel.Dock="Right"
                                     HorizontalAlignment="Right" 
                                     Width="20" 
                                     Height="20"/>
-                        </DockPanel>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBlock Text="Choose a bookmark"
+                           Foreground="{DynamicResource clBrText}"
+                           FontFamily="Georgia"
+                           FontSize="12" 
+                           IsHitTestVisible="False"
+                           VerticalAlignment="Center"
+                           Margin="5,0,0,0"
+                           Visibility="{Binding ElementName=bookmarkList, Path=SelectedItem, Converter={StaticResource LabelVisibilityConverter}}"/>
+            </Grid>
         </StackPanel>
         <Grid Background="{DynamicResource clBr}">
             <!--<Grid.ColumnDefinitions>
