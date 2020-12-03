@@ -15,7 +15,7 @@ namespace LibraryReader.Books
 
         public override string ToString()
         {
-            return "Choose Bookmark";
+            return "Choose a bookmark";
         }
     }
 }
