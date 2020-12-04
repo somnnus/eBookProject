@@ -9,6 +9,14 @@
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="TextAlignment" Value="Center" />
     </Style>
+    <Style TargetType="{x:Type TextBlock}" x:Key="TextSettingsForCombo">
+        <Setter Property="FontFamily" Value="Georgia" />
+        <Setter Property="Foreground" Value="{DynamicResource clBrText}"/>
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="5,0,0,0"/>
+    </Style>
     <Style TargetType="{x:Type Control}" x:Key="TextSettings">
         <Setter Property="FontFamily" Value="Garamond" />
         <Setter Property="FontSize" Value="26" />

@@ -7,12 +7,14 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:lib="clr-namespace:Menu.LibraryPage"
              xmlns:menu="clr-namespace:Menu"
+             xmlns:helper="clr-namespace:Menu.Helpers"
              mc:Ignorable="d"
              d:DesignHeight="700" d:DesignWidth="1150"
              d:DataContext="{d:DesignInstance lib:LibraryViewModel,
                                          IsDesignTimeCreatable=True}">
     <UserControl.Resources>
         <menu:SizePercentageConverter x:Key="PercentageConverter"/>
+        <helper:LabelVisibilityConverter x:Key="LabelVisibilityConverter"/>
         <ControlTemplate x:Key="NoScroll">
             <ItemsPresenter></ItemsPresenter>
         </ControlTemplate>
@@ -86,12 +88,16 @@
                     </DataGridTextColumn.ElementStyle>-->
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>
-                            <ComboBox Text="-- Sorted By Date --" 
-                                      Focusable="False" 
-                                      IsEditable="True" 
-                                      IsReadOnly="True" 
-                                      SelectionChanged="ComboBox_Selected">
-                                <!--<ComboBox.Style>
+                            <Grid>
+                                <ComboBox Text="-- Sorted By Date --" 
+                                          Foreground="{DynamicResource clBrText}"
+                                          Focusable="False" 
+                                          IsEditable="True" 
+                                          IsReadOnly="True" 
+                                          SelectionChanged="ComboBox_Selected"
+                                          DropDownOpened="ComboBox_DropDownOpened"
+                                          DropDownClosed="ComboBox_DropDownClosed">
+                                    <!--<ComboBox.Style>
                                         <Style TargetType="ComboBox">
                                             <Style.Triggers>
                                                 <Trigger Property="IsDropDownOpen" Value="False">
@@ -100,10 +106,11 @@
                                             </Style.Triggers>
                                         </Style>
                                     </ComboBox.Style>-->
-                                <TextBlock>Sorted By Author</TextBlock>
-                                <TextBlock>Sorted By Title</TextBlock>
-                                <TextBlock>Sorted By Date</TextBlock>
-                            </ComboBox>
+                                    <TextBlock>Sorted By Author</TextBlock>
+                                    <TextBlock>Sorted By Title</TextBlock>
+                                    <TextBlock>Sorted By Date</TextBlock>
+                                </ComboBox>
+                            </Grid>
                         </DataTemplate>
                     </DataGridTextColumn.HeaderTemplate>
                 </DataGridTextColumn>

@@ -53,13 +53,8 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <TextBlock Name="chooseBookmarkLabel"
-                           Foreground="{DynamicResource clBrText}"
                            Text="Choose a bookmark"
-                           FontFamily="Georgia"
-                           FontSize="12" 
-                           IsHitTestVisible="False"
-                           VerticalAlignment="Center"
-                           Margin="5,0,0,0"
+                           Style="{StaticResource TextSettingsForCombo}"
                            Visibility="{Binding ElementName=bookmarkList, Path=SelectedItem, Converter={StaticResource LabelVisibilityConverter}}"/>
             </Grid>
         </StackPanel>

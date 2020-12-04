@@ -10,5 +10,9 @@ namespace Menu.LibraryPage
 {
     public class LibraryViewModel: ViewModelBase
     {
+        LibraryViewModel()
+        {
+
+        }
     }
 }
