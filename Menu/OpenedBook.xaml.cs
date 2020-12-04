@@ -97,7 +97,7 @@ namespace Menu
 
         private void CreateBookmark(object sender, RoutedEventArgs routedEventArgs)
         {
-            flag = true;
+            flag = true;          
 
             Bookmark mark = new Bookmark();
             mark.NumberPage = flowDocument.MasterPageNumber;
@@ -143,7 +143,7 @@ namespace Menu
             bookmarkList.DataContext = null;
             bookmarkList.DataContext = currentBook.bookmarks;
             bookmarkList.SelectedIndex = -1;
-
+        
             flag = false;
 
         }
@@ -157,7 +157,6 @@ namespace Menu
 
         private void ComboBox_Selected(object sender, RoutedEventArgs routedEventArgs)
         {
-         
             var comboBox = (ComboBox)sender;
             if (((Bookmark)(comboBox.SelectedItem)) != null && flag == false)
             {
@@ -165,6 +164,8 @@ namespace Menu
                 flowDocument.GoToPage(selectedNum);
                 bookmarkList.SelectedIndex = -1;
             }
+            
+
             //   bookmarkList.ItemsSource = currentBook.bookmarks;
         }
 
