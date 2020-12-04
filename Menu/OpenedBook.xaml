@@ -15,6 +15,24 @@
             <Path Width="30" Height="{TemplateBinding Height}" Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z" Stretch="Uniform" Fill="{DynamicResource clBrText}"  RenderTransformOrigin="0.5,0.5"/>
         </ControlTemplate>
         <helper:LabelVisibilityConverter x:Key="LabelVisibilityConverter"/>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFFFD5C1" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <DockPanel x:Name="gridForReading"
                LastChildFill="True">
@@ -35,9 +53,9 @@
                           BorderThickness="2"
                           Focusable="False"
                           IsEditable="True"
-                          SelectionChanged="ComboBox_Selected"
                           Width="125"
                           IsReadOnly="True"
+                          SelectionChanged="ComboBox_Selected"
                           DropDownOpened="BookmarkList_DropDownOpened"
                           DropDownClosed="BookmarkList_DropDownClosed">
                     <ComboBox.ItemTemplate>
@@ -46,18 +64,21 @@
                                 <TextBlock Foreground="Black" Text="{Binding NumberPage}" />
                                 <Button Click="DeleteBookmark" 
                                     DockPanel.Dock="Right"
-                                    HorizontalAlignment="Right" 
-                                    Width="20" 
-                                    Height="20">
-                                    <Button.Background>
-                                        <ImageBrush ImageSource="images/delete.png"/>
-                                        <!--<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    HorizontalAlignment="Right"
+                                    Width="25"
+                                    Height="25">
+                                    <!--<Button.Background>
+                                        <ImageBrush ImageSource="images/deleteImage.jpg"/>
+                                        --><!--<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                             <GradientStop Color="Black" Offset="0"/>
                                             <GradientStop Color="White" Offset="1"/>
                                             
-                                        </LinearGradientBrush>-->
+                                        </LinearGradientBrush>--><!--
                                         
-                                    </Button.Background>
+                                    </Button.Background>-->
+                                    <StackPanel>
+                                        <Image Source="images/deleteImage.jpg" Width="20"/>
+                                    </StackPanel>
                                 </Button>
                             </DockPanel>
                         </DataTemplate>
