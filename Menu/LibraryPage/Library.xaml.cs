@@ -122,5 +122,17 @@ namespace Menu.LibraryPage
                 }
             }
         }
+
+        private void ComboBox_DropDownOpened(object sender, EventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            comboBox.Foreground = Brushes.Black;
+        }
+
+        private void ComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            comboBox.Foreground = (Brush)Application.Current.Resources["clBrText"];
+        }
     }
 }

@@ -59,11 +59,14 @@
                     </DataGridTextColumn.ElementStyle>-->
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>
-                            <ComboBox Text="-- Sorted By Date --" 
+                            <ComboBox Text="-- Sorted By Date --"
+                                      Foreground="{DynamicResource clBrText}"
                                       Focusable="False" 
                                       IsEditable="True" 
                                       IsReadOnly="True" 
-                                      SelectionChanged="ComboBox_Selected">
+                                      SelectionChanged="ComboBox_Selected"
+                                      DropDownOpened="ComboBox_DropDownOpened"
+                                      DropDownClosed="ComboBox_DropDownClosed">
                                 <TextBlock>Sorted By Author</TextBlock>
                                 <TextBlock>Sorted By Title</TextBlock>
                                 <TextBlock>Sorted By Date</TextBlock>
@@ -90,6 +93,7 @@
                                             Orientation="Horizontal" 
                                             Background="{DynamicResource clBrSearch}">
                                     <TextBox TextChanged="SearchInLibrary"
+                                             Foreground="{DynamicResource clBrText}"
                                              materialDesign:HintAssist.Hint="Search..."
                                              Width="160"
                                              VerticalAlignment="Center"
