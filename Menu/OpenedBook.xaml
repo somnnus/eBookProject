@@ -36,7 +36,9 @@
                           Focusable="False"
                           IsEditable="True"
                           SelectionChanged="ComboBox_Selected"
-                          Width="125">
+                          Width="125"
+                          DropDownOpened="BookmarkList_DropDownOpened"
+                          DropDownClosed="BookmarkList_DropDownClosed">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <DockPanel>
@@ -50,8 +52,9 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <TextBlock Text="Choose a bookmark"
+                <TextBlock Name="chooseBookmarkLabel"
                            Foreground="{DynamicResource clBrText}"
+                           Text="Choose a bookmark"
                            FontFamily="Georgia"
                            FontSize="12" 
                            IsHitTestVisible="False"

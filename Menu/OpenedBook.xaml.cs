@@ -51,9 +51,7 @@ namespace Menu
             openBookWindow.Title = currentBook.Title + " - " + currentBook.Author;
             DisplayBook();
             Serialization.SerializationLastBook(currentBook, fullPath);
-
-        
-           
+            
            // bookmarkList.DataContext = currentBook.bookmarks;
             bookmarkList.DataContext = currentBook.bookmarks;
         }
@@ -205,9 +203,16 @@ namespace Menu
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BookmarkList_DropDownOpened(object sender, EventArgs e)
         {
+            chooseBookmarkLabel.Foreground = Brushes.Black;
+            bookmarkList.BorderBrush = Brushes.Black;
+        }
 
+        private void BookmarkList_DropDownClosed(object sender, EventArgs e)
+        {
+            chooseBookmarkLabel.Foreground = (Brush)Application.Current.Resources["clBrText"];
+            bookmarkList.BorderBrush = (Brush)Application.Current.Resources["clBrText"];
         }
     }
 }
