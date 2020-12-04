@@ -49,12 +49,12 @@
             <StackPanel Name="libraryGrid"
                         Orientation="Vertical">
                 <ListBox Name="recentlyReadBooksBox"
-                             VerticalContentAlignment="Top"
-                             HorizontalContentAlignment="Center"
-                             Cursor="Hand"
-                             ItemsSource="{Binding Path=DataContext.RecentlyReadBooks.Values, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-                             ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                         VerticalContentAlignment="Top"
+                         HorizontalContentAlignment="Center"
+                         Cursor="Hand"
+                         ItemsSource="{Binding Path=DataContext.RecentlyReadBooks.Values, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                         ScrollViewer.VerticalScrollBarVisibility="Hidden">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel MouseDown="StackPanel_MouseDown">
@@ -130,7 +130,8 @@
                             <WrapPanel IsItemsHost="True"
                                        ListBoxItem.Selected="Item_Selected"
                                        ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.25, ElementName=libraryGrid, Path=ActualWidth}"
-                                       Orientation="Horizontal"/>
+                                       Orientation="Horizontal"
+                                       HorizontalAlignment="Center"/>
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                 </ListBox>
