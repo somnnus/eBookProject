@@ -20,16 +20,16 @@
         </ControlTemplate>
         <local:SizePercentageConverter x:Key="PercentageConverter"/>
     </UserControl.Resources>
-    <Grid Margin="40" Name="OuterGrid">
-        <DockPanel Name="DockPanelLibrary" 
-                   Background="{DynamicResource clBr}"
-                   LastChildFill="True">
-            <Label Content="Recently Read" 
+    <StackPanel Margin="40" Name="OuterGrid">
+        <Label Content="Recently Read" 
                    Foreground="{DynamicResource clBrMenu}" 
                    Style="{StaticResource Headings}" 
                    DockPanel.Dock="Top" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Top"/>
+        <DockPanel Name="DockPanelLibrary" 
+                   Background="{DynamicResource clBr}"
+                   LastChildFill="True">
             <Grid Width="40" DockPanel.Dock="Left">
                 <Label Name="labelArrowLeft"
                        Cursor="Hand"
@@ -47,9 +47,9 @@
                 </Label>
             </Grid>
             <StackPanel Name="libraryGrid"
-                        Orientation="Vertical">
+                        Orientation="Vertical"
+                        VerticalAlignment="Center">
                 <ListBox Name="recentlyReadBooksBox"
-                         VerticalContentAlignment="Top"
                          HorizontalContentAlignment="Center"
                          Cursor="Hand"
                          ItemsSource="{Binding Path=DataContext.RecentlyReadBooks.Values, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
@@ -82,13 +82,13 @@
                             <WrapPanel IsItemsHost="True"
                                        ListBoxItem.Selected="Item_Selected"
                                        ItemWidth="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.5, ElementName=libraryGrid, Path=ActualWidth}"
-                                       Orientation="Horizontal">
+                                       Orientation="Horizontal"
+                                       HorizontalAlignment="Center">
                             </WrapPanel>
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                 </ListBox>
                 <ListBox Name="listBoxBooks"
-                         VerticalContentAlignment="Top"
                          HorizontalContentAlignment="Center"
                          Cursor="Hand"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -137,5 +137,5 @@
                 </ListBox>
             </StackPanel>
         </DockPanel>
-    </Grid>
+    </StackPanel>
 </UserControl>
