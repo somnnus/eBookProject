@@ -207,9 +207,6 @@
     <Resource Include="images\WhiteTheme.PNG" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\catBook.ico" />
   </ItemGroup>
   <ItemGroup>
