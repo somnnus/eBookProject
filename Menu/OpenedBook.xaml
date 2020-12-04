@@ -37,6 +37,7 @@
                           IsEditable="True"
                           SelectionChanged="ComboBox_Selected"
                           Width="125"
+                          IsReadOnly="True"
                           DropDownOpened="BookmarkList_DropDownOpened"
                           DropDownClosed="BookmarkList_DropDownClosed">
                     <ComboBox.ItemTemplate>
