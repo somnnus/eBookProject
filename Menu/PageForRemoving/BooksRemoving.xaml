@@ -93,6 +93,7 @@
                                             Orientation="Horizontal" 
                                             Background="{DynamicResource clBrSearch}">
                                     <TextBox TextChanged="SearchInLibrary"
+                                             Foreground="{DynamicResource clBrText}"
                                              materialDesign:HintAssist.Hint="Search..."
                                              Width="160"
                                              VerticalAlignment="Center"
