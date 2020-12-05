@@ -68,6 +68,7 @@ namespace LibraryReader
                 //  MessageBox.Show("=> Saved list in XML format!");
             }
         }
+
         public static Book DeserializationLastBook(string fullPath)
         {
             Book book;
@@ -134,7 +135,6 @@ namespace LibraryReader
                     XmlSerializer xmlFormat1 = new XmlSerializer(typeof(List<Book>), new Type[] { typeof(Book), typeof(string), typeof(EpubBook), typeof(FB2Book), typeof(Bookmark) });
                     xmlFormat1.Serialize(fStream, books);
                 }
-               
             }
         }
 
@@ -152,11 +152,5 @@ namespace LibraryReader
 
             return books;
         }
-
-
-
-
-
-
     }
 }

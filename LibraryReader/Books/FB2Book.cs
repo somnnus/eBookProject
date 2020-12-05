@@ -20,8 +20,8 @@ namespace LibraryReader.Books
         FB2File fB2File;
         public FB2Book()
         {
-
         }
+
         public FB2Book(string path,string newPath)
         {
             fB2File = new FB2File();
@@ -49,11 +49,13 @@ namespace LibraryReader.Books
             CoverPath = GetCoverPath();
 
         }
+
         public static string GetContentAsTitle(string Content)
         {
             Match m = Regex.Match(Content, @"<title[^>]*>.+</title>", Utils.REO_csi);
             return m.Success ? Utils.ClearText(m.Value) : "";
         }
+
         private string GetCoverPath()
         {
             Random rnd = new Random();

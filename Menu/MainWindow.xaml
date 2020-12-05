@@ -7,7 +7,7 @@
         xmlns:UserControl="clr-namespace:Menu"
         Icon="/images/iconBook.ico"
         mc:Ignorable="d"
-        Title="Reader" Height="650" Width="1250" WindowState="Normal" ResizeMode="CanResizeWithGrip" MinHeight="300" MinWidth="950"
+        Title="Reader" Height="650" Width="1250" WindowState="Normal" ResizeMode="CanResizeWithGrip" MinHeight="500" MinWidth="950"
         WindowStartupLocation="CenterScreen">
     <Grid Name="mainGrid" Background="{DynamicResource clBr}" >
         <DockPanel>

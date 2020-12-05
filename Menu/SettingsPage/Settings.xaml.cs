@@ -44,9 +44,8 @@ namespace Menu.SettingsPage
             setting.Add("#424242");
             //setting.Add("#000000");
             Serialization.SerializationSetting(setting, fullPath);
-            
-
         }
+
         private void SetSepiaTheme(object sender, RoutedEventArgs e)
         {
             List<string> setting = new List<string>();
@@ -64,6 +63,7 @@ namespace Menu.SettingsPage
             //setting.Add("#000000");
             Serialization.SerializationSetting(setting, fullPath);
         }
+
         private void SetDarkBlueTheme(object sender, RoutedEventArgs e)
         {
             List<string> setting = new List<string>();
@@ -81,6 +81,7 @@ namespace Menu.SettingsPage
             //setting.Add("#EFEFFE");
             Serialization.SerializationSetting(setting, fullPath);
         }
+
         private void SetNightTheme(object sender, RoutedEventArgs e)
         {
             List<string> setting = new List<string>();

@@ -19,6 +19,7 @@ namespace LibraryReader.Books
         {
 
         }
+
         public EpubBook(string path,string newPath)
         {          
                 epubBook = new Epub(path);
@@ -32,17 +33,14 @@ namespace LibraryReader.Books
 
                 Zoom = -1;
                 LastPage = -1;
-
-
-
         }
-
       
         public string GetContentAsString(string content)
         {
             Match m = Regex.Match(content, @"<body[^>]*>.+</body>", Utils.REO_csi);
             return m.Success ? Utils.ClearText(m.Value) : "";
         }
+
         private string GetCoverPath()
         {
             Random rnd = new Random();

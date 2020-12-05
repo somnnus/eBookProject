@@ -202,6 +202,7 @@ namespace Menu
                 LibraryRefreshing.SortByDate();
             }
         }
+
         private Book CheckLastBookSerializization()
         {
             string fileNameSerialize = fullPath + "\\" + "last.xml";

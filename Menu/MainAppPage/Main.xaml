@@ -25,11 +25,11 @@
                    Foreground="{DynamicResource clBrMenu}" 
                    Style="{StaticResource Headings}" 
                    DockPanel.Dock="Top" 
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Top"/>
+                   HorizontalAlignment="Center"/>
         <DockPanel Name="DockPanelLibrary" 
                    Background="{DynamicResource clBr}"
-                   LastChildFill="True">
+                   LastChildFill="True"
+                   MinHeight="{Binding Converter={StaticResource PercentageConverter}, ConverterParameter=0.5, ElementName=OuterGrid, Path=ActualHeight}">
             <Grid Width="40" DockPanel.Dock="Left">
                 <Label Name="labelArrowLeft"
                        Cursor="Hand"
