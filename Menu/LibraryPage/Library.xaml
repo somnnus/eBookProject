@@ -13,7 +13,7 @@
              d:DataContext="{d:DesignInstance lib:LibraryViewModel,
                                          IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <menu:SizePercentageConverter x:Key="PercentageConverter"/>
+        <helper:PercentageSizeConverter x:Key="PercentageConverter"/>
         <helper:LabelVisibilityConverter x:Key="LabelVisibilityConverter"/>
         <ControlTemplate x:Key="NoScroll">
             <ItemsPresenter></ItemsPresenter>

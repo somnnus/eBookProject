@@ -1,13 +1,13 @@
-﻿using LibraryReader.Books;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibraryReader.Books;
 
-namespace Menu
+namespace Menu.Helpers
 {
-    public static class ArrayHelperExtensions
+    public static class LibrarySorting
     {
         public static Dictionary<int, List<Book>> SplitByBlocks(List<Book> array, Dictionary<int, List<Book>> dictKeys, int size)
         {
