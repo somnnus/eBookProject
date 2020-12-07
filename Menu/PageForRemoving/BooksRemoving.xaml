@@ -12,7 +12,7 @@
                                          IsDesignTimeCreatable=True}"
              d:DesignHeight="700" d:DesignWidth="1150">
     <UserControl.Resources>
-        <menu:SizePercentageConverter x:Key="PercentageConverter"/>
+        <helper:PercentageSizeConverter x:Key="PercentageConverter"/>
         <ControlTemplate x:Key="NoScroll">
             <ItemsPresenter></ItemsPresenter>
         </ControlTemplate>

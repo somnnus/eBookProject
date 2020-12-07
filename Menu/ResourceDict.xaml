@@ -32,12 +32,16 @@
         <Setter Property="BorderThickness" Value="0"/>
     </Style>
     <Style TargetType="{x:Type Button}" x:Key="Button">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+        </Style.Triggers>
         <Setter Property="Background" Value="{DynamicResource clBrSearch}"/>
         <Setter Property="Foreground" Value="{DynamicResource clBrText}"/>
-        <Setter Property="Width" Value="100"/>
         <Setter Property="FontFamily" Value="Georgia"/>
         <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Width" Value="100"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">

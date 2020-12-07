@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:settings="clr-namespace:Menu.SettingsPage"
+             xmlns:helper="clr-namespace:Menu.Helpers"
              xmlns:menu="clr-namespace:Menu"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance settings:SettingsViewModel,
@@ -15,7 +16,7 @@
             <Setter Property="Margin" Value="10,5,10,5" />
             <Setter Property="Cursor" Value="Hand"/>
         </Style>
-        <menu:SizePercentageConverter x:Key="PercentageConverter"/>
+        <helper:PercentageSizeConverter x:Key="PercentageConverter"/>
     </UserControl.Resources>
     <Grid>
         <StackPanel x:Name="OuterStacPanel"

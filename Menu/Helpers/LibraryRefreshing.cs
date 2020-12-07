@@ -71,7 +71,7 @@ namespace Menu.Helpers
 
                     int blocksCount = 4;
                     ResourcesProvider.Current.BooksByPages = new Dictionary<int, List<Book>>();
-                    ResourcesProvider.Current.BooksByPages = ArrayHelperExtensions.SplitByBlocks(restOfBooksHelper, ResourcesProvider.Current.BooksByPages, blocksCount);
+                    ResourcesProvider.Current.BooksByPages = LibrarySorting.SplitByBlocks(restOfBooksHelper, ResourcesProvider.Current.BooksByPages, blocksCount);
                 }
             }
             else
@@ -85,21 +85,21 @@ namespace Menu.Helpers
         {
             ResourcesProvider.Current.ListBooks.Sort(new AuthorComparer());
             ResourcesProvider.Current.SortedByAuthor = new Dictionary<string, List<Book>>();
-            ResourcesProvider.Current.SortedByAuthor = ArrayHelperExtensions.SplitByAuthor(ResourcesProvider.Current.ListBooks, ResourcesProvider.Current.SortedByAuthor);
+            ResourcesProvider.Current.SortedByAuthor = LibrarySorting.SplitByAuthor(ResourcesProvider.Current.ListBooks, ResourcesProvider.Current.SortedByAuthor);
         }
 
         public static void SortByTitle()
         {
             ResourcesProvider.Current.ListBooks.Sort(new TitleComparer());
             ResourcesProvider.Current.SortedByTitle = new Dictionary<string, List<Book>>();
-            ResourcesProvider.Current.SortedByTitle = ArrayHelperExtensions.SplitByBookName(ResourcesProvider.Current.ListBooks, ResourcesProvider.Current.SortedByTitle);
+            ResourcesProvider.Current.SortedByTitle = LibrarySorting.SplitByBookName(ResourcesProvider.Current.ListBooks, ResourcesProvider.Current.SortedByTitle);
         }
 
         public static void SortByDate()
         {
             ResourcesProvider.Current.ListBooks.Sort(new DateComparer());
             ResourcesProvider.Current.SortedByDate = new Dictionary<string, List<Book>>();
-            ResourcesProvider.Current.SortedByDate = ArrayHelperExtensions.SplitByDate(ResourcesProvider.Current.ListBooks, ResourcesProvider.Current.SortedByDate);
+            ResourcesProvider.Current.SortedByDate = LibrarySorting.SplitByDate(ResourcesProvider.Current.ListBooks, ResourcesProvider.Current.SortedByDate);
         }
     }
 }
