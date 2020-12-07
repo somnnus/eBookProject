@@ -120,7 +120,6 @@ namespace Menu
                         {
                             MessageBox.Show("Couldn't open the book");
                         }
-                        
                     }
                     catch (Exception)
                     {
@@ -284,7 +283,7 @@ namespace Menu
                 }
                 if (!found)
                 {
-                    MessageBox.Show("Book wasn't found");
+                    MessageBox.Show("You haven't opened the book earlier!");
                 }
             }
             else

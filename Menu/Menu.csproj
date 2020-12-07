@@ -107,6 +107,7 @@
     <Compile Include="Helpers\LibraryRefreshing.cs" />
     <Compile Include="Helpers\LibrarySearching.cs" />
     <Compile Include="Helpers\MarginSetter.cs" />
+    <Compile Include="Helpers\PercentageSizeConverter.cs" />
     <Compile Include="Helpers\UsedImplicitlyAttribute.cs" />
     <Compile Include="LibraryPage\Library.xaml.cs">
       <DependentUpon>Library.xaml</DependentUpon>
